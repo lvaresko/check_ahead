@@ -13,6 +13,6 @@ Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl.
 * lista
   * podlista
 
-[Link na prototip aplikacije] https://www.figma.com/proto/f99rNxIjyfLDljY60b3OAS/Prototip?node-id=12%3A18&scaling=scale-down
+[Link na prototip aplikacije](https://www.figma.com/proto/f99rNxIjyfLDljY60b3OAS/Prototip?node-id=12%3A18&scaling=scale-down)
 
 
