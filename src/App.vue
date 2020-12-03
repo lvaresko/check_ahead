@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">LUCIJA BABIĆ PROBA</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">Lucia Vareško proba</router-link>
     </div>
     <router-view />
   </div>
