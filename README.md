@@ -24,5 +24,6 @@ Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl.
 
 [Link na prototip aplikacije](https://www.figma.com/proto/f99rNxIjyfLDljY60b3OAS/Prototip?node-id=12%3A18&scaling=scale-down)
 
-## Zaduženja
+## Zaduženja (trenutna)
 Lucia Vareško: prijava i registracija
+Lucija Babić: izrada liste sastojaka (kategorije, naziv, opis) i homepage
