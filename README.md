@@ -23,3 +23,6 @@ Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl.
 * Pregled nedavno pretraženih proizvoda
 
 [Link na prototip aplikacije](https://www.figma.com/proto/f99rNxIjyfLDljY60b3OAS/Prototip?node-id=12%3A18&scaling=scale-down)
+
+## Zaduženja
+Lucia Vareško: prijava i registracija
