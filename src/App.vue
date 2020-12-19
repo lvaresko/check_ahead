@@ -1,12 +1,24 @@
 <template>
   <div id="app">
+    <Navbar />
     <div id="nav">
       <router-link to="/">LUCIJA BABIĆ PROBA</router-link> |
-      <router-link to="/about">Lucia Vareško proba</router-link>
+      <router-link to="/about">Lucia Vareško proba</router-link> |
+      <router-link to="/signup">Sign up</router-link>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+import Navbar from "@/components/Layout/Navbar.vue";
+
+export default {
+  components: {
+    Navbar,
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
