@@ -6,7 +6,7 @@
 Kolegij: [Programsko Inženjerstvo](https://www.notion.so/Kontakt-stranica-875574d1b92248b1a8e90dae52cd29a9) <br />
 Mentori: [doc.dr.sc. Nikola Tanković](https://www.notion.so/Kontakt-stranica-875574d1b92248b1a8e90dae52cd29a9) i Toni Starčić, univ.bacc. inf. <br />
 
-## Opis 
+## Opis  
 Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl. te je često vrlo zamorno čitati deklaracije proizvoda i utvrditi koji sastojci nisu prikladni za nas. Dok je u prehrambenoj industriji taj problem riješen time što su alergeni istaknuti na deklaraciji, u industriji kozmetičkih proizvoda popis sastojaka često je predugačak, sitan i/ili skraćen. Check Ahead aplikacija rješava taj problem na način da korisniku daje informaciju o kompatibilnosti proizvoda s njegovom listom neželjenih sastojaka. 
 
 ## Funkcionalnosti
