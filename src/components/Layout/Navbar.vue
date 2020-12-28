@@ -1,14 +1,16 @@
 <template>
   <div>
-    <sui-menu :widths="3" attached="top" secondary>
+    <sui-menu attached="top" :widths="3" secondary>
       <sui-menu-item is="sui-button" icon="bars" size="massive"></sui-menu-item>
-      <sui-menu-item>
-        <img is="sui-image" size="huge" src="../../assets/logo.png" />
+      <sui-menu-item is="sui-button">
+        <img is="sui-image" size="medium" src="../../assets/logo.png" />
       </sui-menu-item>
       <sui-menu-item icon="user" is="sui-button" size="massive">
       </sui-menu-item>
     </sui-menu>
 
+    <sui-input size="massive" placeholder="Search big..." icon="search" />
+    <p>waskjil</p>
     <div>
       <div class="ui stackable equal width grid">
         <div class="column">
@@ -185,3 +187,12 @@ export default {
   },
 };
 </script>
+
+<style>
+input.ui.input {
+  border: 7 solid black !important;
+}
+sui-menu-item.sui-button {
+  color: red !important;
+}
+</style>

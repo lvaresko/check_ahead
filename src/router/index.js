@@ -6,8 +6,11 @@ import Signup from '../components/Auth/Signup.vue'
 import SuiVue from 'semantic-ui-vue';
 import 'semantic-ui-css/semantic.min.css';
 
+import '../assets/main.css'
+
 Vue.use(VueRouter)
 Vue.use(SuiVue)
+
 
 const routes = [{
         path: '/',
