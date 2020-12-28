@@ -4,6 +4,10 @@ div.item.ui.icon {
 
 div.input.ui.input>input {
     border: none;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid lightgray;
     border-radius: 0;
+}
+
+div.input.ui.input>input:focus {
+    border-bottom: 2px solid gray;
 }
