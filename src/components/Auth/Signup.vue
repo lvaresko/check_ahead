@@ -7,7 +7,7 @@
         <div class="col-sm text-left">
           <form>
             <div class="form-group">
-              <label form="exampleInputEmail">EmailLUCIJABABIC</label>
+              <label form="exampleInputEmail">Email</label>
               <input
                 type="email"
                 v-model="email"
