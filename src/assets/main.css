@@ -11,3 +11,11 @@ div.input.ui.input>input {
 div.input.ui.input>input:focus {
     border-bottom: 2px solid gray;
 }
+
+
+/*
+button.ui.button {
+    background-color: rgba(111, 162, 180, 1);
+    color: white
+}
+*/
