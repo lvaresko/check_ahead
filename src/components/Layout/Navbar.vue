@@ -51,7 +51,10 @@
     <sui-button>Click Here</sui-button>
     <sui-button content="Content as a prop" />
     <div is="sui-button">This is a div</div>
-    <sui-button active>Hero</sui-button>
+    <div class="ui input">
+      <input type="text" placeholder="Search..." />
+    </div>
+    <button class="ui button">Follow</button>
   </div>
 </template>
 
