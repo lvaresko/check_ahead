@@ -33,7 +33,7 @@
   padding: 0.5em 0;
   font-family: 'Noto Serif Malayala', sans-serif;
   font-size: 1em;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 
 /* Default Styling */
@@ -147,12 +147,12 @@
 .ui.styled.accordion .accordion .title:hover,
 .ui.styled.accordion .accordion .active.title {
   background: transparent;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 .ui.styled.accordion .accordion .title:hover,
 .ui.styled.accordion .accordion .active.title {
   background: transparent;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 
 /* Active */

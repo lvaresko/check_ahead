@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login ui container">
     <sui-grid divided="vertically">
       <sui-grid-row :columns="3">
         <sui-grid-column></sui-grid-column>

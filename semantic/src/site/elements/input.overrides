@@ -10,5 +10,5 @@
 }
 
 .input1.ui.input>input:focus {
-    border-bottom: 1px solid #595959;
+    border-bottom: 1px solid #595959 !important;
 }
