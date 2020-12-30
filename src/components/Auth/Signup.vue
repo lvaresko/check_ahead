@@ -1,12 +1,12 @@
 <template>
-  <div class="signup">
+  <div class="signup ui container center aligned">
     <h1>Registration</h1>
     <sui-grid divided="vertically">
-      <sui-grid-row :columns="3">
-        <sui-grid-column></sui-grid-column>
-        <sui-grid-column>
+      <sui-grid-row :columns="3" >
+        <sui-grid-column :width="4"></sui-grid-column>
+        <sui-grid-column class="left aligned" :width="6">
           <sui-form>
-            <sui-form-field>
+            <sui-form-field width="ten">
               <label>First Name:</label>
               <sui-input
                 type="text"
@@ -15,7 +15,7 @@
                 placeholder="Amy"
               />
             </sui-form-field>
-            <sui-form-field>
+            <sui-form-field width="ten">
               <label>Last Name:</label>
               <sui-input
                 type="text"
@@ -24,7 +24,7 @@
                 placeholder="Wise"
               />
             </sui-form-field>
-            <sui-form-field>
+            <sui-form-field width="ten">
               <label>Email:</label>
               <sui-input
                 type="email"
@@ -34,7 +34,7 @@
                 placeholder="amy@gmail.com"
               />
             </sui-form-field>
-            <sui-form-field>
+            <sui-form-field width="ten">
               <label>Password:</label>
               <sui-input
                 type="password"
@@ -44,7 +44,7 @@
                 placeholder="abc12"
               />
             </sui-form-field>
-            <sui-form-field>
+            <sui-form-field width="ten">
               <label>Repeat password:</label>
               <sui-input
                 type="password"
@@ -54,10 +54,10 @@
                 placeholder="Retype your password here..."
               />
             </sui-form-field>
-            <sui-button @click="signup">Register</sui-button>
+            <sui-button fluid @click="signup">Register</sui-button>
           </sui-form>
         </sui-grid-column>
-        <sui-grid-column></sui-grid-column>
+        <sui-grid-column :width="4"></sui-grid-column>
       </sui-grid-row>
     </sui-grid>
   </div>

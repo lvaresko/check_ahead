@@ -13,7 +13,7 @@
              Page
 *******************************/
 
-@import url('https://fonts.googleapis.com/css?family=Noto Serif Malayala:400,700&subset=latin&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto Serif Malayala:400, 400&subset=latin&display=swap');
 html,
 body {
   height: 100%;
@@ -30,7 +30,7 @@ body {
   font-family: 'Noto Serif Malayala', sans-serif;
   font-size: 14px;
   line-height: 1.4285em;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 
 
@@ -46,12 +46,12 @@ h5 {
   font-family: 'Noto Serif Malayala', sans-serif;
   line-height: 1.28571429em;
   margin: calc(2rem - 0.1428571428571429em) 0 1rem;
-  font-weight: bold;
+  font-weight: 400;
   padding: 0;
 }
 h1 {
   min-height: 1rem;
-  font-size: 2rem;
+  font-size: 2.57142857rem;
 }
 h2 {
   font-size: 1.71428571rem;
@@ -124,36 +124,36 @@ a:hover {
 /* Site */
 ::-webkit-selection {
   background-color: #CCE2FF;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 ::-moz-selection {
   background-color: #CCE2FF;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 ::selection {
   background-color: #CCE2FF;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 
 /* Form */
 textarea::-webkit-selection,
 input::-webkit-selection {
   background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 textarea::-moz-selection,
 input::-moz-selection {
   background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 textarea::-moz-selection, input::-moz-selection {
   background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 textarea::selection,
 input::selection {
   background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 
 /* Force Simple Scrollbars */

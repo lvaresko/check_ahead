@@ -24,7 +24,7 @@
   border-radius: 0.28571429rem;
   text-align: left;
   vertical-align: middle;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
   border-collapse: separate;
   border-spacing: 0;
 }
@@ -66,7 +66,7 @@
   cursor: auto;
   background: #F9FAFB;
   text-align: inherit;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
   padding: 0.92857143em 0.78571429em;
   vertical-align: inherit;
   font-style: none;
@@ -98,7 +98,7 @@
   border-top: 1px solid rgba(34, 36, 38, 0.15);
   background: #F9FAFB;
   text-align: inherit;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
   padding: 0.78571429em 0.78571429em;
   vertical-align: inherit;
   font-style: normal;
@@ -565,9 +565,9 @@
 
 .ui.ui.ui.ui.table tr.active,
 .ui.ui.table td.active {
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0.87) inset;
+  box-shadow: 0 0 0 #595959 inset;
   background: #E0E0E0;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 
 /*--------------
@@ -932,7 +932,7 @@
 .ui.table tr td.selectable.active:hover,
 .ui.selectable.table tr:hover td.active {
   background: #E0E0E0;
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 .ui.ui.selectable.table tr.positive:hover,
 .ui.table tr td.selectable.positive:hover,
@@ -1668,7 +1668,7 @@
   cursor: pointer;
   white-space: nowrap;
   border-left: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  color: #595959;
 }
 .ui.sortable.table > thead > tr > th:first-child {
   border-left: none;
