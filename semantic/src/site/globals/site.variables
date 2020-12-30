@@ -6,9 +6,26 @@
      Fonts
 --------------------*/
 
+@headerFont : 'Noto Serif Malayala', sans-serif;
+@pageFont : 'Noto Serif Malayala', sans-serif;
+@fontSmoothing : antialiased;
+
 @importGoogleFonts : true;
-@googleFontName    : 'Sofia';
-@googleFontSizes   : '400;
+@googleFontName    : 'Noto Serif Malayala';
+@googleFontSizes   : '400,700';
 @googleFontFamily  : '@{googleFontName}:@{googleFontSizes}';
 
 
+/*-------------------
+    Base Sizes
+--------------------*/
+
+@emSize      : 14px;
+@fontSize    : 14px;
+
+
+/*-------------------
+    Site Colors
+--------------------*/
+
+@primaryColor        : #6FA2B4;

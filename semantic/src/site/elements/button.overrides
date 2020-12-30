@@ -3,6 +3,6 @@
 *******************************/
 
 .ui.button {
-  background: rgba(111, 162, 180, 1);
+  background: @primaryColor;
   color: white;
 }
