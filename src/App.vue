@@ -4,7 +4,8 @@
     <div id="nav">
       <router-link to="/">LUCIJA BABIĆ PROBA</router-link> |
       <router-link to="/about">Lucia Vareško proba</router-link> |
-      <router-link to="/signup">Sign up</router-link>
+      <router-link to="/signup">Sign up</router-link> |
+      <router-link to="/login">Login</router-link>
     </div>
     <router-view />
   </div>

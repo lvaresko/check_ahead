@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Signup from '../components/Auth/Signup.vue'
+import Login from '../components/Auth/Login.vue'
 
 import SuiVue from 'semantic-ui-vue';
 //import 'semantic-ui-css/semantic.min.css';
@@ -31,7 +32,12 @@ const routes = [{
         path: '/signup',
         name: 'Signup',
         component: Signup
-    }
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
 ]
 
 const router = new VueRouter({
