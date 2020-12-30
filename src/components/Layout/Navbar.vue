@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--
     <sui-grid :columns="3">
       <sui-grid-row stretched>
         <sui-grid-column>
@@ -33,9 +34,9 @@
         <docs-wireframe name="paragraph" />
       </sui-segment>
     </div>
-
+  
     <h1>ILI</h1>
-
+    -->
     <sui-menu attached="top" :widths="3" secondary>
       <sui-menu-item icon="bars" is="sui-button" size="massive">
       </sui-menu-item>
@@ -47,14 +48,15 @@
     </sui-menu>
 
     <sui-input size="massive" placeholder="Search big..." icon="search" />
+    
     <div></div>
-    <sui-button>Click Here</sui-button>
+    <sui-button>Click Here</sui-button> <!-- semantic vue -->
     <sui-button content="Content as a prop" />
     <div is="sui-button">This is a div</div>
     <div class="ui input">
       <input type="text" placeholder="Search..." />
     </div>
-    <button class="ui button">Follow</button>
+    <button class="ui button">Follow</button> <!-- semantic original-->
   </div>
 </template>
 
@@ -75,4 +77,6 @@ input.ui.input {
 sui-menu-item.sui-button {
   color: red !important;
 }
+
+
 </style>

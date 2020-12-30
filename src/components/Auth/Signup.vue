@@ -1,50 +1,37 @@
 <template>
   <div class="signup">
     <h1>Registration</h1>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm"></div>
-        <div class="col-sm text-left">
-          <form>
-            <div class="form-group">
-              <label form="exampleInputEmail">Email</label>
-              <input
-                type="email"
-                v-model="email"
-                class="form-control"
-                id="exampleInputEmail"
-                aria-describedby="EmailHelp"
-                placeholder="amy@gmail.com"
-              />
-            </div>
-            <div class="form-group">
-              <label form="exampleInputPassword1">Password</label>
-              <input
-                type="password"
-                v-model="password"
-                class="form-control"
-                id="exampleInputPassword1"
-                placeholder="abc12"
-              />
-              <div class="form-group">
-                <label form="exampleInputPassword2">Repeat password</label>
-                <input
-                  type="password"
-                  v-model="passwordRepeat"
-                  class="form-control"
-                  id="exampleInputpassword2"
-                  placeholder="Retype here your password..."
-                />
-              </div>
-            </div>
-            <button type="button" @click="signup" class="btn btn-primary">
-              Register
-            </button>
-          </form>
-        </div>
-        <div class="col-sm"></div>
-      </div>
-    </div>
+    <sui-grid divided="vertically">
+    <sui-grid-row :columns="3">
+      <sui-grid-column></sui-grid-column>
+      <sui-grid-column>
+        <sui-form>
+              <sui-form-field>
+                <label>First Name:</label>
+                <sui-input type="text" class="input1" id="exampleInputFirstName" placeholder="Amy"/>
+              </sui-form-field>
+              <sui-form-field>
+                <label>Last Name:</label>
+                <sui-input type="text" class="input1" id="exampleInputLastName" placeholder="Wise"/>
+              </sui-form-field>
+              <sui-form-field>
+                <label>Email:</label>
+                <sui-input type="email" class="input1" v-model="email" id="exampleInputEmail" placeholder="amy@gmail.com"/>
+              </sui-form-field>
+              <sui-form-field>
+                <label>Password:</label>
+                <sui-input type="password" class="input1" v-model="password" id="exampleInputPassword1" placeholder="abc12"/>
+              </sui-form-field>
+              <sui-form-field>
+                <label>Repeat password:</label>
+                <sui-input type="password" class="input1" v-model="passwordRepeat" id="exampleInputpassword2" placeholder="Retype your password here..."/>
+              </sui-form-field>
+          <sui-button  @click="signup">Register</sui-button>
+        </sui-form>
+      </sui-grid-column>
+      <sui-grid-column></sui-grid-column>
+    </sui-grid-row>
+  </sui-grid>
   </div>
 </template>
 
@@ -81,3 +68,4 @@ export default {
   },
 };
 </script>
+

@@ -1,3 +1,14 @@
 /*******************************
          Site Overrides
 *******************************/
+
+.input1.ui.input>input {
+    background: transparent;
+    border: none !important;
+    border-bottom: 1px solid lightgray !important;
+    border-radius: 0 !important;
+}
+
+.input1.ui.input>input:focus {
+    border-bottom: 1px solid #595959;
+}

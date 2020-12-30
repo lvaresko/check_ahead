@@ -1,3 +1,14 @@
 /*******************************
      User Global Variables
 *******************************/
+
+/*-------------------
+     Fonts
+--------------------*/
+
+@importGoogleFonts : true;
+@googleFontName    : 'Sofia';
+@googleFontSizes   : '400;
+@googleFontFamily  : '@{googleFontName}:@{googleFontSizes}';
+
+

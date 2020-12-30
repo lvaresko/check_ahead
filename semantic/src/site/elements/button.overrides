@@ -4,5 +4,5 @@
 
 .ui.button {
   background: rgba(111, 162, 180, 1);
-  color: red;
+  color: white;
 }

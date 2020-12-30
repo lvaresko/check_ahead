@@ -5273,7 +5273,7 @@ body .ui.inverted:not(.dimmer)::-webkit-scrollbar-thumb:hover {
 
 .ui.button {
   background: #6fa2b4;
-  color: red;
+  color: white;
 }
 /*!
  * # Fomantic-UI - Container
@@ -33359,6 +33359,17 @@ img.ui.bordered.image {
 /*******************************
          Site Overrides
 *******************************/
+
+.input1.ui.input > input {
+  background: transparent;
+  border: none !important;
+  border-bottom: 1px solid lightgray !important;
+  border-radius: 0 !important;
+}
+
+.input1.ui.input > input:focus {
+  border-bottom: 1px solid #595959;
+}
 /*!
  * # Fomantic-UI - Label
  * http://github.com/fomantic/Fomantic-UI/
