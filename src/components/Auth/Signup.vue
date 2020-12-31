@@ -1,71 +1,79 @@
 <template>
-  <div class="signup ui container center aligned">
+  <div class="signup text-center">
     <h1>Registration</h1>
-    <sui-grid divided="vertically">
-      <sui-grid-row :columns="3" >
-        <sui-grid-column :width="4"></sui-grid-column>
-        <sui-grid-column class="left aligned" :width="6">
-          <sui-form>
-            <sui-form-field width="ten">
-              <label>First Name:</label>
-              <sui-input
+    <div class="container">
+      <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm p-5">
+          <form>
+            <div class="form-group text-left">
+              <label form="exampleInputFirstName">First name:</label>
+              <input
                 type="text"
-                class="input1"
+                class="form-control"
                 id="exampleInputFirstName"
                 placeholder="Amy"
               />
-            </sui-form-field>
-            <sui-form-field width="ten">
-              <label>Last Name:</label>
-              <sui-input
+            </div>
+            <div class="form-group text-left">
+              <label form="exampleInputLastName">Last name:</label>
+              <input
                 type="text"
-                class="input1"
+                class="form-control"
                 id="exampleInputLastName"
                 placeholder="Wise"
               />
-            </sui-form-field>
-            <sui-form-field width="ten">
-              <label>Email:</label>
-              <sui-input
+            </div>
+            <div class="form-group text-left">
+              <label form="exampleInputEmail">Email:</label>
+              <input
                 type="email"
-                class="input1"
                 v-model="email"
+                class="form-control"
                 id="exampleInputEmail"
+                aria-describedby="EmailHelp"
                 placeholder="amy@gmail.com"
               />
-            </sui-form-field>
-            <sui-form-field width="ten">
-              <label>Password:</label>
-              <sui-input
+            </div>
+            <div class="form-group text-left">
+              <label form="exampleInputPassword1">Password:</label>
+              <input
                 type="password"
-                class="input1"
                 v-model="password"
+                class="form-control"
                 id="exampleInputPassword1"
                 placeholder="abc12"
               />
-            </sui-form-field>
-            <sui-form-field width="ten">
-              <label>Repeat password:</label>
-              <sui-input
+            </div>
+            <div class="form-group text-left">
+              <label form="exampleInputPassword2">Repeat password:</label>
+              <input
                 type="password"
-                class="input1"
                 v-model="passwordRepeat"
+                class="form-control"
                 id="exampleInputpassword2"
-                placeholder="Retype your password here..."
+                placeholder="Retype here your password..."
               />
-            </sui-form-field>
-            <sui-button fluid @click="signup">Register</sui-button>
-          </sui-form>
-        </sui-grid-column>
-        <sui-grid-column :width="4"></sui-grid-column>
-      </sui-grid-row>
-    </sui-grid>
+            </div>
+            <button type="button" @click="signup" class="btn btn-primary mt-4">
+              Register
+            </button>
+          </form>
+          <div clas="row" style="margin: 30px">
+            <p style="font-size: 12px">
+              By continuing, you agree to Check Ahead Terms of Use and confirm
+              that you have read its Privacy Policy.
+            </p>
+          </div>
+        </div>
+        <div class="col-sm"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { firebase } from "@/firebase";
-
 export default {
   name: "Signup",
   data() {
