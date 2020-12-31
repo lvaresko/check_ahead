@@ -1,6 +1,7 @@
 /*------------
     Fonts
 --------------*/
+
 * {
     font-family: 'Noto Serif Malayalam', sans-serif;
     font-size: 18px;
@@ -11,9 +12,11 @@
     font-size: 36px;
 }
 
+
 /*-------------------
     Button primary
 --------------------*/
+
 .btn-primary {
     width: 280px;
     height: 40px;
@@ -26,9 +29,11 @@
     background-color: #6FA2B4;
 }
 
+
 /*-------------------
     Button primary
 --------------------*/
+
 .btn-secondary {
     width: 280px;
     height: 40px;
@@ -48,7 +53,8 @@
 /*--------------
    Form Input
 ---------------*/
-.form-control { 
+
+.form-control {
     font-size: 16px;
     color: #595959;
     background: transparent;
@@ -60,19 +66,29 @@
     margin-bottom: 20px;
 }
 
+
 /* Focus */
+
 .form-control:focus {
     border-bottom: 1px solid #595959;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 
+
 /* AutoFill */
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active  {
-  -webkit-text-fill-color: #595959; 
-  -webkit-box-shadow: 0 0 0 30px white inset;
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #595959;
+    -webkit-box-shadow: 0 0 0 30px white inset;
 }
-  
+
+
+/* Icons */
+
+span[class^="icon"] {
+    font-size: 40px;
+}
