@@ -26,12 +26,12 @@
     <nav class="navbar navbar-expand-sm">
       <div class="container-sm">
         <div class="col-sm">
-          <i src="../../assets/icons/menu.svg"></i>
+          <button>
+            <span class="menu"></span>
+          </button>
         </div>
-        <a class="navbar-brand" href="#">Navbar</a>
       </div>
     </nav>
-    <span class="icon-perfume" style="font-size: 50px"></span>
   </div>
 </template>
 
