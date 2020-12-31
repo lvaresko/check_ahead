@@ -1,42 +1,40 @@
 <template>
-  <div class="login ui container">
-    <sui-grid divided="vertically">
-      <sui-grid-row :columns="3">
-        <sui-grid-column></sui-grid-column>
-        <sui-grid-column>
-            <img src="@/assets/check_ahead_logo.png">
-          <sui-form>
-            <sui-form-field>
-              <label>Email:</label>
-              <sui-input
+  <div class="signup text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm p-5">
+          <img src="@/assets/full_logo.png" class="img-fluid" />
+          <form>
+            <div class="form-group text-left">
+              <label form="exampleInputEmail">Email:</label>
+              <input
                 type="email"
-                class="input1"
-                v-model="email"
+                class="form-control"
                 id="exampleInputEmail"
+                aria-describedby="EmailHelp"
                 placeholder="Type here your email..."
               />
-            </sui-form-field>
-            <sui-form-field>
-              <label>Password:</label>
-              <sui-input
+            </div>
+            <div class="form-group text-left">
+              <label form="exampleInputPassword1">Password:</label>
+              <input
                 type="password"
-                class="input1"
-                v-model="password"
+                class="form-control"
                 id="exampleInputPassword1"
                 placeholder="Type here your password..."
               />
-            </sui-form-field>
-            <sui-button>Login</sui-button>
-          </sui-form>
-        </sui-grid-column>
-        <sui-grid-column></sui-grid-column>
-      </sui-grid-row>
-    </sui-grid>
+            </div>
+            <button type="button" class="btn btn-primary mt-4">Login</button>
+          </form>
+          <button type="button" class="btn btn-secondary mt-4">
+            Continue with Google
+          </button>
+          <div clas="row" style="margin: 30px"></div>
+          <p>New to Check Ahead? Create Account</p>
+        </div>
+        <div class="col-sm"></div>
+      </div>
+    </div>
   </div>
 </template>
-
-<script>
-export default {
-    name: "Login",
-}
-</script>
