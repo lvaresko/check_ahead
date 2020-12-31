@@ -4,14 +4,8 @@ import Home from '../views/Home.vue'
 import Signup from '../views/Signup.vue'
 import Login from '../views/Login.vue'
 
-import SuiVue from 'semantic-ui-vue';
-//import 'semantic-ui-css/semantic.min.css';
 
-//import '../assets/main.css'
-
-import '../../semantic/dist/semantic.min.css';
 Vue.use(VueRouter)
-Vue.use(SuiVue)
 
 
 const routes = [{
