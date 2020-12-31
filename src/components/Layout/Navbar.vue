@@ -46,17 +46,6 @@
       <sui-menu-item icon="user" is="sui-button" size="massive">
       </sui-menu-item>
     </sui-menu>
-
-    <sui-input size="massive" placeholder="Search big..." icon="search" />
-    
-    <div></div>
-    <sui-button>Click Here</sui-button> <!-- semantic vue -->
-    <sui-button content="Content as a prop" />
-    <div is="sui-button">This is a div</div>
-    <div class="ui input">
-      <input type="text" placeholder="Search..." />
-    </div>
-    <button class="ui button">Follow</button> <!-- semantic original-->
   </div>
 </template>
 
@@ -70,13 +59,4 @@ export default {
 };
 </script>
 
-<style>
-input.ui.input {
-  border: 7 solid black !important;
-}
-sui-menu-item.sui-button {
-  color: red !important;
-}
 
-
-</style>
