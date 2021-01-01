@@ -1,17 +1,26 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-sm">
-      <div class="container-sm">
-        <div class="col-sm">
-          <button>
-            <span class="icon-menu"></span>
-          </button>
-        </div>
-        <div class="col-sm">
-          <router-link to="/about">
-            <span class="icon-user"></span
-          ></router-link>
-        </div>
+    <nav
+      class="navbar sticky-top navbar-expand-sm"
+      style="border:1px solid black"
+    >
+      <div class="container-fluid">
+        <button type="button" class="btn">
+          <span class="icon-menu"></span>
+        </button>
+
+        <router-link to="/home">
+          <img
+            id="brand"
+            src="@/assets/logo.png"
+            alt="Check Ahead"
+            loading="lazy"
+          />
+        </router-link>
+
+        <router-link to="/about" style="text-decoration: none">
+          <span class="icon-user"></span
+        ></router-link>
       </div>
     </nav>
   </div>

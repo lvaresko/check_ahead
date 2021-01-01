@@ -1,3 +1,12 @@
+/*-------------
+    Box-Sizing
+--------------*/
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
+
 /*------------
     Fonts
 --------------*/
@@ -6,6 +15,8 @@
     font-family: 'Noto Serif Malayalam', sans-serif;
     font-size: 18px;
     font-weight: 400;
+    color: rgba(89, 89, 89, 1);
+    /* TU SAM BOJU DODALA, VALJDA JE OK */
 }
 
 .h1 {
@@ -67,7 +78,9 @@
 }
 
 
-/* Focus */
+/*-------------
+     Focus 
+--------------*/
 
 .form-control:focus {
     border-bottom: 1px solid #595959;
@@ -76,7 +89,9 @@
 }
 
 
-/* AutoFill */
+/*---------------
+    AutoFill 
+---------------*/
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -87,8 +102,51 @@ input:-webkit-autofill:active {
 }
 
 
-/* Icons */
+/*------------
+    Icons 
+-------------*/
 
 span[class^="icon"] {
-    font-size: 40px;
+    font-size: 30px;
+}
+
+
+/*-------------
+   Brand image
+    (navbar)
+--------------*/
+
+
+/* xs */
+
+img {
+    width: 150px;
+    height: auto;
+}
+
+
+/* sm */
+
+@media (min-width: 768px) {
+    img {
+        width: 200px;
+    }
+}
+
+
+/* md */
+
+@media (min-width: 992px) {
+    img {
+        width: 250px;
+    }
+}
+
+
+/* lg */
+
+@media (min-width: 1200px) {
+    img {
+        width: 300px;
+    }
 }
