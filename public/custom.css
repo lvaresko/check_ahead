@@ -157,3 +157,43 @@ img#brand {
         width: 300px;
     }
 }
+
+
+/*-----------
+  Home-page
+-----------*/
+
+.jumbotron {
+    background-image: url('~@/assets/home.jpg');
+    /*ne radi i popizdit cu vise sa assetsima*/
+    background-size: cover;
+    margin-bottom: 0;
+}
+
+#home-page {
+    background-color: #6FA2B4;
+    padding: 20px;
+    -webkit-box-shadow: 0 8px 6px -6px #ccc;
+}
+
+.input-group {
+    position: relative;
+}
+
+.form-control#home-page {
+    background: white;
+    border: 1px solid gray;
+    border-bottom: 1px solid gray;
+    box-shadow: 5px 10px;
+    border-radius: 6;
+    margin-bottom: 20px;
+}
+
+#home-page.form-control:focus {
+    -webkit-box-shadow: 5px 10px;
+    box-shadow: 5px 10px;
+}
+
+.icon-group {
+    width: 60px;
+}

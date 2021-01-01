@@ -1,15 +1,12 @@
 <template>
   <div>
-    <nav
-      class="navbar sticky-top navbar-expand-sm align-middle"
-      style="border:1px solid black;"
-    >
+    <nav class="navbar sticky-top navbar-expand-sm align-middle">
       <div class="container-fluid">
         <button type="button" class="btn">
           <span class="icon-menu"></span>
         </button>
 
-        <router-link to="/home">
+        <router-link to="/">
           <img
             id="brand"
             src="@/assets/logo.png"
