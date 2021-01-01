@@ -1,8 +1,8 @@
 <template>
   <div>
     <nav
-      class="navbar sticky-top navbar-expand-sm"
-      style="border:1px solid black"
+      class="navbar sticky-top navbar-expand-sm align-middle"
+      style="border:1px solid black;"
     >
       <div class="container-fluid">
         <button type="button" class="btn">
@@ -19,8 +19,8 @@
         </router-link>
 
         <router-link to="/about" style="text-decoration: none">
-          <span class="icon-user"></span
-        ></router-link>
+          <span class="icon-user"></span>
+        </router-link>
       </div>
     </nav>
   </div>

@@ -110,6 +110,13 @@ span[class^="icon"] {
     font-size: 30px;
 }
 
+span[class^="icon"]::before {
+    vertical-align: middle;
+}
+
+
+/*taj fontastic koristi ikone ::before i zbog nekog razloga nisu bili align-ani po srediti vertikalno i opet sam izgubila 5h zivota na ovakvu glupost*/
+
 
 /*-------------
    Brand image
