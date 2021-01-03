@@ -78,9 +78,7 @@
 }
 
 
-/*-------------
-     Focus 
---------------*/
+/* Focus */
 
 .signup .form-control:focus {
     border-bottom: 1px solid #595959;
@@ -90,9 +88,7 @@
 }
 
 
-/*---------------
-    AutoFill 
----------------*/
+/* AutoFill */
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -189,7 +185,9 @@ h2.line span {
 }
 
 
-/* Search */
+/*-----------
+  Search
+-----------*/
 
 #search.form-control {
     font-size: 16px;
