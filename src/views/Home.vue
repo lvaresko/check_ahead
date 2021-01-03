@@ -53,6 +53,21 @@
           <input type="text" class="form-control" placeholder="Username" />
           <i class="icon-magnifying-glass form-control-feedback"></i>
         </div>
+      
+      <!-- evoo nez ako je ovako okej, trebalo bi jos samo uredit malo da ne bude plavi border kad kliknes itd... -->
+        <div class="input-group mt-4">
+          <input 
+            id="search1"
+            type="text"
+            class="form-control border-right-0"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            placeholder="Search for a product in our database..."
+          >
+          <span class="input-group-append bg-white rounded">
+              <button class="btn border border-left-0" type="button"><i class="icon-magnifying-glass"></i></button>
+          </span>
+        </div>
       </div>
     </div>
     <div class="container" style="padding: auto">

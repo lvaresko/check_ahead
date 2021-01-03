@@ -36,6 +36,12 @@
     background-color: #6FA2B4;
 }
 
+
+.btn-primary.v2 {
+    width: 120px;
+    height: 40px;
+}
+
 .btn-primary:hover {
     background-color: #6FA2B4;
 }
@@ -96,6 +102,25 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-text-fill-color: #595959;
     -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+/*------------------
+   Ingredient list
+-------------------*/
+
+.custom-control.custom-checkbox{padding-left: 0;}
+
+label.custom-control-label {
+  position: relative;
+  padding-top: 4px;
+  padding-right: 1.5rem;
+  margin: 8px;
+}
+
+label.custom-control-label::before, label.custom-control-label::after{
+  right: 0;
+  left: auto;
+  top: 8px;
 }
 
 
@@ -218,3 +243,4 @@ span.icon-magnifying-glass {
     border-radius: 20px;
     pointer-events: none;
 }
+
