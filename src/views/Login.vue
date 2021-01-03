@@ -25,13 +25,18 @@
                 placeholder="Type here your password..."
               />
             </div>
-            <button type="button" class="btn btn-primary mt-4">Login</button>
+            <button type="button" class="btn btn-primary mt-3">Login</button>
           </form>
-          <button type="button" class="btn btn-secondary mt-4">
+          <div class="mt-4" style="padding: auto">
+            <h2 class="line" style="width: 70%; margin: 10px 48px 20px;">
+              <span> or </span>
+            </h2>
+          </div>
+          <button type="button" class="btn btn-secondary mt-3">
             Continue with Google
           </button>
           <div clas="row" style="margin: 30px"></div>
-          <p>New to Check Ahead? Create Account</p>
+          <p>New to Check Ahead? <a href="/signup">Create Account</a></p>
         </div>
         <div class="col-sm"></div>
       </div>

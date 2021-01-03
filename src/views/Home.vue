@@ -2,7 +2,7 @@
   <div class="home">
     <div
       class="jumbotron jumbotron-fluid"
-      :style="{ backgroundImage: `url(${require('../assets/home_3.jpeg')})` }"
+      :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
     >
       <div class="container">
         <h1 class="display-5" style="color:white">

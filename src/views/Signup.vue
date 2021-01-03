@@ -36,7 +36,13 @@
               />
             </div>
             <div class="form-group text-left">
-              <label form="exampleInputPassword1">Password:</label>
+              <div class="custom-control-inline">
+                <label form="exampleInputPassword1">Password:</label>
+                <div style="margin: 0 0 0 103px">
+                  <label form="passwordWarning" style="font-size: 13px">At least 6 characters</label>
+                </div>
+              </div>
+              
               <input
                 type="password"
                 v-model="password"
@@ -55,7 +61,7 @@
                 placeholder="Retype here your password..."
               />
             </div>
-            <button type="button" @click="signup" class="btn btn-primary mt-4">
+            <button type="button" @click="$router.push('signup-ingredient-list')" class="btn btn-primary mt-4">
               Register
             </button>
           </form>
