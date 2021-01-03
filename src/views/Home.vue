@@ -1,11 +1,15 @@
 <template>
   <div class="home">
-    <div class="jumbotron jumbotron-fluid">
+    <div
+      class="jumbotron jumbotron-fluid"
+      :style="{ backgroundImage: `url(${require('../assets/home_3.jpeg')})` }"
+    >
       <div class="container">
-        <h1 class="display-4">Fluid jumbotron</h1>
-        <p class="lead">
-          This is a modified jumbotron that occupies the entire horizontal space
-          of its parent.
+        <h1 class="display-5" style="color:white">
+          We check the ingredients for you!
+        </h1>
+        <p class="lead" style="color:white">
+          Ovo sve mora ljepše bit, malo modernije? nez kako
         </p>
       </div>
     </div>
@@ -22,18 +26,22 @@
         </div>
         <div form="search-form">
           <input
+            id="search"
             type="text"
             class="form-control"
             aria-label="Default"
             aria-describedby="inputGroup-sizing-default"
+            placeholder="Search for a product in our database..."
           />
           <span class="icon-magnifying-glass"></span>
         </div>
       </div>
     </div>
-    <h4>
-      <span class="icon-group"></span> Or <span class="icon-group"></span>
-    </h4>
+    <div class="container" style="padding: auto">
+      <h2 class="line">
+        <span> or </span>
+      </h2>
+    </div>
   </div>
 </template>
 

@@ -42,7 +42,7 @@
 
 
 /*-------------------
-    Button primary
+    Button secondary
 --------------------*/
 
 .btn-secondary {
@@ -84,6 +84,7 @@
 
 .form-control:focus {
     border-bottom: 1px solid #595959;
+    border-bottom-width: 2px;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
@@ -113,9 +114,6 @@ span[class^="icon"] {
 span[class^="icon"]::before {
     vertical-align: middle;
 }
-
-
-/*taj fontastic koristi ikone ::before i zbog nekog razloga nisu bili align-ani po srediti vertikalno i opet sam izgubila 5h zivota na ovakvu glupost*/
 
 
 /*-------------
@@ -164,10 +162,10 @@ img#brand {
 -----------*/
 
 .jumbotron {
-    background-image: url('~@/assets/home.jpg');
-    /*ne radi i popizdit cu vise sa assetsima*/
     background-size: cover;
     margin-bottom: 0;
+    min-height: 500px;
+    /* povecava jumbotron */
 }
 
 #home-page {
@@ -176,24 +174,68 @@ img#brand {
     -webkit-box-shadow: 0 8px 6px -6px #ccc;
 }
 
-.input-group {
-    position: relative;
+h2.line {
+    width: 30%;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
 }
 
-.form-control#home-page {
+h2.line span {
+    background: #fff;
+    padding: 0 10px;
+    color: #ccc;
+}
+
+
+/* Search */
+
+#search.form-control {
+    font-size: 16px;
+    color: #595959;
     background: white;
-    border: 1px solid gray;
-    border-bottom: 1px solid gray;
-    box-shadow: 5px 10px;
-    border-radius: 6;
-    margin-bottom: 20px;
+    border-bottom: none;
+    position: relative;
+    width: 100%;
+    -webkit-box-shadow: 2px 2px 2px #595959;
+    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 2px 2px 2px #595959;
+    /* Firefox 3.5 - 3.6 */
+    box-shadow: 2px 2px 2px #595959;
+    /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+    border-radius: 20px;
 }
 
-#home-page.form-control:focus {
-    -webkit-box-shadow: 5px 10px;
-    box-shadow: 5px 10px;
+
+/*-------------
+     Focus 
+--------------*/
+
+#search.form-control:focus {
+    border-bottom: 1px solid #595959;
+    -webkit-box-shadow: 5px 5px 5px #595959;
+    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 5px 5px 5px #595959;
+    /* Firefox 3.5 - 3.6 */
+    box-shadow: 5px 5px 5px #595959;
+    /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
-.icon-group {
-    width: 60px;
+
+/*---------------
+    AutoFill 
+---------------*/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #595959;
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+.icon-magnifying-glass {
+    position: absolute;
+    font-size: 100px;
 }
