@@ -65,7 +65,7 @@
    Form Input
 ---------------*/
 
-.form-control {
+.signup .form-control {
     font-size: 16px;
     color: #595959;
     background: transparent;
@@ -82,7 +82,7 @@
      Focus 
 --------------*/
 
-.form-control:focus {
+.signup .form-control:focus {
     border-bottom: 1px solid #595959;
     border-bottom-width: 2px;
     -webkit-box-shadow: none;
@@ -196,46 +196,27 @@ h2.line span {
     color: #595959;
     background: white;
     border-bottom: none;
-    position: relative;
-    width: 100%;
-    -webkit-box-shadow: 2px 2px 2px #595959;
-    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: 2px 2px 2px #595959;
-    /* Firefox 3.5 - 3.6 */
-    box-shadow: 2px 2px 2px #595959;
-    /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
     border-radius: 20px;
+    /*    -webkit-box-shadow: 0 4px 8px 0;
+    -moz-box-shadow: 0 4px 8px 0;
+
+    box-shadow: 0 4px 8px 0;
+*/
+    box-shadow: none;
 }
 
 
-/*-------------
-     Focus 
---------------*/
-
+/*
 #search.form-control:focus {
-    border-bottom: 1px solid #595959;
-    -webkit-box-shadow: 5px 5px 5px #595959;
-    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: 5px 5px 5px #595959;
-    /* Firefox 3.5 - 3.6 */
-    box-shadow: 5px 5px 5px #595959;
-    /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+    -webkit-box-shadow: 0 8px 10px 0;
+    -moz-box-shadow: 0 8px 10px 0;
+    box-shadow: 0 8px 10px 0;
 }
+*/
 
-
-/*---------------
-    AutoFill 
----------------*/
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-text-fill-color: #595959;
-    -webkit-box-shadow: 0 0 0 30px white inset;
-}
-
-.icon-magnifying-glass {
-    position: absolute;
-    font-size: 100px;
+span.icon-magnifying-glass {
+    font-size: 15px;
+    z-index: 99;
+    border-radius: 20px;
+    pointer-events: none;
 }

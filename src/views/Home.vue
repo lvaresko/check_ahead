@@ -2,7 +2,7 @@
   <div class="home">
     <div
       class="jumbotron jumbotron-fluid"
-      :style="{ backgroundImage: `url(${require('../assets/home_3.jpeg')})` }"
+      :style="{ backgroundImage: `url(${require('../assets/home_3.1.jpeg')})` }"
     >
       <div class="container">
         <h1 class="display-5" style="color:white">
@@ -24,7 +24,20 @@
             is suitable for you or not.
           </h5>
         </div>
-        <div form="search-form">
+        <div class="input-group mb-3">
+          <input
+            id="search"
+            type="text"
+            class="form-control border-right-0"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            placeholder="Search for a product in our database..."
+          />
+          <span
+            class="icon-magnifying-glass input-group-append bg-white"
+          ></span>
+        </div>
+        <div class="form-group has-feedback">
           <input
             id="search"
             type="text"
@@ -33,7 +46,12 @@
             aria-describedby="inputGroup-sizing-default"
             placeholder="Search for a product in our database..."
           />
-          <span class="icon-magnifying-glass"></span>
+          <span class="icon-magnifying-glass form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <label class="control-label">Username</label>
+          <input type="text" class="form-control" placeholder="Username" />
+          <i class="icon-magnifying-glass form-control-feedback"></i>
         </div>
       </div>
     </div>
