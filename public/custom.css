@@ -36,7 +36,6 @@
     background-color: #6FA2B4;
 }
 
-
 .btn-primary.v2 {
     width: 120px;
     height: 40px;
@@ -104,23 +103,27 @@ input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
+
 /*------------------
    Ingredient list
 -------------------*/
 
-.custom-control.custom-checkbox{padding-left: 0;}
-
-label.custom-control-label {
-  position: relative;
-  padding-top: 4px;
-  padding-right: 1.5rem;
-  margin: 8px;
+.custom-control.custom-checkbox {
+    padding-left: 0;
 }
 
-label.custom-control-label::before, label.custom-control-label::after{
-  right: 0;
-  left: auto;
-  top: 8px;
+label.custom-control-label {
+    position: relative;
+    padding-top: 4px;
+    padding-right: 1.5rem;
+    margin: 8px;
+}
+
+label.custom-control-label::before,
+label.custom-control-label::after {
+    right: 0;
+    left: auto;
+    top: 8px;
 }
 
 
@@ -193,6 +196,8 @@ img#brand {
     background-color: #6FA2B4;
     padding: 20px;
     -webkit-box-shadow: 0 8px 6px -6px #ccc;
+    -moz-box-shadow: 0 8px 6px -6px #ccc;
+    box-shadow: 0 8px 6px -6px #ccc;
 }
 
 h2.line {
@@ -200,7 +205,7 @@ h2.line {
     text-align: center;
     border-bottom: 1px solid #ccc;
     line-height: 0.1em;
-    margin: 10px 0 20px;
+    margin: 10px auto;
 }
 
 h2.line span {
@@ -214,33 +219,36 @@ h2.line span {
   Search
 -----------*/
 
-#search.form-control {
-    font-size: 16px;
-    color: #595959;
-    background: white;
-    border-bottom: none;
-    border-radius: 20px;
-    /*    -webkit-box-shadow: 0 4px 8px 0;
-    -moz-box-shadow: 0 4px 8px 0;
-
-    box-shadow: 0 4px 8px 0;
-*/
-    box-shadow: none;
-}
-
-
-/*
-#search.form-control:focus {
-    -webkit-box-shadow: 0 8px 10px 0;
-    -moz-box-shadow: 0 8px 10px 0;
-    box-shadow: 0 8px 10px 0;
-}
-*/
-
 span.icon-magnifying-glass {
-    font-size: 15px;
-    z-index: 99;
+    font-size: 19px;
     border-radius: 20px;
-    pointer-events: none;
+    transition: 0.5s;
 }
 
+.icon-magnifying-glass:hover {
+    color: black;
+}
+
+.search-button,
+.search-input {
+    border: none;
+    border-radius: 20px;
+}
+
+.search-input {
+    padding-right: 0
+}
+
+.search {
+    background-color: white;
+    padding: 0;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 2px 4px 0 #777;
+    -moz-box-shadow: 0 2px 4px 0 #777;
+    box-shadow: 0 2px 4px 0 #777;
+}
+
+.search-button:focus,
+.search-input:focus {
+    outline: none;
+}

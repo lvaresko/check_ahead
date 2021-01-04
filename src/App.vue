@@ -30,7 +30,7 @@ export default {
     color: #595959;
 
     &.router-link-exact-active {
-      color: #6FA2B4;
+      color: #6fa2b4;
     }
   }
 }
