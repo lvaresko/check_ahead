@@ -16,9 +16,6 @@
     font-size: 18px;
     font-weight: 400;
     color: #595959;
-    
-    /* TU SAM BOJU DODALA, VALJDA JE OK */
-    /* ja sam samo promijenila u hex jer svugdje koristimo hex */
 }
 
 .h1 {
@@ -290,3 +287,44 @@ span.icon-magnifying-glass {
 -----------*/
 
 
+.sidebar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 50px);
+    margin-top: 85px;
+    background-color: white;
+    position: absolute;
+}
+
+.sidebar ul {
+    position: relative;
+    top: 10px;
+    width: 100%;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0 auto;
+  }
+  
+  .sidebar li {
+    background-color: white;
+    transition: 0.3s;
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    color: #595959;
+    display: block;
+    font-size: 18px;
+  }
+  
+  .sidebar a:hover {
+    color:  #595959;
+    font-weight: bold;
+  }
+  
+  .sidebar li:hover {
+    background-color: #eeeeee !important;
+  }
+    

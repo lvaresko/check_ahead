@@ -1,6 +1,6 @@
 <template>
-    <nav id="sidebar" class="col-sm-3">
-      <ul class="list-unstyled components">
+    <div class="sidebar col-sm-2 sticky-top" v-if="open">
+      <ul >
           <li>
             <router-link to="/" style="text-decoration: none">
                 <span class="icon-home"></span>
@@ -49,11 +49,14 @@
             </router-link>
           </li>
       </ul>
-    </nav>
+    </div>
 </template>
 
 <script>
 export default {
   name: "Sidebar",
+  props: [
+    'open'
+  ],
 };
 </script>
