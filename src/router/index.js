@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Signup from '../views/Signup.vue'
 import Login from '../views/Login.vue'
-import Signup_ingredient_list from '../views/Signup_ingredient_list.vue'
+import ChooseIngredients from '../views/ChooseIngredients.vue'
 
 
 Vue.use(VueRouter)
@@ -29,9 +29,9 @@ const routes = [{
         component: Signup
     },
     {
-        path: '/signup-ingredient-list',
-        name: 'Signup_ingredient_list',
-        component: Signup_ingredient_list
+        path: '/choose_ingredients',
+        name: 'CchooseIngredients',
+        component: ChooseIngredients
     },
     {
         path: '/login',

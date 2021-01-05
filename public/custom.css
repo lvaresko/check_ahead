@@ -15,8 +15,10 @@
     font-family: 'Noto Serif Malayalam', sans-serif;
     font-size: 18px;
     font-weight: 400;
-    color: rgba(89, 89, 89, 1);
+    color: #595959;
+    
     /* TU SAM BOJU DODALA, VALJDA JE OK */
+    /* ja sam samo promijenila u hex jer svugdje koristimo hex */
 }
 
 .h1 {
@@ -41,8 +43,10 @@
     height: 40px;
 }
 
-.btn-primary:hover {
-    background-color: #6FA2B4;
+.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary.v2:active:focus{
+    background-color: #6391a2 !important;
 }
 
 
@@ -59,10 +63,11 @@
     background-color: #ffffff;
 }
 
-.btn-secondary:hover {
-    color: #595959;
-    border: 1px solid lightgray;
-    background-color: #ffffff;
+.btn-secondary:hover,
+.btn-secondary:active:focus {
+    color: #595959 !important;
+    border: 1px solid lightgray !important;
+    background-color: #eeeeee !important;
 }
 
 
@@ -108,6 +113,7 @@ input:-webkit-autofill:active {
    Ingredient list
 -------------------*/
 
+/*  */
 .custom-control.custom-checkbox {
     padding-left: 0;
 }
@@ -122,9 +128,27 @@ label.custom-control-label {
 label.custom-control-label::before,
 label.custom-control-label::after {
     right: 0;
-    left: auto;
+    left: inherit;
     top: 8px;
 }
+
+/* Checkbox */
+.custom-control-input:focus~.custom-control-label::before {
+    background-color: white;
+    border-color: lightgray !important;
+    box-shadow: none !important;
+}
+.custom-control-input:checked~.custom-control-label::before,
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+    background-color: lightgray;
+    border-color: lightgray !important;
+    box-shadow: none !important;
+}
+ 
+  .custom-control-input:not(:disabled):active~.custom-control-label::before {
+    background-color: lightgray;
+    border-color: lightgray !important;
+  }
 
 
 /*------------

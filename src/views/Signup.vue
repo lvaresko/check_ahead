@@ -61,7 +61,7 @@
                 placeholder="Retype here your password..."
               />
             </div>
-            <button type="button" @click="$router.push('signup-ingredient-list')" class="btn btn-primary mt-4">
+            <button type="button" @click="$router.push('choose_ingredients')" class="btn btn-primary shadow none mt-4">
               Register
             </button>
           </form>

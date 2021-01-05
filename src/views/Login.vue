@@ -25,14 +25,14 @@
                 placeholder="Type here your password..."
               />
             </div>
-            <button type="button" class="btn btn-primary mt-3">Login</button>
+            <button type="button" class="btn btn-primary mt-3 shadow none">Login</button>
           </form>
           <div class="mt-4" style="padding: auto">
             <h2 class="line" style="width: 70%; margin: 10px 48px 20px;">
               <span> or </span>
             </h2>
           </div>
-          <button type="button" class="btn btn-secondary mt-3">
+          <button type="button" class="btn btn-secondary shadow none mt-3">
             Continue with Google
           </button>
           <div clas="row" style="margin: 30px"></div>
