@@ -36,6 +36,7 @@
     border: none;
     font-weight: 700;
     background-color: #6FA2B4;
+    padding: 0
 }
 
 .btn-primary.v2 {
@@ -43,9 +44,13 @@
     height: 40px;
 }
 
+.btn-primary.v3 {
+    width: 65px;
+    height: 26px;
+}
+
 .btn-primary:hover,
-.btn-primary:active:focus,
-.btn-primary.v2:active:focus{
+.btn-primary:active:focus{
     background-color: #6391a2 !important;
 }
 
@@ -113,7 +118,8 @@ input:-webkit-autofill:active {
    Ingredient list
 -------------------*/
 
-/*  */
+/* Checkbox label position */
+
 .custom-control.custom-checkbox {
     padding-left: 0;
 }
@@ -132,23 +138,24 @@ label.custom-control-label::after {
     top: 8px;
 }
 
-/* Checkbox */
-.custom-control-input:focus~.custom-control-label::before {
+
+/* Checkbox style */
+
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
     background-color: white;
     border-color: lightgray !important;
     box-shadow: none !important;
 }
 .custom-control-input:checked~.custom-control-label::before,
-.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+.custom-control-input:not(:disabled):active~.custom-control-label::before {
     background-color: lightgray;
-    border-color: lightgray !important;
+    border-color: gray !important;
     box-shadow: none !important;
 }
- 
-  .custom-control-input:not(:disabled):active~.custom-control-label::before {
-    background-color: lightgray;
-    border-color: lightgray !important;
-  }
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after{
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='gray' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+}
 
 
 /*------------
@@ -276,3 +283,10 @@ span.icon-magnifying-glass {
 .search-input:focus {
     outline: none;
 }
+
+
+/*-----------
+  Sidebar
+-----------*/
+
+

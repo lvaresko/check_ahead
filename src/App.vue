@@ -3,20 +3,22 @@
     <Navbar />
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">Lucia Vareško proba</router-link> |
       <router-link to="/signup">Sign up</router-link> |
       <router-link to="/login">Login</router-link>
     </div>
     <router-view />
+     <sidebar />
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Layout/Navbar.vue";
+import Sidebar from "@/components/Layout/Sidebar.vue";
 
 export default {
   components: {
     Navbar,
+    Sidebar,
   },
 };
 </script>

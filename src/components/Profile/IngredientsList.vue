@@ -43,6 +43,19 @@
       <label class="custom-control-label" for="customCheck6">Animal by-products</label>
       <h2 class="line" style="width: 100%"></h2>
     </div>
+    <div class="form-group proba text-left mt-4">
+      <label form="exampleInputCustom">CUSTOM:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputCustom"
+        placeholder="e.g. citrus, petroleum..."
+      />
+      <!-- botun prebacit u input -->
+      <button type="button" class="btn btn-primary v3 shadow none mt-3">
+        add
+      </button>
+    </div> 
     <button type="button" class="btn btn-primary v2 shadow none mt-3">
       Submit
     </button>

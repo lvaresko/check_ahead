@@ -15,7 +15,7 @@
           />
         </router-link>
 
-        <router-link to="/about" style="text-decoration: none">
+        <router-link to="/profile" style="text-decoration: none">
           <span class="icon-user"></span>
         </router-link>
       </div>
@@ -26,6 +26,5 @@
 <script>
 export default {
   name: "Navbar",
-  components: {},
 };
 </script>
