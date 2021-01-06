@@ -1,14 +1,10 @@
 <template>
   <div id="app">
-    <Navbar @tooglenav="navOpen = !navOpen"/>
-    <Sidebar :open="navOpen"/>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/signup">Sign up</router-link> |
-      <router-link to="/login">Login</router-link>
-    </div>
+    <Navbar @tooglenav="navOpen = !navOpen" />
+    <Sidebar :open="navOpen" />
+
     <router-view />
-     <sidebar />
+    <sidebar />
   </div>
 </template>
 
@@ -17,11 +13,11 @@ import Navbar from "@/components/Layout/Navbar.vue";
 import Sidebar from "@/components/Layout/Sidebar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   data: () => {
     return {
-      navOpen: false
-    }
+      navOpen: false,
+    };
   },
   components: {
     Navbar,

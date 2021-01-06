@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <nav class="navbar sticky-top navbar-expand-sm align-middle">
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-sm align-middle">
       <div class="container-fluid">
         <button type="button" class="btn" @click="$emit('tooglenav')">
           <span class="icon-menu"></span>
@@ -20,7 +20,7 @@
         </router-link>
       </div>
     </nav>
-  </div>
+  </header>
 </template>
 
 <script>

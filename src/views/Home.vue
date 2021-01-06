@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/signup">Sign up</router-link> |
+      <router-link to="/login">Login</router-link>
+    </div>
     <div
       class="jumbotron jumbotron-fluid"
       :style="{ backgroundImage: `url(${require('../assets/home_3.1.jpeg')})` }"
@@ -44,14 +49,27 @@
       <h2 class="line">
         <span> or </span>
       </h2>
-      <p>BOTUN ZA SCAN</p>
+      <button type="button" class="scan btn btn-primary mt-3 shadow none">
+        SCAN BARCODE <i class="icon-barcode"></i>
+      </button>
+    </div>
+    <div class="album py-5 ">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <Card /><Card /><Card />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Card from "@/components/Card.vue";
+
 export default {
   name: "Home",
-  components: {},
+  components: {
+    Card,
+  },
 };
 </script>

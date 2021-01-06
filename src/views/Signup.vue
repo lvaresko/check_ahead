@@ -1,79 +1,78 @@
 <template>
   <div class="signup text-center">
-    <h1>Registration</h1>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm"></div>
-        <div class="col-sm p-5">
-          <form>
-            <div class="form-group text-left">
-              <label form="exampleInputFirstName">First name:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputFirstName"
-                placeholder="Amy"
-              />
-            </div>
-            <div class="form-group text-left">
-              <label form="exampleInputLastName">Last name:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputLastName"
-                placeholder="Wise"
-              />
-            </div>
-            <div class="form-group text-left">
-              <label form="exampleInputEmail">Email:</label>
-              <input
-                type="email"
-                v-model="email"
-                class="form-control"
-                id="exampleInputEmail"
-                aria-describedby="EmailHelp"
-                placeholder="amy@gmail.com"
-              />
-            </div>
-            <div class="form-group text-left">
-              <div class="custom-control-inline">
-                <label form="exampleInputPassword1">Password:</label>
-                <div style="margin: 0 0 0 103px">
-                  <label form="passwordWarning" style="font-size: 13px">At least 6 characters</label>
-                </div>
-              </div>
-              
-              <input
-                type="password"
-                v-model="password"
-                class="form-control"
-                id="exampleInputPassword1"
-                placeholder="abc12"
-              />
-            </div>
-            <div class="form-group text-left">
-              <label form="exampleInputPassword2">Repeat password:</label>
-              <input
-                type="password"
-                v-model="passwordRepeat"
-                class="form-control"
-                id="exampleInputpassword2"
-                placeholder="Retype here your password..."
-              />
-            </div>
-            <button type="button" @click="$router.push('choose_ingredients')" class="btn btn-primary shadow none mt-4">
-              Register
-            </button>
-          </form>
-          <div clas="row" style="margin: 30px">
-            <p style="font-size: 12px">
-              By continuing, you agree to Check Ahead Terms of Use and confirm
-              that you have read its Privacy Policy.
-            </p>
+    <form class="signup">
+      <h1>Registration</h1>
+
+      <div class="form-group text-left">
+        <label form="exampleInputFirstName">First name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputFirstName"
+          placeholder="Amy"
+        />
+      </div>
+      <div class="form-group text-left">
+        <label form="exampleInputLastName">Last name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputLastName"
+          placeholder="Wise"
+        />
+      </div>
+      <div class="form-group text-left">
+        <label form="exampleInputEmail">Email:</label>
+        <input
+          type="email"
+          v-model="email"
+          class="form-control"
+          id="exampleInputEmail"
+          aria-describedby="EmailHelp"
+          placeholder="amy@gmail.com"
+        />
+      </div>
+      <div class="form-group text-left">
+        <div class="custom-control-inline">
+          <label form="exampleInputPassword1">Password:</label>
+          <div style="margin: 0 0 0 103px">
+            <label form="passwordWarning" style="font-size: 13px"
+              >At least 6 characters</label
+            >
           </div>
         </div>
-        <div class="col-sm"></div>
+
+        <input
+          type="password"
+          v-model="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          placeholder="abc12"
+        />
       </div>
+      <div class="form-group text-left">
+        <label form="exampleInputPassword2">Repeat password:</label>
+        <input
+          type="password"
+          v-model="passwordRepeat"
+          class="form-control"
+          id="exampleInputpassword2"
+          placeholder="Retype here your password..."
+        />
+      </div>
+      <button
+        type="button"
+        @click="$router.push('choose_ingredients')"
+        class="btn btn-primary shadow none mt-4"
+      >
+        Register
+      </button>
+    </form>
+    <div clas="row" style="margin: 30px">
+      <p style="font-size: 12px">
+        By continuing, you agree to Check Ahead Terms of Use and confirm that
+        you have read its Privacy Policy.
+      </p>
     </div>
   </div>
 </template>
@@ -96,10 +95,10 @@ export default {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then(function () {
+          .then(function() {
             console.log("Uspješna registracija");
           })
-          .catch(function (error) {
+          .catch(function(error) {
             console.error("Došlo je do pogreške", error);
           });
         console.log("Nastavak");
@@ -110,4 +109,3 @@ export default {
   },
 };
 </script>
-
