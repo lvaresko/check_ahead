@@ -28,3 +28,41 @@ export default {
   name: "Navbar",
 };
 </script>
+
+<style>
+.navbar {
+  background-color: white;
+  width: 100vw;
+}
+
+/* xs */
+
+img#brand {
+  width: 150px;
+  height: auto;
+}
+
+/* sm */
+
+@media (min-width: 768px) {
+  img#brand {
+    width: 200px;
+  }
+}
+
+/* md */
+
+@media (min-width: 992px) {
+  img#brand {
+    width: 250px;
+  }
+}
+
+/* lg */
+
+@media (min-width: 1200px) {
+  img#brand {
+    width: 300px;
+  }
+}
+</style>

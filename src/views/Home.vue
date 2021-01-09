@@ -53,18 +53,20 @@
         SCAN BARCODE <i class="icon-barcode"></i>
       </button>
     </div>
-    <div class="album py-5 ">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <Card /><Card /><Card />
-        </div>
+
+    <div class="container">
+      <div class="row">
+        <Card />
+        <Card />
+        <Card />
+        <Card />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Card from "@/components/Card.vue";
+import Card from "../components/Card.vue";
 
 export default {
   name: "Home",
@@ -73,3 +75,64 @@ export default {
   },
 };
 </script>
+
+<style>
+.icon-barcode::before {
+  color: white;
+  font-size: 25px;
+  vertical-align: middle;
+}
+
+.jumbotron {
+  background-size: cover;
+  margin-bottom: 0;
+  min-height: 500px;
+  /* povecava jumbotron */
+}
+
+#home-page {
+  background-color: #6fa2b4;
+  padding: 20px;
+  -webkit-box-shadow: 0 8px 6px -6px #ccc;
+  -moz-box-shadow: 0 8px 6px -6px #ccc;
+  box-shadow: 0 8px 6px -6px #ccc;
+}
+
+/*-----------
+  Search
+-----------*/
+
+span.icon-magnifying-glass {
+  font-size: 19px;
+  border-radius: 20px;
+  transition: 0.5s;
+}
+
+.icon-magnifying-glass:hover {
+  color: black;
+}
+
+.search-button,
+.search-input {
+  border: none;
+  border-radius: 20px;
+}
+
+.search-input {
+  padding-right: 0;
+}
+
+.search {
+  background-color: white;
+  padding: 0;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 2px 4px 0 #777;
+  -moz-box-shadow: 0 2px 4px 0 #777;
+  box-shadow: 0 2px 4px 0 #777;
+}
+
+.search-button:focus,
+.search-input:focus {
+  outline: none;
+}
+</style>
