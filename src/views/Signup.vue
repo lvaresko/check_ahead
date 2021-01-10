@@ -3,7 +3,7 @@
     <form class="signup">
       <h1>Registration</h1>
 
-      <div class="form-group text-left">
+      <div class="form-group text-left pt-3">
         <label form="exampleInputFirstName">First name:</label>
         <input
           type="text"

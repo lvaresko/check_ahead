@@ -74,9 +74,9 @@
 }
 
 
-/*-----------
+/*-------------
 Sign up / Login
--------------*/
+---------------*/
 
 .signup {
     width: 100%;
@@ -90,7 +90,7 @@ Sign up / Login
    Form Input
 ---------------*/
 
-.signup .form-control {
+.form-control {
     font-size: 16px;
     color: #595959;
     background: transparent;
@@ -110,7 +110,7 @@ Sign up / Login
 
 /* Focus */
 
-.signup .form-control:focus {
+.form-control:focus {
     border-bottom: 1px solid #595959;
     border-bottom-width: 2px;
     -webkit-box-shadow: none;
@@ -322,42 +322,10 @@ span.icon-magnifying-glass {
 -----------*/
 
 .sidebar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    height: calc(100vh - 50px);
-    margin-top: 85px;
-    background-color: white;
-    position: absolute;
-}
-
-.sidebar ul {
-    position: relative;
-    top: 10px;
     width: 100%;
-    list-style-type: none;
-    padding: 0px;
-    margin: 0 auto;
-}
-
-.sidebar li {
+    max-width: 250px;
+    height: calc(100vh - 50px);
     background-color: white;
-    transition: 0.3s;
-}
-
-.sidebar a {
-    text-decoration: none;
-    color: #595959;
-    display: block;
-    font-size: 18px;
-}
-
-.sidebar a:hover {
-    color: #595959;
-    font-weight: bold;
-}
-
-.sidebar li:hover {
-    background-color: #eeeeee !important;
+    position: fixed;
+    padding: 0;
 }

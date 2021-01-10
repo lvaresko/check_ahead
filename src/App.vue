@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar @tooglenav="navOpen = !navOpen" />
-    <Sidebar :open="navOpen" />
+   <!-- <Sidebar :open="navOpen" /> -->
 
     <router-view />
     <sidebar />

@@ -69,10 +69,10 @@
         <span>{{ custom }} </span
         ><span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
       </div>
-      <!-- botun prebacit u input -->
+      <!-- botun prebacit u input 
       <button type="button" class="btn btn-primary v3 shadow none mt-3">
         add
-      </button>
+      </button> -->
       <!-- vjv nece trebat ovaj gumb jer se automatski doda kad stavis ','-->
     </div>
     <button type="button" class="btn btn-primary v2 shadow none mt-3">
