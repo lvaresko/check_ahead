@@ -5,7 +5,7 @@
       <router-link to="/signup">Sign up</router-link> |
       <router-link to="/login">Login</router-link>
     </div>
-    <h3>NAVBAR 1</h3>
+    <h3>NAVBAR 1 sori i dalje je ruzno a ful nez sa da nap</h3>
     <div
       class="jumbotron jumbotron-fluid"
       :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
@@ -16,7 +16,7 @@
         </h1>
         <div class="description">
           <h4 style="font-weight: bolder; color: white">
-            Welcome to the searchable database of cosmetics products.
+            Welcome to the searchable database of cosmetic products.
           </h4>
           <h5 style="color:white">
             Based on your list of non-preferences, we determine if the product
@@ -62,7 +62,7 @@
     <div id="home-page" class="container-fluid">
       <div class="container" style="text-align: center">
         <h4 style="font-weight: bolder; color: white">
-          Welcome to the searchable database of cosmetics products.
+          Welcome to the searchable database of cosmetic products.
         </h4>
         <h5 style="color:white">
           Based on your list of non-preferences, we determine if the product is
@@ -90,7 +90,7 @@
       <h2 class="line">
         <span> or </span>
       </h2>
-      <button type="button" class="scan btn btn-primary mt-3 shadow none">
+      <button type="button" class="scan btn btn-primary mt-3 shadow-none">
         SCAN BARCODE <i class="icon-barcode"></i>
       </button>
     </div>
@@ -98,7 +98,7 @@
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
-        <button class="btn btn-primary">FILTER</button>
+        <button class="btn btn-primary shadow-none">FILTER</button>
       </div>
 
       <div class="row">
@@ -131,9 +131,13 @@ export default {
 
 .jumbotron {
   background-size: cover;
+  background-image: url("../assets/home_3.1.jpeg");
   margin-bottom: 0;
-  min-height: 500px;
-  /* povecava jumbotron */
+  min-height: 480px;
+  background-position: center center;
+  -webkit-box-shadow: 0 8px 6px -6px #ccc;
+  -moz-box-shadow: 0 8px 6px -6px #ccc;
+  box-shadow: 0 8px 6px -6px #ccc;
 }
 
 #home-page {
@@ -144,6 +148,40 @@ export default {
   box-shadow: 0 8px 6px -6px #ccc;
 }
 
+.home .btn {
+  padding: 0 9px;
+}
+
+.display-5 {
+  margin-top: 15px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px #777;
+}
+.description {
+  background: rgba(200, 200, 200, 0.6);
+  padding: 10px;
+}
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-fluid img {
+  width: 50%;
+}
+
+.recommended {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recommended .btn {
+  margin: 0;
+  width: 90px;
+}
+
 /*-----------
   Search
 -----------*/
@@ -152,6 +190,7 @@ span.icon-magnifying-glass {
   font-size: 19px;
   border-radius: 20px;
   transition: 0.5s;
+  padding: 3px;
 }
 
 .icon-magnifying-glass:hover {
