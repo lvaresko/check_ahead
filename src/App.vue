@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    
     <Navbar @open="toggleSidebar" />
-    <Sidebar :openSidebar="sidebarOpen" @close="toggleSidebar"/> 
-    
+    <Sidebar :openSidebar="sidebarOpen" @close="toggleSidebar" />
+
     <router-view />
 
     <Footer />
@@ -23,8 +22,8 @@ export default {
     };
   },
   methods: {
-      toggleSidebar() {
-          this.sidebarOpen = !this.sidebarOpen;
+    toggleSidebar() {
+      this.sidebarOpen = !this.sidebarOpen;
     },
   },
   components: {

@@ -2,7 +2,7 @@
   <header class="sticky-top">
     <nav class="navbar navbar-expand-sm align-middle">
       <div class="container-fluid">
-        <button type="button" class="btn" @click="$emit('open')">
+        <button type="button" class="btn shadow-none" @click="$emit('open')">
           <span class="icon-menu"></span>
         </button>
 
