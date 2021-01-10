@@ -187,81 +187,10 @@ span[class^="icon"]::before {
     vertical-align: middle;
 }
 
-.icon-barcode::before {
-    color: white;
-    font-size: 25px;
-    vertical-align: middle;
-}
-
-
-/*-------------
-   Navbar
---------------*/
-
-.navbar {
-    background-color: white;
-    width: 100vw;
-}
-
-
-/* xs */
-
-img#brand {
-    width: 150px;
-    height: auto;
-}
-
-
-/* sm */
-
-@media (min-width: 768px) {
-    img#brand {
-        width: 200px;
-    }
-}
-
-
-/* md */
-
-@media (min-width: 992px) {
-    img#brand {
-        width: 250px;
-    }
-}
-
-
-/* lg */
-
-@media (min-width: 1200px) {
-    img#brand {
-        width: 300px;
-    }
-}
-
 
 /*-----------
-  Home-page
------------*/
-
-.jumbotron {
-    background-size: cover;
-    margin-bottom: 0;
-    min-height: 500px;
-    /* povecava jumbotron */
-}
-
-#home-page {
-    background-color: #6FA2B4;
-    padding: 20px;
-    -webkit-box-shadow: 0 8px 6px -6px #ccc;
-    -moz-box-shadow: 0 8px 6px -6px #ccc;
-    box-shadow: 0 8px 6px -6px #ccc;
-}
-
-
-/*---------
-   --or--  
------------*/
+   ---or---
+------------*/
 
 h2.line {
     width: 30%;
@@ -275,45 +204,6 @@ h2.line span {
     background: #fff;
     padding: 0 10px;
     color: #ccc;
-}
-
-
-/*-----------
-  Search
------------*/
-
-span.icon-magnifying-glass {
-    font-size: 19px;
-    border-radius: 20px;
-    transition: 0.5s;
-}
-
-.icon-magnifying-glass:hover {
-    color: black;
-}
-
-.search-button,
-.search-input {
-    border: none;
-    border-radius: 20px;
-}
-
-.search-input {
-    padding-right: 0
-}
-
-.search {
-    background-color: white;
-    padding: 0;
-    border-radius: 20px;
-    -webkit-box-shadow: 0 2px 4px 0 #777;
-    -moz-box-shadow: 0 2px 4px 0 #777;
-    box-shadow: 0 2px 4px 0 #777;
-}
-
-.search-button:focus,
-.search-input:focus {
-    outline: none;
 }
 
 
