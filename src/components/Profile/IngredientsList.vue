@@ -108,7 +108,52 @@ export default {
   },
 };
 </script>
-<style scoped>
+
+<style lang="scss">
+
+
+/* Checkbox label position */
+
+.custom-control.custom-checkbox {
+    padding-left: 0;
+}
+
+label.custom-control-label {
+    position: relative;
+    padding-top: 4px;
+    padding-right: 1.5rem;
+    margin: 8px;
+}
+
+label.custom-control-label::before,
+label.custom-control-label::after {
+    right: 0;
+    left: inherit;
+    top: 8px;
+}
+
+
+/* Checkbox style */
+
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+    background-color: white;
+    border-color: lightgray !important;
+    box-shadow: none !important;
+}
+
+.custom-control-input:checked~.custom-control-label::before,
+.custom-control-input:not(:disabled):active~.custom-control-label::before {
+    background-color: lightgray;
+    border-color: gray !important;
+    box-shadow: none !important;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='gray' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+}
+
+/* Add custom ingredients */
+
 .pill {
   color: white;
   font-weight: bold;
@@ -121,6 +166,7 @@ export default {
   letter-spacing: 1px;
   font-weight: bold;
 }
+
 .icon-cancel-1 {
   font-size: 13px;
   cursor: pointer;

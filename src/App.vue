@@ -5,12 +5,15 @@
     <Sidebar :openSidebar="sidebarOpen" @close="toggleSidebar"/> 
     
     <router-view />
+
+    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Layout/Navbar.vue";
 import Sidebar from "@/components/Layout/Sidebar.vue";
+import Footer from "@/components/Layout/Footer.vue";
 
 export default {
   name: "App",
@@ -27,6 +30,7 @@ export default {
   components: {
     Navbar,
     Sidebar,
+    Footer,
   },
 };
 </script>

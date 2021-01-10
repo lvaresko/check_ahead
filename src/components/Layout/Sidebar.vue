@@ -1,7 +1,6 @@
 <template>
   <header class="sticky-top">
-    
-    <div class="sidebar col-sm-2" v-if="openSidebar">
+    <div class="sidebar" v-if="openSidebar">
       <div class="backdrop" @click.self="closeSidebar">
       <div class="menu-items">
         <router-link to="/" active-class="active" tag="button" class="side-btn">
@@ -62,9 +61,7 @@
       </div>  
       </div>
     </div> 
-    
   </header>
-
 </template>
 
 <script>
@@ -82,6 +79,15 @@ export default {
 </script>
 
 <style lang="scss">
+.sidebar {
+    width: 100%;
+    max-width: 250px;
+    height: calc(100vh - 50px);
+    background-color: white;
+    position: fixed;
+    padding: 0;
+}
+
 .menu-items {
   width: 40vw;
   height: 100%;
@@ -99,14 +105,11 @@ export default {
 
 .side-btn:focus {
   outline: none;
+  background-color: #eeeeee;
 }
 
 .side-btn:hover {
     background-color: #eeeeee;
-}
-
-.side-btn .active {
-  background-color: #eeeeee;
 }
 
 .side-btn .link-container:hover{
@@ -120,5 +123,4 @@ export default {
   width: 100%;
   height: 100%;
 }
-
 </style>
