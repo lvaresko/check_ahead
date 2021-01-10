@@ -98,7 +98,7 @@
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
-        <button class="btn btn-primary v3">FILTER</button>
+        <button class="btn btn-primary">FILTER</button>
       </div>
 
       <div class="row">

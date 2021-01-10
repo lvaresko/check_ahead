@@ -2,11 +2,7 @@
   <header class="sticky-top">
     <nav class="navbar navbar-expand-sm align-middle">
       <div class="container-fluid">
-        <button
-          type="button"
-          class="btn shadow-none"
-          @click="$emit('tooglenav')"
-        >
+        <button type="button" class="btn shadow-none" @click="$emit('open')">
           <span class="icon-menu"></span>
         </button>
 
@@ -37,6 +33,10 @@ export default {
 .navbar {
   background-color: white;
   width: 100%;
+<<<<<<< HEAD
+=======
+  z-index: -1;
+>>>>>>> f46a6548779b925b55984192223f10467da86235
 }
 
 .btn {

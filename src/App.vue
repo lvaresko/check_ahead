@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <Navbar @tooglenav="navOpen = !navOpen" />
-    <Sidebar :open="navOpen" />
+    <Navbar @open="toggleSidebar" />
+    <Sidebar :openSidebar="sidebarOpen" @close="toggleSidebar" />
+
     <router-view />
   </div>
 </template>
@@ -14,8 +15,13 @@ export default {
   name: "App",
   data: () => {
     return {
-      navOpen: false,
+      sidebarOpen: false,
     };
+  },
+  methods: {
+    toggleSidebar() {
+      this.sidebarOpen = !this.sidebarOpen;
+    },
   },
   components: {
     Navbar,
