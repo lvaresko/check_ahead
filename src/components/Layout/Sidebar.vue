@@ -1,7 +1,8 @@
 <template>
-
   <header class="sticky-top">
-    <div class="sidebar col-sm-2" v-if="open">
+    
+    <div class="sidebar col-sm-2" v-if="openSidebar">
+      <div class="backdrop" @click.self="closeSidebar">
       <div class="menu-items">
         <router-link to="/" active-class="active" tag="button" class="side-btn">
             <div class="link-container">
@@ -59,7 +60,9 @@
             </div>
         </router-link>
       </div>  
+      </div>
     </div> 
+    
   </header>
 
 </template>
@@ -68,12 +71,23 @@
 export default {
   name: "Sidebar",
   props: [
-    'open'
+    'openSidebar'
   ],
+  methods: {
+    closeSidebar() {
+      this.$emit("close");
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.menu-items {
+  width: 40vw;
+  height: 100%;
+  background: white;
+}
+
 .side-btn {
   width: 100%;
   text-align: left;
@@ -99,6 +113,12 @@ export default {
   color: #232323;
 }
 
-
+.backdrop {
+  top: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+}
 
 </style>
