@@ -6,6 +6,7 @@
       <router-link to="/login">Login</router-link>
     </div>
     <h3>NAVBAR 1 sori i dalje je ruzno a ful nez sa da nap</h3>
+    <h2>meni je ovaj do sad jos najbolji</h2>
     <div
       class="jumbotron jumbotron-fluid"
       :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
