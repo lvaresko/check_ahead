@@ -2,7 +2,11 @@
   <header class="sticky-top">
     <nav class="navbar navbar-expand-sm align-middle">
       <div class="container-fluid">
-        <button type="button" class="btn" @click="$emit('tooglenav')">
+        <button
+          type="button"
+          class="btn shadow-none"
+          @click="$emit('tooglenav')"
+        >
           <span class="icon-menu"></span>
         </button>
 
@@ -32,7 +36,11 @@ export default {
 <style>
 .navbar {
   background-color: white;
-  width: 100vw;
+  width: 100%;
+}
+
+.btn {
+  padding: 0;
 }
 
 /* xs */
