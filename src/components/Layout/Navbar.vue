@@ -1,4 +1,4 @@
-<template>
+<template >
   <header class="sticky-top">
     <nav class="navbar navbar-expand-sm align-middle">
       <div class="container-fluid">

@@ -109,6 +109,7 @@
         <Card />
       </div>
     </div>
+    <h2>meni je ruzan malo ovaj footer, ljepse bi mi bilo da su svi "linkovi" u jednom redu, a ne u dva stupca jer ih je malo</h2>
   </div>
 </template>
 

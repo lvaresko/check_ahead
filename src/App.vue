@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar @open="toggleSidebar" />
+    <Navbar @open="toggleSidebar"/> <!--  v-if='$route.path !== "/login" && $route.path !== "/signup"' tako da se navbar ne vidi ako nisi ulogiran-->
     <Sidebar :openSidebar="sidebarOpen" @close="toggleSidebar" />
 
     <router-view />
