@@ -1,4 +1,4 @@
-<template >
+<template>
   <header class="sticky-top">
     <nav class="navbar navbar-expand-sm align-middle">
       <div class="container-fluid">
@@ -15,7 +15,7 @@
           />
         </router-link>
 
-        <router-link to="/profile" style="text-decoration: none">
+        <router-link to="/account" style="text-decoration: none">
           <span class="icon-user"></span>
         </router-link>
       </div>

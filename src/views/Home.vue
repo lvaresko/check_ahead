@@ -109,7 +109,10 @@
         <Card />
       </div>
     </div>
-    <h2>meni je ruzan malo ovaj footer, ljepse bi mi bilo da su svi "linkovi" u jednom redu, a ne u dva stupca jer ih je malo</h2>
+    <h2>
+      meni je ruzan malo ovaj footer, ljepse bi mi bilo da su svi "linkovi" u
+      jednom redu, a ne u dva stupca jer ih je malo
+    </h2>
   </div>
 </template>
 
@@ -125,13 +128,13 @@ export default {
 </script>
 
 <style>
-.icon-barcode::before {
+.home .icon-barcode::before {
   color: white;
-  font-size: 25px;
-  vertical-align: middle;
+  font-size: 26px;
+  vertical-align: top;
 }
 
-.jumbotron {
+.home .jumbotron {
   background-size: cover;
   background-image: url("../assets/home_3.1.jpeg");
   margin-bottom: 0;
@@ -150,10 +153,6 @@ export default {
   box-shadow: 0 8px 6px -6px #ccc;
 }
 
-.home .btn {
-  padding: 0 9px;
-}
-
 .display-5 {
   margin-top: 15px;
   color: white;
@@ -163,6 +162,9 @@ export default {
 .description {
   background: rgba(200, 200, 200, 0.6);
   padding: 10px;
+}
+.home .search-button {
+  padding: 0 15px;
 }
 .container-fluid {
   display: flex;
@@ -182,44 +184,5 @@ export default {
 .recommended .btn {
   margin: 0;
   width: 90px;
-}
-
-/*-----------
-  Search
------------*/
-
-span.icon-magnifying-glass {
-  font-size: 19px;
-  border-radius: 20px;
-  transition: 0.5s;
-  padding: 3px;
-}
-
-.icon-magnifying-glass:hover {
-  color: black;
-}
-
-.search-button,
-.search-input {
-  border: none;
-  border-radius: 20px;
-}
-
-.search-input {
-  padding-right: 0;
-}
-
-.search {
-  background-color: white;
-  padding: 0;
-  border-radius: 20px;
-  -webkit-box-shadow: 0 2px 4px 0 #777;
-  -moz-box-shadow: 0 2px 4px 0 #777;
-  box-shadow: 0 2px 4px 0 #777;
-}
-
-.search-button:focus,
-.search-input:focus {
-  outline: none;
 }
 </style>

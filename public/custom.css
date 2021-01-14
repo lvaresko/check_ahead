@@ -68,9 +68,9 @@
 
 .btn-secondary:hover,
 .btn-secondary:active:focus {
-    color: #595959 !important;
+    /*color: #595959;
     border: 1px solid lightgray !important;
-    background-color: #eeeeee !important;
+    background-color: #eeeeee !important;*/
 }
 
 
@@ -160,3 +160,45 @@ h2.line span {
     color: #ccc;
 }
 
+
+/*-----------
+  Search
+-----------*/
+
+span.icon-magnifying-glass {
+    font-size: 19px;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+span.icon-magnifying-glass::before {
+    vertical-align: middle;
+}
+
+.icon-magnifying-glass:hover {
+    color: black;
+}
+
+.search-button,
+.search-input {
+    border: none;
+    border-radius: 20px;
+}
+
+.search-input {
+    padding-right: 0;
+}
+
+.search {
+    background-color: white;
+    padding: 0;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 2px 4px 0 #777;
+    -moz-box-shadow: 0 2px 4px 0 #777;
+    box-shadow: 0 2px 4px 0 #777;
+}
+
+.search-button:focus,
+.search-input:focus {
+    outline: none;
+}
