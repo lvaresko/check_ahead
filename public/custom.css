@@ -66,6 +66,11 @@
     background-color: #ffffff;
 }
 
+.btn-secondary.v2 {
+    width: 120px;
+    height: 40px;
+}
+
 .btn-secondary:hover,
 .btn-secondary:active:focus {
     /*color: #595959;
@@ -90,7 +95,7 @@ Sign up / Login
    Form Input
 ---------------*/
 
-.form-control {
+.basic-input {
     font-size: 16px;
     color: #595959;
     background: transparent;
@@ -116,7 +121,7 @@ Sign up / Login
 
 /* Focus */
 
-.form-control:focus {
+.basic-input:focus {
     border-bottom: 1px solid #595959;
     border-bottom-width: 2px;
     -webkit-box-shadow: none;

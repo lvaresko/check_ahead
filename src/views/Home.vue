@@ -109,6 +109,9 @@
         <Card />
       </div>
     </div>
+
+    <button type="button" class="btn btn-primary shadow-none" @click="togglePopup"> Popup </button>
+    <popup :showPopup="popupOpen" @close="togglePopup"/>
     <h2>
       meni je ruzan malo ovaj footer, ljepse bi mi bilo da su svi "linkovi" u
       jednom redu, a ne u dva stupca jer ih je malo
@@ -118,11 +121,23 @@
 
 <script>
 import Card from "../components/Card.vue";
+import Popup from "../components/Popup.vue";
 
 export default {
   name: "Home",
+  data: () => {
+    return {
+      popupOpen: false,
+    };
+  },
+  methods: {
+    togglePopup() {
+      this.popupOpen = !this.popupOpen;
+    },
+  },
   components: {
     Card,
+    Popup,
   },
 };
 </script>
