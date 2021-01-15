@@ -7,7 +7,7 @@
         <label form="exampleInputFirstName">First name:</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control basic-input"
           id="exampleInputFirstName"
           placeholder="Amy"
         />
@@ -16,7 +16,7 @@
         <label form="exampleInputLastName">Last name:</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control basic-input"
           id="exampleInputLastName"
           placeholder="Wise"
         />
@@ -26,7 +26,7 @@
         <input
           type="email"
           v-model="email"
-          class="form-control"
+          class="form-control basic-input"
           id="exampleInputEmail"
           aria-describedby="EmailHelp"
           placeholder="amy@gmail.com"
@@ -45,7 +45,7 @@
         <input
           type="password"
           v-model="password"
-          class="form-control"
+          class="form-control basic-input"
           id="exampleInputPassword1"
           placeholder="abc12"
         />
@@ -55,7 +55,7 @@
         <input
           type="password"
           v-model="passwordRepeat"
-          class="form-control"
+          class="form-control basic-input"
           id="exampleInputpassword2"
           placeholder="Retype here your password..."
         />

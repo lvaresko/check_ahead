@@ -2,58 +2,58 @@
   <header class="sticky-top">  
     <div class="sidebar" >
       <div class="backdrop" @click.self="closeSidebar" v-if="openSidebar"></div>         
-      <transition name="slide">            
+      <transition name="slide-l">            
         <div class="menu-items" v-if="openSidebar">
-          <router-link to="/" active-class="active" tag="button" class="side-btn">
-              <div class="link-container">
+          <router-link to="/" tag="button" class="side-btn">
+              <div class="link-container" @click.self="closeSidebar">
                   <span class="icon-home"></span>
                   Home
               </div>
           </router-link>
-          <router-link to="#" active-class="active" tag="button" class="side-btn">
-              <div class="link-container">
+          <router-link to="/choose_ingredients" tag="button" class="side-btn">
+              <div class="link-container" @click.self="closeSidebar">
                   <span class="icon-list"></span>
                   Ingredients list
               </div>
           </router-link>
-          <router-link to="#" active-class="active" tag="button" class="side-btn">
-              <div class="link-container">
+          <router-link to="#" tag="button" class="side-btn">
+              <div class="link-container" @click.self="closeSidebar">
                   <span class="icon-heart"></span>
                   Favourites
               </div>
           </router-link>
-          <router-link to="#" active-class="active" tag="button" class="side-btn">
-              <div class="link-container">
+          <router-link to="#" tag="button" class="side-btn">
+              <div class="link-container" @click.self="closeSidebar"> 
                   <span class="icon-request"></span>
                   Your requests
               </div>
           </router-link>
           <h2 class="line" style="width: 100%"></h2>
-          <router-link to="#" active-class="active" exact tag="button" class="side-btn">
-              <div class="link-container">
+          <router-link to="#" tag="button" class="side-btn">
+              <div class="link-container" @click.self="closeSidebar">
                   Contact Us
               </div>
           </router-link>
           <br>
-          <router-link to="#" active-class="active" exact tag="button" class="side-btn">
-              <div class="link-container">
+          <router-link to="#" tag="button" class="side-btn">
+              <div class="link-container" @click.self="closeSidebar">
                   FAQ
               </div>
           </router-link>
           <br>
-          <router-link to="#" active-class="active" exact tag="button" class="side-btn">
-              <div class="link-container">
+          <router-link to="#" tag="button" class="side-btn">
+              <div class="link-container" @click.self="closeSidebar">
                   Terms of use
               </div>
           </router-link>
           <br>
-          <router-link to="#" active-class="active" exact tag="button" class="side-btn">
-              <div class="link-container">
+          <router-link to="#" tag="button" class="side-btn">
+              <div class="link-container" @click.self="closeSidebar">
                 Privacy Policy
               </div>
           </router-link>
           <h2 class="line" style="width: 100%"></h2>
-          <router-link to="#" active-class="active" exact tag="button" class="side-btn">
+          <router-link to="#" tag="button" class="side-btn">
               <div class="link-container">
                 <span class="icon-exit"></span>
                 Sign out
@@ -74,19 +74,19 @@ export default {
   methods: {
     closeSidebar() {
       this.$emit("close");
-    }
+    },
   }
 };
 </script>
 
 <style lang="scss">
-.slide-enter-active,
-.slide-leave-active {
+.slide-l-enter-active,
+.slide-l-leave-active {
   transition: transform 0.4s ease;
 }
 
-.slide-enter,
-.slide-leave-to {
+.slide-l-enter,
+.slide-l-leave-to {
   transform: translateX(-100%);
   transition: all 300ms ease-in 0s
 }
@@ -110,17 +110,15 @@ export default {
   padding-left: 10px;
 }
 
-.side-btn:focus {
-  outline: none;
-  background-color: #eeeeee;
-}
+.side-btn:focus { outline: none; }
 
-.side-btn:hover {
-    background-color: #eeeeee;
-}
-
-.side-btn .link-container:hover{
+.side-btn:hover,
+.link-container:hover {
   color: #232323;
+}
+
+.router-link-exact-active {
+  background-color: #eeeeee;
 }
 
 .backdrop {

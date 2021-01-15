@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import IngredientsList from '@/components/Profile/IngredientsList.vue';
+import IngredientsList from '@/components/Account/IngredientsList.vue';
 
 export default {
   name: "ChooseIngredients",

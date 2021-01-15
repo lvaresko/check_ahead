@@ -6,7 +6,7 @@
         <label form="exampleInputEmail">Email:</label>
         <input
           type="email"
-          class="form-control"
+          class="form-control basic-input"
           id="exampleInputEmail"
           aria-describedby="EmailHelp"
           placeholder="Type here your email..."
@@ -16,7 +16,7 @@
         <label form="exampleInputPassword1">Password:</label>
         <input
           type="password"
-          class="form-control"
+          class="form-control basic-input"
           id="exampleInputPassword1"
           placeholder="Type here your password..."
         />
