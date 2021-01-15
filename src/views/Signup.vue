@@ -35,11 +35,10 @@
       <div class="form-group text-left">
         <div class="custom-control-inline">
           <label form="exampleInputPassword1">Password:</label>
-          <div style="margin: 0 0 0 103px">
-            <label form="passwordWarning" style="font-size: 13px"
-              >At least 6 characters</label
-            >
-          </div>
+
+          <label form="passwordWarning" style="font-size: 12px;"
+            >At least 6 characters</label
+          >
         </div>
 
         <input

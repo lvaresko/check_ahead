@@ -107,6 +107,12 @@ Sign up / Login
     font-size: 16px;
 }
 
+.custom-control-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
 
 /* Focus */
 

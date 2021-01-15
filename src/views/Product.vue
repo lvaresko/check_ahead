@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="product">
     <div class="container-fluid search-next">
       <div
         class="container"

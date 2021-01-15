@@ -40,6 +40,10 @@ const routes = [{
         path: '/account',
         name: 'Account',
         component: Account
+    },
+    {
+        path: 'account/update',
+        name: 'Update'
     }
 ]
 
