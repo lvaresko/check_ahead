@@ -4,10 +4,11 @@ import Home from '../views/Home.vue'
 import Signup from '../views/Signup.vue'
 import Login from '../views/Login.vue'
 import ChooseIngredients from '../views/ChooseIngredients.vue'
-
 import Product from '../views/Product.vue'
-
-import Account from '../views/Account.vue'
+import Account from '../views/Account/Account.vue'
+import UpdateAccount from '../views/Account/UpdateAccount.vue'
+import ResetPassword from '../views/Account/ResetPassword.vue'
+import SearchHistory from '../views/Account/SearchHistory.vue'
 
 Vue.use(VueRouter)
 
@@ -42,9 +43,19 @@ const routes = [{
         component: Account
     },
     {
-        path: 'account/update',
-        name: 'Update'
+        path: '/account/update',
+        name: 'UpdateAccount',
+        component: UpdateAccount
+    }, {
+        path: '/account/reset-password',
+        name: 'ResetPassword',
+        component: ResetPassword
+    }, {
+        path: '/account/history',
+        name: 'SearchHistory',
+        component: SearchHistory
     }
+
 ]
 
 const router = new VueRouter({
