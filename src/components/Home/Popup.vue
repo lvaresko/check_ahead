@@ -91,10 +91,10 @@ export default {
 
 .popup {
   position: fixed;
-  top: 58%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 999;
+  z-index: 20000;
   padding: 35px;
   max-width: 300px;
   background-color: #ffffff;
@@ -109,6 +109,7 @@ export default {
   width: 100%;
   height: 100%;
   position: fixed;
+  z-index: 10000;
   background: rgba(0, 0, 0, 0.5);
 }
 

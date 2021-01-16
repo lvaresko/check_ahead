@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer fixed bottom text-center">
+  <footer class="footer text-center">
     <div class="group">
       <div class="first">
         <a href="#" onclick="return false;">FAQ</a> <br />
@@ -26,10 +26,11 @@ export default {
 
 <style lang="scss">
 .footer{
+  position: absolute;
   font-size: 16px;
   background-color:#eeeeee; //ili tamnije #dddddd
   width: 100%;
-  margin-top: 40px;
+  margin-top : 40px;
 }
 .footer .group{
   display: flex;

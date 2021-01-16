@@ -40,7 +40,7 @@
       </div>
       <div class="recently-viewed">
         <label>RECENTLY VIEWED ITEMS:</label>
-        <div v-for="content in products" :key="">
+        <div v-for="content in products" :key="content">
           <div class="row">
             <div class="col-2">
               <img

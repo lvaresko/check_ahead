@@ -120,8 +120,8 @@
 </template>
 
 <script>
-import Card from "../components/Card.vue";
-import Popup from "../components/Popup.vue";
+import Card from "../components/Home/Card.vue";
+import Popup from "../components/Home/Popup.vue";
 
 export default {
   name: "Home",
