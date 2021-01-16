@@ -213,3 +213,16 @@ span.icon-magnifying-glass::before {
 .search-input:focus {
     outline: none;
 }
+
+
+/*---------------
+     Account
+----------------*/
+
+.account {
+    padding: 50px
+}
+
+.account .right-side {
+    padding-top: 30px;
+}
