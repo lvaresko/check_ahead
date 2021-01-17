@@ -4,7 +4,7 @@
     <!--  v-if='$route.path !== "/login" && $route.path !== "/signup"' tako da se navbar ne vidi ako nisi ulogiran-->
     <Sidebar :openSidebar="sidebarOpen" @close="toggleSidebar" />
 
-    <router-view class="content" :key="$route.fullPath" />
+    <router-view :key="$route.fullPath" />
 
     <Footer />
   </div>

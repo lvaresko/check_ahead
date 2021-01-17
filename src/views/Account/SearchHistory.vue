@@ -79,8 +79,6 @@ export default {
   height: 45px;
   max-width: 150px;
   width: 100%;
-  height: inherit;
-  object-fit: cover;
 }
 
 .recently-viewed div {
@@ -101,6 +99,7 @@ export default {
 }
 
 .recently-viewed .icon-cancel {
+  justify-content: flex-end;
   color: #ff3d00;
 }
 </style>

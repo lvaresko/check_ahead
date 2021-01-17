@@ -32,7 +32,7 @@ footer {
   font-size: 16px;
   width: 100%;
   margin-top: 20px;
-  display: block;
+
   left: 0;
   bottom: 0;
 }

@@ -5,8 +5,6 @@
       <router-link to="/signup">Sign up</router-link> |
       <router-link to="/login">Login</router-link>
     </div>
-    <h3>NAVBAR 1 sori i dalje je ruzno a ful nez sa da nap</h3>
-    <h2>meni je ovaj do sad jos najbolji</h2>
     <div
       class="jumbotron jumbotron-fluid"
       :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
@@ -46,56 +44,6 @@
         </button>
       </div>
     </div>
-    <h3>NAVBAR 2</h3>
-    <div
-      class="jumbotron jumbotron-fluid"
-      :style="{ backgroundImage: `url(${require('../assets/home_3.1.jpeg')})` }"
-    >
-      <div class="container">
-        <h1 class="display-5" style="color:white">
-          We check the ingredients for you!
-        </h1>
-        <p class="lead" style="color:white">
-          Ovo sve mora ljepše bit, malo modernije? nez kako
-        </p>
-      </div>
-    </div>
-    <div id="home-page" class="container-fluid">
-      <div class="container" style="text-align: center">
-        <h4 style="font-weight: bolder; color: white">
-          Welcome to the searchable database of cosmetic products.
-        </h4>
-        <h5 style="color:white">
-          Based on your list of non-preferences, we determine if the product is
-          suitable for you or not.
-        </h5>
-        <div class="input-group mt-4 search">
-          <input
-            type="text"
-            class="form-control border-right-0 search-input shadow-none"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-            placeholder="Search for a product in our database..."
-            onfocus="this.placeholder = ''"
-          />
-          <button
-            class="btn border-left-0 search-button shadow-none"
-            type="button"
-          >
-            <span class="icon-magnifying-glass"></span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="container" style="text-align: center">
-      <h2 class="line">
-        <span> or </span>
-      </h2>
-      <button type="button" class="scan btn btn-primary mt-3 shadow-none">
-        SCAN BARCODE <i class="icon-barcode"></i>
-      </button>
-    </div>
-
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
@@ -110,12 +58,14 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary shadow-none" @click="togglePopup"> Popup </button>
-    <popup :showPopup="popupOpen" @close="togglePopup"/>
-    <h2>
-      meni je ruzan malo ovaj footer, ljepse bi mi bilo da su svi "linkovi" u
-      jednom redu, a ne u dva stupca jer ih je malo
-    </h2>
+    <button
+      type="button"
+      class="btn btn-primary shadow-none"
+      @click="togglePopup"
+    >
+      Popup
+    </button>
+    <popup :showPopup="popupOpen" @close="togglePopup" />
   </div>
 </template>
 
@@ -155,6 +105,7 @@ export default {
   margin-bottom: 0;
   min-height: 480px;
   background-position: center center;
+  margin-bottom: 20px;
   -webkit-box-shadow: 0 8px 6px -6px #ccc;
   -moz-box-shadow: 0 8px 6px -6px #ccc;
   box-shadow: 0 8px 6px -6px #ccc;
