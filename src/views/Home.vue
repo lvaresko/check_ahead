@@ -50,7 +50,10 @@
         <button class="btn btn-primary shadow-none">FILTER</button>
       </div>
 
-      <div class="row">
+      <div
+        class="row justify-content-between"
+        data-masonry='{"percentPosition": true }'
+      >
         <Card />
         <Card />
         <Card />

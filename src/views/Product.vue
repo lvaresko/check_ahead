@@ -126,7 +126,7 @@ export default {};
 /* sm */
 
 @media (min-width: 500px) {
-  .img-fluid {
+  .product .img-fluid {
     height: 70vh;
   }
 }
@@ -134,7 +134,7 @@ export default {};
 /* lg */
 
 @media (min-width: 1200px) {
-  .img-fluid {
+  .product .img-fluid {
     height: inherit;
   }
 }

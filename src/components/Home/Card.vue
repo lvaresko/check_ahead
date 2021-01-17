@@ -1,11 +1,8 @@
 <template>
-  <div class="col">
-    <div class="card mt-3 mb-3">
-      <img
-        src="@/assets/architect.jpeg"
-        class="card-img-top img-fluid"
-        alt="..."
-      />
+  <div class="col-12 col-md-6 col-lg-3">
+    <!-- justify-content-between">-->
+    <div class="card">
+      <img src="@/assets/logo.png" class="card-img-top" alt="..." />
       <div class="card-img-overlay">
         <span class="icon-heart"></span>
       </div>
@@ -14,7 +11,6 @@
         <p class="card-text">
           With supporting text below as a natural lead-in to additional content.
         </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
@@ -26,14 +22,21 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+/*.column {
+  margin: 10px;
+}
+.card {
+  width: 310px;
+}
 .card-img-top {
   width: 100%;
-  height: 40vh;
-  object-fit: cover;
+  height: 500px;
+}*/
+.card-img-top {
+  height: 350px;
 }
-
-span.icon-heart {
+.card span.icon-heart {
   background: white;
   opacity: 0.7;
   padding: 0 8px;
@@ -41,4 +44,15 @@ span.icon-heart {
   cursor: pointer;
   float: right;
 }
+/*
+@media (max-width: 767px) {
+  .column {
+    margin: auto;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .column {
+    margin: 10px 0;
+  }
+}*/
 </style>
