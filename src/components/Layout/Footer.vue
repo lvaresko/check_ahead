@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer fixed bottom text-center">
+  <footer class="bd-footer text-muted py-3 bg-light">
     <div class="group">
       <div class="first">
         <a href="#" onclick="return false;">FAQ</a> <br />
@@ -13,7 +13,9 @@
     </div>
     <div>
       <h2 class="line" style="width: 80%"></h2>
-      <span class="icon-copyright"></span> 2020, CheckAhead
+      <div class="text-center">
+        <span class="icon-copyright"></span> 2020, CheckAhead
+      </div>
     </div>
   </footer>
 </template>
@@ -25,13 +27,16 @@ export default {
 </script>
 
 <style lang="scss">
-.footer{
+footer {
+  position: absolute;
   font-size: 16px;
-  background-color:#eeeeee; //ili tamnije #dddddd
   width: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
+  display: block;
+  left: 0;
+  bottom: 0;
 }
-.footer .group{
+footer .group {
   display: flex;
   justify-content: space-evenly;
   padding-top: 5px;

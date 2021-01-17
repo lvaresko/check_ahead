@@ -13,7 +13,7 @@
               <label form="exampleInputFirstName">First name:</label>
               <input
                 type="text"
-                class="form-control"
+                class="form-control basic-input"
                 id="exampleInputFirstName"
                 placeholder="Amy"
               />
@@ -22,7 +22,7 @@
               <label form="exampleInputLastName">Last name:</label>
               <input
                 type="text"
-                class="form-control"
+                class="form-control basic-input"
                 id="exampleInputLastName"
                 placeholder="Wise"
               />
@@ -32,7 +32,7 @@
               <input
                 type="email"
                 v-model="email"
-                class="form-control"
+                class="form-control basic-input"
                 id="exampleInputEmail"
                 aria-describedby="EmailHelp"
                 placeholder="amy@gmail.com"

@@ -1,3 +1,13 @@
+#app {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content {
+    padding-bottom: 200px;
+}
+
+
 /*-------------
     Box-Sizing
 --------------*/
@@ -220,7 +230,7 @@ span.icon-magnifying-glass::before {
 ----------------*/
 
 .account {
-    padding: 50px
+    padding: 20px
 }
 
 .account .right-side {

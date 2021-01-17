@@ -111,7 +111,7 @@ export default {};
   font-size: 35px;
 }
 
-.img-fluid {
+.product .img-fluid {
   width: 100%;
   height: inherit;
   object-fit: cover;

@@ -26,7 +26,6 @@ export default {
 
 <style>
 .account-sidebar {
-  background: rgb(239, 241, 241);
   padding: 30px;
 }
 .account-sidebar li {
@@ -34,5 +33,16 @@ export default {
 }
 .account-sidebar a {
   font-size: 15px;
+}
+
+.account-sidebar {
+  border-right: none;
+  border-bottom: 1px solid lightgray;
+}
+@media (min-width: 768px) {
+  .account-sidebar {
+    border-right: 1px solid lightgray;
+    border-bottom: none;
+  }
 }
 </style>

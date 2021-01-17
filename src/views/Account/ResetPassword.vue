@@ -20,7 +20,7 @@
               <input
                 type="password"
                 v-model="password"
-                class="form-control"
+                class="form-control basic-input"
                 id="exampleInputPassword1"
                 placeholder="abc12"
               />
@@ -30,7 +30,7 @@
               <input
                 type="password"
                 v-model="passwordRepeat"
-                class="form-control"
+                class="form-control basic-input"
                 id="exampleInputpassword2"
                 placeholder="Retype here your password..."
               />
