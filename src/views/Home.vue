@@ -53,6 +53,10 @@
     <FilterProducts :openFilter="filterOpen" @close="toggleFilter"/>
 
       <div class="row">
+      <div
+        class="row justify-content-between"
+        data-masonry='{"percentPosition": true }'
+      >
         <Card />
         <Card />
         <Card />
