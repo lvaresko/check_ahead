@@ -4,17 +4,17 @@
     <p style="font-size: 20px">
       Choose the ingredients you wish to avoid:
     </p>
-    <ingredients-list />
+    <ingredients />
   </div>
 </template>
 
 <script>
-import IngredientsList from '@/components/Account/IngredientsList.vue';
+import Ingredients from '@/components/Account/Ingredients.vue';
 
 export default {
   name: "ChooseIngredients",
   components: {
-    IngredientsList
+    Ingredients
   },
 }
 </script>

@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Signup from '../views/Signup.vue'
-import Login from '../views/Login.vue'
-import ChooseIngredients from '../views/ChooseIngredients.vue'
+import Signup from '../views/Auth/Signup.vue'
+import Login from '../views/Auth/Login.vue'
+import ChooseIngredients from '../views/Auth/ChooseIngredients.vue'
+import IngredientsList from '../views/IngredientsList.vue'
 import Product from '../views/Product.vue'
 import Account from '../views/Account/Account.vue'
 import UpdateAccount from '../views/Account/UpdateAccount.vue'
@@ -54,7 +55,12 @@ const routes = [{
         path: '/account/history',
         name: 'SearchHistory',
         component: SearchHistory
-    }
+    },
+    {
+        path: '/ingredients_list',
+        name: 'IngredientsList',
+        component: IngredientsList
+    },
 
 ]
 

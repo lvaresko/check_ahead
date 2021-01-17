@@ -10,7 +10,7 @@
                   Home
               </div>
           </router-link>
-          <router-link to="/choose_ingredients" tag="button" class="side-btn">
+          <router-link to="/ingredients_list" tag="button" class="side-btn">
               <div class="link-container" @click.self="closeSidebar">
                   <span class="icon-list"></span>
                   Ingredients list
@@ -117,7 +117,7 @@ export default {
   color: #232323;
 }
 
-.router-link-exact-active {
+.sidebar .router-link-exact-active {
   background-color: #eeeeee;
 }
 
