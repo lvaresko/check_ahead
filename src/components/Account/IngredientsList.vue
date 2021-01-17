@@ -1,15 +1,22 @@
 <template>
   <form>
-    <div class="custom-control custom-checkbox text-left">
+    <div v-for="content in ingredientCategories()" :key="content.category" class="custom-control custom-checkbox text-left">
       <span class="icon-caret-right" style="font-size: 20px"></span>
-      <span class="icon-perfume"></span>
+      <span :class="classIcon(content)"></span>
       <input type="checkbox" class="custom-control-input" id="customCheck1" />
-      <label class="custom-control-label" for="customCheck1">Fragrances</label>
+      <label href="#proba" data-toggle="collapse" class="custom-control-label" for="customCheck1"> {{ content }}</label>
+      <div v-for="content  in category(content)" :key="content" id="proba" class="collapse" style="margin: 10px">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+        <label href="#proba" data-toggle="collapse" class="custom-control-label" for="customCheck1"> {{ content }}</label>
+      </div>
+
       <h2 class="line" style="width: 100%"></h2>
     </div>
+    
+    <!--
     <div class="custom-control custom-checkbox text-left">
       <span class="icon-caret-right" style="font-size: 20px"></span>
-      <span class="icon-gloves"></span>
+      <span class="icon-natural"></span>
       <input type="checkbox" class="custom-control-input" id="customCheck2" />
       <label class="custom-control-label" for="customCheck2"
         >Natural rubber</label
@@ -18,7 +25,7 @@
     </div>
     <div class="custom-control custom-checkbox text-left">
       <span class="icon-caret-right" style="font-size: 20px"></span>
-      <span class="icon-test"></span>
+      <span class="icon-preservatives"></span>
       <input type="checkbox" class="custom-control-input" id="customCheck3" />
       <label class="custom-control-label" for="customCheck3"
         >Preservatives</label
@@ -27,14 +34,14 @@
     </div>
     <div class="custom-control custom-checkbox text-left">
       <span class="icon-caret-right" style="font-size: 20px"></span>
-      <span class="icon-dye"></span>
+      <span class="icon-dyes"></span>
       <input type="checkbox" class="custom-control-input" id="customCheck4" />
       <label class="custom-control-label" for="customCheck4">Dyes</label>
       <h2 class="line" style="width: 100%"></h2>
     </div>
     <div class="custom-control custom-checkbox text-left">
       <span class="icon-caret-right" style="font-size: 20px"></span>
-      <span class="icon-nut-1"></span>
+      <span class="icon-metals"></span>
       <input type="checkbox" class="custom-control-input" id="customCheck5" />
       <label
         href="#proba"
@@ -48,18 +55,19 @@
     </div>
     <div class="custom-control custom-checkbox text-left">
       <span class="icon-caret-right" style="font-size: 20px"></span>
-      <span class="icon-sheep"></span>
+      <span class="icon-animal"></span>
       <input type="checkbox" class="custom-control-input" id="customCheck6" />
       <label class="custom-control-label" for="customCheck6"
         >Animal by-products</label
       >
       <h2 class="line" style="width: 100%"></h2>
-    </div>
+    </div> 
+    -->
     <div class="form-group proba text-left mt-4">
       <label form="exampleInputCustom">CUSTOM:</label>
       <input
         type="text"
-        class="form-control"
+        class="form-control basic-input"
         id="exampleInputCustom"
         placeholder="e.g. citrus, petroleum..."
         v-model="tempCustom"
@@ -88,6 +96,16 @@ export default {
     return {
       tempCustom: "",
       custom_ingredients: [],
+      ingredients: [
+        { name: "perfume", category: "fragrances" },
+        { name: "eugenol", category: "fragrances" },
+        { name: "geraniol", category: "fragrances" },
+        { name: "methylisothiazolinone", category: "preservatives" },
+        { name: "coal-tar", category: "dyes" },
+        { name: "p-phenylenediamine", category: "dyes" },
+        { name: "gold", category: "metals" },
+        { name: "nickel", category: "metals" },
+      ],
     };
   },
   methods: {
@@ -99,11 +117,22 @@ export default {
         this.tempCustom = "";
       }
     },
-
     deleteCustom(custom) {
       this.custom_ingredients = this.custom_ingredients.filter((item) => {
         return custom !== item;
       });
+    },
+    ingredientCategories () { 
+      return [...new Set(this.ingredients.map(({ category }) => category))] 
+    },
+    classIcon(icon) {
+      //console.log("icon-"+ icon);
+      //console.log(this.ingredients);
+      return "icon-"+ icon;
+    },
+    category(name) {
+      console.log(this.ingredients); //samo da nesto bude
+      
     },
   },
 };
@@ -168,7 +197,7 @@ label.custom-control-label::after {
 }
 
 .icon-cancel-1 {
-  font-size: 13px;
+  font-size: 13px !important;
   cursor: pointer;
   vertical-align: 3px;
 }

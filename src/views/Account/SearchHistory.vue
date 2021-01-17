@@ -78,6 +78,9 @@ export default {
 .recently-viewed img {
   height: 45px;
   max-width: 150px;
+  width: 100%;
+  height: inherit;
+  object-fit: cover;
 }
 
 .recently-viewed div {

@@ -98,7 +98,7 @@ export default {
   padding: 0;
   background: white;
   top: 0;
-  z-index: 999;
+  z-index: 1;
 }
 
 .side-btn {
