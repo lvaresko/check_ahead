@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="fade">
-      <div class="popup-overlay" v-if="showPopup"></div>
+      <div class="popup-overlay" @click="closePopup" v-if="showPopup"></div>
     </transition>
     <transition name="fade" >
       <div class="popup text-center" v-if="showPopup">
@@ -68,15 +68,6 @@ export default {
 </script>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
 
 /*
 .slide-enter-active,
@@ -111,6 +102,7 @@ export default {
   position: fixed;
   z-index: 10000;
   background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 #sad {

@@ -47,8 +47,10 @@
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
-        <button class="btn btn-primary shadow-none">FILTER</button>
+        <button class="btn btn-primary shadow-none" @click="toggleFilter">FILTER</button>
       </div>
+
+    <FilterProducts :openFilter="filterOpen" @close="toggleFilter"/>
 
       <div class="row">
         <Card />
@@ -65,29 +67,35 @@
     >
       Popup
     </button>
-    <popup :showPopup="popupOpen" @close="togglePopup" />
+    <Popup :showPopup="popupOpen" @close="togglePopup" />
   </div>
 </template>
 
 <script>
 import Card from "../components/Home/Card.vue";
 import Popup from "../components/Home/Popup.vue";
+import FilterProducts from "../components/Home/FilterProducts.vue";
 
 export default {
   name: "Home",
   data: () => {
     return {
       popupOpen: false,
+      filterOpen: false,
     };
   },
   methods: {
     togglePopup() {
       this.popupOpen = !this.popupOpen;
     },
+    toggleFilter() {
+      this.filterOpen = !this.filterOpen;
+    },
   },
   components: {
     Card,
     Popup,
+    FilterProducts,
   },
 };
 </script>
