@@ -10,6 +10,7 @@ import Account from '../views/Account/Account.vue'
 import UpdateAccount from '../views/Account/UpdateAccount.vue'
 import ResetPassword from '../views/Account/ResetPassword.vue'
 import SearchHistory from '../views/Account/SearchHistory.vue'
+import Requests from '../views/Requests.vue'
 
 Vue.use(VueRouter)
 
@@ -61,6 +62,11 @@ const routes = [{
         name: 'IngredientsList',
         component: IngredientsList
     },
+    {
+        path: '/requests',
+        name: 'Requests',
+        component: Requests
+    }
 
 ]
 

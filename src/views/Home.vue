@@ -47,31 +47,34 @@
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
-        <button class="btn btn-primary shadow-none" @click="toggleFilter">FILTER</button>
+        <button class="btn btn-primary shadow-none" @click="toggleFilter">
+          FILTER
+        </button>
       </div>
 
-    <FilterProducts :openFilter="filterOpen" @close="toggleFilter"/>
+      <FilterProducts :openFilter="filterOpen" @close="toggleFilter" />
 
-      <div class="row">
-      <div
-        class="row justify-content-between"
-        data-masonry='{"percentPosition": true }'
+      
+        <div
+          class="row justify-content-between"
+          data-masonry='{"percentPosition": true }'
+        >
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary shadow-none"
+        @click="togglePopup"
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </div>
+        Popup
+      </button>
+      <Popup :showPopup="popupOpen" @close="togglePopup" />
     </div>
-
-    <button
-      type="button"
-      class="btn btn-primary shadow-none"
-      @click="togglePopup"
-    >
-      Popup
-    </button>
-    <Popup :showPopup="popupOpen" @close="togglePopup" />
   </div>
 </template>
 
