@@ -54,7 +54,12 @@
                 :key="sastojak"
                 style="display: inline-block"
               >
-                <span>{{ sastojak }}</span>
+                <span @click="toggleDescription">{{ sastojak }}</span>
+                <Description
+                  :showDescription="DescriptionOpen"
+                  :info="sastojak"
+                  @close="toggleDescription"
+                />
               </div>
             </div>
             <br />
@@ -86,7 +91,24 @@
 </template>
 
 <script>
-export default {};
+import Description from "../components/Description.vue";
+
+export default {
+  name: "Product",
+  data() {
+    return {
+      DescriptionOpen: false,
+    };
+  },
+  methods: {
+    toggleDescription() {
+      this.DescriptionOpen = !this.DescriptionOpen;
+    },
+  },
+  components: {
+    Description,
+  },
+};
 </script>
 
 <style>

@@ -54,28 +54,25 @@
 
       <FilterProducts :openFilter="filterOpen" @close="toggleFilter" />
 
-      
-        <div
-          class="row justify-content-between"
-          data-masonry='{"percentPosition": true }'
-        >
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
-      </div>
-
-      <button
-        type="button"
-        class="btn btn-primary shadow-none"
-        @click="togglePopup"
+      <div
+        class="row justify-content-between"
+        data-masonry='{"percentPosition": true }'
       >
-        Popup
-      </button>
-      <Popup :showPopup="popupOpen" @close="togglePopup" />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </div>
     </div>
-  </div>
+
+    <button
+      type="button"
+      class="btn btn-primary shadow-none"
+      @click="togglePopup"
+    >
+      Popup
+    </button>
+    <Popup :showPopup="popupOpen" @close="togglePopup" />
   </div>
 </template>
 

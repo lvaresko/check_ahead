@@ -42,7 +42,7 @@
               <div>APPROVED REQUESTS</div>
             </div>
             <div v-if="requests2.length">
-              <div v-for="request in requests2" :key="nis">
+              <div v-for="request in requests2" :key="request.name">
                 <div class="request">
                   <label>PRODUCT NAME</label>
                   <div>{{ request.name }}</div>
