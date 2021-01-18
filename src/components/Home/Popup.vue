@@ -3,7 +3,7 @@
     <transition name="fade">
       <div class="popup-overlay" @click="closePopup" v-if="showPopup"></div>
     </transition>
-    <transition name="fade" >
+    <transition name="fade">
       <div class="popup text-center" v-if="showPopup">
         <div class="popup-image ">
           <img
@@ -68,7 +68,6 @@ export default {
 </script>
 
 <style>
-
 /*
 .slide-enter-active,
 .slide-leave-active {

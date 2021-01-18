@@ -47,10 +47,12 @@
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
-        <button class="btn btn-primary shadow-none" @click="toggleFilter">FILTER</button>
+        <button class="btn btn-primary shadow-none" @click="toggleFilter">
+          FILTER
+        </button>
       </div>
 
-    <FilterProducts :openFilter="filterOpen" @close="toggleFilter"/>
+      <FilterProducts :openFilter="filterOpen" @close="toggleFilter" />
 
       <div
         class="row justify-content-between"
@@ -70,7 +72,6 @@
       Popup
     </button>
     <Popup :showPopup="popupOpen" @close="togglePopup" />
-  </div>
   </div>
 </template>
 
