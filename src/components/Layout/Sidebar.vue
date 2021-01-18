@@ -1,7 +1,9 @@
 <template>
   <header class="sticky-top">  
     <div class="sidebar" >
-      <div class="backdrop" @click.self="closeSidebar" v-if="openSidebar"></div>         
+      <transition name="fade">
+        <div class="backdrop" @click.self="closeSidebar" v-if="openSidebar"></div>        
+      </transition> 
       <transition name="slide-l">            
         <div class="menu-items" v-if="openSidebar">
           <router-link to="/" tag="button" class="side-btn">
@@ -80,16 +82,6 @@ export default {
 </script>
 
 <style lang="scss">
-.slide-l-enter-active,
-.slide-l-leave-active {
-  transition: transform 0.4s ease;
-}
-
-.slide-l-enter,
-.slide-l-leave-to {
-  transform: translateX(-100%);
-  transition: all 300ms ease-in 0s
-}
 
 .menu-items {
   width: 50vmin;
