@@ -305,7 +305,7 @@ span.icon-magnifying-glass::before {
 
 
 /*---------------
-     Transitions
+    Transitions
 ----------------*/
 
 /* fade */
@@ -342,3 +342,7 @@ span.icon-magnifying-glass::before {
   transform: translateX(100%);
   transition: all 300ms ease-in 0s
 }
+
+
+
+

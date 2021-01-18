@@ -7,16 +7,16 @@
         </div>
         <div class="col-12 col-md-8 mt-6 text-center right-side">
           <div class="col text-center">
-            <h3>Hi {{ user_name }}!</h3>
-            <h1>Your account</h1>
+            <h3>Hi, {{ user_name }}!</h3> 
+            <h3>Welcome to your acocunt</h3>
+            <!-- <h1>Your account</h1> -->
           </div>
-          <h3>Welcome to your acocunt!</h3>
-          <p>Here you can update your settings ??????</p>
-          <p>
-            Ovaj account je uzasno uzasan ..izgleda katastroficno i trenutno
-            nemam vise snage za trazit neki dobar dizajn paa ako se tebi da moes
-            ili cemo ful ostavit za kraj
-          </p>
+          <img
+            id="pic"
+            src="@/assets/home_2.1.jpeg"
+            alt=""
+          />
+          <!-- <p>Here you can update your settings ??????</p> -->
         </div>
       </div>
     </div>
@@ -51,4 +51,9 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+#pic {
+  height: 50%;
+  width: 80%;
+}
+</style>
