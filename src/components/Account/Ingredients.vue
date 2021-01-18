@@ -3,7 +3,7 @@
     <div
       v-for="content in ingredientCategories()"
       :key="content.category"
-      class="custom-control custom-checkbox text-left"
+      class="custom-control custom-checkbox text-left mt-3"
     >
       <span class="icon-caret-right" style="font-size: 20px"></span>
       <span :class="classIcon(content)"></span>
@@ -15,7 +15,7 @@
       >
         {{ content }}</label
       >
-      <h2 class="line" style="width: 100%"></h2>
+      <h2 class="line1" style="width: 100%"></h2>
 
       <!-- dropdown -->
       <div
@@ -27,8 +27,6 @@
       <div class="dropdown-item" style="margin-left: 25px">
         <input type="checkbox" class="custom-control-input" id="customCheck1" />
         <label
-          href="#proba"
-          data-toggle="collapse"
           class="custom-control-label"
           for="customCheck1"
         >
@@ -119,57 +117,6 @@ export default {
 </script>
 
 <style lang="scss">
-/* Checkbox label position */
-
-.custom-control.custom-checkbox {
-  padding-left: 0;
-}
-
-label.custom-control-label {
-  position: relative;
-  padding-top: 4px;
-  padding-right: 1.5rem;
-  margin: 8px;
-}
-
-label.custom-control-label::before,
-label.custom-control-label::after {
-  right: 0;
-  left: inherit;
-  top: 8px;
-}
-
-/* Divider */
-
-h2.line {
-    border-bottom: 1px solid #a3a3a3;
-    margin: 10px auto;
-}
-
-h2.line2 {
-    border-bottom: 1px solid #ccc;
-    line-height: 0.1em;
-    margin: 2px auto;
-}
-
-/* Checkbox style */
-
-.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-  background-color: white;
-  border-color: lightgray !important;
-  box-shadow: none !important;
-}
-
-.custom-control-input:checked ~ .custom-control-label::before,
-.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
-  background-color: lightgray;
-  border-color: gray !important;
-  box-shadow: none !important;
-}
-
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='gray' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
-}
 
 /* Add custom ingredients */
 

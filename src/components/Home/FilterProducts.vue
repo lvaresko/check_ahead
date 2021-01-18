@@ -10,15 +10,63 @@
             <span class="icon-cancel-1" @click.self="closeFilter"></span>
           </div>
           <div class="filter-title">
-            <h1><i class="icon-filter"></i> Filter</h1>
+            <h3><i class="icon-filter"></i> Filter</h3>
           </div>
-          <div class="filter-content text-left">
-            <label href="#proba" data-toggle="collapse">
-              Product category
-            </label>
-            <div class="collapse" id="proba">aa</div>
-            <p data-toggle="collapse">Product type</p>
-            <p data-toggle="collapse">Brand</p>
+          <div class="filter-list custom-control custom-checkbox text-left">
+            <div class="filter-item">
+              <label href="#category" data-toggle="collapse" class="custom-control-label">
+                <span class="icon-caret-right" style="font-size: 20px"></span>
+                Category
+              </label>
+              <h2 class="line1" style="width: 90%"></h2>
+
+              <!-- dropdown -->
+              <div v-for="category in product_categories" :key="category">
+                <div class="dropdown-item collapse" id="category" style="margin-left: 15px">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                  <label class="custom-control-label" for="customCheck1">
+                    {{ category }}
+                  </label>
+                  <h2 class="line2" style="width: 100%"></h2>
+                </div>
+              </div>
+            </div>
+            <div class="filter-item">
+              <label href="#type" data-toggle="collapse" class="custom-control-label">
+                <span class="icon-caret-right" style="font-size: 20px"></span>
+                Type
+              </label>
+              <h2 class="line1" style="width: 90%"></h2>
+
+              <!-- dropdown -->
+              <div v-for="type in product_types" :key="type">
+                <div class="dropdown-item collapse" id="type" style="margin-left: 15px">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                  <label class="custom-control-label" for="customCheck1">
+                    {{ type }}
+                  </label>
+                  <h2 class="line2" style="width: 100%"></h2>
+                </div>
+              </div>
+            </div>
+            <div class="filter-item">
+              <label href="#brand" data-toggle="collapse" class="custom-control-label">
+                <span class="icon-caret-right" style="font-size: 20px"></span>
+                Brand
+              </label>
+              <h2 class="line1" style="width: 90%"></h2>
+
+              <!-- dropdown -->
+              <div v-for="brand in brands" :key="brand">
+                <div class="dropdown-item collapse" id="brand" style="margin-left: 15px">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                  <label class="custom-control-label" for="customCheck1">
+                    {{ brand }}
+                  </label>
+                  <h2 class="line2" style="width: 100%"></h2>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </transition>
@@ -30,6 +78,13 @@
 export default {
   name: "FilterProducts",
   props: ["openFilter"],
+  data() {
+    return {
+      product_categories: ["Makeup","Toiletry","Skincare"],
+      product_types: ["Cleansing gel", "Lipstick", "Hair Shampoo"],
+      brands: ["Skintegra", "Lush", "Trixie Cosmetics"],
+    }
+  },
   methods: {
     closeFilter() {
       this.$emit("close");
@@ -61,18 +116,21 @@ export default {
 
 .filter-title {
   display: inline-block;
-  margin-top: 30px;
+  margin-top: 25px;
 }
 
 .icon-filter::before {
-  font-size: 45px;
+  font-size: 35px;
   vertical-align: top;
 }
 
-.filter-content {
-  margin: 40px;
+.icon-caret-right::before {
+  vertical-align: baseline;
 }
 
+.filter-item {
+  padding: 0 15px 0;
+}
 
 .filter-overlay {
   top: 0;

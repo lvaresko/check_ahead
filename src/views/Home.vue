@@ -76,6 +76,7 @@
       <Popup :showPopup="popupOpen" @close="togglePopup" />
     </div>
   </div>
+  </div>
 </template>
 
 <script>
