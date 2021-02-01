@@ -63,15 +63,16 @@
         <Card />
         <Card />
       </div>
-    
-    <button
-      type="button"
-      class="btn btn-primary shadow-none"
-      @click="togglePopup"
-    >
-      Popup
-    </button>
-    <Popup :showPopup="popupOpen" @close="togglePopup" />
+
+      <button
+        type="button"
+        class="btn btn-primary shadow-none"
+        @click="togglePopup"
+      >
+        Popup
+      </button>
+      <Popup :showPopup="popupOpen" @close="togglePopup" />
+    </div>
   </div>
 </template>
 
