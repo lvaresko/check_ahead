@@ -6,8 +6,8 @@
           <AccountSidebar />
         </div>
         <div class="col-12 col-md-8 mt-6 text-center right-side">
+          <h2>Personal information:</h2>
           <div class="signup personal-info">
-            <h2>Personal information:</h2>
             <!--<label>PERSONAL INFO:</label>-->
             <div class="form-group text-left pt-3">
               <label form="exampleInputFirstName">First name:</label>

@@ -6,8 +6,8 @@
           <AccountSidebar />
         </div>
         <div class="col-12 col-md-8 mt-6 text-center right-side">
+          <h2>Change password:</h2>
           <div class="signup change-password">
-            <label>CHANGE PASSWORD:</label>
             <div class="form-group text-left pt-3">
               <div class="custom-control-inline">
                 <label form="exampleInputPassword1">Password:</label>

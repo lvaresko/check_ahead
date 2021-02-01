@@ -7,14 +7,13 @@ import "firebase/firestore";
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyBHDg1dEuHbioQ7SngKc1APfI-8e76ptuk",
-    authDomain: "check-ahead.firebaseapp.com",
-    projectId: "check-ahead",
-    storageBucket: "check-ahead.appspot.com",
-    messagingSenderId: "837133193825",
-    appId: "1:837133193825:web:29c869c5a2839eb374d020"
-  };
-
+  apiKey: "AIzaSyC2lZXspOZ03exIgApCOWbm6J77KG8pJaE",
+  authDomain: "checkahead-41fde.firebaseapp.com",
+  projectId: "checkahead-41fde",
+  storageBucket: "checkahead-41fde.appspot.com",
+  messagingSenderId: "780812450499",
+  appId: "1:780812450499:web:32677a817eeec0cd1d8076"
+};
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

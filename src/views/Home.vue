@@ -63,8 +63,7 @@
         <Card />
         <Card />
       </div>
-    </div>
-
+    
     <button
       type="button"
       class="btn btn-primary shadow-none"
