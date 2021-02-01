@@ -1,66 +1,64 @@
 <template>
-  <form>
-    <div
-      v-for="content in ingredientCategories()"
-      :key="content.category"
-      class="custom-control custom-checkbox text-left mt-3"
-    >
-      <span class="icon-caret-right" style="font-size: 20px"></span>
-      <span :class="classIcon(content)"></span>
-      <input type="checkbox" class="custom-control-input"/>
-      <label
-        href="#proba"
-        data-toggle="collapse"
-        class="custom-control-label"
-      >
-        {{ content }}</label
-      >
-      <h2 class="line1" style="width: 100%"></h2>
-
-      <!-- dropdown -->
+  <div>
+    <form>
       <div
-        v-for="content in filterIngredients(content)"
-        :key="content"
-        id="proba"
-        class="collapse"
+        v-for="content in ingredientCategories()"
+        :key="content.category"
+        class="custom-control custom-checkbox text-left mt-3"
       >
-      <div class="dropdown-item" style="margin-left: 25px">
-        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+        <span class="icon-caret-right" style="font-size: 20px"></span>
+        <span :class="classIcon(content)"></span>
+        <input type="checkbox" class="custom-control-input" />
         <label
+          href="#proba"
+          data-toggle="collapse"
           class="custom-control-label"
-          for="customCheck1"
         >
           {{ content }}</label
         >
-        <h2 class="line2" style="width: 100%"></h2>
+        <h2 class="line1" style="width: 100%"></h2>
+
+        <!-- dropdown -->
+        <div
+          v-for="content in filterIngredients(content)"
+          :key="content"
+          id="proba"
+          class="collapse"
+        >
+          <div class="dropdown-item" style="margin-left: 25px">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck1"
+            />
+            <label class="custom-control-label" for="customCheck1">
+              {{ content }}</label
+            >
+            <h2 class="line2" style="width: 100%"></h2>
+          </div>
+        </div>
       </div>
+
+      <div class="form-group proba text-left mt-4">
+        <label form="exampleInputCustom">CUSTOM:</label>
+        <input
+          type="text"
+          class="form-control basic-input"
+          id="exampleInputCustom"
+          placeholder="e.g. citrus, petroleum..."
+          v-model="tempCustom"
+          @keyup="addCustom"
+        />
+        <div v-for="custom in custom_ingredients" :key="custom" class="pill">
+          <span>{{ custom }} </span
+          ><span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
+        </div>
       </div>
-    </div>
-    
-    <div class="form-group proba text-left mt-4">
-      <label form="exampleInputCustom">CUSTOM:</label>
-      <input
-        type="text"
-        class="form-control basic-input"
-        id="exampleInputCustom"
-        placeholder="e.g. citrus, petroleum..."
-        v-model="tempCustom"
-        @keyup="addCustom"
-      />
-      <div v-for="custom in custom_ingredients" :key="custom" class="pill">
-        <span>{{ custom }} </span
-        ><span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
-      </div>
-      <!-- botun prebacit u input 
-      <button type="button" class="btn btn-primary v3 shadow none mt-3">
-        add
-      </button> -->
-      <!-- vjv nece trebat ovaj gumb jer se automatski doda kad stavis ','-->
-    </div>
+    </form>
     <button type="button" class="btn btn-primary v2 shadow none mt-3">
       Submit
     </button>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -117,8 +115,11 @@ export default {
 </script>
 
 <style lang="scss">
-
 /* Add custom ingredients */
+
+.icon-caret-right {
+  cursor: pointer;
+}
 
 .pill {
   color: white;
@@ -128,14 +129,16 @@ export default {
   padding: 5px 10px;
   background: #eee;
   border-radius: 20px;
-  font-size: 15px;
+  font-size: 9px;
   letter-spacing: 1px;
   font-weight: bold;
 }
-
-.icon-cancel-1 {
-  font-size: 13px !important;
+.pill .icon-cancel-1 {
+  font-size: 10px;
+}
+.pill .icon-cancel-1::before {
+  font-size: 10px;
   cursor: pointer;
-  vertical-align: 3px;
+  vertical-align: 1px;
 }
 </style>

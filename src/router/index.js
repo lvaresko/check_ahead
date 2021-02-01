@@ -11,6 +11,7 @@ import UpdateAccount from '../views/Account/UpdateAccount.vue'
 import ResetPassword from '../views/Account/ResetPassword.vue'
 import SearchHistory from '../views/Account/SearchHistory.vue'
 import Requests from '../views/Requests.vue'
+import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -66,6 +67,12 @@ const routes = [{
         path: '/requests',
         name: 'Requests',
         component: Requests
+    },
+    //catchall 404
+    {
+        path: ':catchAll(.*)',
+        name: 'NotFound',
+        component: NotFound
     }
 
 ]
