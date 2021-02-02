@@ -28,11 +28,9 @@ export default {
 
 <style lang="scss">
 footer {
-  position: absolute;
   font-size: 16px;
   width: 100%;
   margin-top: 20px;
-
   left: 0;
   bottom: 0;
 }
@@ -46,12 +44,12 @@ span.icon-copyright {
   font-size: 20px;
 }
 
-a {
+.bd-footer a {
   font-size: 16px;
   color: #595959;
 }
 
-a:hover {
+.bd-footer a:hover {
   color: #232323;
   text-decoration: none;
 }
