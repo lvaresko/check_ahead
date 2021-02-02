@@ -14,54 +14,67 @@
           </div>
           <div class="filter-list custom-control custom-checkbox text-left">
             <div class="filter-item">
-              <label href="#category" data-toggle="collapse" class="custom-control-label">
-                <span class="icon-caret-right" style="font-size: 20px"></span>
-                Category
+              <label> 
+               <!--  <input type="checkbox" class="custom-control-input" /> -->
+                <div href="#category" data-toggle="collapse"> <!-- class="custom-control-label" -->
+                  <span class="icon-caret-right" style="font-size: 20px"></span>
+                  Category
+                </div>
               </label>
               <h2 class="line1" style="width: 90%"></h2>
 
               <!-- dropdown -->
-              <div v-for="category in product_categories" :key="category">
-                <div class="dropdown-item collapse" id="category" style="margin-left: 15px">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                  <label class="custom-control-label" for="customCheck1">
-                    {{ category }}
+              <div class="collapse" id="category" v-for="category in product_categories" :key="category">
+                <div class="dropdown-item">
+                  <label>
+                    <input type="checkbox" class="custom-control-input" />
+                    <div class="custom-control-label">
+                      {{ category }}
+                    </div>
                   </label>
                   <h2 class="line2" style="width: 100%"></h2>
                 </div>
               </div>
             </div>
             <div class="filter-item">
-              <label href="#type" data-toggle="collapse" class="custom-control-label">
-                <span class="icon-caret-right" style="font-size: 20px"></span>
-                Type
+              <label>
+                <div href="#type" data-toggle="collapse">
+                  <span class="icon-caret-right" style="font-size: 20px"></span>
+                  Type
+                </div>
               </label>
               <h2 class="line1" style="width: 90%"></h2>
 
               <!-- dropdown -->
-              <div v-for="type in product_types" :key="type">
-                <div class="dropdown-item collapse" id="type" style="margin-left: 15px">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                  <label class="custom-control-label" for="customCheck1">
-                    {{ type }}
+              <div  class="collapse" id="type" v-for="type in product_types" :key="type">
+                <div class="dropdown-item">
+                  <label>
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                    <div class="custom-control-label" for="customCheck1">
+                      {{ type }}
+                    </div>
                   </label>
                   <h2 class="line2" style="width: 100%"></h2>
                 </div>
               </div>
             </div>
             <div class="filter-item">
-              <label href="#brand" data-toggle="collapse" class="custom-control-label">
-                <span class="icon-caret-right" style="font-size: 20px"></span>
-                Brand
+              <label>
+                <div href="#brand" data-toggle="collapse">
+                  <span class="icon-caret-right" style="font-size: 20px"></span>
+                  Brand
+                </div>
               </label>
               <h2 class="line1" style="width: 90%"></h2>
 
               <!-- dropdown -->
-              <div v-for="brand in brands" :key="brand">
-                <div class="dropdown-item collapse" id="brand" style="margin-left: 15px">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                  <label class="custom-control-label" for="customCheck1">
-                    {{ brand }}
+              <div class="collapse" id="brand" v-for="brand in brands" :key="brand">
+                <div class="dropdown-item">
+                  <label>
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                    <div class="custom-control-label" for="customCheck1">
+                      {{ brand }}
+                    </div>
                   </label>
                   <h2 class="line2" style="width: 100%"></h2>
                 </div>
@@ -95,7 +108,7 @@ export default {
 
 <style>
 .filter {
-  width: 50vmin;
+  width: 55vmin;
   height: 100%;
   position: fixed;
   padding: 0;
@@ -103,6 +116,7 @@ export default {
   top: 0;
   right: 0;
   z-index: 20000;
+  overflow: scroll;
 }
 
 .filter-close {
@@ -112,11 +126,12 @@ export default {
 .icon-cancel-1::before {
   font-size: 20px;
   vertical-align: top;
+  cursor: pointer;
 }
 
 .filter-title {
   display: inline-block;
-  margin-top: 25px;
+  margin: 25px 0 25px 0;
 }
 
 .icon-filter::before {
@@ -126,10 +141,6 @@ export default {
 
 .icon-caret-right::before {
   vertical-align: baseline;
-}
-
-.filter-item {
-  padding: 0 15px 0;
 }
 
 .filter-overlay {
