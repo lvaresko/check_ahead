@@ -16,7 +16,7 @@
             onfocus="this.placeholder = ''"
           />
           <button
-            class="btn border-left-0 search-button  shadow-none"
+            class="btn border-left-0 search-button shadow-sm"
             type="button"
           >
             <span class="icon-magnifying-glass"></span>

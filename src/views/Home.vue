@@ -1,10 +1,6 @@
 <template>
   <div class="home">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/signup">Sign up</router-link> |
-      <router-link to="/login">Login</router-link>
-    </div>
+    <div id="nav"></div>
     <div
       class="jumbotron jumbotron-fluid"
       :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
@@ -39,7 +35,7 @@
           </button>
         </div>
         <h4 style="color: white">or</h4>
-        <button type="button" class="scan btn btn-primary shadow">
+        <button type="button" class="scan btn btn-primary shadow-sm">
           SCAN BARCODE <i class="icon-barcode"></i>
         </button>
       </div>
@@ -47,7 +43,7 @@
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
-        <button class="btn btn-primary shadow-none" @click="toggleFilter">
+        <button class="btn btn-primary shadow-sm" @click="toggleFilter">
           FILTER
         </button>
       </div>

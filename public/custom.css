@@ -170,6 +170,15 @@ Sign up / Login
     margin: auto;
 }
 
+.signup a {
+    color: #6FA2B4;
+    text-decoration: underline;
+}
+
+.signup .link {
+    margin-top: 30px;
+}
+
 
 /*--------------
    Form Input

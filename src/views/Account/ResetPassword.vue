@@ -35,7 +35,7 @@
                 placeholder="Retype here your password..."
               />
             </div>
-            <button type="button" class="btn btn-primary shadow none mt-4">
+            <button type="button" class="btn btn-primary shadow-sm mt-4">
               Reset
             </button>
           </div>

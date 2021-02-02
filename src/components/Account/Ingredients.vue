@@ -55,7 +55,7 @@
         </div>
       </div>
     </form>
-    <button type="button" class="btn btn-primary v2 shadow none mt-3">
+    <button type="button" class="btn btn-primary v2 shadow-sm mt-3">
       Submit
     </button>
   </div>

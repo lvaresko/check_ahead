@@ -38,7 +38,7 @@
                 placeholder="amy@gmail.com"
               />
             </div>
-            <button type="button" class="btn btn-primary shadow none mt-4">
+            <button type="button" class="btn btn-primary shadow-sm mt-4">
               Save changes
             </button>
           </div>

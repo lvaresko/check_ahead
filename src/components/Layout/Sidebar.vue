@@ -1,88 +1,103 @@
 <template>
-  <header class="sticky-top">  
-    <div class="sidebar" >
+  <header class="sticky-top">
+    <div class="sidebar">
       <transition name="fade">
-        <div class="backdrop" @click.self="closeSidebar" v-if="openSidebar"></div>        
-      </transition> 
-      <transition name="slide-l">            
+        <div
+          class="backdrop"
+          @click.self="closeSidebar"
+          v-if="openSidebar"
+        ></div>
+      </transition>
+      <transition name="slide-l">
         <div class="menu-items" v-if="openSidebar">
           <router-link to="/" tag="button" class="side-btn">
-              <div class="link-container" @click.self="closeSidebar">
-                  <span class="icon-home"></span>
-                  Home
-              </div>
+            <div class="link-container" @click.self="closeSidebar">
+              <span class="icon-home"></span>
+              Home
+            </div>
           </router-link>
           <router-link to="/ingredients_list" tag="button" class="side-btn">
-              <div class="link-container" @click.self="closeSidebar">
-                  <span class="icon-list"></span>
-                  Ingredients list
-              </div>
+            <div class="link-container" @click.self="closeSidebar">
+              <span class="icon-list"></span>
+              Ingredients list
+            </div>
           </router-link>
           <router-link to="#" tag="button" class="side-btn">
-              <div class="link-container" @click.self="closeSidebar">
-                  <span class="icon-heart"></span>
-                  Favourites
-              </div>
+            <div class="link-container" @click.self="closeSidebar">
+              <span class="icon-heart"></span>
+              Favourites
+            </div>
           </router-link>
           <router-link to="#" tag="button" class="side-btn">
-              <div class="link-container" @click.self="closeSidebar"> 
-                  <span class="icon-request"></span>
-                  Your requests
-              </div>
+            <div class="link-container" @click.self="closeSidebar">
+              <span class="icon-request"></span>
+              Your requests
+            </div>
           </router-link>
           <h2 class="line" style="width: 100%"></h2>
           <router-link to="#" tag="button" class="side-btn">
-              <div class="link-container" @click.self="closeSidebar">
-                  Contact Us
-              </div>
+            <div class="link-container" @click.self="closeSidebar">
+              Contact Us
+            </div>
           </router-link>
-          <br>
+          <br />
           <router-link to="#" tag="button" class="side-btn">
-              <div class="link-container" @click.self="closeSidebar">
-                  FAQ
-              </div>
+            <div class="link-container" @click.self="closeSidebar">
+              FAQ
+            </div>
           </router-link>
-          <br>
+          <br />
           <router-link to="#" tag="button" class="side-btn">
-              <div class="link-container" @click.self="closeSidebar">
-                  Terms of use
-              </div>
+            <div class="link-container" @click.self="closeSidebar">
+              Terms of use
+            </div>
           </router-link>
-          <br>
+          <br />
           <router-link to="#" tag="button" class="side-btn">
-              <div class="link-container" @click.self="closeSidebar">
-                Privacy Policy
-              </div>
+            <div class="link-container" @click.self="closeSidebar">
+              Privacy Policy
+            </div>
           </router-link>
           <h2 class="line" style="width: 100%"></h2>
-          <router-link to="#" tag="button" class="side-btn">
-              <div class="link-container">
-                <span class="icon-exit"></span>
-                Sign out
-              </div>
-          </router-link>
-        </div>  
-      </transition>        
+          <a
+            href="#"
+            @click.prevent="logout()"
+            @click.self="closeSidebar"
+            tag="button"
+            class="side-btn link-container"
+          >
+            <span class="icon-exit"></span>
+            Log Out
+          </a>
+        </div>
+      </transition>
     </div>
   </header>
 </template>
 
 <script>
+import { firebase } from "@/firebase";
+
 export default {
   name: "Sidebar",
-  props: [
-    'openSidebar'
-  ],
+  props: ["openSidebar"],
   methods: {
     closeSidebar() {
       this.$emit("close");
     },
-  }
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "Login" });
+        });
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-
 .menu-items {
   width: 50vmin;
   height: 100%;
@@ -102,11 +117,14 @@ export default {
   padding-left: 10px;
 }
 
-.side-btn:focus { outline: none; }
+.side-btn:focus {
+  outline: none;
+}
 
 .side-btn:hover,
 .link-container:hover {
   color: #232323;
+  text-decoration: none;
 }
 
 .sidebar .router-link-exact-active {
@@ -116,7 +134,7 @@ export default {
 .backdrop {
   top: 0;
   position: fixed;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(122, 128, 134, 0.5);
   width: 100%;
   height: 100%;
   cursor: pointer;

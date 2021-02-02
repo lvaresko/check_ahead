@@ -1,114 +1,131 @@
 <template>
-  <div class="signup text-center">
-    <form class="signup">
-      <h1 class="pb-3">Registration</h1>
+  <form class="signup text-center">
+    <h1 class="pb-3">Sign Up</h1>
 
-      <div class="form-group text-left" :class="classObject(this.nameSuccess)">
-        <label form="exampleInputFirstName">First name:</label>
-        <input
-          type="text"
-          v-model="name"
-          @blur="checkName"
-          class="form-control basic-input"
-          placeholder="Amy"
-        />
-        <i class="icon-check-2"></i>
-        <i class="icon-exclamation-2"></i>
-        <small id="name">
-          Error message.
-        </small>
-      </div>
-      <div
-        class="form-group text-left"
-        :class="classObject(this.lastnameSuccess)"
-      >
-        <label form="exampleInputLastName">Last name:</label>
-        <input
-          type="text"
-          v-model="lastname"
-          @blur="checkLastname"
-          class="form-control basic-input"
-          placeholder="Wise"
-        />
-        <i class="icon-check-2"></i>
-        <i class="icon-exclamation-2"></i>
-        <small id="lastname">
-          Error message.
-        </small>
-      </div>
-      <div class="form-group text-left" :class="classObject(this.emailSuccess)">
-        <label form="exampleInputEmail">Email:</label>
-        <input
-          type="email"
-          v-model="email"
-          @blur="checkEmail"
-          class="form-control basic-input"
-          aria-describedby="EmailHelp"
-          placeholder="amy@gmail.com"
-        />
-        <i class="icon-check-2"></i>
-        <i class="icon-exclamation-2"></i>
-        <small id="email">
-          Error message.
-        </small>
-      </div>
-      <div
-        class="form-group text-left"
-        :class="classObject(this.passwordSuccess)"
-      >
-        <div class="custom-control-inline">
-          <label form="exampleInputPassword1">Password:</label>
+    <div class="form-group text-left" :class="classObject(this.nameSuccess)">
+      <label form="exampleInputFirstName">First name:</label>
+      <input
+        type="text"
+        v-model="name"
+        @blur="checkName"
+        class="form-control basic-input"
+        placeholder="Amy"
+      />
+      <i class="icon-check-2"></i>
+      <i class="icon-exclamation-2"></i>
+      <small id="name">
+        Error message.
+      </small>
+    </div>
+    <div
+      class="form-group text-left"
+      :class="classObject(this.lastnameSuccess)"
+    >
+      <label form="exampleInputLastName">Last name:</label>
+      <input
+        type="text"
+        v-model="lastname"
+        @blur="checkLastname"
+        class="form-control basic-input"
+        placeholder="Wise"
+      />
+      <i class="icon-check-2"></i>
+      <i class="icon-exclamation-2"></i>
+      <small id="lastname">
+        Error message.
+      </small>
+    </div>
+    <div class="form-group text-left" :class="classObject(this.emailSuccess)">
+      <label form="exampleInputEmail">Email:</label>
+      <input
+        type="email"
+        v-model="email"
+        @blur="checkEmail"
+        class="form-control basic-input"
+        aria-describedby="EmailHelp"
+        placeholder="amy@gmail.com"
+      />
+      <i class="icon-check-2"></i>
+      <i class="icon-exclamation-2"></i>
+      <small id="email">
+        Error message.
+      </small>
+    </div>
+    <div
+      class="form-group text-left"
+      :class="classObject(this.passwordSuccess)"
+    >
+      <div class="custom-control-inline">
+        <label form="exampleInputPassword1">Password:</label>
 
-          <label form="passwordWarning" style="font-size: 12px;"
-            >At least 6 characters</label
-          >
-        </div>
-        <input
-          type="password"
-          v-model="password"
-          @blur="checkPassword"
-          class="form-control basic-input"
-          placeholder="abc12"
-        />
-        <i class="icon-check-2"></i>
-        <i class="icon-exclamation-2"></i>
-        <small id="password">
-          Error message.
-        </small>
+        <label form="passwordWarning" style="font-size: 12px;"
+          >At least 6 characters</label
+        >
       </div>
-      <div
-        class="form-group text-left"
-        :class="classObject(this.passwordRepeatSuccess)"
-      >
-        <label form="exampleInputPassword2">Repeat password:</label>
-        <input
-          type="password"
-          v-model="passwordRepeat"
-          @blur="checkPasswordRepeat"
-          class="form-control basic-input"
-          placeholder="Retype here your password..."
-        />
-        <i class="icon-check-2"></i>
-        <i class="icon-exclamation-2"></i>
-        <small id="passwordRepeat">
-          Error message.
-        </small>
-      </div>
-      <button
-        type="button"
-        @click="$router.push('choose_ingredients')"
-        class="btn btn-primary shadow none mt-4"
-      >
-        Register
-      </button>
-    </form>
-    <div clas="row" style="margin: 30px">
-      <p style="font-size: 12px">
-        By continuing, you agree to Check Ahead Terms of Use and confirm that
-        you have read its Privacy Policy.
+      <input
+        type="password"
+        v-model="password"
+        @blur="checkPassword"
+        class="form-control basic-input"
+        placeholder="abc12"
+      />
+      <i class="icon-check-2"></i>
+      <i class="icon-exclamation-2"></i>
+      <small id="password">
+        Error message.
+      </small>
+    </div>
+    <div
+      class="form-group text-left"
+      :class="classObject(this.passwordRepeatSuccess)"
+    >
+      <label form="exampleInputPassword2">Repeat password:</label>
+      <input
+        type="password"
+        v-model="passwordRepeat"
+        @blur="checkPasswordRepeat"
+        class="form-control basic-input"
+        placeholder="Retype here your password..."
+      />
+      <i class="icon-check-2"></i>
+      <i class="icon-exclamation-2"></i>
+      <small id="passwordRepeat">
+        Error message.
+      </small>
+    </div>
+    <button
+      type="button"
+      @click="signup()"
+      class="btn btn-primary shadow-sm mt-4"
+    >
+      Sign Up
+    </button>
+    <div clas="row" style="margin-top: 30px">
+      <p>
+        Already have an account? <router-link to="/login">Login</router-link>
       </p>
     </div>
-  </div>
+
+    <div class="mt-4" style="padding: auto">
+      <h2 class="line" style="width: 70%; margin: 10px 48px 20px;">
+        <span> or </span>
+      </h2>
+    </div>
+    <button
+      type="button"
+      class="btn btn-secondary shadow-sm mt-3"
+      @click="SignInWithGoogle()"
+    >
+      Continue with Google
+    </button>
+    <button type="button" class="btn btn-secondary shadow-sm mt-3">
+      Continue with Facebook
+    </button>
+    <p style="font-size: 12px; margin-top: 20px">
+      By continuing, you agree to Check Ahead Terms of Use and confirm that you
+      have read its Privacy Policy.
+    </p>
+  </form>
 </template>
 
 <script>
@@ -146,16 +163,43 @@ export default {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then(function() {
-            console.log("Uspješna registracija");
+          .then(() => {
+            console.log("Success");
+            this.$router.push("/choose_ingredients");
           })
-          .catch(function(error) {
-            console.error("Došlo je do pogreške", error);
+          .catch((error) => {
+            console.error("Error", error);
           });
-        console.log("Nastavak");
       } else {
-        alert("Lozinke se ne podudaraju!");
+        alert("All inputs must be filled correctly.");
       }
+    },
+    SignInWithGoogle() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          var credential = result.credential;
+
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          // ...
+          this.$router.push("/choose_ingredients");
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
     },
     checkName() {
       if (this.name === "") {

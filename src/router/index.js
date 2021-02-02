@@ -12,6 +12,7 @@ import ResetPassword from '../views/Account/ResetPassword.vue'
 import SearchHistory from '../views/Account/SearchHistory.vue'
 import Requests from '../views/Requests.vue'
 import NotFound from '../views/NotFound.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,10 @@ Vue.use(VueRouter)
 const routes = [{
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+            needsUser: true,
+        }
     },
     {
         path: '/signup',
@@ -39,34 +43,58 @@ const routes = [{
     {
         path: '/product',
         name: 'Product',
-        component: Product
-    }, {
+        component: Product,
+        meta: {
+            needsUser: true,
+        }
+    },
+    {
         path: '/account',
         name: 'Account',
-        component: Account
+        component: Account,
+        meta: {
+            needsUser: true,
+        }
     },
     {
         path: '/account/update',
         name: 'UpdateAccount',
-        component: UpdateAccount
-    }, {
+        component: UpdateAccount,
+        meta: {
+            needsUser: true,
+        }
+    },
+    {
         path: '/account/reset-password',
         name: 'ResetPassword',
-        component: ResetPassword
-    }, {
+        component: ResetPassword,
+        meta: {
+            needsUser: true,
+        }
+    },
+    {
         path: '/account/history',
         name: 'SearchHistory',
-        component: SearchHistory
+        component: SearchHistory,
+        meta: {
+            needsUser: true,
+        }
     },
     {
         path: '/ingredients_list',
         name: 'IngredientsList',
-        component: IngredientsList
+        component: IngredientsList,
+        meta: {
+            needsUser: true,
+        }
     },
     {
         path: '/requests',
         name: 'Requests',
-        component: Requests
+        component: Requests,
+        meta: {
+            needsUser: true,
+        }
     },
     //catchall 404
     {
@@ -81,6 +109,17 @@ const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
-})
+});
+
+router.beforeEach((to, from, next) => {
+    const noUser = (store.currentUser === null);
+
+    if (noUser && to.meta.needsUser) {
+        console.log("Permission denied");
+        next("Login")
+    } else {
+        next();
+    }
+});
 
 export default router

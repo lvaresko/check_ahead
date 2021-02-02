@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <Navbar @open="toggleSidebar" />
+    <Navbar v-if="store.currentUser" @open="toggleSidebar" />
     <!--  v-if='$route.path !== "/login" && $route.path !== "/signup"' tako da se navbar ne vidi ako nisi ulogiran-->
     <Sidebar :openSidebar="sidebarOpen" @close="toggleSidebar" />
 
     <router-view :key="$route.fullPath" id="app_content" />
 
-    <Footer />
+    <Footer v-if="store.currentUser" />
   </div>
 </template>
 
@@ -14,11 +14,36 @@
 import Navbar from "@/components/Layout/Navbar.vue";
 import Sidebar from "@/components/Layout/Sidebar.vue";
 import Footer from "@/components/Layout/Footer.vue";
+import { firebase } from "@/firebase";
+import store from "@/store";
+import router from "@/router";
+
+//Observer
+firebase.auth().onAuthStateChanged((user) => {
+  const currentRoute = router.currentRoute;
+  if (user) {
+    //user is signed in
+    console.log("Signed in: " + user.email);
+    store.currentUser = user.email;
+
+    if (!currentRoute.meta.needsUser) {
+      router.push({ name: "Home" });
+    }
+  } else {
+    console.log("No user");
+    store.currentUser = null;
+
+    if (currentRoute.meta.needsUser) {
+      router.push({ name: "Login" });
+    }
+  }
+});
 
 export default {
   name: "App",
   data: () => {
     return {
+      store,
       sidebarOpen: false,
     };
   },
@@ -36,16 +61,11 @@ export default {
 </script>
 
 <style lang="scss">
-#nav {
-  padding: 30px;
+a {
+  color: #595959;
 
-  a {
-    font-weight: bold;
-    color: #595959;
-
-    &.router-link-exact-active {
-      color: #6fa2b4;
-    }
+  &.router-link-exact-active {
+    color: #6fa2b4;
   }
 }
 </style>
