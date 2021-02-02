@@ -2,38 +2,34 @@
   <div>
     <form>
       <div
-        v-for="content in ingredientCategories()"
+        v-for="(content, index) in ingredientCategories()"
         :key="content.category"
         class="custom-control custom-checkbox text-left mt-3"
       >
-        <span class="icon-caret-right" style="font-size: 20px"></span>
-        <span :class="classIcon(content)"></span>
-        <input type="checkbox" class="custom-control-input" />
-        <label
-          href="#proba"
-          data-toggle="collapse"
-          class="custom-control-label"
-        >
-          {{ content }}</label
-        >
+        <label>
+          <!-- <input type="checkbox" class="custom-control-input" /> -->
+          <div :href="'#proba' + index" data-toggle="collapse"> 
+            <span class="icon-caret-right" style="font-size: 20px"></span>
+            <span :class="classIcon(content)"></span>
+            {{ content }}
+          </div>
+        </label>
         <h2 class="line1" style="width: 100%"></h2>
 
         <!-- dropdown -->
         <div
           v-for="content in filterIngredients(content)"
           :key="content"
-          id="proba"
+          :id="'proba' + index"
           class="collapse"
         >
           <div class="dropdown-item" style="margin-left: 25px">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="customCheck1"
-            />
-            <label class="custom-control-label" for="customCheck1">
-              {{ content }}</label
-            >
+            <label>
+              <input type="checkbox" class="custom-control-input"/>
+              <div class="custom-control-label">
+                {{ content }}
+              </div>
+            </label>
             <h2 class="line2" style="width: 100%"></h2>
           </div>
         </div>

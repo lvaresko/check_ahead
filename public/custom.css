@@ -14,6 +14,10 @@ body {
     /* height of your footer */
 }
 
+#app_content {
+    flex: 1;
+}
+
 
 /*-------------
     Box-Sizing
@@ -99,22 +103,21 @@ body {
 /*-------------
     Checkbox
 --------------*/
+.dropdown-item:hover {
+    background: #fff;
+}
 
 /* Checkbox label position */
-
-.custom-control.custom-checkbox {
-    padding-left: 0;
-}
   
-label.custom-control-label {
+.custom-control-label {
     position: relative;
     padding-top: 4px;
     padding-right: 1.5rem;
-    margin: 8px;
+    margin: 4px 0 4px 0;
 }
   
-label.custom-control-label::before,
-label.custom-control-label::after {
+.custom-control-label::before,
+.custom-control-label::after {
     right: 0;
     left: inherit;
     top: 8px;
