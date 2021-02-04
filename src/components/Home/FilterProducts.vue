@@ -15,11 +15,8 @@
           <div class="filter-list custom-control custom-checkbox text-left">
             <div class="filter-item">
               <label> 
-               <!--  <input type="checkbox" class="custom-control-input" /> -->
-                <div href="#category" data-toggle="collapse"> <!-- class="custom-control-label" -->
-                  <span class="icon-caret-right" style="font-size: 20px"></span>
-                  Category
-                </div>
+                <span href="#category" data-toggle="collapse" class="icon-caret-right" style="font-size: 20px"></span>
+                Category 
               </label>
               <h2 class="line1" style="width: 90%"></h2>
 
@@ -27,7 +24,7 @@
               <div class="collapse" id="category" v-for="category in product_categories" :key="category">
                 <div class="dropdown-item">
                   <label>
-                    <input type="checkbox" class="custom-control-input" />
+                    <input type="checkbox" v-model="selectedCat" :value="category" class="custom-control-input" />
                     <div class="custom-control-label">
                       {{ category }}
                     </div>
@@ -38,10 +35,8 @@
             </div>
             <div class="filter-item">
               <label>
-                <div href="#type" data-toggle="collapse">
-                  <span class="icon-caret-right" style="font-size: 20px"></span>
-                  Type
-                </div>
+                <span href="#type" data-toggle="collapse" class="icon-caret-right" style="font-size: 20px"></span>
+                Type
               </label>
               <h2 class="line1" style="width: 90%"></h2>
 
@@ -49,7 +44,7 @@
               <div  class="collapse" id="type" v-for="type in product_types" :key="type">
                 <div class="dropdown-item">
                   <label>
-                    <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                    <input type="checkbox" v-model="selectedType" :value="type" class="custom-control-input" id="customCheck1" />
                     <div class="custom-control-label" for="customCheck1">
                       {{ type }}
                     </div>
@@ -60,10 +55,8 @@
             </div>
             <div class="filter-item">
               <label>
-                <div href="#brand" data-toggle="collapse">
-                  <span class="icon-caret-right" style="font-size: 20px"></span>
-                  Brand
-                </div>
+                <span href="#brand" data-toggle="collapse" class="icon-caret-right" style="font-size: 20px"></span>
+                Brand
               </label>
               <h2 class="line1" style="width: 90%"></h2>
 
@@ -71,7 +64,7 @@
               <div class="collapse" id="brand" v-for="brand in brands" :key="brand">
                 <div class="dropdown-item">
                   <label>
-                    <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                    <input type="checkbox" v-model="selectedBrand" :value="brand" class="custom-control-input" id="customCheck1" />
                     <div class="custom-control-label" for="customCheck1">
                       {{ brand }}
                     </div>
@@ -81,6 +74,11 @@
               </div>
             </div>
           </div>
+          <!-- TEST 
+            {{selectedCat}}
+            {{selectedType}}
+            {{selectedBrand}} 
+          -->
         </div>
       </transition>
     </div>
@@ -96,6 +94,9 @@ export default {
       product_categories: ["Makeup","Toiletry","Skincare"],
       product_types: ["Cleansing gel", "Lipstick", "Hair Shampoo"],
       brands: ["Skintegra", "Lush", "Trixie Cosmetics"],
+      selectedCat: [],
+      selectedType: [],
+      selectedBrand: [],
     }
   },
   methods: {

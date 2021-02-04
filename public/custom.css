@@ -56,7 +56,7 @@ body {
     font-weight: 700;
     background-color: #6FA2B4;
     padding: 0;
-    margin: auto;
+    
 }
 
 .btn-primary.v2 {
@@ -127,6 +127,9 @@ body {
 
 
 /* Checkbox style */
+.custom-control-input ~ .custom-control-label {
+    cursor: pointer;
+}
 
 .custom-control-input:focus:not(:checked)~.custom-control-label::before {
     background-color: white;

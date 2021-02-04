@@ -4,13 +4,23 @@
       <div
         v-for="(content, index) in ingredientCategories()"
         :key="content.category"
-        class="custom-control custom-checkbox text-left mt-3"
+        class="custom-control x custom-checkbox text-left mt-3"
       >
+        <span
+          :href="'#proba' + index"
+          data-toggle="collapse"
+          class="icon-caret-right"
+          style="font-size: 20px"
+        ></span>
+        <span :class="classIcon(content)"></span>
         <label>
-          <!-- <input type="checkbox" class="custom-control-input" /> -->
-          <div :href="'#proba' + index" data-toggle="collapse">
-            <span class="icon-caret-right" style="font-size: 20px"></span>
-            <span :class="classIcon(content)"></span>
+          <input
+            type="checkbox"
+            @click="checkAll"
+            v-model="allChecked"
+            class="custom-control-input"
+          />
+          <div class="custom-control-label pl-2">
             {{ content }}
           </div>
         </label>
@@ -25,7 +35,12 @@
         >
           <div class="dropdown-item" style="margin-left: 25px">
             <label>
-              <input type="checkbox" class="custom-control-input" />
+              <input
+                type="checkbox"
+                v-model="selectedIngr"
+                :value="content"
+                class="custom-control-input"
+              />
               <div class="custom-control-label">
                 {{ content }}
               </div>
@@ -46,8 +61,8 @@
           @keyup="addCustom"
         />
         <div v-for="custom in custom_ingredients" :key="custom" class="pill">
-          <span>{{ custom }} </span
-          ><span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
+          <span>{{ custom }} </span>
+          <span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
         </div>
       </div>
     </form>
@@ -71,6 +86,8 @@ export default {
         { name: "gold", category: "metals" },
         { name: "nickel", category: "metals" },
       ],
+      allChecked: false,
+      selectedIngr: [],
     };
   },
   methods: {
@@ -78,6 +95,7 @@ export default {
       if ((e.key === "," || e.key === "Enter") && this.tempCustom) {
         if (!this.custom_ingredients.includes(this.custom_ingredients)) {
           this.custom_ingredients.push(this.tempCustom.replace(",", "")); //ili to ili skuzi kako obrisat sve u inputu nakon keyown
+          this.selectedIngr.push(this.tempCustom.replace(",", ""));
         }
         this.tempCustom = "";
       }
@@ -103,11 +121,25 @@ export default {
         .filter((key) => key.category.includes(name))
         .map(({ name }) => name);
     },
+    checkAll: function() {
+      this.allChecked = !this.allChecked;
+
+      if (this.allChecked) {
+        // Check all
+        for (var key in this.ingredients) {
+          this.selectedIngr.push(this.ingredients[key].name);
+        }
+      }
+    },
   },
 };
 </script>
 
-<style lang="scss">
+<style>
+.custom-control.x {
+  padding-left: 0;
+}
+
 /* Add custom ingredients */
 
 .icon-caret-right {
