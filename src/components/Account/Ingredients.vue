@@ -1,36 +1,10 @@
 <template>
   <div>
-    <div
-      v-for="(content, index) in ingredientCategories()"
-      :key="content.category"
-      class="custom-control x custom-checkbox text-left mt-3"
-    >
-      <span
-        :href="'#proba' + index"
-        data-toggle="collapse"
-        class="icon-caret-right"
-        style="font-size: 20px"
-      ></span>
-      <span :class="classIcon(content)"></span>
-      <label>
-        <input
-          type="checkbox"
-          @click="checkAll(content)"
-          v-model="allChecked"
-          class="custom-control-input"
-        />
-        <div class="custom-control-label pl-2">
-          {{ content }}
-        </div>
-      </label>
-      <h2 class="line1" style="width: 100%"></h2>
-
-      <!-- dropdown -->
+    <form>
       <div
-        v-for="content in filterIngredients(content)"
-        :key="content"
-        :id="'proba' + index"
-        class="collapse"
+        v-for="(content, index) in ingredientCategories()"
+        :key="content.category"
+        class="custom-control x custom-checkbox text-left mt-3"
       >
         <span
           :href="'#proba' + index"
@@ -75,22 +49,23 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group proba text-left mt-4">
-      <label form="exampleInputCustom">CUSTOM:</label>
-      <input
-        type="text"
-        class="form-control basic-input"
-        id="exampleInputCustom"
-        placeholder="e.g. citrus, petroleum..."
-        v-model="tempCustom"
-        @keyup="addCustom"
-      />
-      <div v-for="custom in custom_ingredients" :key="custom" class="pill">
-        <span>{{ custom }} </span>
-        <span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
+      <div class="form-group proba text-left mt-4">
+        <label form="exampleInputCustom">CUSTOM:</label>
+        <input
+          type="text"
+          class="form-control basic-input"
+          id="exampleInputCustom"
+          placeholder="e.g. citrus, petroleum..."
+          v-model="tempCustom"
+          @keyup="addCustom"
+        />
+        <div v-for="custom in custom_ingredients" :key="custom" class="pill">
+          <span>{{ custom }} </span>
+          <span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
+        </div>
       </div>
+    </form>
   </div>
 </template>
 
@@ -168,6 +143,12 @@ export default {
 <style>
 .custom-control.x {
   padding-left: 0;
+}
+
+/* Add custom ingredients */
+
+.icon-caret-right {
+  cursor: pointer;
 }
 
 .pill {
