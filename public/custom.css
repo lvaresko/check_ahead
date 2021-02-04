@@ -108,20 +108,22 @@ body {
     background: #fff;
 }
 
-
 /* Checkbox label position */
   
 .custom-control-label {
-    position: relative;
     padding-top: 4px;
-    padding-right: 1.5rem;
     margin: 4px 0 4px 0;
 }
   
-.custom-control-label::before,
-.custom-control-label::after {
-    right: 0;
-    left: inherit;
+.x .custom-control-label::before,
+.x .custom-control-label::after {
+    left: 220px;
+    top: 8px;
+}
+
+.filter .custom-control-label::before,
+.filter .custom-control-label::after {
+    left: 210px;
     top: 8px;
 }
 

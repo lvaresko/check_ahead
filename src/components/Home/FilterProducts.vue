@@ -109,7 +109,7 @@ export default {
 
 <style>
 .filter {
-  width: 55vmin;
+  width: 330px;
   height: 100%;
   position: fixed;
   padding: 0;
