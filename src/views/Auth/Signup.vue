@@ -83,7 +83,7 @@
       <input
         type="password"
         v-model="passwordRepeat"
-        @blur="checkPasswordRepeat"
+        @keyup="checkPasswordRepeat"
         class="form-control basic-input"
         placeholder="Retype here your password..."
       />
@@ -94,8 +94,8 @@
       </small>
     </div>
     <button
-      type="button"
-      @click="signup()"
+      type="submit"
+      @click.prevent="signup()"
       class="btn btn-primary shadow-sm mt-4"
     >
       Sign Up
@@ -106,21 +106,6 @@
       </p>
     </div>
 
-    <div class="mt-4" style="padding: auto">
-      <h2 class="line" style="width: 70%; margin: 10px 48px 20px;">
-        <span> or </span>
-      </h2>
-    </div>
-    <button
-      type="button"
-      class="btn btn-secondary shadow-sm mt-3"
-      @click="SignInWithGoogle()"
-    >
-      Continue with Google
-    </button>
-    <button type="button" class="btn btn-secondary shadow-sm mt-3">
-      Continue with Facebook
-    </button>
     <p style="font-size: 12px; margin-top: 20px">
       By continuing, you agree to Check Ahead Terms of Use and confirm that you
       have read its Privacy Policy.
@@ -129,7 +114,8 @@
 </template>
 
 <script>
-import { firebase } from "@/firebase";
+import { firebase, db } from "@/firebase";
+import store from "@/store";
 
 function setMessageFor(input, message) {
   document.getElementById(input).innerText = message;
@@ -152,54 +138,36 @@ export default {
     };
   },
   methods: {
-    signup() {
-      if (
-        this.nameSuccess &&
-        this.lastnameSuccess &&
-        this.emailSuccess &&
-        this.passwordSuccess &&
-        this.passwordRepeatSuccess
-      ) {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            console.log("Success");
-            this.$router.push("/choose_ingredients");
-          })
-          .catch((error) => {
-            console.error("Error", error);
-          });
-      } else {
-        alert("All inputs must be filled correctly.");
+    async signup() {
+      try {
+        if (
+          this.nameSuccess &&
+          this.lastnameSuccess &&
+          this.emailSuccess &&
+          this.passwordSuccess &&
+          this.passwordRepeatSuccess
+        ) {
+          //If user with email exists
+
+          //Create user
+          let userCredential = await firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.email, this.password);
+
+          console.log("Success");
+          db.collection("users")
+            .doc(userCredential.user.uid)
+            .set({
+              firstName: this.name,
+              lastName: this.lastname,
+              active: false,
+            });
+        } else {
+          alert("All inputs must be filled correctly.");
+        }
+      } catch (e) {
+        console.error(e);
       }
-    },
-    SignInWithGoogle() {
-      var provider = new firebase.auth.GoogleAuthProvider();
-
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then((result) => {
-          var credential = result.credential;
-
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          // ...
-          this.$router.push("/choose_ingredients");
-        })
-        .catch((error) => {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-        });
     },
     checkName() {
       if (this.name === "") {
@@ -217,7 +185,12 @@ export default {
       if (this.email === "") {
         this.emailSuccess = false;
         setMessageFor("email", "Email cannot be blank");
-      } else if (!this.email.includes("@") || !this.email.includes(".")) {
+      } //else if (!this.email.includes("@") || !this.email.includes(".")) {
+      else if (
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          this.email
+        )
+      ) {
         this.emailSuccess = false;
         setMessageFor("email", "Email formulation invalid");
       } else this.emailSuccess = true;

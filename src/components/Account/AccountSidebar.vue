@@ -45,4 +45,12 @@ export default {
     border-bottom: none;
   }
 }
+
+.account-sidebar a {
+  font-weight: bold;
+  color: #595959;
+  &.router-link-exact-active {
+    color: #6fa2b4;
+  }
+}
 </style>

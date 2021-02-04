@@ -13,6 +13,7 @@ import SearchHistory from '../views/Account/SearchHistory.vue'
 import Requests from '../views/Requests.vue'
 import NotFound from '../views/NotFound.vue'
 import store from '@/store'
+import { firebase, db } from '@/firebase'
 
 Vue.use(VueRouter)
 
@@ -111,7 +112,7 @@ const router = new VueRouter({
     routes
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
     const noUser = (store.currentUser === null);
 
     if (noUser && to.meta.needsUser) {

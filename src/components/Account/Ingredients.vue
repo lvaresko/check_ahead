@@ -8,7 +8,7 @@
       >
         <label>
           <!-- <input type="checkbox" class="custom-control-input" /> -->
-          <div :href="'#proba' + index" data-toggle="collapse"> 
+          <div :href="'#proba' + index" data-toggle="collapse">
             <span class="icon-caret-right" style="font-size: 20px"></span>
             <span :class="classIcon(content)"></span>
             {{ content }}
@@ -25,7 +25,7 @@
         >
           <div class="dropdown-item" style="margin-left: 25px">
             <label>
-              <input type="checkbox" class="custom-control-input"/>
+              <input type="checkbox" class="custom-control-input" />
               <div class="custom-control-label">
                 {{ content }}
               </div>
@@ -51,9 +51,6 @@
         </div>
       </div>
     </form>
-    <button type="button" class="btn btn-primary v2 shadow-sm mt-3">
-      Submit
-    </button>
   </div>
 </template>
 

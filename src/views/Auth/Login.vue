@@ -26,8 +26,8 @@
       </div>
     </div>
     <button
-      type="button"
-      @click="login()"
+      type="submit"
+      @click.prevent="login()"
       class="btn btn-primary mt-3 shadow-sm"
     >
       Login
@@ -36,6 +36,21 @@
     <p class="link">
       New to Check Ahead? <router-link to="/signup">Sign up</router-link>
     </p>
+    <div class="mt-4" style="padding: auto">
+      <h2 class="line" style="width: 70%; margin: 10px 48px 20px;">
+        <span> or </span>
+      </h2>
+    </div>
+    <button
+      type="button"
+      class="btn btn-secondary shadow-sm mt-3"
+      @click="SignInWithGoogle()"
+    >
+      Continue with Google
+    </button>
+    <button type="button" class="btn btn-secondary shadow-sm mt-3">
+      Continue with Facebook
+    </button>
     <div style="border: 1px solid red;">
       <div>email: test@user.com</div>
       <div>password: 123456</div>
@@ -44,7 +59,8 @@
 </template>
 
 <script>
-import { firebase } from "@/firebase";
+import { firebase, db } from "@/firebase";
+import store from "@/store";
 
 export default {
   name: "login",
@@ -55,16 +71,42 @@ export default {
     };
   },
   methods: {
-    login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          //this.$router.replace({ name: "Home" });
-        })
-        .catch((e) => {
-          console.error(e);
-        });
+    async login() {
+      try {
+        let result = await firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async SignInWithGoogle() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+
+      try {
+        let result = await firebase.auth().signInWithPopup(provider);
+
+        let doc = await db
+          .collection("users")
+          .doc(result.user.uid)
+          .get();
+
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+        } else {
+          console.log("Creating user...");
+
+          db.collection("users")
+            .doc(result.user.uid)
+            .set({
+              firstName: result.additionalUserInfo.profile.given_name,
+              lastName: result.additionalUserInfo.profile.family_name,
+              active: false,
+            });
+        }
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
 };

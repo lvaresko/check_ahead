@@ -77,6 +77,7 @@
 
 <script>
 import { firebase } from "@/firebase";
+import store from "@/store";
 
 export default {
   name: "Sidebar",
@@ -90,6 +91,8 @@ export default {
         .auth()
         .signOut()
         .then(() => {
+          store.currentUser = null;
+          store.active = null;
           this.$router.push({ name: "Login" });
         });
     },
