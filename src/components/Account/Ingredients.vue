@@ -1,72 +1,71 @@
 <template>
   <div>
-    <form>
-      <div
-        v-for="(content, index) in ingredientCategories()"
-        :key="content.category"
-        class="custom-control x custom-checkbox text-left mt-3"
-      >
-        <span
-          :href="'#proba' + index"
-          data-toggle="collapse"
-          class="icon-caret-right"
-          style="font-size: 20px"
-        ></span>
-        <span :class="classIcon(content)"></span>
-        <label>
-          <input
-            type="checkbox"
-            @click="checkAll(content)"
-            v-model="allChecked"
-            class="custom-control-input"
-          />
-          <div class="custom-control-label pl-2">
-            {{ content }}
-          </div>
-        </label>
-        <h2 class="line1" style="width: 100%"></h2>
-
-        <!-- dropdown -->
-        <div
-          v-for="content in filterIngredients(content)"
-          :key="content"
-          :id="'proba' + index"
-          class="collapse"
-        >
-          <div class="dropdown-item" style="margin-left: 25px">
-            <label>
-              <input
-                type="checkbox"
-                v-model="selectedIngr"
-                :value="content"
-                class="custom-control-input"
-              />
-              <div class="custom-control-label">
-                {{ content }}
-              </div>
-            </label>
-            <h2 class="line2" style="width: 100%"></h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group proba text-left mt-4">
-        <label form="exampleInputCustom">CUSTOM:</label>
+    <div
+      v-for="(content, index) in ingredientCategories()"
+      :key="content.category"
+      class="custom-control x custom-checkbox text-left mt-3"
+    >
+      <span
+        :href="'#proba' + index"
+        data-toggle="collapse"
+        class="icon-caret-right"
+        style="font-size: 20px"
+      ></span>
+      <span :class="classIcon(content)"></span>
+      <label>
         <input
-          type="text"
-          class="form-control basic-input"
-          id="exampleInputCustom"
-          placeholder="e.g. citrus, petroleum..."
-          v-model="tempCustom"
-          @keyup="addCustom"
+          type="checkbox"
+          @click="checkAll(content)"
+          v-model="allChecked"
+          class="custom-control-input"
         />
-        <div v-for="custom in custom_ingredients" :key="custom" class="pill">
-          <span>{{ custom }} </span>
-          <span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
+        <div class="custom-control-label pl-2">
+          {{ content }}
+        </div>
+      </label>
+      <h2 class="line1" style="width: 100%"></h2>
+
+      <!-- dropdown -->
+      <div
+        v-for="content in filterIngredients(content)"
+        :key="content"
+        :id="'proba' + index"
+        class="collapse"
+      >
+        <div class="dropdown-item" style="margin-left: 25px">
+          <label>
+            <input
+              type="checkbox"
+              v-model="selectedIngr"
+              :value="content"
+              class="custom-control-input"
+            />
+            <div class="custom-control-label">
+              {{ content }}
+            </div>
+          </label>
+          <h2 class="line2" style="width: 100%"></h2>
         </div>
       </div>
-    </form>
-    {{selectedIngr}}
+    </div>
+
+    <div class="form-group proba text-left mt-4">
+      <label form="exampleInputCustom">CUSTOM:</label>
+      <input
+        type="text"
+        class="form-control basic-input"
+        id="exampleInputCustom"
+        placeholder="e.g. citrus, petroleum..."
+        v-model="tempCustom"
+        @keyup="addCustom"
+      />
+      <div v-for="custom in custom_ingredients" :key="custom" class="pill">
+        <span>{{ custom }} </span>
+        <span class="icon-cancel-1" @click="deleteCustom(custom)"></span>
+      </div>
+    </div>
+
+    {{ selectedIngr }}
   </div>
 </template>
 
@@ -123,7 +122,7 @@ export default {
     },
     checkAll: function(x) {
       this.allChecked = !this.allChecked;
-      let pom = this.ingredients.filter((key) => key.category.includes(x))
+      let pom = this.ingredients.filter((key) => key.category.includes(x));
       console.log(pom);
       if (this.allChecked) {
         // Check all
@@ -139,12 +138,6 @@ export default {
 <style>
 .custom-control.x {
   padding-left: 0;
-}
-
-/* Add custom ingredients */
-
-.icon-caret-right {
-  cursor: pointer;
 }
 
 .pill {
