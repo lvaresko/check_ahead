@@ -56,7 +56,6 @@ body {
     font-weight: 700;
     background-color: #6FA2B4;
     padding: 0;
-    
 }
 
 .btn-primary.v2 {
@@ -104,12 +103,20 @@ body {
 /*-------------
     Checkbox
 --------------*/
+
 .dropdown-item:hover {
     background: #fff;
 }
 
 /* Checkbox label position */
-  
+
+
+/* Add custom ingredients */
+
+.icon-caret-right {
+    cursor: pointer;
+}
+
 .custom-control-label {
     padding-top: 4px;
     margin: 4px 0 4px 0;
@@ -129,7 +136,8 @@ body {
 
 
 /* Checkbox style */
-.custom-control-input ~ .custom-control-label {
+
+.custom-control-input~.custom-control-label {
     cursor: pointer;
 }
 
