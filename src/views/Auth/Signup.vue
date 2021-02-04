@@ -96,7 +96,7 @@
     <button
       type="submit"
       @click.prevent="signup()"
-      class="btn btn-primary shadow-sm mt-4"
+      class="btn btn-primary shadow-sm mt-2"
     >
       Sign Up
     </button>

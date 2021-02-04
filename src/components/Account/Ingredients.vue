@@ -16,7 +16,7 @@
         <label>
           <input
             type="checkbox"
-            @click="checkAll"
+            @click="checkAll(content)"
             v-model="allChecked"
             class="custom-control-input"
           />
@@ -66,6 +66,7 @@
         </div>
       </div>
     </form>
+    {{selectedIngr}}
   </div>
 </template>
 
@@ -95,7 +96,6 @@ export default {
       if ((e.key === "," || e.key === "Enter") && this.tempCustom) {
         if (!this.custom_ingredients.includes(this.custom_ingredients)) {
           this.custom_ingredients.push(this.tempCustom.replace(",", "")); //ili to ili skuzi kako obrisat sve u inputu nakon keyown
-          this.selectedIngr.push(this.tempCustom.replace(",", ""));
         }
         this.tempCustom = "";
       }
@@ -121,13 +121,14 @@ export default {
         .filter((key) => key.category.includes(name))
         .map(({ name }) => name);
     },
-    checkAll: function() {
+    checkAll: function(x) {
       this.allChecked = !this.allChecked;
-
+      let pom = this.ingredients.filter((key) => key.category.includes(x))
+      console.log(pom);
       if (this.allChecked) {
         // Check all
-        for (var key in this.ingredients) {
-          this.selectedIngr.push(this.ingredients[key].name);
+        for (var key in pom) {
+          this.selectedIngr.push(pom[key].name);
         }
       }
     },
