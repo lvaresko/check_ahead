@@ -56,7 +56,6 @@ body {
     font-weight: 700;
     background-color: #6FA2B4;
     padding: 0;
-    
 }
 
 .btn-primary.v2 {
@@ -104,30 +103,37 @@ body {
 /*-------------
     Checkbox
 --------------*/
+
 .dropdown-item:hover {
     background: #fff;
 }
 
 
 /* Checkbox label position */
-  
+
+
+/* Add custom ingredients */
+
+.icon-caret-right {
+    cursor: pointer;
+}
+
 .custom-control-label {
-    position: relative;
     padding-top: 4px;
-    padding-right: 1.5rem;
     margin: 4px 0 4px 0;
 }
-  
+
 .custom-control-label::before,
 .custom-control-label::after {
     right: 0;
-    left: inherit;
+    left: 220px;
     top: 8px;
 }
 
 
 /* Checkbox style */
-.custom-control-input ~ .custom-control-label {
+
+.custom-control-input~.custom-control-label {
     cursor: pointer;
 }
 
