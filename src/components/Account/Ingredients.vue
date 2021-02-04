@@ -17,7 +17,7 @@
           <input
             type="checkbox"
             @click="checkAll(content)"
-            v-model="allChecked"
+           
             class="custom-control-input"
           />
           <div class="custom-control-label pl-2">
@@ -66,7 +66,6 @@
         </div>
       </div>
     </form>
-    {{selectedIngr}}
   </div>
 </template>
 
@@ -121,15 +120,20 @@ export default {
         .filter((key) => key.category.includes(name))
         .map(({ name }) => name);
     },
-    checkAll: function(x) {
+    checkAll(x) {
       this.allChecked = !this.allChecked;
       let pom = this.ingredients.filter((key) => key.category.includes(x))
-      console.log(pom);
-      if (this.allChecked) {
-        // Check all
+      
+      if(this.allChecked) {   // Check all in that category
         for (var key in pom) {
           this.selectedIngr.push(pom[key].name);
         }
+      } else {    // Uncheck all in that category
+          for (var key in pom) {
+            this.selectedIngr = this.selectedIngr.filter((item) => {
+              return pom[key].name !== item;
+            });
+          }
       }
     },
   },
