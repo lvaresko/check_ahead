@@ -54,7 +54,7 @@
         class="row justify-content-between"
         data-masonry='{"percentPosition": true }'
       >
-        <Card />
+        <Card :site="site" />
         <Card />
         <Card />
         <Card />
@@ -83,6 +83,7 @@ export default {
     return {
       popupOpen: false,
       filterOpen: false,
+      site: "home",
     };
   },
   methods: {

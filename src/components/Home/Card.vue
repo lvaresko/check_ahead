@@ -1,10 +1,15 @@
 <template>
   <div class="col-12 col-md-6 col-lg-4">
     <!-- justify-content-between">-->
-    <div class="card">
+    <div class="card" @click="product">
       <img src="@/assets/architect.jpeg" class="card-img-top" alt="..." />
       <div class="card-img-overlay">
-        <span class="icon-heart"></span>
+        <span
+          v-if="site == 'home'"
+          :class="favorite ? 'icon-heart-2' : 'icon-heart'"
+          @click.stop.prevent="toggleFav"
+        ></span>
+        <span v-else class="icon-trashcan"></span>
       </div>
       <div class="card-body">
         <h5 class="card-title">Special title treatment</h5>
@@ -17,26 +22,55 @@
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "Card",
+  props: ["site"],
+  data() {
+    return {
+      favorite: false,
+    };
+  },
+  methods: {
+    product() {
+      console.log("PRODUCT");
+      router.push({ name: "Product" });
+    },
+    toggleFav() {
+      //ovo ce trebat s bazom sredivat i update-at
+      this.favorite = !this.favorite;
+    },
+  },
 };
 </script>
 
 <style>
 .card {
   margin: 10px 0;
+  cursor: pointer;
 }
 .card-img-top {
   height: 350px;
 }
-.card span.icon-heart {
-  font-size: 22px;
+.card:hover .card-title {
+  text-decoration: underline;
+}
+
+.card span.icon-trashcan::before,
+.card span.icon-heart::before,
+.card span.icon-heart-2::before {
+  font-size: 24px;
   background: white;
   opacity: 0.6;
-  padding: 0 6px;
-
-  border-radius: 50%;
+  padding: 4.5px 5px;
+  border-radius: 70%;
   cursor: pointer;
   float: right;
+  display: block;
+}
+
+.card span.icon-heart-2 {
+  color: rgb(255, 0, 55);
 }
 </style>

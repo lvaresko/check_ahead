@@ -22,10 +22,10 @@
               Ingredients list
             </div>
           </router-link>
-          <router-link to="#" tag="button" class="side-btn">
+          <router-link to="/favorites" tag="button" class="side-btn">
             <div class="link-container" @click.self="closeSidebar">
               <span class="icon-heart"></span>
-              Favourites
+              Favorites
             </div>
           </router-link>
           <router-link to="#" tag="button" class="side-btn">

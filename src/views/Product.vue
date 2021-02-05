@@ -54,13 +54,13 @@
                 :key="sastojak"
                 style="display: inline-block"
               >
-                <span @click="toggleDescription">{{ sastojak }}</span>
-                <Description
-                  :showDescription="DescriptionOpen"
-                  :info="sastojak"
-                  @close="toggleDescription"
-                />
+                <span @click="toggleDescription(sastojak)">{{ sastojak }}</span>
               </div>
+              <Description
+                :showDescription="DescriptionOpen"
+                :info="info"
+                @close="toggleDescription"
+              />
             </div>
             <br />
           </div>
@@ -98,10 +98,12 @@ export default {
   data() {
     return {
       DescriptionOpen: false,
+      info: null,
     };
   },
   methods: {
-    toggleDescription() {
+    toggleDescription(x) {
+      this.info = x;
       this.DescriptionOpen = !this.DescriptionOpen;
     },
   },

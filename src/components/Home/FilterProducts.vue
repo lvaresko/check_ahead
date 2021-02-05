@@ -23,8 +23,9 @@
                   <span
                     href="#category"
                     data-toggle="collapse"
-                    class="icon-caret-right"
+                    class="icon-caret-right collapsed arrow"
                     style="font-size: 20px"
+                    @click="rotate"
                   ></span>
                   Category
                 </label>
@@ -154,6 +155,14 @@ export default {
   methods: {
     closeFilter() {
       this.$emit("close");
+    },
+    rotate(e) {
+      const element = e.target;
+      if (element.className.includes("collapsed")) {
+        element.style.transform = "rotate(90deg)";
+      } else {
+        element.style.transform = "rotate(0deg)";
+      }
     },
   },
 };
