@@ -27,3 +27,7 @@ Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl.
 ## Zaduženja (trenutna)
 Lucia Vareško: prijava i registracija <br />
 Lucija Babić: izrada liste sastojaka (kategorije, naziv, opis) i homepage
+
+## Test user
+Email: test@user.com <br />
+Password: 123456
