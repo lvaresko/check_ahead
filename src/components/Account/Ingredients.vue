@@ -6,7 +6,7 @@
       class="custom-control x custom-checkbox text-left mt-3"
     >
       <span
-        :href="'#proba' + index"
+        :href="'#id' + index"
         data-toggle="collapse"
         class="icon-caret-right collapsed arrow"
         style="font-size: 20px"
@@ -17,19 +17,21 @@
         <input
           type="checkbox"
           @click="checkAll(content)"
+          v-model="selectedCat"
+          :value="content"
           class="custom-control-input"
         />
         <div class="custom-control-label pl-2">
-          {{ content }}
+          {{ content }} 
         </div>
       </label>
       <h2 class="line1" style="width: 100%"></h2>
 
       <!-- dropdown -->
       <div
-        v-for="content in filterIngredients(content)"
-        :key="content"
-        :id="'proba' + index"
+        v-for="ingredient in filterIngredients(content)"
+        :key="ingredient"
+        :id="'id' + index"
         class="collapse"
       >
         <div class="dropdown-item" style="margin-left: 25px">
@@ -37,11 +39,12 @@
             <input
               type="checkbox"
               v-model="selectedIngr"
-              :value="content"
+              :value="ingredient"
+              @change='updateCheckAll(content)'
               class="custom-control-input"
             />
             <div class="custom-control-label">
-              {{ content }}
+              {{ ingredient }}
             </div>
           </label>
           <h2 class="line2" style="width: 100%"></h2>
@@ -83,6 +86,7 @@ export default {
         { name: "eugenol", category: "fragrances" },
         { name: "geraniol", category: "fragrances" },
         { name: "methylisothiazolinone", category: "preservatives" },
+        { name: "formaldehyde", category: "preservatives" },
         { name: "coal-tar", category: "dyes" },
         { name: "p-phenylenediamine", category: "dyes" },
         { name: "gold", category: "metals" },
@@ -90,6 +94,7 @@ export default {
       ],
       allChecked: false,
       selectedIngr: [],
+      selectedCat: [],
     };
   },
   methods: {
@@ -110,34 +115,42 @@ export default {
       return [...new Set(this.ingredients.map(({ category }) => category))];
     },
     classIcon(icon) {
-      //console.log("icon-"+ icon);
-      //console.log(this.ingredients);
       return "icon-" + icon;
     },
     filterIngredients(name) {
-      //console.log(this.ingredients);
-      //console.log("filter " + name + " " + this.ingredients.filter((key) => key.category.includes(name)).map(({name}) => name));
-
       return this.ingredients
         .filter((key) => key.category.includes(name))
         .map(({ name }) => name);
     },
     checkAll(x) {
-      this.allChecked = !this.allChecked;
       let pom = this.ingredients.filter((key) => key.category.includes(x));
+      let pom2 = this.filterIngredients(x);
 
-      if (this.allChecked) {
-        // Check all in that category
+      if (!(pom2.every(r => this.selectedIngr.includes(r)))  ){       // Check all in that category
         for (var key in pom) {
-          this.selectedIngr.push(pom[key].name);
+          this.selectedIngr.push(pom[key].name);    
         }
+        this.allChecked = true;
+      } else if (pom2.every(r => this.selectedIngr.includes(r))) {    // Uncheck all in that category
+          for (var key in pom) {
+            this.selectedIngr = this.selectedIngr.filter((item) => {
+              return pom[key].name !== item;
+            });
+          }
+          this.allChecked = false;
+        }
+    },
+    updateCheckAll(category) {
+      let pom = this.filterIngredients(category);
+
+      if (pom.every(r => this.selectedIngr.includes(r))) { 
+        this.allChecked = true; 
+        this.selectedCat.push(category); 
       } else {
-        // Uncheck all in that category
-        for (var key in pom) {
-          this.selectedIngr = this.selectedIngr.filter((item) => {
-            return pom[key].name !== item;
-          });
-        }
+        this.allChecked = false;
+        this.selectedCat = this.selectedCat.filter((item) => {
+            return item !== category;
+        });
       }
     },
     rotate(e) {
