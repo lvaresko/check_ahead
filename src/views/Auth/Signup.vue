@@ -1,7 +1,9 @@
 <template>
   <form class="signup text-center">
     <h1 class="pb-3">Sign Up</h1>
-
+    <!-- <div class="error mt-2 mb-3">
+      {{errorMessage}}
+    </div> -->
     <div class="form-group text-left" :class="classObject(this.nameSuccess)">
       <label form="exampleInputFirstName">First name:</label>
       <input
@@ -135,6 +137,7 @@ export default {
       emailSuccess: null,
       passwordSuccess: null,
       passwordRepeatSuccess: null,
+      errorMessage: null,
     };
   },
   methods: {
@@ -147,7 +150,6 @@ export default {
           this.passwordSuccess &&
           this.passwordRepeatSuccess
         ) {
-          //If user with email exists
 
           //Create user
           let userCredential = await firebase
@@ -167,6 +169,11 @@ export default {
         }
       } catch (e) {
         console.error(e);
+        if (e.code === "auth/email-already-in-use") { //If user with email exists
+          //this.errorMessage = "The email address has already been allocated to antoher user.";
+          this.emailSuccess = false;
+          setMessageFor("email", "User with the given email already exists");
+        }
       }
     },
     checkName() {
@@ -229,42 +236,9 @@ export default {
   computed: {},
 };
 </script>
+
 <style>
-.signup small {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  visibility: hidden;
-}
-.signup .form-group {
-  position: relative;
-  height: 102px;
-  margin-bottom: 0;
-}
-.signup .form-group i {
-  position: absolute;
-  top: 45px;
-  right: 15px;
-  visibility: hidden;
-}
-.signup .form-group.success input {
-  border-width: 2px;
-  border-color: #2ecc71;
-}
-
-.signup .form-group.success i.icon-check-2 {
-  color: #2ecc71;
-  visibility: visible;
-}
-
-.signup .form-group.error input {
-  border-width: 2px;
-  border-color: #e74c3c;
-}
-
-.signup .form-group.error i.icon-exclamation-2,
-.signup .form-group.error small {
+.error {
   color: #e74c3c;
-  visibility: visible;
 }
 </style>

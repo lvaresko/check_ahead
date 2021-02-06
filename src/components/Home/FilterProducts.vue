@@ -59,8 +59,9 @@
                   <span
                     href="#type"
                     data-toggle="collapse"
-                    class="icon-caret-right"
+                    class="collapsed arrow icon-caret-right"
                     style="font-size: 20px"
+                    @click="rotate"
                   ></span>
                   Type
                 </label>
@@ -80,9 +81,8 @@
                         v-model="selectedType"
                         :value="type"
                         class="custom-control-input"
-                        id="customCheck1"
                       />
-                      <div class="custom-control-label" for="customCheck1">
+                      <div class="custom-control-label">
                         {{ type }}
                       </div>
                     </label>
@@ -95,8 +95,9 @@
                   <span
                     href="#brand"
                     data-toggle="collapse"
-                    class="icon-caret-right"
+                    class="collapsed arrow icon-caret-right"
                     style="font-size: 20px"
+                    @click="rotate"
                   ></span>
                   Brand
                 </label>
@@ -116,9 +117,8 @@
                         v-model="selectedBrand"
                         :value="brand"
                         class="custom-control-input"
-                        id="customCheck1"
                       />
-                      <div class="custom-control-label" for="customCheck1">
+                      <div class="custom-control-label">
                         {{ brand }}
                       </div>
                     </label>

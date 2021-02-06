@@ -8,7 +8,7 @@
 
         <router-link to="/">
           <img
-            id="brand"
+            id="brand_img"
             src="@/assets/logo.png"
             alt="Check Ahead"
             loading="lazy"
@@ -42,7 +42,7 @@ export default {
 
 /* xs */
 
-img#brand {
+img#brand_img {
   width: 150px;
   height: auto;
 }
@@ -50,7 +50,7 @@ img#brand {
 /* sm */
 
 @media (min-width: 768px) {
-  img#brand {
+  img#brand_img {
     width: 200px;
   }
 }
@@ -58,7 +58,7 @@ img#brand {
 /* md */
 
 @media (min-width: 992px) {
-  img#brand {
+  img#brand_img {
     width: 250px;
   }
 }
@@ -66,7 +66,7 @@ img#brand {
 /* lg */
 
 @media (min-width: 1200px) {
-  img#brand {
+  img#brand_img {
     width: 300px;
   }
 }

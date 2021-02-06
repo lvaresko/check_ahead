@@ -108,11 +108,7 @@ body {
     background: #fff;
 }
 
-
 /* Checkbox label position */
-
-
-/* Add custom ingredients */
 
 .icon-caret-right {
     cursor: pointer;
@@ -208,6 +204,49 @@ Sign up / Login
 
 .signup .link {
     margin-top: 30px;
+}
+
+/* Fail/succes classes */
+
+.signup small {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.signup .form-group {
+    position: relative;
+    height: 102px;
+    margin-bottom: 0;
+}
+
+.signup .form-group i {
+    position: absolute;
+    top: 45px;
+    right: 15px;
+    visibility: hidden;
+}
+
+.signup .form-group.success input {
+    border-width: 2px;
+    border-color: #2ecc71;
+}
+  
+.signup .form-group.success i.icon-check-2 {
+    color: #2ecc71;
+    visibility: visible;
+}
+  
+.signup .form-group.error input {
+    border-width: 2px;
+    border-color: #e74c3c;
+}
+  
+.signup .form-group.error i.icon-exclamation-2,
+.signup .form-group.error small {
+    color: #e74c3c;
+    visibility: visible;
 }
 
 
