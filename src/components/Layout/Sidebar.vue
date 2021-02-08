@@ -93,6 +93,7 @@ export default {
         .then(() => {
           store.currentUser = null;
           store.active = null;
+          localStorage.setItem("isSignedIn", false);
           this.$router.push({ name: "Login" });
         });
     },
