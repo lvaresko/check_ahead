@@ -75,29 +75,40 @@
 </template>
 
 <script>
+import { db } from '@/firebase';
+import store from "@/store";
+
 export default {
   name: "Ingredients",
   data() {
     return {
       tempCustom: "",
       custom_ingredients: [],
-      ingredients: [
-        { name: "perfume", category: "fragrances" },
-        { name: "eugenol", category: "fragrances" },
-        { name: "geraniol", category: "fragrances" },
-        { name: "methylisothiazolinone", category: "preservatives" },
-        { name: "formaldehyde", category: "preservatives" },
-        { name: "coal-tar", category: "dyes" },
-        { name: "p-phenylenediamine", category: "dyes" },
-        { name: "gold", category: "metals" },
-        { name: "nickel", category: "metals" },
-      ],
+      ingredients: [],
       allChecked: false,
       selectedIngr: [],
       selectedCat: [],
     };
   },
+  mounted() {
+    this.getIngr();
+  },
   methods: {
+    getIngr() {
+      db.collection('ingredients')
+              .get()
+              .then((querry) => {
+                  querry.forEach((doc) => {
+                      const data = doc.data();
+
+                      this.ingredients.push({
+                          id: doc.id,
+                          name: data.name,
+                          category: data.category
+                      });
+                  });
+           });
+    },
     addCustom(e) {
       if ((e.key === "," || e.key === "Enter") && this.tempCustom) {
         if (!this.custom_ingredients.includes(this.custom_ingredients)) {
@@ -115,6 +126,7 @@ export default {
       return [...new Set(this.ingredients.map(({ category }) => category))];
     },
     classIcon(icon) {
+      icon = icon.toLowerCase();
       return "icon-" + icon;
     },
     filterIngredients(name) {
@@ -131,7 +143,7 @@ export default {
           this.selectedIngr.push(pom[key].name);    
         }
         this.allChecked = true;
-      } else if (pom2.every(r => this.selectedIngr.includes(r))) {    // Uncheck all in that category
+      } else {                                                        // Uncheck all in that category
           for (var key in pom) {
             this.selectedIngr = this.selectedIngr.filter((item) => {
               return pom[key].name !== item;
@@ -143,10 +155,10 @@ export default {
     updateCheckAll(category) {
       let pom = this.filterIngredients(category);
 
-      if (pom.every(r => this.selectedIngr.includes(r))) { 
+      if (pom.every(r => this.selectedIngr.includes(r))) {            // If all checked, check the category
         this.allChecked = true; 
         this.selectedCat.push(category); 
-      } else {
+      } else {                                                        // If something unchecked, uncheck the category
         this.allChecked = false;
         this.selectedCat = this.selectedCat.filter((item) => {
             return item !== category;
@@ -161,6 +173,16 @@ export default {
         element.style.transform = "rotate(0deg)";
       }
     },
+    updateList() {
+      let list = this.selectedIngr.concat(this.custom_ingredients);
+      console.log(list);
+
+      db.collection("users")
+            .doc(store.currentUser)
+            .set({
+              selectedIngredients: list
+            }, { merge: true });          // data should be merged into the existing document
+    }
   },
   computed: {},
 };

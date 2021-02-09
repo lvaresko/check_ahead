@@ -4,10 +4,10 @@
     <p style="font-size: 20px">
       Choose the ingredients you wish to avoid:
     </p>
-    <ingredients />
+    <ingredients ref="myChild"/>
     <button
       type="button"
-      @click="checkIngredients()"
+      @click="checkIngredients(); $refs.myChild.updateList();"
       class="btn btn-primary v2 shadow-sm mt-3"
     >
       Submit
