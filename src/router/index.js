@@ -123,10 +123,12 @@ const router = new VueRouter({
 
 router.beforeEach(async(to, from, next) => {
     const noUser = (store.currentUser === null);
-
-    if (noUser && to.meta.needsUser) {
+    const User = localStorage.getItem("isSignedIn");
+    console.log("STORE CURRENT USEER" + store.currentUser);
+    console.log("USER LOCALSTORAGE" + User)
+    if (!User && to.matched.some(rec => rec.meta.needsUser)) { //to.meta.needsUser) {
         console.log("Permission denied");
-        next("Login")
+        next({ name: "Login" })
     } else {
         next();
     }

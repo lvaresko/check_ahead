@@ -1,10 +1,7 @@
 <template>
   <form class="signup text-center">
     <img src="@/assets/full_logo.png" class="img-fluid" />
-    <div 
-      class="form-group text-left"
-      :class="classObject(this.emailSuccess)"
-    >
+    <div class="form-group text-left" :class="classObject(this.emailSuccess)">
       <label form="exampleInputEmail">Email:</label>
       <input
         type="email"
@@ -21,7 +18,7 @@
         Error message.
       </small>
     </div>
-    <div 
+    <div
       class="form-group text-left mb-0"
       :class="classObject(this.passwordSuccess)"
     >
@@ -66,8 +63,8 @@
     >
       Continue with Google
     </button>
-    <button 
-      type="button" 
+    <button
+      type="button"
       class="btn btn-secondary shadow-sm mt-3"
       @click="SignInWithFacebook()"
     >
@@ -106,7 +103,7 @@ export default {
           this.emailSuccess = false;
           setMessageFor("email", "User with the given email doesn't exists");
         }
-        if (e.code === "auth/wrong-password") { 
+        if (e.code === "auth/wrong-password") {
           this.passwordSuccess = false;
           setMessageFor("password", "Wrong password");
         }
@@ -162,7 +159,7 @@ export default {
               lastName: result.additionalUserInfo.profile.last_name,
               active: false,
             });
-          }
+        }
       } catch (e) {
         console.error(e);
         /* treba implementirat linkanje providera sa postojecim acc
@@ -184,13 +181,13 @@ export default {
       ) {
         this.emailSuccess = false;
         setMessageFor("email", "Email formulation invalid");
-      } else this.emailSuccess = true;
+      } //else this.emailSuccess = true;
     },
     checkPassword() {
       if (this.password === "") {
         this.passwordSuccess = false;
         setMessageFor("password", "Password cannot be blank");
-      } else this.passwordSuccess = true;
+      } //else this.passwordSuccess = true;
     },
     classObject: function(varName) {
       if (varName == null) {

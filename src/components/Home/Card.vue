@@ -6,6 +6,7 @@
       <div class="card-img-overlay">
         <span
           v-if="site == 'home'"
+          class="transform"
           :class="favorite ? 'icon-heart-2' : 'icon-heart'"
           @click.stop.prevent="toggleFav"
         ></span>
@@ -61,16 +62,24 @@ export default {
 .card span.icon-heart::before,
 .card span.icon-heart-2::before {
   font-size: 24px;
-  background: white;
-  opacity: 0.6;
-  padding: 4.5px 5px;
-  border-radius: 70%;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 5px 5px 3px 4.5px;
+  border-radius: 50%;
   cursor: pointer;
   float: right;
-  display: block;
 }
 
-.card span.icon-heart-2 {
-  color: rgb(255, 0, 55);
+.card span.icon-heart-2::before {
+  color: rgba(255, 0, 43, 0.685);
+}
+
+.transform {
+  float: right;
+  transition-property: transform;
+  transition-duration: 0.6s;
+}
+
+.transform:active {
+  transform: scale(0.2);
 }
 </style>

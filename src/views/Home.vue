@@ -40,6 +40,7 @@
         </button>
       </div>
     </div>
+    <p class="proba_brisi">buton</p>
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
@@ -160,5 +161,29 @@ export default {
 .recommended .btn {
   margin: 0;
   width: 90px;
+}
+
+//BRISIIIIIIIIIIII
+
+.proba_brisi {
+  margin: 70px auto;
+  width: 30%;
+  line-height: 2.75;
+  border: 4px solid salmon;
+  text-align: center;
+  transition-property: transform;
+  transition-duration: 5s;
+  background-color: red;
+}
+
+.proba_brisi,
+.proba_brisi:hover {
+  cursor: pointer;
+}
+
+.proba_brisi:active {
+  font-size: 1rem;
+  transform: scale(0.9);
+  box-shadow: 0 3px 15px -2px;
 }
 </style>
