@@ -1,9 +1,7 @@
 <template>
   <form class="signup text-center">
     <h1 class="pb-3">Sign Up</h1>
-    <!-- <div class="error mt-2 mb-3">
-      {{errorMessage}}
-    </div> -->
+
     <div class="form-group text-left" :class="classObject(this.nameSuccess)">
       <label form="exampleInputFirstName">First name:</label>
       <input
@@ -169,8 +167,7 @@ export default {
         }
       } catch (e) {
         console.error(e);
-        if (e.code === "auth/email-already-in-use") { //If user with email exists
-          //this.errorMessage = "The email address has already been allocated to antoher user.";
+        if (e.code === "auth/email-already-in-use") {               //If user with the given email exists
           this.emailSuccess = false;
           setMessageFor("email", "User with the given email already exists");
         }
@@ -237,8 +234,3 @@ export default {
 };
 </script>
 
-<style>
-.error {
-  color: #e74c3c;
-}
-</style>
