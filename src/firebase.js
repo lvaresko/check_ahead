@@ -4,6 +4,7 @@ import firebase from "firebase/app";
 // Add the Firebase products that you want to use
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -18,8 +19,10 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 let db = firebase.firestore();
+let storage = firebase.storage();
 
 export {
     firebase,
-    db
+    db,
+    storage
 };

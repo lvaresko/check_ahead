@@ -40,7 +40,7 @@
         </button>
       </div>
     </div>
-    <p class="proba_brisi">buton</p>
+
     <div class="container">
       <div class="recommended">
         <p>Recommended for you:</p>
@@ -55,10 +55,12 @@
         class="row justify-content-between"
         data-masonry='{"percentPosition": true }'
       >
-        <Card :site="site" />
-        <Card />
-        <Card />
-        <Card />
+        <Card
+          v-for="product in products"
+          :key="product.id"
+          :site="site"
+          :info="product"
+        />
       </div>
 
       <button
@@ -77,15 +79,20 @@
 import Card from "../components/Home/Card.vue";
 import Popup from "../components/Home/Popup.vue";
 import FilterProducts from "../components/Home/FilterProducts.vue";
+import { db } from "@/firebase.js";
 
 export default {
   name: "Home",
   data: () => {
     return {
+      products: null,
       popupOpen: false,
       filterOpen: false,
       site: "home",
     };
+  },
+  mounted() {
+    this.getReccomended();
   },
   methods: {
     togglePopup() {
@@ -93,6 +100,24 @@ export default {
     },
     toggleFilter() {
       this.filterOpen = !this.filterOpen;
+    },
+    async getReccomended() {
+      console.log("LOADING");
+      let results = await db.collection("products").get();
+      this.products = [];
+      results.forEach((doc) => {
+        let data = doc.data();
+        this.products.push({
+          id: doc.id,
+          brand: data.brand,
+          name: data.name,
+          category: data.category,
+          type: data.type,
+          ingredients: data.ingredients,
+          url: data.url,
+        });
+        console.log(this.products);
+      });
     },
   },
   components: {
@@ -161,29 +186,5 @@ export default {
 .recommended .btn {
   margin: 0;
   width: 90px;
-}
-
-//BRISIIIIIIIIIIII
-
-.proba_brisi {
-  margin: 70px auto;
-  width: 30%;
-  line-height: 2.75;
-  border: 4px solid salmon;
-  text-align: center;
-  transition-property: transform;
-  transition-duration: 5s;
-  background-color: red;
-}
-
-.proba_brisi,
-.proba_brisi:hover {
-  cursor: pointer;
-}
-
-.proba_brisi:active {
-  font-size: 1rem;
-  transform: scale(0.9);
-  box-shadow: 0 3px 15px -2px;
 }
 </style>

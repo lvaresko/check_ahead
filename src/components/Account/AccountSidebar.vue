@@ -15,6 +15,10 @@
     <li class="nav-item">
       <router-link to="/account/history">SEARCH HISTORY</router-link>
     </li>
+    <br />
+    <li class="nav-item">
+      <router-link to="/account/admin">ADMIN PANEL</router-link>
+    </li>
   </div>
 </template>
 
@@ -24,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .account-sidebar {
   padding: 30px;
 }

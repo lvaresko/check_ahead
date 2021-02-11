@@ -22,7 +22,7 @@
           class="custom-control-input"
         />
         <div class="custom-control-label pl-2">
-          {{ content }} 
+          {{ content }}
         </div>
       </label>
       <h2 class="line1" style="width: 100%"></h2>
@@ -40,7 +40,7 @@
               type="checkbox"
               v-model="selectedIngr"
               :value="ingredient"
-              @change='updateCheckAll(content)'
+              @change="updateCheckAll(content)"
               class="custom-control-input"
             />
             <div class="custom-control-label">
@@ -126,30 +126,32 @@ export default {
       let pom = this.ingredients.filter((key) => key.category.includes(x));
       let pom2 = this.filterIngredients(x);
 
-      if (!(pom2.every(r => this.selectedIngr.includes(r)))  ){       // Check all in that category
+      if (!pom2.every((r) => this.selectedIngr.includes(r))) {
+        // Check all in that category
         for (var key in pom) {
-          this.selectedIngr.push(pom[key].name);    
+          this.selectedIngr.push(pom[key].name);
         }
         this.allChecked = true;
-      } else if (pom2.every(r => this.selectedIngr.includes(r))) {    // Uncheck all in that category
-          for (var key in pom) {
-            this.selectedIngr = this.selectedIngr.filter((item) => {
-              return pom[key].name !== item;
-            });
-          }
-          this.allChecked = false;
+      } else if (pom2.every((r) => this.selectedIngr.includes(r))) {
+        // Uncheck all in that category
+        for (var key in pom) {
+          this.selectedIngr = this.selectedIngr.filter((item) => {
+            return pom[key].name !== item;
+          });
         }
+        this.allChecked = false;
+      }
     },
     updateCheckAll(category) {
       let pom = this.filterIngredients(category);
 
-      if (pom.every(r => this.selectedIngr.includes(r))) { 
-        this.allChecked = true; 
-        this.selectedCat.push(category); 
+      if (pom.every((r) => this.selectedIngr.includes(r))) {
+        this.allChecked = true;
+        this.selectedCat.push(category);
       } else {
         this.allChecked = false;
         this.selectedCat = this.selectedCat.filter((item) => {
-            return item !== category;
+          return item !== category;
         });
       }
     },

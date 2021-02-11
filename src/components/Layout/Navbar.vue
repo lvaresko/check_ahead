@@ -29,14 +29,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .navbar {
   background-color: white;
   width: 100%;
   z-index: -1;
-  -webkit-box-shadow: 0 8px 6px -6px rgba(100, 100, 100, 0.397);
-  -moz-box-shadow: 0 8px 6px -6px rgb(100, 100, 100, 0.397);
-  box-shadow: 0 8px 6px -6px rgb(100, 100, 100, 0.397);
+  -webkit-box-shadow: 0 8px 6px -9px rgba(100, 100, 100, 0.397);
+  -moz-box-shadow: 0 8px 6px -9px rgb(100, 100, 100, 0.397);
+  box-shadow: 0 8px 6px -9px rgb(100, 100, 100, 0.397);
 }
 
 .btn {

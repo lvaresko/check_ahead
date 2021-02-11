@@ -28,6 +28,7 @@
       </div>
     </div>
     <div class="container">
+      <h2>proizvod: {{ productId }}</h2>
       <div class="row">
         <div class="col-12 col-xl-6">
           <img src="@/assets/architect.jpeg" alt="Img" class="img-fluid" />
@@ -97,6 +98,7 @@ export default {
   name: "Product",
   data() {
     return {
+      productId: this.$route.params.product_id,
       DescriptionOpen: false,
       info: null,
     };
@@ -113,7 +115,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .search-next {
   background: #6fa2b4;
   padding: 20px;
