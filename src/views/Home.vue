@@ -1,76 +1,88 @@
 <template>
   <div class="home">
-    <div id="nav"></div>
-    <div
-      class="jumbotron jumbotron-fluid"
-      :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
-    >
-      <div class="container text-center">
-        <h1 class="display-5">
-          We check the ingredients for you!
-        </h1>
-        <div class="description">
-          <h4 style="font-weight: bolder; color: white">
-            Welcome to the searchable database of cosmetic products.
-          </h4>
-          <h5 style="color:white">
-            Based on your list of non-preferences, we determine if the product
-            is suitable for you or not.
-          </h5>
-        </div>
-        <div class="input-group mt-4 search">
-          <input
-            type="text"
-            class="form-control border-right-0 search-input shadow-none"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-            placeholder="Search for a product in our database..."
-            onfocus="this.placeholder = ''"
-          />
-          <button
-            class="btn border-left-0 search-button shadow-none"
-            type="button"
-          >
-            <span class="icon-magnifying-glass"></span>
+    <img
+      class="loading"
+      v-if="loading"
+      :src="require('@/assets/loading.gif')"
+    />
+    <div v-else>
+      <div
+        class="jumbotron jumbotron-fluid"
+        :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
+      >
+        <div class="container text-center">
+          <h1 class="display-5">
+            We check the ingredients for you!
+          </h1>
+          <div class="description">
+            <h4 style="font-weight: bolder; color: white">
+              Welcome to the searchable database of cosmetic products.
+            </h4>
+            <h5 style="color:white">
+              Based on your list of non-preferences, we determine if the product
+              is suitable for you or not.
+            </h5>
+          </div>
+          <div class="input-group mt-4 search">
+            <input
+              type="text"
+              class="form-control border-right-0 search-input shadow-none"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              placeholder="Search for a product in our database..."
+              onfocus="this.placeholder = ''"
+            />
+            <button
+              class="btn border-left-0 search-button shadow-none"
+              type="button"
+            >
+              <span class="icon-magnifying-glass"></span>
+            </button>
+          </div>
+          <h4 style="color: white">or</h4>
+          <button type="button" class="scan btn btn-primary shadow-sm">
+            SCAN BARCODE <i class="icon-barcode"></i>
           </button>
         </div>
-        <h4 style="color: white">or</h4>
-        <button type="button" class="scan btn btn-primary shadow-sm">
-          SCAN BARCODE <i class="icon-barcode"></i>
+      </div>
+
+      <div class="container">
+        <div class="recommended">
+          <p>Recommended for you:</p>
+          <button class="btn btn-primary shadow-sm" @click="toggleFilter">
+            FILTER
+          </button>
+        </div>
+
+        <FilterProducts :openFilter="filterOpen" @close="toggleFilter" />
+
+        <div
+          class="row justify-content-between"
+          data-masonry='{"percentPosition": true }'
+        >
+          <!--<div v-for="x in [1, 1, 1, 1, 1, 1, 1, 1]" :key="x">
+          <div>UTICA MAY BE A SMALL TOWN</div>
+          <div>FARM GIRL FIT FOR A CROWN</div>
+          <h1>LIGHTNING STRIKING YOU DOWN</h1>
+          <div>STRIKE A POSE LIKE THAT</div>
+          <div>STRIKE A POSE LIKE THAT</div>
+        </div>-->
+          <Card
+            v-for="product in products"
+            :key="product.id"
+            :site="site"
+            :info="product"
+          />
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary shadow-none"
+          @click="togglePopup"
+        >
+          Popup
         </button>
+        <Popup :showPopup="popupOpen" @close="togglePopup" />
       </div>
-    </div>
-
-    <div class="container">
-      <div class="recommended">
-        <p>Recommended for you:</p>
-        <button class="btn btn-primary shadow-sm" @click="toggleFilter">
-          FILTER
-        </button>
-      </div>
-
-      <FilterProducts :openFilter="filterOpen" @close="toggleFilter" />
-
-      <div
-        class="row justify-content-between"
-        data-masonry='{"percentPosition": true }'
-      >
-        <Card
-          v-for="product in products"
-          :key="product.id"
-          :site="site"
-          :info="product"
-        />
-      </div>
-
-      <button
-        type="button"
-        class="btn btn-primary shadow-none"
-        @click="togglePopup"
-      >
-        Popup
-      </button>
-      <Popup :showPopup="popupOpen" @close="togglePopup" />
     </div>
   </div>
 </template>
@@ -89,10 +101,11 @@ export default {
       popupOpen: false,
       filterOpen: false,
       site: "home",
+      loading: false,
     };
   },
-  mounted() {
-    this.getReccomended();
+  async mounted() {
+    await this.getReccomended();
   },
   methods: {
     togglePopup() {
@@ -102,7 +115,7 @@ export default {
       this.filterOpen = !this.filterOpen;
     },
     async getReccomended() {
-      console.log("LOADING");
+      this.loading = true;
       let results = await db.collection("products").get();
       this.products = [];
       results.forEach((doc) => {
@@ -117,6 +130,7 @@ export default {
           url: data.url,
         });
         console.log(this.products);
+        this.loading = false;
       });
     },
   },
@@ -186,5 +200,12 @@ export default {
 .recommended .btn {
   margin: 0;
   width: 90px;
+}
+
+.loading {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30vh;
 }
 </style>

@@ -1,6 +1,11 @@
 <template>
   <div class="product">
-    <div class="container-fluid search-next">
+    <img
+      class="loading"
+      v-if="loading"
+      :src="require('@/assets/loading.gif')"
+    />
+    <div v-else class="container-fluid search-next">
       <div
         class="container"
         style="  display: flex;
@@ -28,10 +33,9 @@
       </div>
     </div>
     <div class="container">
-      <h2>proizvod: {{ productId }}</h2>
       <div class="row">
         <div class="col-12 col-xl-6">
-          <img src="@/assets/architect.jpeg" alt="Img" class="img-fluid" />
+          <img :src="this.product_info.url" alt="Img" class="img-fluid" />
         </div>
         <div class="col-12 col-xl-6">
           <!--<div class="suitable">
@@ -67,22 +71,12 @@
           </div>
           <div class="product">
             <label>BRAND:</label>
-            <p>AJmooooooooooo</p>
+            <p>{{ this.product_info.brand }}</p>
             <label>PRODUCT NAME:</label>
-            <p>Se moze ovo dinamicki?</p>
+            <p>{{ this.product_info.name }}</p>
             <label>INGREDIENTS:</label>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia iste
-              temporibus voluptas corrupti maxime consectetur quos cumque quis.
-              Aliquid, tempore odio. Distinctio non eligendi iure ut ipsa
-              excepturi necessitatibus quibusdam! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Recusandae doloremque minima, vitae
-              consequatur ab illum modi eius quisquam deleniti corporis earum
-              animi esse placeat dolore. Veritatis fugit totam eaque nam. Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Provident
-              quidem numquam quibusdam. Iure numquam soluta accusantium iusto
-              qui hic aut illo, repellat dicta odit voluptate, repudiandae ipsa
-              maxime ut. Impedit!
+              {{ this.product_info.ingredients }}
             </p>
           </div>
         </div>
@@ -93,20 +87,36 @@
 
 <script>
 import Description from "../components/Description.vue";
+import { db } from "@/firebase.js";
 
 export default {
   name: "Product",
   data() {
     return {
       productId: this.$route.params.product_id,
+      product_info: {},
       DescriptionOpen: false,
       info: null,
+      loading: true,
     };
+  },
+  async mounted() {
+    await this.getProduct();
   },
   methods: {
     toggleDescription(x) {
       this.info = x;
       this.DescriptionOpen = !this.DescriptionOpen;
+    },
+    async getProduct() {
+      this.loading = true;
+      let result = await db
+        .collection("products")
+        .doc(this.productId)
+        .get();
+
+      this.product_info = result.data();
+      this.loading = false;
     },
   },
   components: {
