@@ -3,7 +3,7 @@
     <!-- justify-content-between">-->
     <div class="card" @click="product">
       <img :src="info.url" class="card-img-top" alt="..." />
-      <!--<div class="card-img-overlay">
+      <div class="card-img-overlay">
         <span
           v-if="site == 'home'"
           class="transform"
@@ -15,7 +15,7 @@
           class="icon-trashcan transform"
           @click.stop.prevent="deleteProduct"
         ></span>
-      </div>-->
+      </div>
       <div class="card-body">
         <h5 class="card-title">{{ info.brand }}</h5>
         <p class="card-text">

@@ -12,7 +12,9 @@
         <transition name="slide-r">
           <div class="filter text-center" v-if="openFilter">
             <div class="filter-close text-right">
-              <span class="icon-cancel-1" @click.self="closeFilter"></span>
+              <button type="button" class="btn btn-primary shadow-sm" @click.self="closeFilter">
+                Done
+              </button>
             </div>
             <div class="filter-title">
               <h3><i class="icon-filter"></i> Filter</h3>
@@ -35,7 +37,7 @@
                 <div
                   class="collapse"
                   id="category"
-                  v-for="category in product_categories"
+                  v-for="category in filter(1)"
                   :key="category"
                 >
                   <div class="dropdown-item">
@@ -71,7 +73,7 @@
                 <div
                   class="collapse"
                   id="type"
-                  v-for="type in product_types"
+                  v-for="type in filter(2)"
                   :key="type"
                 >
                   <div class="dropdown-item">
@@ -107,7 +109,7 @@
                 <div
                   class="collapse"
                   id="brand"
-                  v-for="brand in brands"
+                  v-for="brand in filter(3)"
                   :key="brand"
                 >
                   <div class="dropdown-item">
@@ -127,11 +129,7 @@
                 </div>
               </div>
             </div>
-            <!-- TEST 
-            {{selectedCat}}
-            {{selectedType}}
-            {{selectedBrand}} 
-          --></div>
+          </div>
         </transition>
       </div>
     </header>
@@ -139,22 +137,47 @@
 </template>
 
 <script>
+import { db } from "@/firebase";
+
 export default {
   name: "FilterProducts",
   props: ["openFilter"],
   data() {
     return {
-      product_categories: ["Makeup", "Toiletry", "Skincare"],
-      product_types: ["Cleansing gel", "Lipstick", "Hair Shampoo"],
-      brands: ["Skintegra", "Lush", "Trixie Cosmetics"],
+      filter_items: [],
       selectedCat: [],
       selectedType: [],
       selectedBrand: [],
     };
   },
+  mounted() {
+    this.getData();
+  },
   methods: {
     closeFilter() {
       this.$emit("close");
+    },
+    async getData() {
+      let results = await db.collection("products").get();
+
+      results.forEach((doc) => {
+        let data = doc.data();
+        this.filter_items.push({
+          brand: data.brand,
+          category: data.category,
+          type: data.type,
+        });
+      });
+    },
+    filter(x) {
+      switch (x) {
+        case 1:
+          return [...new Set(this.filter_items.map(({ category }) => category))];
+        case 2:
+          return [...new Set(this.filter_items.map(({ type }) => type))];
+        case 3:
+          return [...new Set(this.filter_items.map(({ brand }) => brand))];
+      }
     },
     rotate(e) {
       const element = e.target;
@@ -183,6 +206,10 @@ export default {
 
 .filter-close {
   margin: 15px 15px 0 0;
+}
+
+.filter-close .btn {
+  width: 60px;
 }
 
 .icon-cancel-1::before {
