@@ -1,9 +1,8 @@
 <template>
   <div class="col-12 col-md-6 col-lg-4">
-    <!-- justify-content-between">-->
     <div class="card" @click="product">
       <img :src="info.url" class="card-img-top" alt="..." />
-      <!--<div class="card-img-overlay">
+      <div class="card-img-overlay">
         <span
           v-if="site == 'home'"
           class="transform"
@@ -15,7 +14,7 @@
           class="icon-trashcan transform"
           @click.stop.prevent="deleteProduct"
         ></span>
-      </div>-->
+      </div>
       <div class="card-body">
         <h5 class="card-title">{{ info.brand }}</h5>
         <p class="card-text">
@@ -38,14 +37,13 @@ export default {
   props: ["site", "info"],
   data() {
     return {
-      productId: 1234,
       favorite: false,
     };
   },
   methods: {
     product() {
       console.log("PRODUCT");
-      router.push({ name: "Product", params: { product_id: this.productId } });
+      router.push({ name: "Product", params: { product_id: this.info.id } });
     },
     toggleFav() {
       //ovo ce trebat s bazom sredivat i update-at
@@ -98,7 +96,7 @@ export default {
 }
 
 .card-body {
-  padding-bottom: 5px;
+  margin-bottom: 5px;
   height: 140px;
 }
 
@@ -112,6 +110,6 @@ export default {
 .card-text {
   margin-bottom: 0;
   height: 52px;
-  font-size: 15px;
+  font-size: larger;
 }
 </style>

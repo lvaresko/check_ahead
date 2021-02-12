@@ -28,15 +28,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .account-sidebar {
   padding: 30px;
 }
 .account-sidebar li {
   list-style-type: none;
-}
-.account-sidebar a {
-  font-size: 15px;
 }
 
 .account-sidebar {
@@ -50,9 +47,10 @@ export default {
   }
 }
 
-.account-sidebar a {
+a {
   font-weight: bold;
   color: #595959;
+  font-size: 15px;
   &.router-link-exact-active {
     color: #6fa2b4;
   }
