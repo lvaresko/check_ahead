@@ -110,6 +110,5 @@ export default {
 .card-text {
   margin-bottom: 0;
   height: 52px;
-  font-size: larger;
 }
 </style>

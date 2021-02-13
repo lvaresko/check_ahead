@@ -203,9 +203,11 @@ export default {
 }
 
 .loading {
+  height: 250px;
+  width: 250px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30vh;
+  margin-top: 20vh;
 }
 </style>
