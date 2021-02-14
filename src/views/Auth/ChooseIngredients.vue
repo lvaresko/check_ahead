@@ -1,13 +1,16 @@
 <template>
   <div class="signup text-center">
-    <img src="@/assets/full_logo.png" class="img-fluid" />
+    <img src="@/assets/full_logo.png" class="img-fluid" loading="lazy" />
     <p style="font-size: 20px">
       Choose the ingredients you wish to avoid:
     </p>
-    <ingredients ref="myChild"/>
+    <ingredients ref="myChild" />
     <button
       type="button"
-      @click="checkIngredients(); $refs.myChild.updateList();"
+      @click="
+        checkIngredients();
+        $refs.myChild.updateList();
+      "
       class="btn btn-primary v2 shadow-sm mt-3"
     >
       Submit

@@ -14,15 +14,21 @@
           class="icon-trashcan transform"
           @click.stop.prevent="deleteProduct"
         ></span>
+        <div class="status">
+          <span v-if="this.suitable" style="color: #54bb5e;"
+            >SUITABLE FOR YOU</span
+          >
+          <span v-else style="color: #ff3d00;">NOT SUITABLE FOR YOU</span>
+        </div>
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ info.brand }}</h5>
-        <p class="card-text">
+        <p class="card-text" @mouseover="moveText" @mouseleave="returnText">
           {{ info.name }}
         </p>
-        <div class="m-0">
-          <span class="icon-shampoo"></span>
-          <span>{{ info.category }}</span> | <span>{{ info.type }}</span>
+        <div class="category_brand">
+          <span :class="classIcon"></span>
+          <span> {{ info.category }}</span> | <span>{{ info.type }}</span>
         </div>
       </div>
     </div>
@@ -38,6 +44,7 @@ export default {
   data() {
     return {
       favorite: false,
+      suitable: false,
     };
   },
   methods: {
@@ -51,6 +58,26 @@ export default {
     },
     deleteProduct() {
       console.log("OBRISI");
+    },
+    moveText(e) {
+      const x = e.target;
+      const text = x.innerHTML.length; //ili treba pronac sirinu u pixelima (nemoguce bas)
+      const width = x.clientWidth;
+      const total = width - text * 11.7;
+      x.style.transition = "2s ease-in-out";
+      if (total < 0) x.style.marginLeft = total + "px";
+    },
+    returnText(e) {
+      const x = e.target;
+      x.style.transition = "0s";
+      x.style.marginLeft = "0px";
+    },
+  },
+  computed: {
+    classIcon() {
+      const icon = this.info.category.toLowerCase();
+      console.log(icon);
+      return "icon-" + icon;
     },
   },
 };
@@ -94,10 +121,13 @@ export default {
 .transform:active {
   transform: scale(0.2);
 }
-
+.card-img-overlay {
+  height: 350px;
+}
 .card-body {
-  margin-bottom: 5px;
-  height: 140px;
+  padding-bottom: 5px;
+  height: 135px;
+  overflow: hidden;
 }
 
 .card-title {
@@ -109,7 +139,40 @@ export default {
 
 .card-text {
   margin-bottom: 0;
-  height: 52px;
-  font-size: larger;
+  margin-top: 8px;
+  margin-left: 0em;
+  height: 35px;
+  font-size: 25px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.category_brand {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 6px;
+}
+
+.category_brand span {
+  font-size: 17px;
+}
+
+.card-img-overlay:hover {
+  color: red;
+}
+
+.status {
+  text-align: center;
+  margin-top: 280px;
+}
+
+.status span {
+  font-size: 20px;
+  font-weight: bolder;
+  background: rgba(255, 255, 255, 0.466);
+  padding: 7px;
 }
 </style>

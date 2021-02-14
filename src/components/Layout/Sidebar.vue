@@ -143,4 +143,11 @@ export default {
   height: 100%;
   cursor: pointer;
 }
+a {
+  color: #595959;
+  font-size: 15px;
+  &.router-link-exact-active {
+    color: #6fa2b4;
+  }
+}
 </style>

@@ -35,14 +35,23 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-xl-6">
-          <img :src="this.product_info.url" alt="Img" class="img-fluid" />
+          <img
+            :src="this.product_info.url"
+            alt="Img"
+            class="img-fluid"
+            loading="lazy"
+          />
         </div>
         <div class="col-12 col-xl-6">
-          <!--<div class="suitable">
-          <span class="icon-check"></span>
-          <div>THIS PRODUCT IS SUITABLE FOR YOU!</div>
-        </div>-->
-          <div class="unsuitable">
+          <div class="suitable">
+            <span class="icon-check"></span>
+            <div>THIS PRODUCT IS SUITABLE FOR YOU!</div>
+
+            <p v-if="!this.favorite">Add to Favorites!</p>
+            <p v-else>Remove from Favorites</p>
+            <span class="icon-heart"></span>
+          </div>
+          <!--<div class="unsuitable">
             <span class="icon-cancel"></span>
             <div>THIS PRODUCT IS <b>NOT</b> SUITABLE FOR YOU.</div>
             <br />
@@ -66,19 +75,18 @@
                 :info="info"
                 @close="toggleDescription"
               />
-            </div>
-            <br />
-          </div>
-          <div class="product">
-            <label>BRAND:</label>
-            <p>{{ this.product_info.brand }}</p>
-            <label>PRODUCT NAME:</label>
-            <p>{{ this.product_info.name }}</p>
-            <label>INGREDIENTS:</label>
-            <p>
-              {{ this.product_info.ingredients }}
-            </p>
-          </div>
+            </div>-->
+          <br />
+        </div>
+        <div class="product">
+          <label>BRAND:</label>
+          <p>{{ this.product_info.brand }}</p>
+          <label>PRODUCT NAME:</label>
+          <p>{{ this.product_info.name }}</p>
+          <label>INGREDIENTS:</label>
+          <p>
+            {{ this.product_info.ingredients.join(", ") }}
+          </p>
         </div>
       </div>
     </div>
@@ -98,6 +106,7 @@ export default {
       DescriptionOpen: false,
       info: null,
       loading: true,
+      favorite: true,
     };
   },
   async mounted() {
@@ -200,6 +209,20 @@ b {
 .unsuitable div,
 b {
   font-size: 25px;
+}
+
+.suitable .icon-heart {
+  font-size: 17px;
+  color: gray;
+  margin-left: 5px;
+}
+
+.suitable p {
+  margin-top: 5px;
+  color: rgb(112, 112, 112);
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline;
 }
 
 .contains {

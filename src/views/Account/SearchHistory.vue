@@ -65,7 +65,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .recently-viewed label {
   font-size: 15px;
   font-weight: bold;
@@ -79,6 +79,7 @@ export default {
   height: 45px;
   max-width: 150px;
   width: 100%;
+  object-fit: cover;
 }
 
 .recently-viewed div {

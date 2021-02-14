@@ -56,17 +56,7 @@
 
         <FilterProducts :openFilter="filterOpen" @close="toggleFilter" />
 
-        <div
-          class="row justify-content-between"
-          data-masonry='{"percentPosition": true }'
-        >
-          <!--<div v-for="x in [1, 1, 1, 1, 1, 1, 1, 1]" :key="x">
-          <div>UTICA MAY BE A SMALL TOWN</div>
-          <div>FARM GIRL FIT FOR A CROWN</div>
-          <h1>LIGHTNING STRIKING YOU DOWN</h1>
-          <div>STRIKE A POSE LIKE THAT</div>
-          <div>STRIKE A POSE LIKE THAT</div>
-        </div>-->
+        <div class="row" data-masonry='{"percentPosition": true }'>
           <Card
             v-for="product in products"
             :key="product.id"

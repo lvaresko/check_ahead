@@ -46,7 +46,6 @@ export default {
     border-bottom: none;
   }
 }
-
 a {
   font-weight: bold;
   color: #595959;

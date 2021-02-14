@@ -91,10 +91,10 @@ export default {
     };
   },
   mounted() {
-    this.getIngr();
+    this.getIngredients();
   },
   methods: {
-    getIngr() {
+    getIngredients() {
       db.collection("ingredients")
         .get()
         .then((querry) => {

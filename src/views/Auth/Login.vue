@@ -1,6 +1,6 @@
 <template>
   <form class="signup text-center">
-    <img src="@/assets/full_logo.png" class="img-fluid" />
+    <img src="@/assets/full_logo.png" class="img-fluid" loading="lazy" />
     <div class="form-group text-left" :class="classObject(this.emailSuccess)">
       <label form="exampleInputEmail">Email:</label>
       <input
