@@ -32,7 +32,7 @@
         v-for="ingredient in filterIngredients(content)"
         :key="ingredient"
         :id="'id' + index"
-        class="collapse"
+        class="collapse" 
       >
         <div class="dropdown-item" style="margin-left: 25px">
           <label>
@@ -56,7 +56,7 @@
       <label form="exampleInputCustom">CUSTOM:</label>
       <input
         type="text"
-        class="form-control basic-input  mb-0"
+        class="form-control basic-input mb-0"
         id="exampleInputCustom"
         placeholder="e.g. citrus, petroleum..."
         v-model="tempCustom"
@@ -91,7 +91,12 @@ export default {
     };
   },
   mounted() {
+<<<<<<< HEAD
     this.getIngredients();
+=======
+    this.getIngr();
+    this.selected();
+>>>>>>> 331fe6367c8e12485ce1462ee45e094d29305eec
   },
   methods: {
     getIngredients() {
@@ -102,7 +107,6 @@ export default {
             const data = doc.data();
 
             this.ingredients.push({
-              id: doc.id,
               name: data.name,
               category: data.category,
             });
@@ -179,20 +183,41 @@ export default {
       }
     },
     updateList() {
-      let list = this.selectedIngr.concat(this.custom_ingredients);
-      console.log(list);
-
       db.collection("users")
+        .doc(store.currentUser)
+        .collection("ingredients_list")
         .doc(store.currentUser)
         .set(
           {
-            selectedIngredients: list,
+            selectedIngredients: this.selectedIngr,
+            customIngredients: this.custom_ingredients,
           },
           { merge: true }
         ); // data should be merged into the existing document
     },
+    async selected() {
+      if (store.active == true) {
+        let results = await db
+          .collection("users")
+          .doc(store.currentUser)
+          .collection("ingredients_list")
+          .doc(store.currentUser)
+          .get();
+
+        const data = results.data();
+        this.selectedIngr.push(...data.selectedIngredients);
+        this.custom_ingredients.push(...data.customIngredients);
+
+        let categories = this.ingredientCategories();
+
+        // update all checked for every category
+        for(let i=0; i < categories.length; i++) {
+          console.log(categories[i]);
+          this.updateCheckAll(categories[i]);
+        }
+      }
+    },
   },
-  computed() {},
 };
 </script>
 
