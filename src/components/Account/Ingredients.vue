@@ -32,7 +32,7 @@
         v-for="ingredient in filterIngredients(content)"
         :key="ingredient"
         :id="'id' + index"
-        class="collapse" 
+        class="collapse"
       >
         <div class="dropdown-item" style="margin-left: 25px">
           <label>
@@ -91,12 +91,8 @@ export default {
     };
   },
   mounted() {
-<<<<<<< HEAD
     this.getIngredients();
-=======
-    this.getIngr();
     this.selected();
->>>>>>> 331fe6367c8e12485ce1462ee45e094d29305eec
   },
   methods: {
     getIngredients() {
@@ -211,7 +207,7 @@ export default {
         let categories = this.ingredientCategories();
 
         // update all checked for every category
-        for(let i=0; i < categories.length; i++) {
+        for (let i = 0; i < categories.length; i++) {
           console.log(categories[i]);
           this.updateCheckAll(categories[i]);
         }
