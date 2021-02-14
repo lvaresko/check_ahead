@@ -21,7 +21,7 @@
             onfocus="this.placeholder = ''"
           />
           <button
-            class="btn border-left-0 search-button shadow-sm"
+            class="btn border-left-0 search-button shadow-none"
             type="button"
           >
             <span class="icon-magnifying-glass"></span>
@@ -43,15 +43,15 @@
           />
         </div>
         <div class="col-12 col-xl-6">
-          <div class="suitable">
+          <!--<div class="suitable">
             <span class="icon-check"></span>
             <div>THIS PRODUCT IS SUITABLE FOR YOU!</div>
 
             <p v-if="!this.favorite">Add to Favorites!</p>
             <p v-else>Remove from Favorites</p>
             <span class="icon-heart"></span>
-          </div>
-          <!--<div class="unsuitable">
+          </div>-->
+          <div class="unsuitable">
             <span class="icon-cancel"></span>
             <div>THIS PRODUCT IS <b>NOT</b> SUITABLE FOR YOU.</div>
             <br />
@@ -75,18 +75,19 @@
                 :info="info"
                 @close="toggleDescription"
               />
-            </div>-->
-          <br />
-        </div>
-        <div class="product">
-          <label>BRAND:</label>
-          <p>{{ this.product_info.brand }}</p>
-          <label>PRODUCT NAME:</label>
-          <p>{{ this.product_info.name }}</p>
-          <label>INGREDIENTS:</label>
-          <p>
-            {{ this.product_info.ingredients.join(", ") }}
-          </p>
+            </div>
+            <br />
+          </div>
+          <div class="product">
+            <label>BRAND:</label>
+            <p>{{ this.product_info.brand }}</p>
+            <label>PRODUCT NAME:</label>
+            <p>{{ this.product_info.name }}</p>
+            <label>INGREDIENTS:</label>
+            <p>
+              {{ this.ingredients }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -107,10 +108,12 @@ export default {
       info: null,
       loading: true,
       favorite: true,
+      ingredients: null,
     };
   },
   async mounted() {
     await this.getProduct();
+    this.ingredients = this.product_info.ingredients.join(", ");
   },
   methods: {
     toggleDescription(x) {
