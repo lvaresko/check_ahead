@@ -9,17 +9,18 @@
           :class="favorite ? 'icon-heart-2' : 'icon-heart'"
           @click.stop.prevent="toggleFav"
         ></span>
-        <span
-          v-else
-          class="icon-trashcan transform"
-          @click.stop.prevent="deleteProduct"
-        ></span>
-        <div class="status">
-          <span v-if="this.suitable" style="color: #54bb5e;"
-            >SUITABLE FOR YOU</span
-          >
-          <span v-else style="color: #ff3d00;">NOT SUITABLE FOR YOU</span>
-        </div>
+        <span v-else>
+          <span
+            class="icon-trashcan transform"
+            @click.stop.prevent="deleteProduct"
+          ></span>
+          <div class="status">
+            <span v-if="this.suitable" style="color: #54bb5e;"
+              >SUITABLE FOR YOU</span
+            >
+            <span v-else style="color: #ff3d00;">NOT SUITABLE FOR YOU</span>
+          </div>
+        </span>
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ info.brand }}</h5>
@@ -37,6 +38,8 @@
 
 <script>
 import router from "@/router";
+import { db } from "@/firebase.js";
+import store from "@/store";
 
 export default {
   name: "Card",
@@ -49,15 +52,29 @@ export default {
   },
   methods: {
     product() {
-      console.log("PRODUCT");
       router.push({ name: "Product", params: { product_id: this.info.id } });
     },
-    toggleFav() {
-      //ovo ce trebat s bazom sredivat i update-at
+    async toggleFav() {
       this.favorite = !this.favorite;
+      if (this.favorite) {
+        await db
+          .collection("users")
+          .doc(store.currentUser)
+          .collection("favorites")
+          .doc(this.info.id)
+          .set({
+            favorited: Date.now(),
+          });
+      } else this.deleteProduct();
     },
-    deleteProduct() {
-      console.log("OBRISI");
+    async deleteProduct() {
+      if (this.site == "favorites") this.$emit("delete", this.info.id);
+      await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("favorites")
+        .doc(this.info.id)
+        .delete();
     },
     moveText(e) {
       const x = e.target;
@@ -76,7 +93,7 @@ export default {
   computed: {
     classIcon() {
       const icon = this.info.category.toLowerCase();
-      console.log(icon);
+
       return "icon-" + icon;
     },
   },

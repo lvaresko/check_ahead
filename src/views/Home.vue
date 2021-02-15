@@ -82,6 +82,7 @@ import Card from "../components/Home/Card.vue";
 import Popup from "../components/Home/Popup.vue";
 import FilterProducts from "../components/Home/FilterProducts.vue";
 import { db } from "@/firebase.js";
+import store from "@/store";
 
 export default {
   name: "Home",
@@ -108,18 +109,27 @@ export default {
       this.loading = true;
       let results = await db.collection("products").get();
       this.products = [];
-      results.forEach((doc) => {
+      results.forEach(async (doc) => {
         let data = doc.data();
-        this.products.push({
-          id: doc.id,
-          brand: data.brand,
-          name: data.name,
-          category: data.category,
-          type: data.type,
-          ingredients: data.ingredients,
-          url: data.url,
-        });
-        console.log(this.products);
+        //don't show products that are favorited
+        let favorited = await db
+          .collection("users")
+          .doc(store.currentUser)
+          .collection("favorites")
+          .doc(doc.id)
+          .get();
+        if (!favorited.exists) {
+          this.products.push({
+            id: doc.id,
+            brand: data.brand,
+            name: data.name,
+            category: data.category,
+            type: data.type,
+            ingredients: data.ingredients,
+            url: data.url,
+          });
+        }
+
         this.loading = false;
       });
     },

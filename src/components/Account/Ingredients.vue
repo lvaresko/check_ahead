@@ -90,6 +90,7 @@ export default {
       selectedCat: [],
     };
   },
+
   mounted() {
     this.getIngredients();
     this.selected();
@@ -181,8 +182,6 @@ export default {
     updateList() {
       db.collection("users")
         .doc(store.currentUser)
-        .collection("ingredients_list")
-        .doc(store.currentUser)
         .set(
           {
             selectedIngredients: this.selectedIngr,
@@ -190,6 +189,7 @@ export default {
           },
           { merge: true }
         ); // data should be merged into the existing document
+      this.$emit("open");
     },
     async selected() {
       if (store.active == true) {
@@ -208,7 +208,6 @@ export default {
 
         // update all checked for every category
         for (let i = 0; i < categories.length; i++) {
-          console.log(categories[i]);
           this.updateCheckAll(categories[i]);
         }
       }
