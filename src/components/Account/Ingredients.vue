@@ -93,7 +93,7 @@ export default {
 
   mounted() {
     this.getIngredients();
-    this.selected();
+    this.selectedIngredients();
   },
   methods: {
     getIngredients() {
@@ -191,12 +191,10 @@ export default {
         ); // data should be merged into the existing document
       this.$emit("open");
     },
-    async selected() {
+    async selectedIngredients() {
       if (store.active == true) {
         let results = await db
           .collection("users")
-          .doc(store.currentUser)
-          .collection("ingredients_list")
           .doc(store.currentUser)
           .get();
 
@@ -216,7 +214,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .custom-control.x {
   padding-left: 0;
 }
