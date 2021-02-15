@@ -8,8 +8,7 @@
     <div v-else class="container-fluid search-next">
       <div
         class="container"
-        style="  display: flex;
-  justify-content: space-between;"
+        style="display: flex; justify-content: space-between"
       >
         <div class="input-group search">
           <input
@@ -43,28 +42,22 @@
           />
         </div>
         <div class="col-12 col-xl-6">
-          <!--<div class="suitable">
+          <div v-if="this.suitable" class="suitable">
             <span class="icon-check"></span>
             <div>THIS PRODUCT IS SUITABLE FOR YOU!</div>
 
             <p v-if="!this.favorite">Add to Favorites!</p>
             <p v-else>Remove from Favorites</p>
             <span class="icon-heart"></span>
-          </div>-->
-          <div class="unsuitable">
+          </div>
+          <div v-else class="unsuitable">
             <span class="icon-cancel"></span>
             <div>THIS PRODUCT IS <b>NOT</b> SUITABLE FOR YOU.</div>
             <br />
             <div class="contains">
               <p style="font-weight: bolder">CONTAINS:</p>
               <div
-                v-for="sastojak in [
-                  'Hexyl cinnamaladehyde',
-                  'Lanolin',
-                  'Shellac',
-                  'jos nesto',
-                  'jos nesto sa puno razmaka za probu',
-                ]"
+                v-for="sastojak in this.filter"
                 :key="sastojak"
                 style="display: inline-block"
               >
@@ -97,6 +90,7 @@
 <script>
 import Description from "../components/Description.vue";
 import { db } from "@/firebase.js";
+import store from "@/store";
 
 export default {
   name: "Product",
@@ -109,16 +103,22 @@ export default {
       loading: true,
       favorite: true,
       ingredients: null,
+      ingredientsList: [],
+      filter: [],
+      suitable: null,
     };
   },
   async mounted() {
     await this.getProduct();
     this.ingredients = this.product_info.ingredients.join(", ");
+    this.checkSuitability();
   },
   methods: {
-    toggleDescription(x) {
+    async toggleDescription(x) {
       this.info = x;
       this.DescriptionOpen = !this.DescriptionOpen;
+
+      /// i tako dalje
     },
     async getProduct() {
       this.loading = true;
@@ -129,6 +129,41 @@ export default {
 
       this.product_info = result.data();
       this.loading = false;
+    },
+    async checkSuitability() {
+      // 1. get users ingredients list
+      let results = await db
+        .collection("users")
+        .doc(store.currentUser)
+        .get();
+
+      const data = results.data();
+      this.ingredientsList.push(
+        ...data.selectedIngredients,
+        ...data.customIngredients
+      );
+
+      // 2. check if product contains smth from ingredients list
+      this.filter = this.product_info.ingredients.filter((key) =>
+        this.ingredientsList.includes(key)
+      );
+      if (this.filter == 0) {
+        //product suitable
+        this.suitable = true;
+      } else {
+        //product not suitable
+        this.suitable = false;
+      }
+
+      // 3. store info for viewed product
+      db.collection("users")
+        .doc(store.currentUser)
+        .collection("products")
+        .doc(this.productId)
+        .set({
+          suitable: this.suitable,
+          viewed: Date.now(),
+        });
     },
   },
   components: {

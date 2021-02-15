@@ -92,7 +92,7 @@ export default {
   },
   mounted() {
     this.getIngredients();
-    this.selected();
+    this.selectedIngredients();
   },
   methods: {
     getIngredients() {
@@ -181,8 +181,6 @@ export default {
     updateList() {
       db.collection("users")
         .doc(store.currentUser)
-        .collection("ingredients_list")
-        .doc(store.currentUser)
         .set(
           {
             selectedIngredients: this.selectedIngr,
@@ -191,12 +189,10 @@ export default {
           { merge: true }
         ); // data should be merged into the existing document
     },
-    async selected() {
+    async selectedIngredients() {
       if (store.active == true) {
         let results = await db
           .collection("users")
-          .doc(store.currentUser)
-          .collection("ingredients_list")
           .doc(store.currentUser)
           .get();
 
@@ -217,7 +213,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .custom-control.x {
   padding-left: 0;
 }
