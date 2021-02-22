@@ -60,7 +60,7 @@ export default {
           .collection("products")
           .doc(doc.id)
           .get();
-        console.log(product);
+
         let data = product.data();
         this.products.push({
           id: doc.id,

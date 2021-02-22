@@ -189,7 +189,7 @@ export default {
           },
           { merge: true }
         ); // data should be merged into the existing document
-      this.$emit("open");
+      this.$emit("toggle");
     },
     async selectedIngredients() {
       if (store.active == true) {

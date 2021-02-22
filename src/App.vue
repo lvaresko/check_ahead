@@ -69,6 +69,7 @@ export default {
       store,
       sidebarOpen: false,
       IsSignedIn: localStorage.getItem("isSignedIn"),
+      loading: false,
     };
   },
   methods: {

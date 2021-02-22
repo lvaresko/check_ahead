@@ -8,18 +8,53 @@
       ></div>
     </transition>
     <transition name="fade">
-      <div class="desc text-center" v-if="showDescription">
-        <div>{{ info }}</div>
+      <div class="desc">
+        <div class="text-center">
+          <h2 style="align-self: center">{{ info }}</h2>
+        </div>
+        <div v-if="custom">
+          <label>CUSTOM INGREDIENT</label>
+        </div>
+        <div>
+          <label>CATEGORY:</label>
+          <p>{{ this.data.category }}</p>
+          <label>DESCRIPTION:</label>
+          <p>{{ this.data.description }}</p>
+        </div>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
+import { db } from "@/firebase.js";
+import store from "@/store";
+
 export default {
   name: "Description",
   props: ["info", "showDescription"],
+  data() {
+    return {
+      custom: false,
+      data: {},
+      loading: true,
+    };
+  },
+  mounted() {
+    this.getInfo();
+  },
   methods: {
+    async getInfo() {
+      var ref = await db
+        .collection("ingredients")
+        .where("name", "==", this.info)
+        .get();
+      //must be iterated through
+      ref.forEach((doc) => {
+        this.data = doc.data();
+      });
+    },
+
     closeDescription() {
       this.$emit("close");
     },
@@ -27,7 +62,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .desc {
   position: fixed;
   top: 50%;
@@ -52,5 +87,15 @@ export default {
   z-index: 10000;
   background: rgba(0, 0, 0, 0.5);
   cursor: pointer;
+}
+
+label {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+p {
+  word-wrap: break-word;
 }
 </style>

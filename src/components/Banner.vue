@@ -17,13 +17,15 @@ export default {
   methods: {
     getBanner() {
       const element = this.$el;
-      element.style.marginTop = "0px";
       setTimeout(() => {
-        element.style.marginTop = "-44px";
+        element.style.marginTop = "0px";
         setTimeout(() => {
-          this.$emit("toggle");
-        }, 1000);
-      }, 3000);
+          element.style.marginTop = "-50px";
+          setTimeout(() => {
+            this.$emit("toggle");
+          }, 500);
+        }, 1500);
+      }, 500);
     },
   },
 };
@@ -32,13 +34,14 @@ export default {
 <style scoped>
 .banner {
   position: absolute;
-
+  position: fixed;
+  padding-bottom: 5px;
+  z-index: 500;
   left: 0;
   right: 0;
-  background: #479e44d8;
+  background: #51af4e;
   text-align: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-  margin-top: -44px;
+  margin-top: -50px;
   overflow: hidden;
   transition: 0.5s margin-top ease-in-out;
   cursor: pointer;
