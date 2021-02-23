@@ -53,7 +53,7 @@ export default {
         .orderBy("favorited", "desc")
         .get();
 
-      if (!results.exists) this.loading = false;
+      //if (!results.exists) this.loading = false;
 
       results.forEach(async (doc) => {
         const product = await db
@@ -61,7 +61,16 @@ export default {
           .doc(doc.id)
           .get();
 
+        const result = await db
+          .collection("users")
+          .doc(store.currentUser)
+          .collection("products")
+          .doc(doc.id)
+          .get();
+
         let data = product.data();
+        let data_suitable = result.data();
+
         this.products.push({
           id: doc.id,
           brand: data.brand,
@@ -70,6 +79,7 @@ export default {
           type: data.type,
           ingredients: data.ingredients,
           url: data.url,
+          suitable: data_suitable.suitable,
         });
         this.loading = false;
       });

@@ -118,6 +118,7 @@ export default {
           .collection("favorites")
           .doc(doc.id)
           .get();
+
         if (!favorited.exists) {
           this.products.push({
             id: doc.id,

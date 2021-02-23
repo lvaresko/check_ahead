@@ -15,7 +15,7 @@
             @click.stop.prevent="deleteProduct"
           ></span>
           <div class="status">
-            <span v-if="this.suitable" style="color: #54bb5e;"
+            <span v-if="info.suitable" style="color: #54bb5e;"
               >SUITABLE FOR YOU</span
             >
             <span v-else style="color: #ff3d00;">NOT SUITABLE FOR YOU</span>
@@ -46,8 +46,7 @@ export default {
   props: ["site", "info"],
   data() {
     return {
-      favorite: false,
-      suitable: false,
+      favorite: null,
     };
   },
   methods: {
@@ -65,6 +64,7 @@ export default {
           .set({
             favorited: Date.now(),
           });
+        this.checkSuitability();
       } else this.deleteProduct();
     },
     async deleteProduct() {
@@ -75,6 +75,66 @@ export default {
         .collection("favorites")
         .doc(this.info.id)
         .delete();
+    },
+    async checkSuitability() {
+      // 1. get users ingredients list
+      let results = await db
+        .collection("users")
+        .doc(store.currentUser)
+        .get();
+
+      const data = results.data();
+      let user_list = [];
+      user_list.push(...data.selectedIngredients, ...data.customIngredients);
+
+      // 2. get product ingredients
+      results = await db
+        .collection("products")
+        .doc(this.info.id)
+        .get();
+
+      const data2 = results.data();
+      let product_list = data2.ingredients;
+
+      // 3. check if product contains smth from ingredients list
+      let suitable = null;
+      let list = user_list.filter((key) => product_list.includes(key));
+      if (list.length) {
+        suitable = false;
+      } else suitable = true;
+
+      // 4. add to db
+      await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("products")
+        .doc(this.info.id)
+        .set({
+          suitable: suitable,
+        });
+    },
+    /*async isSuitable() {
+      let results = await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("products")
+        .doc(this.info.id)
+        .get();
+      if (results.exists) {
+        let data = results.data();
+        this.suitable = data.suitable;
+      } //else this.favorite = false;
+    },*/
+    async isFav() {
+      let favorited = await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("favorites")
+        .doc(this.info.id)
+        .get();
+      if (favorited.exists) {
+        this.favorite = true;
+      } else this.favorite = false;
     },
     moveText(e) {
       const x = e.target;
@@ -93,9 +153,12 @@ export default {
   computed: {
     classIcon() {
       const icon = this.info.category.toLowerCase();
-
       return "icon-" + icon;
     },
+  },
+  async mounted() {
+    //this.isSuitable();
+    this.isFav();
   },
 };
 </script>

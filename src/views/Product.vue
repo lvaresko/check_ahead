@@ -118,8 +118,6 @@ export default {
     async toggleDescription(x) {
       this.info = x;
       this.DescriptionOpen = !this.DescriptionOpen;
-
-      /// i tako dalje
     },
     async getProduct() {
       this.loading = true;
