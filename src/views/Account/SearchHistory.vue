@@ -8,19 +8,18 @@
         <div class="col-12 col-md-8 mt-6 text-center right-side ">
           <div class="recently-viewed">
             <h2 class="mb-5">Recently viewed items:</h2>
-            <!--<label>RECENTLY VIEWED ITEMS:</label>-->
-            <div v-for="content in products" :key="">
-              <div class="row">
+            <div v-for="product in products" :key="product.id">
+              <div class="row text-left" @click="toProduct(product)">
                 <div class="col-2 p-0">
                   <img
-                    src="@/assets/architect.jpeg"
+                    :src="product.url"
                     alt="product"
                     class="img-fluid"
                   />
                 </div>
-                <div class="col-8 ">{{ content.name }}</div>
+                <div class="col-8 ">{{ product.name }}</div>
                 <div class="col-2 ">
-                  <div v-if="content.suitable">
+                  <div v-if="product.suitable">
                     <span class="icon-check"></span>
                   </div>
                   <div v-else>
@@ -38,6 +37,9 @@
 
 <script>
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
+import { db } from "@/firebase.js";
+import store from "@/store";
+import router from "@/router";
 
 export default {
   name: "SearchHistory",
@@ -48,20 +50,51 @@ export default {
     return {
       user_name: "Amy",
       email: "",
-      //username: '',
       password: "",
       passwordRepeat: "",
-      products: [
-        { name: "bas dobar sampon", suitable: true },
-        { name: "ful dobra krema", suitable: false },
-        {
-          name:
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          suitable: true,
-        },
-      ],
+      products: [],
     };
   },
+  async mounted() {
+    await this.getHistory();
+  },
+  methods: {
+    async getHistory() {
+      let results = await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("products")
+        .orderBy("viewed", "desc")
+        .get();
+
+      results.forEach(async (doc) => {
+        const product = await db
+          .collection("products")
+          .doc(doc.id)
+          .get();
+
+        const result = await db
+          .collection("users")
+          .doc(store.currentUser)
+          .collection("products")
+          .doc(doc.id)
+          .get();
+
+        let data = product.data();
+        let data_suitable = result.data();
+
+        this.products.push({
+          id: doc.id,
+          name: data.name,
+          url: data.url,
+          suitable: data_suitable.suitable,
+        });
+      });
+    },
+    toProduct(x) {
+      router.push({ name: "Product", params: { product_id: x.id } });
+    },
+  }
 };
 </script>
 

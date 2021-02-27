@@ -10,12 +10,10 @@
     "bootstrap-icons": "^1.2.2",
     "core-js": "^3.6.5",
     "firebase": "^8.2.1",
-    "fomantic-ui": "^2.8.7",
     "font-awesome": "^4.7.0",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-vue": "^0.11.0",
     "vue": "^2.6.12",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "vue-simple-search-dropdown": "^1.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -23,7 +21,6 @@
     "@vue/cli-service": "~4.5.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11",
-    "vue2-collapse": "^1.0.15"
+    "vue-template-compiler": "^2.6.11"
   }
 }

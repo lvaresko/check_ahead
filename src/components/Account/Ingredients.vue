@@ -19,6 +19,7 @@
           @click="checkAll(content)"
           v-model="selectedCat"
           :value="content"
+          @change="$emit('change')"
           class="custom-control-input"
         />
         <div class="custom-control-label pl-2">
@@ -40,7 +41,7 @@
               type="checkbox"
               v-model="selectedIngr"
               :value="ingredient"
-              @change="updateCheckAll(content)"
+              @change="updateCheckAll(content); $emit('change');"
               class="custom-control-input"
             />
             <div class="custom-control-label">
@@ -90,7 +91,6 @@ export default {
       selectedCat: [],
     };
   },
-
   mounted() {
     this.getIngredients();
     this.selectedIngredients();
@@ -113,15 +113,18 @@ export default {
     addCustom(e) {
       if ((e.key === "," || e.key === "Enter") && this.tempCustom) {
         if (!this.custom_ingredients.includes(this.custom_ingredients)) {
+          this.tempCustom = this.tempCustom.charAt(0).toUpperCase().replace(",", "") + this.tempCustom.slice(1);
           this.custom_ingredients.push(this.tempCustom.replace(",", ""));
         }
         this.tempCustom = "";
       }
+      this.$emit('change')
     },
     deleteCustom(custom) {
       this.custom_ingredients = this.custom_ingredients.filter((item) => {
         return custom !== item;
       });
+      this.$emit('change')
     },
     ingredientCategories() {
       return [...new Set(this.ingredients.map(({ category }) => category))];
@@ -209,6 +212,10 @@ export default {
           this.updateCheckAll(categories[i]);
         }
       }
+    },
+    proba() {
+      console.log("proba");
+      this.$emit ("checked");
     },
   },
 };

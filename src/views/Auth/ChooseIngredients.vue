@@ -4,14 +4,13 @@
     <p style="font-size: 20px">
       Choose the ingredients you wish to avoid:
     </p>
-    <ingredients ref="myChild" />
+    <ingredients ref="myChild" @change="enableBtn"/>
     <button
       type="button"
-      @click="
-        checkIngredients();
-        $refs.myChild.updateList();
-      "
+      @click="checkIngredients();$refs.myChild.updateList();"
+      :class="[selected ? 'disabledClass'  : '', enabledClass]"
       class="btn btn-primary v2 shadow-sm mt-3"
+      :disabled="selected"
     >
       Submit
     </button>
@@ -29,6 +28,12 @@ export default {
   components: {
     Ingredients,
   },
+  data() {
+    return {
+      selected: true,
+      enabledClass: "btn btn-primary v2 shadow-sm mt-3",
+    };
+  },
   methods: {
     checkIngredients() {
       db.collection("users")
@@ -39,6 +44,16 @@ export default {
       store.active = true;
       router.push({ name: "Home" });
     },
+    enableBtn() {
+      this.selected = !this.selected;
+    },
   },
 };
 </script>
+
+<style scoped>
+.disabledClass {
+  cursor: not-allowed;
+  background-color: #6FA2B4;
+}
+</style>
