@@ -9,11 +9,11 @@
           <div class="recently-viewed">
             <h2 class="mb-5">Recently viewed items:</h2>
             <!--<label>RECENTLY VIEWED ITEMS:</label>-->
-            <div v-for="content in products" :key="">
+            <div v-for="content in products" :key="content.id">
               <div class="row">
                 <div class="col-2 p-0">
                   <img
-                    src="@/assets/architect.jpeg"
+                    src="@/assets/home.jpg"
                     alt="product"
                     class="img-fluid"
                   />

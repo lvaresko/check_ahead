@@ -16,8 +16,6 @@ import NotFound from '../views/NotFound.vue'
 import store from '@/store'
 import Admin from '../views/Account/Admin.vue'
 
-import { firebase, db } from '@/firebase'
-
 Vue.use(VueRouter)
 
 
