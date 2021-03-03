@@ -1,16 +1,12 @@
 <template>
   <div>
     <transition name="fade">
-      <div
-        class="desc-overlay"
-        @click="closeDescription"
-        v-if="showDescription"
-      ></div>
+      <div class="desc-overlay" @click="closeDescription" v-if="showDescription"></div>
     </transition>
     <transition name="fade">
-      <div class="desc">
+      <div class="desc" v-if="showDescription">
         <div class="text-center">
-          <h2 style="align-self: center">{{ info }}</h2>
+          <h3 style="align-self: center">{{ info }}</h3>
         </div>
         <div v-if="custom">
           <label>CUSTOM INGREDIENT</label>

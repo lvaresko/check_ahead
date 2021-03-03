@@ -63,8 +63,9 @@
               >
                 <span @click="toggleDescription(sastojak)">{{ sastojak }}</span>
               </div>
+              
               <Description
-                v-if="DescriptionOpen"
+                
                 :showDescription="DescriptionOpen"
                 :info="info"
                 @close="toggleDescription"

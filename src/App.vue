@@ -48,8 +48,10 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
     if (store.currentUser && !store.active) {
       router.push({ name: "ChooseIngredients" }).catch(() => {});
+    } else if (currentRoute.meta.auth){
+      router.push({ name: "Home"});
     } else {
-      router.push({ name: "Home" }).catch(() => {});
+      router.push({currentRoute}).catch(() => {});
     }
   } else {
     console.log("No user");

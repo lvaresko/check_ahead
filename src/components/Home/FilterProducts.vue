@@ -11,8 +11,11 @@
         </transition>
         <transition name="slide-r">
           <div class="filter text-center" v-if="openFilter">
-            <div class="filter-close text-right">
-              <button type="button" class="btn btn-primary shadow-sm" @click.self="closeFilter">
+            <div class="filter-close">
+              <button type="button" class="btn btn-secondary shadow-sm" @click="clear();">
+                Clear
+              </button>
+              <button type="button" class="btn btn-primary shadow-sm" @click.self="closeFilter();">
                 Done
               </button>
             </div>
@@ -156,6 +159,7 @@ export default {
   methods: {
     closeFilter() {
       this.$emit("close");
+      this.$emit('filter', this.selectedCat, this.selectedType, this.selectedBrand);
     },
     async getData() {
       let results = await db.collection("products").get();
@@ -187,11 +191,17 @@ export default {
         element.style.transform = "rotate(0deg)";
       }
     },
+    clear() {
+      this.selectedCat = [];
+      this.selectedType = [];
+      this.selectedBrand = [];
+      this.$emit('clear');
+    }
   },
 };
 </script>
 
-<style>
+<style scoped>
 .filter {
   width: 330px;
   height: 100%;
@@ -205,18 +215,22 @@ export default {
 }
 
 .filter-close {
-  margin: 15px 15px 0 0;
+  margin: 15px 15px 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .filter-close .btn {
   width: 60px;
 }
 
+/*
 .icon-cancel-1::before {
   font-size: 20px;
   vertical-align: top;
   cursor: pointer;
-}
+}*/
 
 .filter-title {
   display: inline-block;

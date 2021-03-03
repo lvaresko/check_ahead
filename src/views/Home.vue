@@ -54,21 +54,34 @@
       <div class="container">
         <div class="recommended">
           <p>Recommended for you:</p>
-          <button class="btn btn-primary shadow-sm" @click="toggleFilter">
-            FILTER
-          </button>
+            <button class="btn btn-primary shadow-sm ml-5" @click="toggleFilter">
+              FILTER
+            </button>
         </div>
 
-        <FilterProducts :openFilter="filterOpen" @close="toggleFilter" />
+        <FilterProducts :openFilter="filterOpen" @close="toggleFilter" @filter="filterRecommendations" @clear="clearFilter"/>
 
-        <div class="row" data-masonry='{"percentPosition": true }'>
-          <Card
-            v-for="product in products"
-            :key="product.id"
-            :site="site"
-            :info="product"
-          />
+        <div v-if="!filter" class="row" data-masonry='{"percentPosition": true }'>
+            <Card
+              v-for="(product,index) in products" 
+              v-if="index < productsLimit" 
+              :key="product.id"
+              :site="site"
+              :info="product"
+            />
         </div>
+        <div v-else class="row" data-masonry='{"percentPosition": true }'>
+            <Card
+              v-for="product in proba"
+              :key="product.id"
+              :site="site"
+              :info="product"
+            />
+        </div>
+        <div v-if="totalProducts > productsLimit" class="text-left">
+          <a href="#" @click.prevent="productsLimit += 6" class="load">Load more...</a>
+        </div>
+       
         <button
           type="button"
           class="btn btn-primary shadow-none"
@@ -94,17 +107,23 @@ export default {
   name: "Home",
   data: () => {
     return {
-      products: null,
+      products: [],
       popupOpen: false,
       filterOpen: false,
 
       site: "home",
       loading: false,
-      cameraOpen: false,
+      filter: false,
+      productsLimit: 6,
+      totalProducts: 0,
     };
   },
   async mounted() {
     await this.getReccomended();
+  },
+  updated() {
+    this.totalProducts = this.products.length;
+    console.log(this.products.length);
   },
   methods: {
     togglePopup() {
@@ -139,14 +158,41 @@ export default {
             url: data.url,
           });
         }
-
+        
         this.loading = false;
       });
     },
-    OpenScan() {
-      router.push("BarcodeScan");
+    filterRecommendations(category,type,brand) {
+      console.log("Filter emita oke", category,type,brand);
+
+      if(category.length && type.length && brand.length) {    // if something selected
+        this.filter = true;
+        let a = this.products.filter(
+          (product) =>
+            category.includes(product.category) && type.includes(product.type) && brand.includes(product.brand));
+        //this.proba.push(a);
+        this.proba = a;
+        console.log(a);
+      }
     },
+    clearFilter() {
+      this.filter = false;
+    }
   },
+  computed: {
+   
+    
+      /*let category = ["MakeUp"];
+      let type = ["Lipstick"];
+      let brand = ["Nabla","Skintegra"];
+       console.log(x);
+     /*return this.products.filter(
+        (product) =>
+          x.includes(product.category) && type.includes(product.type) && brand.includes(product.brand));
+
+      /*category.some(el => product.category.includes(el)) || type.some(el => product.type.includes(el)) || brand.some(el => product.brand.includes(el))*/
+  
+  }, 
   components: {
     Card,
     Popup,
@@ -188,13 +234,16 @@ export default {
   font-weight: bold;
   text-shadow: 2px 2px 8px #777;
 }
+
 .description {
   background: rgba(200, 200, 200, 0.6);
   padding: 10px;
 }
+
 .home .search-button {
   padding: 0 15px;
 }
+
 .container-fluid {
   display: flex;
   justify-content: space-between;
@@ -213,6 +262,12 @@ export default {
 .recommended .btn {
   margin: 0;
   width: 90px;
+}
+
+.load:hover {
+  color: #232323;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .loading {

@@ -7,7 +7,6 @@ import VueQuagga from 'vue-quaggajs'
 Vue.config.productionTip = false
 Vue.use(VueQuagga);
 
-
 new Vue({
     router,
     render: h => h(App)
