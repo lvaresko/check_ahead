@@ -43,11 +43,11 @@
           <button
             type="button"
             class="scan btn btn-primary shadow-sm"
-            @click="toggleScan"
+            @click="OpenScan"
           >
             SCAN BARCODE <i class="icon-barcode"></i>
           </button>
-          <BarcodeReader :showScan="scanOpen" @close="toggleScan" />
+          <!--<BarcodeReader :showScan="scanOpen" @close="toggleScan" />-->
         </div>
       </div>
 
@@ -86,7 +86,6 @@
 import Card from "../components/Home/Card.vue";
 import Popup from "../components/Home/Popup.vue";
 import FilterProducts from "../components/Home/FilterProducts.vue";
-import BarcodeReader from "../components/BarcodeReader.vue";
 import { db } from "@/firebase.js";
 import store from "@/store";
 import router from "@/router";
@@ -98,7 +97,7 @@ export default {
       products: null,
       popupOpen: false,
       filterOpen: false,
-      scanOpen: false,
+
       site: "home",
       loading: false,
       cameraOpen: false,
@@ -114,9 +113,7 @@ export default {
     toggleFilter() {
       this.filterOpen = !this.filterOpen;
     },
-    toggleScan() {
-      this.scanOpen = !this.scanOpen;
-    },
+
     async getReccomended() {
       this.loading = true;
       let results = await db.collection("products").get();
@@ -146,15 +143,14 @@ export default {
         this.loading = false;
       });
     },
-    checkBarcode(code) {
-      console.log(code, "++++++++++++");
+    OpenScan() {
+      router.push("BarcodeScan");
     },
   },
   components: {
     Card,
     Popup,
     FilterProducts,
-    BarcodeReader,
   },
 };
 </script>

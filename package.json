@@ -17,6 +17,7 @@
     "vue": "^2.6.12",
     "vue-barcode-scanner": "^0.8.1",
     "vue-cc-quaggajs": "^2.2.2",
+    "vue-qr-reader": "^1.6.2",
     "vue-quaggajs": "^1.0.12",
     "vue-router": "^3.2.0"
   },

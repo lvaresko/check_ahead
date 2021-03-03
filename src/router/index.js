@@ -15,6 +15,7 @@ import Favorites from '../views/Favorites.vue'
 import NotFound from '../views/NotFound.vue'
 import store from '@/store'
 import Admin from '../views/Account/Admin.vue'
+import BarcodeScan from '../views/BarcodeScan.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,14 @@ const routes = [{
         path: '/product/:product_id',
         name: 'Product',
         component: Product,
+        meta: {
+            needsUser: true,
+        }
+    },
+    {
+        path: '/BarcodeScan',
+        name: 'BarcodeScan',
+        component: BarcodeScan,
         meta: {
             needsUser: true,
         }
