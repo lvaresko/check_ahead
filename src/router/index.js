@@ -31,7 +31,10 @@ const routes = [{
     {
         path: '/signup',
         name: 'Signup',
-        component: Signup
+        component: Signup,
+        meta: {
+            auth: true,
+        }
     },
     {
         path: '/choose_ingredients',
@@ -41,7 +44,10 @@ const routes = [{
     {
         path: '/login',
         name: 'Login',
-        component: Login
+        component: Login,
+        meta: {
+            auth: true,
+        }
     },
     {
         path: '/product/:product_id',
@@ -134,14 +140,17 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async(to, from, next) => {
+    console.log('Stara ruta', from.name, '-> ', to.name);
     const noUser = (store.currentUser === null);
     const User = localStorage.getItem("isSignedIn");
     console.log("STORE CURRENT USEER" + store.currentUser);
     console.log("USER LOCALSTORAGE" + User)
+
     if (!User && to.matched.some(rec => rec.meta.needsUser)) { //to.meta.needsUser) {
         console.log("Permission denied");
         next({ name: "Login" })
     } else {
+        console.log("IDEM PUTUJEMM");
         next();
     }
 });

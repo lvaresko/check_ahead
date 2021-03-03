@@ -213,10 +213,6 @@ export default {
         }
       }
     },
-    proba() {
-      console.log("proba");
-      this.$emit ("checked");
-    },
   },
 };
 </script>
