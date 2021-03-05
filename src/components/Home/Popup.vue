@@ -67,7 +67,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /*
 .slide-enter-active,
 .slide-leave-active {

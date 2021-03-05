@@ -78,7 +78,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .title {
   background: #6fa2b4;
   min-width: 330px;
