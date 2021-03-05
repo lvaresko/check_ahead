@@ -1,21 +1,17 @@
 <template>
   <div class="account-sidebar text-center">
-    <li class="nav-item">
+    <li class="nav-item pb-4">
       <router-link to="/account">ACCOUNT OVERVIEW</router-link>
     </li>
-    <br />
-    <li class="nav-item">
+    <li class="nav-item pb-4">
       <router-link to="/account/update">MY DETAILS</router-link>
     </li>
-    <br />
-    <li class="nav-item">
+    <li v-if="this.emailAndPassword" class="nav-item pb-4">
       <router-link to="/account/reset-password">RESET PASSWORD</router-link>
     </li>
-    <br />
-    <li class="nav-item">
+    <li class="nav-item pb-4">
       <router-link to="/account/history">SEARCH HISTORY</router-link>
     </li>
-    <br />
     <li class="nav-item">
       <router-link to="/account/admin">ADMIN PANEL</router-link>
     </li>
@@ -23,8 +19,21 @@
 </template>
 
 <script>
+import { firebase } from "@/firebase";
+
 export default {
   name: "AccountSidebar",
+  data() {
+    return {
+      provider: "",
+      emailAndPassword: false,
+    }
+  },
+  mounted() {
+    this.provider = firebase.auth().currentUser.providerData[0].providerId;
+    if (this. provider == 'password') this.emailAndPassword = true;
+    console.log(this.provider);
+  },
 };
 </script>
 
