@@ -6,6 +6,12 @@
       :src="require('@/assets/loading.gif')"
     />
     <div v-else>
+      <BarcodeReader
+        :showBarcodeReader="barcodeReaderOpen"
+        v-if="this.barcodeReaderOpen"
+        @close="toggleBarcodeReader"
+        @code="checkBarcode"
+      />
       <div
         class="jumbotron jumbotron-fluid"
         :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
@@ -23,24 +29,13 @@
               is suitable for you or not.
             </h5>
           </div>
-          <div class="input-group mt-4 search">
-            <input
-              type="text"
-              class="form-control border-right-0 search-input shadow-none"
-              aria-label="Default"
-              aria-describedby="inputGroup-sizing-default"
-              placeholder="Search for a product in our database..."
-              onfocus="this.placeholder = ''"
-            />
-            <button
-              class="btn border-left-0 search-button shadow-none"
-              type="button"
-            >
-              <span class="icon-magnifying-glass"></span>
-            </button>
-          </div>
+          <SearchDropdown />
           <h4 style="color: white">or</h4>
-          <button type="button" class="scan btn btn-primary shadow-sm">
+          <button
+            type="button"
+            class="scan btn btn-primary shadow-sm"
+            @click="toggleBarcodeReader"
+          >
             SCAN BARCODE <i class="icon-barcode"></i>
           </button>
         </div>
@@ -49,34 +44,45 @@
       <div class="container">
         <div class="recommended">
           <p>Recommended for you:</p>
-            <button class="btn btn-primary shadow-sm ml-5" @click="toggleFilter">
-              FILTER
-            </button>
+          <button class="btn btn-primary shadow-sm ml-5" @click="toggleFilter">
+            FILTER
+          </button>
         </div>
 
-        <FilterProducts :openFilter="filterOpen" @close="toggleFilter" @filter="filterRecommendations" @clear="clearFilter"/>
+        <FilterProducts
+          :openFilter="filterOpen"
+          @close="toggleFilter"
+          @filter="filterRecommendations"
+          @clear="clearFilter"
+        />
 
-        <div v-if="!filter" class="row" data-masonry='{"percentPosition": true }'>
-            <Card
-              v-for="(product,index) in products" 
-              v-if="index < productsLimit" 
-              :key="product.id"
-              :site="site"
-              :info="product"
-            />
+        <div
+          v-if="!filter"
+          class="row"
+          data-masonry='{"percentPosition": true }'
+        >
+          <Card
+            v-for="(product, index) in products"
+            v-if="index < productsLimit"
+            :key="product.id"
+            :site="site"
+            :info="product"
+          />
         </div>
         <div v-else class="row" data-masonry='{"percentPosition": true }'>
-            <Card
-              v-for="product in proba"
-              :key="product.id"
-              :site="site"
-              :info="product"
-            />
+          <Card
+            v-for="product in proba"
+            :key="product.id"
+            :site="site"
+            :info="product"
+          />
         </div>
         <div v-if="totalProducts > productsLimit" class="text-left">
-          <a href="#" @click.prevent="productsLimit += 6" class="load">Load more...</a>
+          <a href="#" @click.prevent="productsLimit += 6" class="load"
+            >Load more...</a
+          >
         </div>
-       
+
         <button
           type="button"
           class="btn btn-primary shadow-none"
@@ -96,6 +102,9 @@ import Popup from "../components/Home/Popup.vue";
 import FilterProducts from "../components/Home/FilterProducts.vue";
 import { db } from "@/firebase.js";
 import store from "@/store";
+import BarcodeReader from "../components/BarcodeReader.vue";
+import router from "@/router";
+import SearchDropdown from "../components/SearchDropdown.vue";
 
 export default {
   name: "Home",
@@ -104,12 +113,20 @@ export default {
       products: [],
       popupOpen: false,
       filterOpen: false,
+      barcodeReaderOpen: false,
       site: "home",
       loading: false,
       filter: false,
       productsLimit: 6,
       totalProducts: 0,
     };
+  },
+  components: {
+    Card,
+    Popup,
+    FilterProducts,
+    BarcodeReader,
+    SearchDropdown,
   },
   async mounted() {
     await this.getReccomended();
@@ -124,6 +141,9 @@ export default {
     },
     toggleFilter() {
       this.filterOpen = !this.filterOpen;
+    },
+    toggleBarcodeReader() {
+      this.barcodeReaderOpen = !this.barcodeReaderOpen;
     },
     async getReccomended() {
       this.loading = true;
@@ -150,18 +170,22 @@ export default {
             url: data.url,
           });
         }
-        
+
         this.loading = false;
       });
     },
-    filterRecommendations(category,type,brand) {
-      console.log("Filter emita oke", category,type,brand);
+    filterRecommendations(category, type, brand) {
+      console.log("Filter emita oke", category, type, brand);
 
-      if(category.length && type.length && brand.length) {    // if something selected
+      if (category.length && type.length && brand.length) {
+        // if something selected
         this.filter = true;
         let a = this.products.filter(
           (product) =>
-            category.includes(product.category) && type.includes(product.type) && brand.includes(product.brand));
+            category.includes(product.category) &&
+            type.includes(product.type) &&
+            brand.includes(product.brand)
+        );
         //this.proba.push(a);
         this.proba = a;
         console.log(a);
@@ -169,12 +193,32 @@ export default {
     },
     clearFilter() {
       this.filter = false;
-    }
+    },
+    async checkBarcode(value) {
+      this.toggleBarcodeReader();
+      this.loading = true;
+
+      let query = await db
+        .collection("products")
+        .where("ean_code", "==", value[0])
+        .get();
+      let product_id = null;
+
+      query.forEach((doc) => {
+        product_id = doc.id;
+      });
+
+      if (product_id) {
+        this.loading = false;
+        router.push({ name: "Product", params: { product_id: product_id } });
+      } else {
+        this.loading = false;
+        this.togglePopup();
+      }
+    },
   },
   computed: {
-   
-    
-      /*let category = ["MakeUp"];
+    /*let category = ["MakeUp"];
       let type = ["Lipstick"];
       let brand = ["Nabla","Skintegra"];
        console.log(x);
@@ -183,12 +227,6 @@ export default {
           x.includes(product.category) && type.includes(product.type) && brand.includes(product.brand));
 
       /*category.some(el => product.category.includes(el)) || type.some(el => product.type.includes(el)) || brand.some(el => product.brand.includes(el))*/
-  
-  }, 
-  components: {
-    Card,
-    Popup,
-    FilterProducts,
   },
 };
 </script>

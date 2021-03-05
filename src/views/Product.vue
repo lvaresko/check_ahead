@@ -5,83 +5,77 @@
       v-if="loading"
       :src="require('@/assets/loading.gif')"
     />
-    <div v-else class="container-fluid search-next">
-      <div
-        class="container"
-        style="display: flex; justify-content: space-between"
-      >
-        <div class="input-group search">
-          <input
-            type="text"
-            class="form-control border-right-0 search-input shadow-none"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-            placeholder="Search for a product in our database..."
-            onfocus="this.placeholder = ''"
-          />
+    <div v-else>
+      <BarcodeReader
+        :showBarcodeReader="barcodeReaderOpen"
+        v-if="this.barcodeReaderOpen"
+        @close="toggleBarcodeReader"
+        @code="checkBarcode"
+      />
+      <div class="container-fluid search-next">
+        <div class="container" style="display: flex; ">
+          <SearchDropdown class="input-group search-dropdown" />
           <button
-            class="btn border-left-0 search-button shadow-none"
-            type="button"
+            class="btn btn-secondary shadow-sm scan-barcode"
+            @click="toggleBarcodeReader"
           >
-            <span class="icon-magnifying-glass"></span>
+            <i class="icon-barcode"></i>
           </button>
         </div>
-        <button class="btn btn-secondary shadow-none scan-barcode">
-          <i class="icon-barcode"></i>
-        </button>
       </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-xl-6">
-          <img
-            :src="this.product_info.url"
-            alt="Img"
-            class="img-fluid"
-            loading="lazy"
-          />
-        </div>
-        <div class="col-12 col-xl-6">
-          <div v-if="this.suitable" class="suitable">
-            <span class="icon-check"></span>
-            <div>THIS PRODUCT IS SUITABLE FOR YOU!</div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-xl-6">
+            <img
+              :src="this.product_info.url"
+              alt="Img"
+              class="img-fluid"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-12 col-xl-6">
+            <div v-if="this.suitable" class="suitable">
+              <span class="icon-check"></span>
+              <div>THIS PRODUCT IS SUITABLE FOR YOU!</div>
 
-            <p v-if="!this.favorite">Add to Favorites!</p>
-            <p v-else>Remove from Favorites</p>
-            <span class="icon-heart"></span>
-          </div>
-          <div v-else class="unsuitable">
-            <span class="icon-cancel"></span>
-            <div>THIS PRODUCT IS <b>NOT</b> SUITABLE FOR YOU.</div>
-            <br />
-            <div class="contains">
-              <p style="font-weight: bolder">CONTAINS:</p>
-              <div
-                v-for="sastojak in this.filter"
-                :key="sastojak"
-                style="display: inline-block"
-              >
-                <span @click="toggleDescription(sastojak)">{{ sastojak }}</span>
-              </div>
-              
-              <Description
-                
-                :showDescription="DescriptionOpen"
-                :info="info"
-                @close="toggleDescription"
-              />
+              <p v-if="!this.favorite">Add to Favorites!</p>
+              <p v-else>Remove from Favorites</p>
+              <span class="icon-heart"></span>
             </div>
-            <br />
-          </div>
-          <div class="product">
-            <label>BRAND:</label>
-            <p>{{ this.product_info.brand }}</p>
-            <label>PRODUCT NAME:</label>
-            <p>{{ this.product_info.name }}</p>
-            <label>INGREDIENTS:</label>
-            <p>
-              {{ this.ingredients }}
-            </p>
+            <div v-else class="unsuitable">
+              <span class="icon-cancel"></span>
+              <div>THIS PRODUCT IS <b>NOT</b> SUITABLE FOR YOU.</div>
+              <br />
+              <div class="contains">
+                <p style="font-weight: bolder">CONTAINS:</p>
+                <div
+                  v-for="sastojak in this.filter"
+                  :key="sastojak"
+                  style="display: inline-block"
+                >
+                  <span @click="toggleDescription(sastojak)">{{
+                    sastojak
+                  }}</span>
+                </div>
+
+                <Description
+                  :showDescription="DescriptionOpen"
+                  :info="info"
+                  @close="toggleDescription"
+                />
+              </div>
+              <br />
+            </div>
+            <div class="product">
+              <label>BRAND:</label>
+              <p>{{ this.product_info.brand }}</p>
+              <label>PRODUCT NAME:</label>
+              <p>{{ this.product_info.name }}</p>
+              <label>INGREDIENTS:</label>
+              <p>
+                {{ this.ingredients }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -93,6 +87,8 @@
 import Description from "../components/Description.vue";
 import { db } from "@/firebase.js";
 import store from "@/store";
+import SearchDropdown from "../components/SearchDropdown.vue";
+import BarcodeReader from "../components/BarcodeReader.vue";
 
 export default {
   name: "Product",
@@ -101,6 +97,7 @@ export default {
       productId: this.$route.params.product_id,
       product_info: {},
       DescriptionOpen: false,
+      barcodeReaderOpen: false,
       info: null,
       loading: true,
       favorite: true,
@@ -109,6 +106,11 @@ export default {
       filter: [],
       suitable: null,
     };
+  },
+  components: {
+    Description,
+    SearchDropdown,
+    BarcodeReader,
   },
   async mounted() {
     await this.getProduct();
@@ -165,9 +167,31 @@ export default {
           viewed: Date.now(),
         });
     },
-  },
-  components: {
-    Description,
+    toggleBarcodeReader() {
+      this.barcodeReaderOpen = !this.barcodeReaderOpen;
+    },
+    async checkBarcode(value) {
+      this.toggleBarcodeReader();
+      this.loading = true;
+
+      let query = await db
+        .collection("products")
+        .where("ean_code", "==", value[0])
+        .get();
+      let product_id = null;
+
+      query.forEach((doc) => {
+        product_id = doc.id;
+      });
+
+      if (product_id) {
+        this.loading = false;
+        router.push({ name: "Product", params: { product_id: product_id } });
+      } else {
+        this.loading = false;
+        this.togglePopup();
+      }
+    },
   },
 };
 </script>
@@ -175,23 +199,32 @@ export default {
 <style scoped>
 .search-next {
   background: #6fa2b4;
-  padding: 20px;
   margin-bottom: 20px;
+  padding: 20px 0;
 }
-.search-next .search-button {
-  padding: 0 15px;
-}
+
 .search-next .input-group {
   height: 45px;
 }
 .scan-barcode {
-  width: 75px;
   border: none;
-  margin: 0 5px;
-  height: 45px;
+  height: 43px;
+  max-width: 60px;
+  margin: 0 2px;
 }
 .icon-barcode::before {
-  font-size: 35px;
+  font-size: 28px;
+}
+.btn:hover > .icon-barcode {
+  color: white;
+}
+.search-dropdown {
+  margin: 0 2px;
+}
+
+.div-col-10,
+.div-col-2 {
+  padding: 0;
 }
 
 .product .img-fluid {
