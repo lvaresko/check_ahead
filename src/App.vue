@@ -42,6 +42,12 @@ firebase.auth().onAuthStateChanged(async (user) => {
       .doc(store.currentUser)
       .get();
 
+    // store user info on local storage
+    console.log("Document data:", doc.data());
+    localStorage.setItem("firstName", doc.data().firstName);
+    localStorage.setItem("lastName", doc.data().lastName);
+    localStorage.setItem("email", user.email);
+
     //ako ne postoji jer observer ne ceka da spremim u colLection kad se s googlom ulogiram
     //valjda se triggera jer se promjeni to stanje prije nego ide stvarat collection
     if (doc.exists) store.active = doc.data().active;
@@ -74,10 +80,25 @@ export default {
       loading: false,
     };
   },
+ 
   methods: {
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
     },
+    /*async getUserInfo() {
+      console.log("ccc",store.currentUser)
+      var user = firebase.auth().currentUser;
+
+      let doc =  await db
+        .collection("users")
+        .doc(store.currentUser)
+        .get();
+      
+      console.log("Document data:", doc.data());
+      localStorage.setItem("firstName", doc.data().firstName);
+      localStorage.setItem("lastName", doc.data().lastName);
+      localStorage.setItem("email", user.email);
+    },*/
   },
   components: {
     Navbar,
@@ -99,5 +120,3 @@ export default {
   },*/
 };
 </script>
-
-<style lang="scss"></style>

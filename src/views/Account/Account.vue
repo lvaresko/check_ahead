@@ -33,25 +33,14 @@ export default {
   },
   data() {
     return {
-      user_name: "Amy",
-      email: "",
-      //username: '',
-      password: "",
-      passwordRepeat: "",
-      products: [
-        { name: "bas dobar sampon", suitable: true },
-        { name: "ful dobra krema", suitable: false },
-        {
-          name:
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          suitable: true,
-        },
-      ],
+      user_name: localStorage.getItem('firstName'),
+      provider: "",
     };
   },
 };
 </script>
-<style>
+
+<style scoped>
 #pic {
   height: 50%;
   width: 80%;

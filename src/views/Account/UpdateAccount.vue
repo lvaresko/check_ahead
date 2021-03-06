@@ -1,30 +1,32 @@
 <template>
-  <div class="account">
+  <div class="account p-0">
+    <Banner v-if="this.updated" @toggle="toggleBanner(false)" />
     <div class="container">
       <div class="row">
-        <div class="col-12 col-md-4" id="nav">
+        <div class="col-12 col-md-4 p-4" id="nav">
           <AccountSidebar />
         </div>
         <div class="col-12 col-md-8 mt-6 text-center right-side">
-          <h2>Personal information:</h2>
+          <h2 class="mb-3">Personal information:</h2>
           <div class="signup personal-info">
-            <!--<label>PERSONAL INFO:</label>-->
-            <div class="form-group text-left pt-3">
+            <div class="form-group text-left">
               <label form="exampleInputFirstName">First name:</label>
               <input
                 type="text"
+                v-model="firstName"
                 class="form-control basic-input"
+                :disabled="!emailAndPassword"
                 id="exampleInputFirstName"
-                placeholder="Amy"
               />
             </div>
             <div class="form-group text-left">
               <label form="exampleInputLastName">Last name:</label>
               <input
                 type="text"
+                v-model="lastName"
                 class="form-control basic-input"
+                :disabled="!emailAndPassword"
                 id="exampleInputLastName"
-                placeholder="Wise"
               />
             </div>
             <div class="form-group text-left">
@@ -33,12 +35,23 @@
                 type="email"
                 v-model="email"
                 class="form-control basic-input"
+                :disabled="!emailAndPassword"
                 id="exampleInputEmail"
                 aria-describedby="EmailHelp"
-                placeholder="amy@gmail.com"
               />
             </div>
-            <button type="button" class="btn btn-primary shadow-sm mt-4">
+            <div class="form-group text-left">
+            <label form="exampleInputPassword1">Password:</label>
+            <input
+              type="password"
+              v-model="password"
+              class="form-control basic-input password_input"
+              :disabled="!emailAndPassword"
+              id="exampleInputPassword1"
+              placeholder="Type here your password..."
+            />
+            </div>
+            <button type="button" @click="updateProfile()" :disabled="!emailAndPassword" :class="[selected ? 'disabledClass'  : '', enabledClass]">
               Save changes
             </button>
           </div>
@@ -50,19 +63,70 @@
 
 <script>
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
+import Banner from "@/components/Banner.vue";
+import store from "@/store";
+import { firebase, db } from "@/firebase";
+
 
 export default {
   name: "UpdateAccount",
-  components: {
-    AccountSidebar,
-  },
   data() {
     return {
-      email: "",
-      //username: '',
+      user: firebase.auth().currentUser,
+      email: localStorage.getItem('email'),
+      firstName: localStorage.getItem('firstName'),
+      lastName: localStorage.getItem('lastName'),
       password: "",
-      passwordRepeat: "",
+      updated: false,
+      emailAndPassword: false,
+      enabledClass: "btn btn-primary shadow-sm mt-4",
+      store,
+      localStorage,
     };
+  },
+  mounted() {
+    this.provider = firebase.auth().currentUser.providerData[0].providerId;
+    if (this. provider == 'password') this.emailAndPassword = true;
+    console.log(this.provider);
+  },
+  methods: {
+    async updateProfile() {
+      try {
+        let credential = firebase.auth.EmailAuthProvider.credential(
+          this.user.email, this.password
+        )
+        
+        let reauthenticate = await this.user.reauthenticateWithCredential(credential);
+
+        db.collection("users")
+          .doc(store.currentUser)
+          .update(
+            {
+              firstName: this.firstName,
+              lastName: this.lastName,
+            },
+          );
+
+        localStorage.setItem("firstName",this.firstName);
+        localStorage.setItem("lastName", this.lastName);
+
+        let update = await user.updateEmail(this.email);
+
+        console.log("Updated");
+        localStorage.setItem('email', this.email);
+        this.password = "";
+        this.toggleBanner(true);
+      } catch(e) {
+          console.log(e);
+        };
+    },
+    toggleBanner(value) {
+      this.updated = value;
+    },
+  },
+  components: {
+    AccountSidebar,
+    Banner,
   },
 };
 </script>
@@ -72,5 +136,10 @@ export default {
   font-size: 15px;
   font-weight: bold;
   margin-bottom: 0;
+}
+
+.disabledClass {
+  cursor: not-allowed;
+  background-color: #6FA2B4 !important;
 }
 </style>

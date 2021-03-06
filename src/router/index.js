@@ -160,7 +160,7 @@ const router = new VueRouter({
 
 router.beforeEach(async(to, from, next) => {
     console.log('Stara ruta', from.name, '-> ', to.name);
-    const noUser = (store.currentUser === null);
+    //const noUser = (store.currentUser === null);
     const User = localStorage.getItem("isSignedIn");
     console.log("STORE CURRENT USEER" + store.currentUser);
     console.log("USER LOCALSTORAGE" + User)
