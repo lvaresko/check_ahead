@@ -11,6 +11,7 @@
             <span class="title_text">SCAN YOUR BARCODE!</span>
             <span class="icon-cancel-1" @click="closeBarcodeReader"></span>
           </div>
+          <img class="loading" :src="require('@/assets/loading.gif')" />
 
           <v-quagga
             :onDetected="logIt"
@@ -70,6 +71,12 @@ export default {
 </script>
 
 <style scoped>
+.loading {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .popup-overlay {
   top: 0;
   left: 0;

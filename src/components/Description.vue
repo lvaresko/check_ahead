@@ -1,21 +1,34 @@
 <template>
   <div>
     <transition name="fade">
-      <div class="desc-overlay" @click="closeDescription" v-if="showDescription"></div>
+      <div
+        class="desc-overlay"
+        @click="closeDescription"
+        v-if="showDescription"
+      ></div>
     </transition>
+
     <transition name="fade">
       <div class="desc" v-if="showDescription">
-        <div class="text-center">
-          <h3 style="align-self: center">{{ info }}</h3>
-        </div>
-        <div v-if="custom">
-          <label>CUSTOM INGREDIENT</label>
-        </div>
-        <div>
-          <label>CATEGORY:</label>
-          <p>{{ this.data.category }}</p>
-          <label>DESCRIPTION:</label>
-          <p>{{ this.data.description }}</p>
+        <img
+          class="loading"
+          v-if="loading"
+          :src="require('@/assets/loading.gif')"
+          style="margin:0"
+        />
+        <div v-else class="desc_text">
+          <div class="text-center">
+            <h3 style="align-self: center">{{ info }}</h3>
+          </div>
+          <div v-if="custom">
+            <label>CUSTOM INGREDIENT</label>
+          </div>
+          <div v-else>
+            <label>CATEGORY:</label>
+            <p>{{ this.data.category }}</p>
+            <label>DESCRIPTION:</label>
+            <p>{{ this.data.description }}</p>
+          </div>
         </div>
       </div>
     </transition>
@@ -36,8 +49,9 @@ export default {
       loading: true,
     };
   },
-  mounted() {
-    this.getInfo();
+  async mounted() {
+    await this.getInfo();
+    this.loading = false;
   },
   methods: {
     async getInfo() {
@@ -49,6 +63,10 @@ export default {
       ref.forEach((doc) => {
         this.data = doc.data();
       });
+
+      if (!Object.keys(this.data).length) {
+        this.custom = true;
+      }
     },
 
     closeDescription() {
@@ -65,9 +83,12 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 20000;
-  padding: 35px;
   max-width: 300px;
-  background-color: #ffffff;
+}
+
+.desc_text {
+  background: white;
+  padding: 35px;
   border-radius: 5px;
   -webkit-box-shadow: 0 2px 4px 0 #777;
   -moz-box-shadow: 0 2px 4px 0 #777;

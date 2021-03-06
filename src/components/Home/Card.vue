@@ -7,12 +7,12 @@
           v-if="site == 'home'"
           class="transform"
           :class="favorite ? 'icon-heart-2' : 'icon-heart'"
-          @click.stop.prevent="toggleFav"
+          @click.stop.prevent="toggleFavorites"
         ></span>
         <span v-else>
           <span
             class="icon-trashcan transform"
-            @click.stop.prevent="deleteProduct"
+            @click.stop.prevent="removeFromFavorites"
           ></span>
           <div class="status">
             <span v-if="info.suitable" style="color: #54bb5e;"
@@ -53,7 +53,7 @@ export default {
     product() {
       router.push({ name: "Product", params: { product_id: this.info.id } });
     },
-    async toggleFav() {
+    async toggleFavorites() {
       this.favorite = !this.favorite;
       if (this.favorite) {
         await db
@@ -65,9 +65,9 @@ export default {
             favorited: Date.now(),
           });
         this.checkSuitability();
-      } else this.deleteProduct();
+      } else this.removeFromFavorites();
     },
-    async deleteProduct() {
+    async removeFromFavorites() {
       if (this.site == "favorites") this.$emit("delete", this.info.id);
       await db
         .collection("users")

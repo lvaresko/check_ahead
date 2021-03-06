@@ -38,13 +38,23 @@
               <span class="icon-check"></span>
               <div>THIS PRODUCT IS SUITABLE FOR YOU!</div>
 
-              <p v-if="!this.favorite">Add to Favorites!</p>
-              <p v-else>Remove from Favorites</p>
+              <p v-if="!this.favorite" @click="addToFavorites">
+                Add to Favorites!
+              </p>
+              <p v-else @click="removeFromFavorites">Remove from Favorites</p>
               <span class="icon-heart"></span>
             </div>
             <div v-else class="unsuitable">
               <span class="icon-cancel"></span>
               <div>THIS PRODUCT IS <b>NOT</b> SUITABLE FOR YOU.</div>
+              <p
+                v-if="this.favorite"
+                @click="removeFromFavorites"
+                style="text-decoration: underline; cursor: pointer"
+              >
+                Remove from Favorites
+              </p>
+
               <br />
               <div class="contains">
                 <p style="font-weight: bolder">CONTAINS:</p>
@@ -59,6 +69,7 @@
                 </div>
 
                 <Description
+                  v-if="DescriptionOpen"
                   :showDescription="DescriptionOpen"
                   :info="info"
                   @close="toggleDescription"
@@ -101,7 +112,7 @@ export default {
       barcodeReaderOpen: false,
       info: null,
       loading: true,
-      favorite: true,
+      favorite: null,
       ingredients: null,
       ingredientsList: [],
       filter: [],
@@ -116,22 +127,56 @@ export default {
   async mounted() {
     await this.getProduct();
     this.ingredients = this.product_info.ingredients.join(", ");
-    this.checkSuitability();
+    await this.checkSuitability();
+    await this.isFav();
+    this.loading = false;
   },
   methods: {
+    async isFav() {
+      let favorited = await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("favorites")
+        .doc(this.productId)
+        .get();
+      if (favorited.exists) {
+        this.favorite = true;
+      } else this.favorite = false;
+    },
+    async addToFavorites() {
+      this.favorite = true;
+
+      await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("favorites")
+        .doc(this.productId)
+        .set({
+          favorited: Date.now(),
+        });
+      this.checkSuitability();
+    },
+    async removeFromFavorites() {
+      this.favorite = false;
+      if (this.site == "favorites") this.$emit("delete", this.info.id);
+      await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("favorites")
+        .doc(this.productId)
+        .delete();
+    },
     async toggleDescription(x) {
       this.info = x;
       this.DescriptionOpen = !this.DescriptionOpen;
     },
     async getProduct() {
-      this.loading = true;
       let result = await db
         .collection("products")
         .doc(this.productId)
         .get();
 
       this.product_info = result.data();
-      this.loading = false;
     },
     async checkSuitability() {
       // 1. get users ingredients list

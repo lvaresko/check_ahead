@@ -4,12 +4,22 @@
       <div class="text-center">
         <h1>Requests</h1>
         <div>
-          Here you can see details on requests you've already made. Want to make
-          a new one? lolll
+          Here you can see details on requests you've already made.
+          <h5>Want to make a new one?</h5>
         </div>
-        <button type="button" class="btn btn-primary shadow none mt-4">
+        <button
+          type="button"
+          class="btn btn-primary shadow-sm mt-1"
+          @click="togglePopup"
+        >
           Make a request
         </button>
+        <Popup
+          v-if="popupOpen"
+          :site="site"
+          :showPopup="popupOpen"
+          @close="togglePopup"
+        />
       </div>
       <div class="row" style="padding-top: 30px">
         <div class="col-12 col-md-6 d-flex justify-content-center">
@@ -19,13 +29,18 @@
               <div>PENDING REQUESTS</div>
             </div>
             <div>
-              <div v-if="requests.length">
-                <div v-for="request in requests" :key="request">
+              <div v-if="PendingRequests.length">
+                <div
+                  v-for="pendingRequest in PendingRequests"
+                  :key="pendingRequest.id"
+                >
                   <div class="request">
                     <label>PRODUCT NAME</label>
-                    <div>{{ request.name }}</div>
+                    <div>{{ pendingRequest.name }}</div>
                     <label>PRODUCT BRAND</label>
-                    <div>{{ request.brand }}</div>
+                    <div>{{ pendingRequest.brand }}</div>
+                    <label>REQUEST SENT ON</label>
+                    <div>{{ pendingRequest.date }}</div>
                   </div>
                 </div>
               </div>
@@ -41,13 +56,16 @@
               <span class="icon-alarm-clock-2"></span>
               <div>APPROVED REQUESTS</div>
             </div>
-            <div v-if="requests2.length">
-              <div v-for="request in requests2" :key="request.name">
+            <div v-if="ApprovedRequests.length">
+              <div
+                v-for="approvedRequest in ApprovedRequests"
+                :key="approvedRequest.id"
+              >
                 <div class="request">
                   <label>PRODUCT NAME</label>
-                  <div>{{ request.name }}</div>
+                  <div>{{ approvedRequest.name }}</div>
                   <label>PRODUCT BRAND</label>
-                  <div>{{ request.brand }}</div>
+                  <div>{{ approvedRequest.brand }}</div>
                 </div>
               </div>
             </div>
@@ -62,18 +80,62 @@
 </template>
 
 <script>
+import Popup from "../components/Home/Popup.vue";
+import { db } from "@/firebase";
+import store from "@/store";
+
 export default {
   name: "Requests",
   data() {
     return {
-      requests: [
-        { name: "perfume", brand: "fragrances" },
-        { name: "eugenol", brand: "fragrances" },
-        { name: "geraniol", brand: "fragrances" },
-        { name: "methylisothiazolinone", brand: "preservatives" },
-      ],
-      requests2: [],
+      popupOpen: false,
+      site: "requests",
+      ApprovedRequests: [],
+      PendingRequests: [],
     };
+  },
+  components: {
+    Popup,
+  },
+  async mounted() {
+    await this.getRequests();
+  },
+  methods: {
+    togglePopup() {
+      this.popupOpen = !this.popupOpen;
+    },
+
+    async getRequests() {
+      let query = await db
+        .collection("users")
+        .doc(store.currentUser)
+        .collection("requests")
+        .orderBy("request_sent")
+        .get();
+
+      query.forEach((doc) => {
+        let data = doc.data();
+        if (!data.approved) {
+          this.PendingRequests.push({
+            name: data.name,
+            brand: data.brand,
+            date: new Date(data.request_sent).toDateString(),
+          });
+        } else {
+          console.log("aaa");
+        }
+      });
+    },
+
+    classObject: function(varName) {
+      if (varName == null) {
+        return "basic";
+      } else if (varName) {
+        return "success";
+      } else {
+        return "error";
+      }
+    },
   },
 };
 </script>

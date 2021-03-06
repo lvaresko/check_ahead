@@ -90,7 +90,7 @@
         >
           Popup
         </button>
-        <Popup :showPopup="popupOpen" @close="togglePopup" />
+        <Popup :site="site" :showPopup="popupOpen" @close="togglePopup" />
       </div>
     </div>
   </div>
@@ -257,6 +257,8 @@ export default {
 .description {
   background: rgba(200, 200, 200, 0.6);
   padding: 10px;
+  margin: 7px;
+  text-shadow: 2px 2px 8px #777;
 }
 
 .home .search-button {
