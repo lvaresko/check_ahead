@@ -64,7 +64,7 @@
       </div>
       <div class="form-group text-left" style="height: 50px">
         <label>Scan barcode:</label>
-        <button class="btn btn-secondary" @click="toggleBarcodeReader">
+        <button class="btn btn-secondary" @click.prevent="toggleBarcodeReader">
           <span class="icon-barcode"></span>
         </button>
         <span v-if="this.barcode" class="icon-check-2"></span>

@@ -71,7 +71,7 @@
         </div>
         <div v-else class="row" data-masonry='{"percentPosition": true }'>
           <Card
-            v-for="product in proba"
+            v-for="product in filtered"
             :key="product.id"
             :site="site"
             :info="product"
@@ -101,7 +101,6 @@ import Card from "../components/Home/Card.vue";
 import Popup from "../components/Home/Popup.vue";
 import FilterProducts from "../components/Home/FilterProducts.vue";
 import { db } from "@/firebase.js";
-import store from "@/store";
 import BarcodeReader from "../components/BarcodeReader.vue";
 import router from "@/router";
 import SearchDropdown from "../components/SearchDropdown.vue";
@@ -110,6 +109,7 @@ export default {
   name: "Home",
   data: () => {
     return {
+      currentUser: localStorage.getItem("user"),
       products: [],
       popupOpen: false,
       filterOpen: false,
@@ -117,6 +117,7 @@ export default {
       site: "home",
       loading: false,
       filter: false,
+      filtered: [],
       productsLimit: 6,
       totalProducts: 0,
     };
@@ -154,7 +155,7 @@ export default {
         //don't show products that are favorited
         let favorited = await db
           .collection("users")
-          .doc(store.currentUser)
+          .doc(this.currentUser)
           .collection("favorites")
           .doc(doc.id)
           .get();
@@ -180,15 +181,14 @@ export default {
       if (category.length && type.length && brand.length) {
         // if something selected
         this.filter = true;
-        let a = this.products.filter(
+        this.filtered = this.products.filter(
           (product) =>
             category.includes(product.category) &&
             type.includes(product.type) &&
             brand.includes(product.brand)
         );
-        //this.proba.push(a);
-        this.proba = a;
-        console.log(a);
+       
+        console.log(this.filtered);
       }
     },
     clearFilter() {
@@ -216,17 +216,6 @@ export default {
         this.togglePopup();
       }
     },
-  },
-  computed: {
-    /*let category = ["MakeUp"];
-      let type = ["Lipstick"];
-      let brand = ["Nabla","Skintegra"];
-       console.log(x);
-     /*return this.products.filter(
-        (product) =>
-          x.includes(product.category) && type.includes(product.type) && brand.includes(product.brand));
-
-      /*category.some(el => product.category.includes(el)) || type.some(el => product.type.includes(el)) || brand.some(el => product.brand.includes(el))*/
   },
 };
 </script>

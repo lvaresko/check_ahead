@@ -51,7 +51,11 @@
               placeholder="Type here your password..."
             />
             </div>
-            <button type="button" @click="updateProfile()" :disabled="!emailAndPassword" :class="[selected ? 'disabledClass'  : '', enabledClass]">
+            <button 
+              type="button" 
+              @click="updateProfile()" 
+              :class="[!emailAndPassword ? 'disabledClass'  : '', 'btn btn-primary shadow-sm mt-4']" 
+              :disabled="!emailAndPassword">
               Save changes
             </button>
           </div>
@@ -64,7 +68,6 @@
 <script>
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
 import Banner from "@/components/Banner.vue";
-import store from "@/store";
 import { firebase, db } from "@/firebase";
 
 
@@ -72,16 +75,13 @@ export default {
   name: "UpdateAccount",
   data() {
     return {
-      user: firebase.auth().currentUser,
+      currentUser: firebase.auth().currentUser,
       email: localStorage.getItem('email'),
       firstName: localStorage.getItem('firstName'),
       lastName: localStorage.getItem('lastName'),
       password: "",
       updated: false,
       emailAndPassword: false,
-      enabledClass: "btn btn-primary shadow-sm mt-4",
-      store,
-      localStorage,
     };
   },
   mounted() {
@@ -99,7 +99,7 @@ export default {
         let reauthenticate = await this.user.reauthenticateWithCredential(credential);
 
         db.collection("users")
-          .doc(store.currentUser)
+          .doc(this.currentUser)
           .update(
             {
               firstName: this.firstName,
@@ -131,7 +131,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .signup > label {
   font-size: 15px;
   font-weight: bold;
@@ -140,6 +140,6 @@ export default {
 
 .disabledClass {
   cursor: not-allowed;
-  background-color: #6FA2B4 !important;
+  background-color: #6FA2B4;
 }
 </style>

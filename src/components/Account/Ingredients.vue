@@ -19,7 +19,7 @@
           @click="checkAll(content)"
           v-model="selectedCat"
           :value="content"
-          @change="$emit('change')"
+          @change="onChange"
           class="custom-control-input"
         />
         <div class="custom-control-label pl-2">
@@ -41,7 +41,7 @@
               type="checkbox"
               v-model="selectedIngr"
               :value="ingredient"
-              @change="updateCheckAll(content); $emit('change');"
+              @change="updateCheckAll(content); onChange;"
               class="custom-control-input"
             />
             <div class="custom-control-label">
@@ -83,6 +83,7 @@ export default {
   name: "Ingredients",
   data() {
     return {
+      currentUser: localStorage.getItem("user"),
       tempCustom: "",
       custom_ingredients: [],
       ingredients: [],
@@ -90,6 +91,12 @@ export default {
       selectedIngr: [],
       selectedCat: [],
     };
+  },
+  watch: {
+    custom_ingredients: function(){
+      console.log("watch")
+      this.onChange()
+    },
   },
   mounted() {
     this.getIngredients();
@@ -118,13 +125,11 @@ export default {
         }
         this.tempCustom = "";
       }
-      this.$emit('change')
     },
     deleteCustom(custom) {
       this.custom_ingredients = this.custom_ingredients.filter((item) => {
         return custom !== item;
       });
-      this.$emit('change')
     },
     ingredientCategories() {
       return [...new Set(this.ingredients.map(({ category }) => category))];
@@ -184,7 +189,7 @@ export default {
     },
     updateList() {
       db.collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .set(
           {
             selectedIngredients: this.selectedIngr,
@@ -198,7 +203,7 @@ export default {
       if (store.active == true) {
         let results = await db
           .collection("users")
-          .doc(store.currentUser)
+          .doc(this.currentUser)
           .get();
 
         const data = results.data();
@@ -211,6 +216,14 @@ export default {
         for (let i = 0; i < categories.length; i++) {
           this.updateCheckAll(categories[i]);
         }
+      }
+    },
+    onChange() {
+      if(this.selectedIngr.length > 0  || this.custom_ingredients.length > 0) {
+        this.$emit('enable');
+      } 
+      if (this.selectedIngr.length == 0 && this.custom_ingredients.length == 0) {
+         this.$emit('disable');
       }
     },
   },

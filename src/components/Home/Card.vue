@@ -39,7 +39,6 @@
 <script>
 import router from "@/router";
 import { db } from "@/firebase.js";
-import store from "@/store";
 
 export default {
   name: "Card",
@@ -47,6 +46,7 @@ export default {
   data() {
     return {
       favorite: null,
+      currentUser: localStorage.getItem("user"),
     };
   },
   methods: {
@@ -58,7 +58,7 @@ export default {
       if (this.favorite) {
         await db
           .collection("users")
-          .doc(store.currentUser)
+          .doc(this.currentUser)
           .collection("favorites")
           .doc(this.info.id)
           .set({
@@ -71,7 +71,7 @@ export default {
       if (this.site == "favorites") this.$emit("delete", this.info.id);
       await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("favorites")
         .doc(this.info.id)
         .delete();
@@ -80,7 +80,7 @@ export default {
       // 1. get users ingredients list
       let results = await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .get();
 
       const data = results.data();
@@ -106,7 +106,7 @@ export default {
       // 4. add to db
       await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("products")
         .doc(this.info.id)
         .set({
@@ -128,7 +128,7 @@ export default {
     async isFav() {
       let favorited = await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("favorites")
         .doc(this.info.id)
         .get();

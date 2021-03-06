@@ -4,12 +4,11 @@
     <p style="font-size: 20px">
       Choose the ingredients you wish to avoid:
     </p>
-    <ingredients ref="myChild" @change="enableBtn"/>
+    <ingredients ref="myChild" @enable="enableBtn(false)" @disable="enableBtn(true)"/>
     <button
       type="button"
       @click="checkIngredients();$refs.myChild.updateList();"
-      :class="[selected ? 'disabledClass'  : '', enabledClass]"
-      class="btn btn-primary v2 shadow-sm mt-3"
+      :class="[selected ? 'disabledClass'  : '', 'btn btn-primary v2 shadow-sm mt-3']"
       :disabled="selected"
     >
       Submit
@@ -21,7 +20,7 @@
 import Ingredients from "@/components/Account/Ingredients.vue";
 import store from "@/store";
 import router from "@/router";
-import { firebase, db } from "@/firebase";
+import { db } from "@/firebase";
 
 export default {
   name: "ChooseIngredients",
@@ -30,22 +29,22 @@ export default {
   },
   data() {
     return {
+      currentUser: localStorage.getItem("user"),
       selected: true,
-      enabledClass: "btn btn-primary v2 shadow-sm mt-3",
     };
   },
   methods: {
     checkIngredients() {
       db.collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .update({
           active: true,
         });
       store.active = true;
       router.push({ name: "Home" });
     },
-    enableBtn() {
-      this.selected = !this.selected;
+    enableBtn(value) {
+      this.selected = value;
     },
   },
 };

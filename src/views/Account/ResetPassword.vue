@@ -59,8 +59,7 @@
 <script>
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
 import Banner from "@/components/Banner.vue";
-import store from "@/store";
-import { firebase, db } from "@/firebase";
+import { firebase } from "@/firebase";
 
 export default {
   name: "ResetPassword",
@@ -71,7 +70,6 @@ export default {
       newPassword: "",
       passwordRepeat: "",
       updated: false,
-      store,
     };
   },
   methods: {

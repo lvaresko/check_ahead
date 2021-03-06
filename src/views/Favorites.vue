@@ -27,12 +27,12 @@
 <script>
 import Card from "../components/Home/Card.vue";
 import { db } from "@/firebase.js";
-import store from "@/store";
 
 export default {
   name: "Favorites",
   data() {
     return {
+      currentUser: localStorage.getItem("user"),
       products: [],
       loading: true,
       site: "favorites",
@@ -48,7 +48,7 @@ export default {
     async getFavorites() {
       let results = await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("favorites")
         .orderBy("favorited", "desc")
         .get();
@@ -63,7 +63,7 @@ export default {
 
         const result = await db
           .collection("users")
-          .doc(store.currentUser)
+          .doc(this.currentUser)
           .collection("products")
           .doc(doc.id)
           .get();
