@@ -14,8 +14,9 @@ import Requests from '../views/Requests.vue'
 import Favorites from '../views/Favorites.vue'
 import NotFound from '../views/NotFound.vue'
 import store from '@/store'
-import Admin from '../views/Account/Admin.vue'
-import BarcodeScan from '../views/BarcodeScan.vue'
+import Admin from '../views/Admin/Admin.vue'
+import HandleRequests from '../views/Admin/HandleRequests.vue'
+import AddProduct from '../views/Admin/AddProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -56,14 +57,7 @@ const routes = [{
             needsUser: true,
         }
     },
-    {
-        path: '/BarcodeScan',
-        name: 'BarcodeScan',
-        component: BarcodeScan,
-        meta: {
-            needsUser: true,
-        }
-    },
+
     {
         path: '/account',
         name: 'Account',
@@ -121,13 +115,31 @@ const routes = [{
         }
     },
     {
-        path: '/account/admin',
+        path: '/admin/:id',
         name: 'Admin',
         component: Admin,
         meta: {
             needsUser: true,
-        }
+        },
+        children: [{
+                path: '/handleRequests',
+                name: 'HandleRequests',
+                component: HandleRequests,
+                meta: {
+                    needsUser: true,
+                }
+            },
+            {
+                path: '/addProduct',
+                name: 'AddProduct',
+                component: AddProduct,
+                meta: {
+                    needsUser: true,
+                }
+            }
+        ]
     },
+
     //catchall 404
     {
         path: '/:catchAll(.*)',
@@ -141,9 +153,9 @@ const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes,
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior(to, from, savedPosition) {
         return { x: 0, y: 0 }
-      }
+    }
 });
 
 router.beforeEach(async(to, from, next) => {

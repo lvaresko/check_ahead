@@ -1,7 +1,5 @@
 <template>
   <div class="admin">
-    <Banner v-if="this.updated" @toggle="toggleBanner(false)" />
-
     <BarcodeReader
       :showBarcodeReader="barcodeReaderOpen"
       v-if="this.barcodeReaderOpen"
@@ -84,10 +82,9 @@
 import { firebase, db, storage } from "@/firebase";
 import store from "@/store";
 import BarcodeReader from "../../components/BarcodeReader.vue";
-import Banner from "@/components/Banner.vue";
 
 export default {
-  name: "Admin",
+  name: "AddProductForm",
   data() {
     return {
       name: null,
@@ -98,12 +95,10 @@ export default {
       selectedFile: null,
       barcode: null,
       barcodeReaderOpen: false,
-      updated: false,
     };
   },
   components: {
     BarcodeReader,
-    Banner,
   },
   methods: {
     onFileSelected(event) {
@@ -112,9 +107,7 @@ export default {
     toggleBarcodeReader() {
       this.barcodeReaderOpen = !this.barcodeReaderOpen;
     },
-    toggleBanner(value) {
-      this.updated = value;
-    },
+
     async checkBarcode(value) {
       this.toggleBarcodeReader();
 

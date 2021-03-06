@@ -13,40 +13,66 @@
           />
         </div>
         <div class="popup-text mt-3">
-          <p style="font-size: 18px">
+          <p v-if="site == 'requests'" style="font-size: 18px">
+            WE'RE SORRY THAT THE PRODUCTS YOU'RE LOOKING FOR ISN'T AVAILABLE,
+            WOULD YOU LIKE TO SEND A REQUEST?
+          </p>
+          <p v-else style="font-size: 18px">
             WE'RE SORRY BUT THIS PRODUCT IS NOT AVAILABLE, WOULD YOU LIKE TO
             SEND A REQUEST?
           </p>
         </div>
         <form>
-          <div class="form-group text-left">
+          <div
+            class="form-group text-left"
+            :class="classObject(this.nameSuccess)"
+          >
             <label form="exampleInputFirstName">Product name:</label>
             <input
               type="text"
               class="form-control basic-input pt-0"
+              v-model="name"
               id="exampleInputProductName"
-              placeholder="Natural Charcoal Deodorant"
+              placeholder="Type here product name"
+              required
             />
+            <i class="icon-exclamation-2"></i>
+            <small id="name">
+              Error message.
+            </small>
           </div>
-          <div class="form-group text-left">
+          <div
+            class="form-group text-left"
+            :class="classObject(this.brandSuccess)"
+          >
             <label form="exampleInputLastName">Product brand:</label>
             <input
               type="text"
               class="form-control basic-input pt-0"
+              v-model="brand"
               id="exampleInputProductBrand"
-              placeholder="Yes to"
+              placeholder="Type here brand name"
+              reqired
             />
+            <i class="icon-exclamation-2"></i>
+            <small id="brand">
+              Error message.
+            </small>
           </div>
           <div class="btn-wrapper mt-4">
             <button
               type="button"
-              class="btn btn-secondary ml-3 shadow none"
+              class="btn btn-secondary ml-3 shadow-sm"
               @click="closePopup"
             >
-              Clear
+              Cancel
             </button>
-            <button type="button" class="btn btn-primary mr-3 shadow none">
-              Apply
+            <button
+              type="button"
+              class="btn btn-primary mr-3 shadow-sm"
+              @click="sendRequest"
+            >
+              Send
             </button>
           </div>
         </form>
@@ -56,12 +82,55 @@
 </template>
 
 <script>
+import { db } from "@/firebase";
+import store from "@/store";
+
+function setMessageFor(input, message) {
+  document.getElementById(input).innerText = message;
+}
+
 export default {
   name: "Popup",
-  props: ["showPopup"],
+  props: ["showPopup", "site"],
+  data() {
+    return {
+      name: "",
+      brand: "",
+      nameSuccess: null,
+      brandSuccess: null,
+    };
+  },
   methods: {
     closePopup() {
       this.$emit("close");
+    },
+    async sendRequest() {
+      try {
+        if (!this.name) {
+          this.nameSuccess = false;
+          setMessageFor("name", "Name cannot be blank");
+        } else this.nameSuccess = true;
+
+        if (!this.brand) {
+          this.brandSuccess = false;
+          setMessageFor("brand", "Brand cannot be blank");
+        } else this.brandSuccess = true;
+        if (this.nameSuccess && this.brandSuccess) {
+          await db
+            .collection("users")
+            .doc(store.currentUser)
+            .collection("requests")
+            .add({
+              name: this.name,
+              brand: this.brand,
+              request_sent: Date.now(),
+            });
+
+          this.closePopup();
+        }
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
 };
