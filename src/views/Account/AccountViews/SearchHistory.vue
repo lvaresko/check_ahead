@@ -30,7 +30,6 @@
 <script>
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
 import { db } from "@/firebase.js";
-import store from "@/store";
 import router from "@/router";
 
 export default {
@@ -40,10 +39,7 @@ export default {
   },
   data() {
     return {
-      user_name: "Amy",
-      email: "",
-      password: "",
-      passwordRepeat: "",
+      currentUser: localStorage.getItem("user"),
       products: [],
       historyLimit: 3,
       totalHistory: 0,
@@ -60,7 +56,7 @@ export default {
     async getHistory() {
       let results = await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("products")
         .orderBy("viewed", "desc")
         .get();
@@ -73,7 +69,7 @@ export default {
 
         const result = await db
           .collection("users")
-          .doc(store.currentUser)
+          .doc(this.currentUser)
           .collection("products")
           .doc(doc.id)
           .get();

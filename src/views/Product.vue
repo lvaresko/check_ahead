@@ -100,6 +100,7 @@ export default {
   name: "Product",
   data() {
     return {
+      currentUser: localStorage.getItem("user"),
       productId: this.$route.params.product_id,
       product_info: {},
       DescriptionOpen: false,
@@ -176,7 +177,7 @@ export default {
       // 1. get users ingredients list
       let results = await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .get();
 
       const data = results.data();
@@ -199,7 +200,7 @@ export default {
 
       // 3. store info for viewed product
       db.collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("products")
         .doc(this.productId)
         .set({

@@ -2,8 +2,8 @@
   <div id="app">
     <Navbar
       v-if="
-        (store.currentUser && store.active) ||
-          ($route.name.match('Home') && this.IsSignedIn && store.currentUser)
+        (this.user && store.active) ||
+          ($route.name.match('Home') && this.IsSignedIn && this.user)
       "
       @open="toggleSidebar"
     />
@@ -12,7 +12,7 @@
 
     <router-view :key="$route.fullPath" id="app_content" />
 
-    <Footer v-if="store.currentUser && store.active" />
+    <Footer v-if="this.user && store.active" />
   </div>
 </template>
 
@@ -33,13 +33,13 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
     // store the user on local storage
     localStorage.setItem("isSignedIn", true);
+    localStorage.setItem("user", user.uid);
 
     console.log("Signed in: " + user.email);
-    store.currentUser = user.uid;
 
     let doc = await db
       .collection("users")
-      .doc(store.currentUser)
+      .doc(localStorage.getItem("user"))
       .get();
 
     // store user info on local storage
@@ -61,7 +61,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
     }
   } else {
     console.log("No user");
-    store.currentUser = null;
+    
     store.active = false;
     localStorage.setItem("isSignedIn", false);
     if (currentRoute.meta.needsUser) {
@@ -77,6 +77,8 @@ export default {
       store,
       sidebarOpen: false,
       IsSignedIn: localStorage.getItem("isSignedIn"),
+      user: localStorage.getItem("user"),
+      loading: false,
     };
   },
 
