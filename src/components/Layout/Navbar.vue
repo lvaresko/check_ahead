@@ -15,7 +15,11 @@
           />
         </router-link>
 
-        <router-link to="/account" style="text-decoration: none">
+        <router-link
+          v-if="this.user_id"
+          :to="{ name: 'AccountOverview', params: { id: this.user_id } }"
+          style="text-decoration: none"
+        >
           <span class="icon-user"></span>
         </router-link>
       </div>
@@ -24,8 +28,15 @@
 </template>
 
 <script>
+import store from "@/store";
+
 export default {
   name: "Navbar",
+  data() {
+    return {
+      user_id: store.currentUser,
+    };
+  },
 };
 </script>
 

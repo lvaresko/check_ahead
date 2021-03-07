@@ -147,6 +147,7 @@ export default {
     },
     async getReccomended() {
       this.loading = true;
+
       let results = await db.collection("products").get();
       this.products = [];
       results.forEach(async (doc) => {
@@ -212,7 +213,7 @@ export default {
         this.loading = false;
         router.push({ name: "Product", params: { product_id: product_id } });
       } else {
-        this.loading = false;
+        store.loading = false;
         this.togglePopup();
       }
     },
@@ -300,14 +301,5 @@ export default {
   color: #232323;
   text-decoration: none;
   cursor: pointer;
-}
-
-.loading {
-  height: 250px;
-  width: 250px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20vh;
 }
 </style>

@@ -3,7 +3,7 @@
     <Navbar
       v-if="
         (store.currentUser && store.active) ||
-          ($route.name.match('Home') && this.IsSignedIn)
+          ($route.name.match('Home') && this.IsSignedIn && store.currentUser)
       "
       @open="toggleSidebar"
     />
@@ -54,10 +54,10 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
     if (store.currentUser && !store.active) {
       router.push({ name: "ChooseIngredients" }).catch(() => {});
-    } else if (currentRoute.meta.auth){
-      router.push({ name: "Home"});
+    } else if (currentRoute.meta.auth) {
+      router.push({ name: "Home" });
     } else {
-      router.push({currentRoute}).catch(() => {});
+      router.push({ currentRoute }).catch(() => {});
     }
   } else {
     console.log("No user");
@@ -77,10 +77,9 @@ export default {
       store,
       sidebarOpen: false,
       IsSignedIn: localStorage.getItem("isSignedIn"),
-      loading: false,
     };
   },
- 
+
   methods: {
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
@@ -93,7 +92,7 @@ export default {
         .collection("users")
         .doc(store.currentUser)
         .get();
-      
+
       console.log("Document data:", doc.data());
       localStorage.setItem("firstName", doc.data().firstName);
       localStorage.setItem("lastName", doc.data().lastName);
@@ -112,11 +111,6 @@ export default {
     if (localStorage.CurrentUser) {
       store.currentUser = localStorage.CurrentUser;
     }
-  },
-  watch: {
-    CurrentUser(LoggedUser) {
-      localStorage.CurrentUser = LoggedUser;
-    },
   },*/
 };
 </script>

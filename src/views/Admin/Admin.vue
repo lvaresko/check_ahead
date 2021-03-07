@@ -1,23 +1,41 @@
 <template>
   <div class="admin">
     <Banner v-if="this.updated" @toggle="toggleBanner(false)" />
+    <div class="container text-center">
+      <div class="nav container-fluid">
+        <li class="nav-item">
+          <router-link :to="{ name: 'AccountOverview', params: { id: 11 } }"
+            >ADMIN OVERVIEW</router-link
+          >
+        </li>
+        |
+        <li class="nav-item">
+          <router-link :to="{ name: 'HandleRequests' }">REQUESTS</router-link>
+        </li>
+        |
+        <li class="nav-item">
+          <router-link :to="{ name: 'AddProduct' }"
+            >PRODUCT DATABASE</router-link
+          >
+        </li>
+      </div>
 
-    <div class="nav">
-      <router-link to="/admin/handleRequests">Handle Requests</router-link>
-      <router-link to="/admin/addProduct">Add Product to Database</router-link>
+      <router-view :key="$route.fullPath" id="app_content" />
     </div>
-
-    <router-view :key="$route.fullPath" id="app_content" />
   </div>
 </template>
 
 <script>
 import Banner from "@/components/Banner.vue";
+import store from "@/store";
 
 export default {
   name: "Admin",
   data() {
-    return { updated: false };
+    return {
+      user_id: store.curretUser,
+      updated: false,
+    };
   },
   components: { Banner },
   methods: {
@@ -28,4 +46,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.nav {
+  margin-top: 10px;
+}
+a {
+  font-weight: bold;
+  color: #595959;
+  font-size: 15px;
+  &.router-link-exact-active {
+    color: #6fa2b4;
+  }
+}
+</style>

@@ -1,11 +1,6 @@
 <template>
   <div class="product">
-    <img
-      class="loading"
-      v-if="loading"
-      :src="require('@/assets/loading.gif')"
-    />
-    <div v-else>
+    <div>
       <BarcodeReader
         :showBarcodeReader="barcodeReaderOpen"
         v-if="this.barcodeReaderOpen"

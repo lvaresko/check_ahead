@@ -1,25 +1,35 @@
 <template>
   <div class="account-sidebar text-center">
     <li class="nav-item pb-4">
-      <router-link to="/account">ACCOUNT OVERVIEW</router-link>
+      <router-link
+        :to="{ name: 'AccountOverview', params: { id: this.user_id } }"
+        >ACCOUNT OVERVIEW</router-link
+      >
     </li>
     <li class="nav-item pb-4">
-      <router-link to="/account/update">MY DETAILS</router-link>
+      <router-link v-if="user_id" :to="{ name: 'UpdateAccount' }"
+        >MY DETAILS</router-link
+      >
     </li>
     <li v-if="this.emailAndPassword" class="nav-item pb-4">
-      <router-link to="/account/reset-password">RESET PASSWORD</router-link>
+      <router-link :to="{ name: 'ResetPassword' }">RESET PASSWORD</router-link>
     </li>
     <li class="nav-item pb-4">
-      <router-link to="/account/history">SEARCH HISTORY</router-link>
+      <router-link :to="{ name: 'SearchHistory' }">SEARCH HISTORY</router-link>
     </li>
     <li class="nav-item">
-      <router-link to="/account/admin">ADMIN PANEL</router-link>
+      <router-link
+        v-if="this.user_id"
+        :to="{ name: 'AdminOverview', params: { id: this.user_id } }"
+        >ADMIN PANEL</router-link
+      >
     </li>
   </div>
 </template>
 
 <script>
 import { firebase } from "@/firebase";
+import store from "@/store";
 
 export default {
   name: "AccountSidebar",
@@ -27,11 +37,12 @@ export default {
     return {
       provider: "",
       emailAndPassword: false,
-    }
+      user_id: store.currentUser,
+    };
   },
   mounted() {
     this.provider = firebase.auth().currentUser.providerData[0].providerId;
-    if (this. provider == 'password') this.emailAndPassword = true;
+    if (this.provider == "password") this.emailAndPassword = true;
     console.log(this.provider);
   },
 };

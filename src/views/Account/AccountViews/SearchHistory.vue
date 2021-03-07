@@ -1,33 +1,27 @@
 <template>
-  <div class="account">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-4" id="nav">
-          <AccountSidebar />
-        </div>
-        <div class="col-12 col-md-8 mt-6 text-center right-side ">
-          <div class="recently-viewed">
-            <h2 class="mb-4">Recently viewed items:</h2>
-            <div v-for="(product, index) in products" :key="product.id">
-              <div v-if="index < historyLimit" class="row text-left ml-0" @click="toProduct(product)">
-                <div class="col-2 p-0">
-                  <img
-                    :src="product.url"
-                    alt="product"
-                  />
-                </div>
-                <div class="col-8">{{ product.name }}</div>
-                <div class="col-2 p-0">
-                  <span  v-if="product.suitable" class="icon-check"></span>
-                  <span  v-else class="icon-cancel"></span>
-                </div>
-              </div>
-            </div> 
-            <div v-if="totalHistory > historyLimit" class="text-left">
-              <a href="#" @click.prevent="historyLimit += 3" class="load">Load more...</a>
-            </div>
+  <div class="col-12 col-md-8 mt-6 text-center right-side ">
+    <div class="recently-viewed">
+      <h2 class="mb-4">Recently viewed items:</h2>
+      <div v-for="(product, index) in products" :key="product.id">
+        <div
+          v-if="index < historyLimit"
+          class="row text-left ml-0"
+          @click="toProduct(product)"
+        >
+          <div class="col-2 p-0">
+            <img :src="product.url" alt="product" />
+          </div>
+          <div class="col-8">{{ product.name }}</div>
+          <div class="col-2 p-0">
+            <span v-if="product.suitable" class="icon-check"></span>
+            <span v-else class="icon-cancel"></span>
           </div>
         </div>
+      </div>
+      <div v-if="totalHistory > historyLimit" class="text-left">
+        <a href="#" @click.prevent="historyLimit += 3" class="load"
+          >Load more...</a
+        >
       </div>
     </div>
   </div>
@@ -98,7 +92,7 @@ export default {
     toProduct(x) {
       router.push({ name: "Product", params: { product_id: x.id } });
     },
-  }
+  },
 };
 </script>
 
