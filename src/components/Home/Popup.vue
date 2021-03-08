@@ -132,6 +132,15 @@ export default {
         console.log(e);
       }
     },
+    classObject: function(varName) {
+      if (varName == null) {
+        return "basic";
+      } else if (varName) {
+        return "success";
+      } else {
+        return "error";
+      }
+    },
   },
 };
 </script>

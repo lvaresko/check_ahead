@@ -7,17 +7,19 @@ import ChooseIngredients from '../views/Auth/ChooseIngredients.vue'
 import IngredientsList from '../views/IngredientsList.vue'
 import Product from '../views/Product.vue'
 import Account from '../views/Account/Account.vue'
-import UpdateAccount from '../views/Account/UpdateAccount.vue'
-import ResetPassword from '../views/Account/ResetPassword.vue'
-import SearchHistory from '../views/Account/SearchHistory.vue'
+import AccountOverview from '../views/Account/AccountViews/AccountOverview.vue'
+import UpdateAccount from '../views/Account/AccountViews/UpdateAccount.vue'
+import ResetPassword from '../views/Account/AccountViews/ResetPassword.vue'
+import SearchHistory from '../views/Account/AccountViews/SearchHistory.vue'
 import Requests from '../views/Requests.vue'
 import Favorites from '../views/Favorites.vue'
 import NotFound from '../views/NotFound.vue'
 import store from '@/store'
 import Admin from '../views/Admin/Admin.vue'
-import HandleRequests from '../views/Admin/HandleRequests.vue'
-import AddProduct from '../views/Admin/AddProduct.vue'
 import LinkAccounts from '../views/Auth/LinkAccounts.vue'
+import AdminOverview from '../views/Admin/AdminViews/AdminOverview.vue'
+import HandleRequests from '../views/Admin/AdminViews/HandleRequests.vue'
+import AddProduct from '../views/Admin/AdminViews/AddProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -68,36 +70,42 @@ const routes = [{
     },
 
     {
-        path: '/account',
-        name: 'Account',
+        path: '/account/:id',
         component: Account,
         meta: {
             needsUser: true,
-        }
-    },
-    {
-        path: '/account/update',
-        name: 'UpdateAccount',
-        component: UpdateAccount,
-        meta: {
-            needsUser: true,
-        }
-    },
-    {
-        path: '/account/reset-password',
-        name: 'ResetPassword',
-        component: ResetPassword,
-        meta: {
-            needsUser: true,
-        }
-    },
-    {
-        path: '/account/history',
-        name: 'SearchHistory',
-        component: SearchHistory,
-        meta: {
-            needsUser: true,
-        }
+        },
+        children: [{
+                path: '',
+                name: 'AccountOverview',
+                component: AccountOverview,
+                meta: {
+                    needsUser: true,
+                }
+            },
+            {
+                path: 'update',
+                name: 'UpdateAccount',
+                component: UpdateAccount,
+                meta: {
+                    needsUser: true,
+                }
+            }, {
+                path: 'reset-password',
+                name: 'ResetPassword',
+                component: ResetPassword,
+                meta: {
+                    needsUser: true,
+                }
+            }, {
+                path: 'history',
+                name: 'SearchHistory',
+                component: SearchHistory,
+                meta: {
+                    needsUser: true,
+                }
+            },
+        ]
     },
     {
         path: '/ingredients_list',
@@ -125,13 +133,19 @@ const routes = [{
     },
     {
         path: '/admin/:id',
-        name: 'Admin',
         component: Admin,
         meta: {
             needsUser: true,
         },
         children: [{
-                path: '/handleRequests',
+                path: '',
+                name: 'AdminOverview',
+                component: AdminOverview,
+                meta: {
+                    needsUser: true,
+                }
+            }, {
+                path: 'handleRequests',
                 name: 'HandleRequests',
                 component: HandleRequests,
                 meta: {
@@ -139,7 +153,7 @@ const routes = [{
                 }
             },
             {
-                path: '/addProduct',
+                path: 'addProduct',
                 name: 'AddProduct',
                 component: AddProduct,
                 meta: {

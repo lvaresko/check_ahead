@@ -1,6 +1,11 @@
 <template>
   <div class="requests">
-    <div class="container">
+    <img
+      class="loading"
+      v-if="loading"
+      :src="require('@/assets/loading.gif')"
+    />
+    <div v-else class="container">
       <div class="text-center">
         <h1>Requests</h1>
         <div>
@@ -35,11 +40,11 @@
                   :key="pendingRequest.id"
                 >
                   <div class="request">
-                    <label>PRODUCT NAME</label>
+                    <label>PRODUCT NAME:</label>
                     <div>{{ pendingRequest.name }}</div>
-                    <label>PRODUCT BRAND</label>
+                    <label>PRODUCT BRAND:</label>
                     <div>{{ pendingRequest.brand }}</div>
-                    <label>REQUEST SENT ON</label>
+                    <label>REQUEST SENT ON:</label>
                     <div>{{ pendingRequest.date }}</div>
                   </div>
                 </div>
@@ -62,9 +67,9 @@
                 :key="approvedRequest.id"
               >
                 <div class="request">
-                  <label>PRODUCT NAME</label>
+                  <label>PRODUCT NAME:</label>
                   <div>{{ approvedRequest.name }}</div>
-                  <label>PRODUCT BRAND</label>
+                  <label>PRODUCT BRAND:</label>
                   <div>{{ approvedRequest.brand }}</div>
                 </div>
               </div>
@@ -92,13 +97,16 @@ export default {
       site: "requests",
       ApprovedRequests: [],
       PendingRequests: [],
+      loading: false,
     };
   },
   components: {
     Popup,
   },
   async mounted() {
+    this.loading = true;
     await this.getRequests();
+    this.loading = false;
   },
   methods: {
     togglePopup() {
@@ -121,8 +129,6 @@ export default {
             brand: data.brand,
             date: new Date(data.request_sent).toDateString(),
           });
-        } else {
-          console.log("aaa");
         }
       });
     },
