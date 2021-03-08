@@ -17,6 +17,7 @@ import store from '@/store'
 import Admin from '../views/Admin/Admin.vue'
 import HandleRequests from '../views/Admin/HandleRequests.vue'
 import AddProduct from '../views/Admin/AddProduct.vue'
+import LinkAccounts from '../views/Auth/LinkAccounts.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,14 @@ const routes = [{
         path: '/login',
         name: 'Login',
         component: Login,
+        meta: {
+            auth: true,
+        }
+    },
+    {
+        path: '/link_accounts',
+        name: 'LinkAccounts',
+        component: LinkAccounts,
         meta: {
             auth: true,
         }

@@ -52,7 +52,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
     //valjda se triggera jer se promjeni to stanje prije nego ide stvarat collection
     if (doc.exists) store.active = doc.data().active;
 
-    if (store.currentUser && !store.active) {
+    if (localStorage.getItem("user") && !store.active) {
       router.push({ name: "ChooseIngredients" }).catch(() => {});
     } else if (currentRoute.meta.auth){
       router.push({ name: "Home"});
