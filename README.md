@@ -25,8 +25,8 @@ Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl.
 [Link na prototip aplikacije](https://www.figma.com/proto/f99rNxIjyfLDljY60b3OAS/Prototip?node-id=12%3A18&scaling=scale-down)
 
 ## Dodaci
-npm install --save vue-quaggajs
-npm install --save vue-search-select
+npm install --save vue-quaggajs <br />
+npm install --save vue-search-select <br />
 npm install --save underscore
 
 ## Test user
