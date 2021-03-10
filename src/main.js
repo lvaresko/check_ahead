@@ -8,7 +8,6 @@ Vue.config.productionTip = false
 
 Vue.use(VueQuagga);
 
-
 new Vue({
     router,
     render: h => h(App),

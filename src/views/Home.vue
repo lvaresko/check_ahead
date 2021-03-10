@@ -82,15 +82,6 @@
             >Load more...</a
           >
         </div>
-
-        <button
-          type="button"
-          class="btn btn-primary shadow-none"
-          @click="togglePopup"
-        >
-          Popup
-        </button>
-        <Popup :site="site" :showPopup="popupOpen" @close="togglePopup" />
       </div>
     </div>
   </div>
@@ -188,7 +179,7 @@ export default {
             type.includes(product.type) &&
             brand.includes(product.brand)
         );
-       
+
         console.log(this.filtered);
       }
     },

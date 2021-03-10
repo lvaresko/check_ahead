@@ -71,6 +71,18 @@
                   <div>{{ approvedRequest.name }}</div>
                   <label>PRODUCT BRAND:</label>
                   <div>{{ approvedRequest.brand }}</div>
+                  <div class="text-center">
+                    <router-link
+                      :to="{
+                        name: 'Product',
+                        params: { product_id: approvedRequest.product_id },
+                      }"
+                    >
+                      <button class="btn btn-secondary check">
+                        CHECK
+                      </button></router-link
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,6 +110,7 @@ export default {
       ApprovedRequests: [],
       PendingRequests: [],
       loading: false,
+      user: localStorage.getItem("user"),
     };
   },
   components: {
@@ -111,23 +124,32 @@ export default {
   methods: {
     togglePopup() {
       this.popupOpen = !this.popupOpen;
+      if (!this.popupOpen) this.getRequests();
     },
 
     async getRequests() {
+      this.ApprovedRequests = [];
+      this.PendingRequests = [];
       let query = await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.user)
         .collection("requests")
         .orderBy("request_sent")
         .get();
 
       query.forEach((doc) => {
         let data = doc.data();
-        if (!data.approved) {
+        if (data.status == "pending") {
           this.PendingRequests.push({
             name: data.name,
             brand: data.brand,
             date: new Date(data.request_sent).toDateString(),
+          });
+        } else if (data.status == "approved") {
+          this.ApprovedRequests.push({
+            name: data.name,
+            brand: data.brand,
+            product_id: data.product_id,
           });
         }
       });
@@ -175,5 +197,11 @@ export default {
   font-size: 14px;
   font-weight: 800;
   margin-bottom: 0px;
+}
+.check {
+  max-width: 60px;
+  font-size: 15px;
+  max-height: 30px;
+  border: 1px solid gray;
 }
 </style>

@@ -80,7 +80,6 @@
 
 <script>
 import { firebase, db, storage } from "@/firebase";
-import store from "@/store";
 import BarcodeReader from "../../components/BarcodeReader.vue";
 
 export default {
@@ -143,7 +142,6 @@ export default {
 
       //remove duplicated and ""
       const ingredients = [...new Set(ingredientsArray)].filter((x) => x != "");
-      console.log(ingredients);
 
       //storage + firestore
       const imgRef = "products/" + brandNew + "_" + nameNew + ".png";
@@ -159,7 +157,8 @@ export default {
         url: url,
         ean_code: this.barcode,
       });
-      this.toggleBanner(true);
+
+      this.$emit("finish", doc.id);
     },
   },
 };

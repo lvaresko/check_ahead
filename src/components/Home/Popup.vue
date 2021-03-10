@@ -5,77 +5,83 @@
     </transition>
     <transition name="fade">
       <div class="popup text-center" v-if="showPopup">
-        <div class="popup-image ">
-          <img
-            id="sad"
-            src="@/assets/unavailable.png"
-            alt="Product unavailable"
-          />
+        <div v-if="updated" class="updated">
+          <span class="icon-check"></span>
+          <div>Your request is sent!</div>
         </div>
-        <div class="popup-text mt-3">
-          <p v-if="site == 'requests'" style="font-size: 18px">
-            WE'RE SORRY THAT THE PRODUCTS YOU'RE LOOKING FOR ISN'T AVAILABLE,
-            WOULD YOU LIKE TO SEND A REQUEST?
-          </p>
-          <p v-else style="font-size: 18px">
-            WE'RE SORRY BUT THIS PRODUCT IS NOT AVAILABLE, WOULD YOU LIKE TO
-            SEND A REQUEST?
-          </p>
+        <div v-else>
+          <div class="popup-image ">
+            <img
+              id="sad"
+              src="@/assets/unavailable.png"
+              alt="Product unavailable"
+            />
+          </div>
+          <div class="popup-text mt-3">
+            <p v-if="site == 'requests'" style="font-size: 18px">
+              WE'RE SORRY THAT THE PRODUCTS YOU'RE LOOKING FOR ISN'T AVAILABLE,
+              WOULD YOU LIKE TO SEND A REQUEST?
+            </p>
+            <p v-else style="font-size: 18px">
+              WE'RE SORRY BUT THIS PRODUCT IS NOT AVAILABLE, WOULD YOU LIKE TO
+              SEND A REQUEST?
+            </p>
+          </div>
+          <form>
+            <div
+              class="form-group text-left"
+              :class="classObject(this.nameSuccess)"
+            >
+              <label form="exampleInputFirstName">Product name:</label>
+              <input
+                type="text"
+                class="form-control basic-input pt-0"
+                v-model="name"
+                id="exampleInputProductName"
+                placeholder="Type here product name"
+                required
+              />
+              <i class="icon-exclamation-2"></i>
+              <small id="name">
+                Error message.
+              </small>
+            </div>
+            <div
+              class="form-group text-left"
+              :class="classObject(this.brandSuccess)"
+            >
+              <label form="exampleInputLastName">Product brand:</label>
+              <input
+                type="text"
+                class="form-control basic-input pt-0"
+                v-model="brand"
+                id="exampleInputProductBrand"
+                placeholder="Type here brand name"
+                reqired
+              />
+              <i class="icon-exclamation-2"></i>
+              <small id="brand">
+                Error message.
+              </small>
+            </div>
+            <div class="btn-wrapper mt-4">
+              <button
+                type="button"
+                class="btn btn-secondary ml-3 shadow-sm"
+                @click="closePopup"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary mr-3 shadow-sm"
+                @click="sendRequest"
+              >
+                Send
+              </button>
+            </div>
+          </form>
         </div>
-        <form>
-          <div
-            class="form-group text-left"
-            :class="classObject(this.nameSuccess)"
-          >
-            <label form="exampleInputFirstName">Product name:</label>
-            <input
-              type="text"
-              class="form-control basic-input pt-0"
-              v-model="name"
-              id="exampleInputProductName"
-              placeholder="Type here product name"
-              required
-            />
-            <i class="icon-exclamation-2"></i>
-            <small id="name">
-              Error message.
-            </small>
-          </div>
-          <div
-            class="form-group text-left"
-            :class="classObject(this.brandSuccess)"
-          >
-            <label form="exampleInputLastName">Product brand:</label>
-            <input
-              type="text"
-              class="form-control basic-input pt-0"
-              v-model="brand"
-              id="exampleInputProductBrand"
-              placeholder="Type here brand name"
-              reqired
-            />
-            <i class="icon-exclamation-2"></i>
-            <small id="brand">
-              Error message.
-            </small>
-          </div>
-          <div class="btn-wrapper mt-4">
-            <button
-              type="button"
-              class="btn btn-secondary ml-3 shadow-sm"
-              @click="closePopup"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary mr-3 shadow-sm"
-              @click="sendRequest"
-            >
-              Send
-            </button>
-          </div>
-        </form>
       </div>
     </transition>
   </div>
@@ -98,6 +104,8 @@ export default {
       brand: "",
       nameSuccess: null,
       brandSuccess: null,
+      user: localStorage.getItem("user"),
+      updated: false,
     };
   },
   methods: {
@@ -118,15 +126,19 @@ export default {
         if (this.nameSuccess && this.brandSuccess) {
           await db
             .collection("users")
-            .doc(store.currentUser)
+            .doc(this.user)
             .collection("requests")
             .add({
               name: this.name,
               brand: this.brand,
               request_sent: Date.now(),
+              status: "pending",
             });
-
-          this.closePopup();
+          this.updated = true;
+          setTimeout(() => {
+            this.updated = false;
+            this.closePopup();
+          }, 2000);
         }
       } catch (e) {
         console.log(e);
@@ -196,5 +208,13 @@ export default {
 
 .btn-wrapper .btn {
   width: 90px;
+}
+.updated span,
+.updated div {
+  color: #54bb5e;
+}
+
+.updated span {
+  font-size: 50px;
 }
 </style>
