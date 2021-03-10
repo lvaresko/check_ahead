@@ -2,8 +2,8 @@
   <div id="app">
     <Navbar
       v-if="
-        (this.user && store.active) ||
-          ($route.name.match('Home') && this.IsSignedIn && this.user)
+        (localStorage.getItem('user') && store.active) ||
+          ($route.name.match('Home') && this.IsSignedIn && localStorage.getItem('user'))
       "
       @open="toggleSidebar"
     />
@@ -12,7 +12,7 @@
 
     <router-view :key="$route.fullPath" id="app_content" />
 
-    <Footer v-if="this.user && store.active" />
+    <Footer v-if="localStorage.getItem('user') && store.active" />
   </div>
 </template>
 
@@ -42,11 +42,18 @@ firebase.auth().onAuthStateChanged(async (user) => {
       .doc(localStorage.getItem("user"))
       .get();
 
-    // store user info on local storage
-    console.log("Document data:", doc.data());
-    localStorage.setItem("firstName", doc.data().firstName);
-    localStorage.setItem("lastName", doc.data().lastName);
-    localStorage.setItem("email", user.email);
+    
+    if(doc.exists) {      // if doc exists store user info on local storage
+      console.log("doc exists");
+      console.log("Document data:", doc.data());
+      localStorage.setItem("firstName", doc.data().firstName);
+      localStorage.setItem("lastName", doc.data().lastName);
+      localStorage.setItem("email", user.email);
+    }
+    
+
+    let provider = await user.providerData[0].providerId;
+    localStorage.setItem("provider", provider);
 
     //ako ne postoji jer observer ne ceka da spremim u colLection kad se s googlom ulogiram
     //valjda se triggera jer se promjeni to stanje prije nego ide stvarat collection
@@ -77,42 +84,19 @@ export default {
       store,
       sidebarOpen: false,
       IsSignedIn: localStorage.getItem("isSignedIn"),
-      user: localStorage.getItem("user"),
       loading: false,
+      localStorage
     };
   },
-
   methods: {
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
     },
-    /*async getUserInfo() {
-      console.log("ccc",store.currentUser)
-      var user = firebase.auth().currentUser;
-
-      let doc =  await db
-        .collection("users")
-        .doc(store.currentUser)
-        .get();
-
-      console.log("Document data:", doc.data());
-      localStorage.setItem("firstName", doc.data().firstName);
-      localStorage.setItem("lastName", doc.data().lastName);
-      localStorage.setItem("email", user.email);
-    },*/
   },
   components: {
     Navbar,
     Sidebar,
     Footer,
   },
-  /*
-  //localStorage????
-  mounted() {
-    //Ako postoji user u localStorage, onda se updejta store
-    if (localStorage.CurrentUser) {
-      store.currentUser = localStorage.CurrentUser;
-    }
-  },*/
 };
 </script>

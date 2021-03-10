@@ -140,6 +140,9 @@ export default {
               auth.signInWithPopup(provider).then(function(result) {
                 result.user.linkAndRetrieveDataWithCredential(pendingCred);
               });
+            } else if(methods[0] === 'password') {
+              console.log("TU SAAAAM ");
+              t.$router.push({ path: "/link_accounts" });  // if sign-in method password go to LinkAccounts (reauthentication)
             }
           }); 
         }   
@@ -159,10 +162,12 @@ export default {
           console.log("**Document data:", doc.data());
         } else {
           console.log("Creating user...");
-
+          
+          console.log(result.additionalUserInfo.profile.first_name, result.additionalUserInfo.profile.last_name);
           localStorage.setItem("firstName",  result.additionalUserInfo.profile.first_name);
           localStorage.setItem("lastName", result.additionalUserInfo.profile.last_name);
           localStorage.setItem("email", result.user.email);
+          console.log("maaaaaa");
 
           let a = await db.collection("users")
             .doc(result.user.uid)

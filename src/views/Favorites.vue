@@ -7,10 +7,10 @@
       :src="require('@/assets/loading.gif')"
     />
     <div v-if="!this.products.length && !loading">
-      <h3>
-        You don't have any products saved to your favorites list
-      </h3>
-      <h5>Click the <span class="icon-heart"></span> icon to add one!</h5>
+      <p>
+        You don't have any products saved to your favorites list. <br />
+        Click the <span class="icon-heart"></span> icon to add one!
+      </p>
     </div>
     <div v-else class="row text-left" data-masonry='{"percentPosition": true }'>
       <Card
@@ -53,8 +53,6 @@ export default {
         .orderBy("favorited", "desc")
         .get();
 
-      //if (!results.exists) this.loading = false;
-
       results.forEach(async (doc) => {
         const product = await db
           .collection("products")
@@ -83,6 +81,7 @@ export default {
         });
         this.loading = false;
       });
+      this.loading = false;
     },
     handleDelete(id) {
       this.products = this.products.filter((product) => {
@@ -96,5 +95,9 @@ export default {
 <style scoped>
 .favorite {
   margin-top: 30px;
+}
+
+.icon-heart {
+  font-size: 25px;
 }
 </style>

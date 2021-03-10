@@ -1,12 +1,9 @@
 <template>
   <div class="overview col-12 col-md-8 mt-6 text-center right-side">
-    <div class="col text-center">
-      <h3>Hi, {{ user_name }}!</h3>
-      <h3>Welcome to your acocunt</h3>
-      <!-- <h1>Your account</h1> -->
+    <div class="col">
+      <h3>Hi, {{ user_name }}! <br /> Welcome to your acocunt</h3>
+    <img id="pic" src="@/assets/proba4.jpg"  loading="lazy" alt="" />
     </div>
-    <img id="pic" src="@/assets/home_2.1.jpeg" alt="" />
-    <!-- <p>Here you can update your settings ??????</p> -->
   </div>
 </template>
 
@@ -21,7 +18,7 @@ export default {
 
 <style scoped>
 #pic {
-  height: 50%;
+  height: 40%;
   width: 80%;
 }
 </style>

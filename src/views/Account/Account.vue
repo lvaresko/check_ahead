@@ -19,11 +19,6 @@ export default {
   components: {
     AccountSidebar,
   },
-  data() {
-    return {
-      provider: "",
-    };
-  },
 };
 </script>
 
