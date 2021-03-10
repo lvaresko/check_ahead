@@ -130,7 +130,7 @@ export default {
     async isFav() {
       let favorited = await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("favorites")
         .doc(this.productId)
         .get();
@@ -143,7 +143,7 @@ export default {
 
       await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("favorites")
         .doc(this.productId)
         .set({
@@ -156,7 +156,7 @@ export default {
       if (this.site == "favorites") this.$emit("delete", this.info.id);
       await db
         .collection("users")
-        .doc(store.currentUser)
+        .doc(this.currentUser)
         .collection("favorites")
         .doc(this.productId)
         .delete();

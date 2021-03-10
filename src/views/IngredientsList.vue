@@ -37,6 +37,7 @@ export default {
       this.updated = value;
     },
     enableBtn(value) {
+      console.log(value);
       this.selected = value;
     },
   },

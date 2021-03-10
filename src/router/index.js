@@ -16,6 +16,7 @@ import Favorites from '../views/Favorites.vue'
 import NotFound from '../views/NotFound.vue'
 import store from '@/store'
 import Admin from '../views/Admin/Admin.vue'
+import LinkAccounts from '../views/Auth/LinkAccounts.vue'
 import AdminOverview from '../views/Admin/AdminViews/AdminOverview.vue'
 import HandleRequests from '../views/Admin/AdminViews/HandleRequests.vue'
 import AddProduct from '../views/Admin/AdminViews/AddProduct.vue'
@@ -47,6 +48,14 @@ const routes = [{
         path: '/login',
         name: 'Login',
         component: Login,
+        meta: {
+            auth: true,
+        }
+    },
+    {
+        path: '/link_accounts',
+        name: 'LinkAccounts',
+        component: LinkAccounts,
         meta: {
             auth: true,
         }

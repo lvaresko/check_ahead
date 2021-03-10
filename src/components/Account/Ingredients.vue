@@ -41,7 +41,7 @@
               type="checkbox"
               v-model="selectedIngr"
               :value="ingredient"
-              @change="updateCheckAll(content); onChange;"
+              @change="updateCheckAll(content); onChange();"
               class="custom-control-input"
             />
             <div class="custom-control-label">
@@ -218,11 +218,12 @@ export default {
         }
       }
     },
-    onChange() {
+    onChange() {console.log(this.selectedIngr.length,this.custom_ingredients.length);
       if(this.selectedIngr.length > 0  || this.custom_ingredients.length > 0) {
         this.$emit('enable');
       } 
       if (this.selectedIngr.length == 0 && this.custom_ingredients.length == 0) {
+        
          this.$emit('disable');
       }
     },
