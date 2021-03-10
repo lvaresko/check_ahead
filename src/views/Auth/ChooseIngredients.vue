@@ -8,7 +8,7 @@
     <button
       type="button"
       @click="checkIngredients();$refs.myChild.updateList();"
-      :class="[selected ? 'disabledClass'  : '', 'btn btn-primary v2 shadow-sm mt-3']"
+      :class="[selected ? 'disabledClass'  : '', 'btn btn-primary v2 shadow-sm mt-4 mb-4']"
       :disabled="selected"
     >
       Submit
@@ -54,5 +54,6 @@ export default {
 .disabledClass {
   cursor: not-allowed;
   background-color: #6FA2B4;
+  margin: 5px 0 5px 0;
 }
 </style>

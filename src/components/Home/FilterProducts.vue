@@ -5,7 +5,7 @@
         <transition name="fade">
           <div
             class="filter-overlay"
-            @click.self="closeFilter"
+            @click.self="closeFilter('close')"
             v-if="openFilter"
           ></div>
         </transition>
@@ -157,9 +157,12 @@ export default {
     this.getData();
   },
   methods: {
-    closeFilter() {
-      this.$emit("close");
-      this.$emit('filter', this.selectedCat, this.selectedType, this.selectedBrand);
+    closeFilter(option) {
+      if (option === 'close') this.$emit("close");
+      else if (this.selectedCat.length || this.selectedType.length || this.selectedBrand.length){
+        this.$emit("close");
+        this.$emit('filter', this.selectedCat, this.selectedType, this.selectedBrand);
+      } else this.$emit("close");
     },
     async getData() {
       let results = await db.collection("products").get();
@@ -176,11 +179,11 @@ export default {
     filter(x) {
       switch (x) {
         case 1:
-          return [...new Set(this.filter_items.map(({ category }) => category))];
+          return [...new Set(this.filter_items.map(({ category }) => category))].sort();
         case 2:
-          return [...new Set(this.filter_items.map(({ type }) => type))];
+          return [...new Set(this.filter_items.map(({ type }) => type))].sort();
         case 3:
-          return [...new Set(this.filter_items.map(({ brand }) => brand))];
+          return [...new Set(this.filter_items.map(({ brand }) => brand))].sort();
       }
     },
     rotate(e) {
@@ -224,13 +227,6 @@ export default {
 .filter-close .btn {
   width: 60px;
 }
-
-/*
-.icon-cancel-1::before {
-  font-size: 20px;
-  vertical-align: top;
-  cursor: pointer;
-}*/
 
 .filter-title {
   display: inline-block;

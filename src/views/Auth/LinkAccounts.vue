@@ -2,7 +2,7 @@
   <form class="signup text-center">
     <!-- <h2 class="pb-3">Link your social account</h2> -->
     <img src="@/assets/social_media.png" class="img-fluid" loading="lazy" />
-    <p class="pt-3 pb-3">Great, you are alredy have a CheckAhead account. Login below using your CheckAhead details to link your social profile. :)</p>
+    <p class="pt-3 pb-3">Great, you alredy have a CheckAhead account. Login below using your CheckAhead details to link your social profile. :)</p>
     <div class="form-group text-left" :class="classObject(this.emailSuccess)">
       <label form="exampleInputEmail">Email:</label>
       <input
@@ -42,7 +42,7 @@
     <button
       type="submit"
       @click.prevent="connectProviders()"
-      class="btn btn-primary mt-4 shadow-sm"
+      class="btn btn-primary mb-4 mt-4 shadow-sm"
     >
       Link accounts
     </button>
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { firebase, db } from "@/firebase";
+import { firebase } from "@/firebase";
 import store from "@/store";
 
 function setMessageFor(input, message) {
@@ -71,7 +71,6 @@ export default {
     async connectProviders() {
       try {
         let result = await firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(function(result) {
-            // Step 4a.
             return result.user.linkWithCredential(store.pendingCred);
         }).then(function() {
             store.pendingCred = "";

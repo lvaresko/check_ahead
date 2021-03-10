@@ -187,7 +187,7 @@ export default {
         element.style.transform = "rotate(0deg)";
       }
     },
-    updateList() {
+    async updateList() {
       db.collection("users")
         .doc(this.currentUser)
         .set(
@@ -197,6 +197,46 @@ export default {
           },
           { merge: true }
         ); // data should be merged into the existing document
+      
+      if (this.$router.currentRoute.name == "IngredientsList") {  // if changes were made to the ingredients list
+        let ingredientsList = [];
+        ingredientsList.push(
+          ...this.selectedIngr,
+          ...this.custom_ingredients
+        );
+
+        let querry = await db
+          .collection("users")
+          .doc(this.currentUser)
+          .collection("products")
+          .get();
+        
+        querry.forEach(async (doc) => {
+          let result = await db
+            .collection("products")
+            .doc(doc.id)
+            .get()
+
+          let product_info = result.data();
+
+          let filter = product_info.ingredients.filter((key) =>
+            ingredientsList.includes(key)
+          );
+
+          let suitable = "";
+          if (filter == 0) suitable = true;
+          else suitable = false;
+        
+          db.collection("users")
+          .doc(this.currentUser)
+          .collection("products")
+          .doc(doc.id)
+          .update({
+            suitable: suitable,
+          });
+        });
+      }
+
       this.$emit("toggle");
     },
     async selectedIngredients() {
@@ -219,13 +259,8 @@ export default {
       }
     },
     onChange() {console.log(this.selectedIngr.length,this.custom_ingredients.length);
-      if(this.selectedIngr.length > 0  || this.custom_ingredients.length > 0) {
-        this.$emit('enable');
-      } 
-      if (this.selectedIngr.length == 0 && this.custom_ingredients.length == 0) {
-        
-         this.$emit('disable');
-      }
+      if(this.selectedIngr.length > 0  || this.custom_ingredients.length > 0) this.$emit('enable');
+      if (this.selectedIngr.length == 0 && this.custom_ingredients.length == 0) this.$emit('disable');
     },
   },
 };

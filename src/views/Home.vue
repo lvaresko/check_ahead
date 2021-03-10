@@ -69,17 +69,18 @@
             :info="product"
           />
         </div>
-        <div v-else class="row" data-masonry='{"percentPosition": true }'>
+        <div v-if="filter" class="row" data-masonry='{"percentPosition": true }'>
           <Card
-            v-for="product in filtered"
+            v-for="(product, index) in filtered"
+            v-if="index < productsLimit"
             :key="product.id"
             :site="site"
             :info="product"
           />
         </div>
-        <div v-if="totalProducts > productsLimit" class="text-left">
+        <div v-if="(this.filtered.length > 0 ? this.filtered.length : this.totalProducts) > productsLimit" class="text-left">
           <a href="#" @click.prevent="productsLimit += 6" class="load"
-            >Load more...</a
+            >Load more... {{this.productsLimit}} {{this.filtered.length}}</a
           >
         </div>
 
@@ -134,7 +135,6 @@ export default {
   },
   updated() {
     this.totalProducts = this.products.length;
-    console.log(this.products.length);
   },
   methods: {
     togglePopup() {
@@ -153,47 +153,83 @@ export default {
       this.products = [];
       results.forEach(async (doc) => {
         let data = doc.data();
-        //don't show products that are favorited
+        //don't show products that are favorited, viewed and not suitable
         let favorited = await db
           .collection("users")
           .doc(this.currentUser)
           .collection("favorites")
           .doc(doc.id)
           .get();
+        
+        let viewed = await db
+          .collection("users")
+          .doc(this.currentUser)
+          .collection("products")
+          .doc(doc.id)
+          .get();
 
-        if (!favorited.exists) {
-          this.products.push({
-            id: doc.id,
-            brand: data.brand,
-            name: data.name,
-            category: data.category,
-            type: data.type,
-            ingredients: data.ingredients,
-            url: data.url,
-          });
+        if (!favorited.exists && !viewed.exists) {    // if product not favorited and viewed check suitability
+          let results = await db
+            .collection("users")
+            .doc(this.currentUser)
+            .get();
+
+          const user_info = results.data();
+          let ingredientsList = [];
+          ingredientsList.push(
+            ...user_info.selectedIngredients,
+            ...user_info.customIngredients
+          );
+
+          let filter = data.ingredients.filter((key) =>
+            ingredientsList.includes(key)
+          );
+          if (filter == 0) {
+            this.products.push({
+              id: doc.id,
+              brand: data.brand,
+              name: data.name,
+              category: data.category,
+              type: data.type,
+              ingredients: data.ingredients,
+              url: data.url,
+            });
+          } 
         }
-
         this.loading = false;
       });
     },
     filterRecommendations(category, type, brand) {
-      console.log("Filter emita oke", category, type, brand);
+      this.productsLimit = 6;
 
-      if (category.length && type.length && brand.length) {
-        // if something selected
-        this.filter = true;
+     if(category.length) {
         this.filtered = this.products.filter(
           (product) =>
-            category.includes(product.category) &&
-            type.includes(product.type) &&
+            category.includes(product.category) 
+        );
+      }
+      if (type.length) {
+        this.filtered = this.products.filter(
+          (product) =>
+            type.includes(product.type)
+        );
+      }
+      if (brand.length) {
+        console.log("EVO",this.products.filter(
+          (product) =>
+            brand.includes(product.brand)
+        ));
+        this.filtered = this.products.filter(
+          (product) =>
             brand.includes(product.brand)
         );
-       
-        console.log(this.filtered);
       }
+
+      this.filter = true;
     },
     clearFilter() {
       this.filter = false;
+      this.filtered = [];
     },
     async checkBarcode(value) {
       this.toggleBarcodeReader();

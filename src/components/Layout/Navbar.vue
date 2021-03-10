@@ -34,7 +34,7 @@ export default {
   name: "Navbar",
   data() {
     return {
-      user_id: store.currentUser,
+      user_id: localStorage.getItem("user"),
     };
   },
 };

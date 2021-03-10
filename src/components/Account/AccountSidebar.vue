@@ -37,7 +37,7 @@ export default {
     return {
       provider: "",
       emailAndPassword: false,
-      user_id: store.currentUser,
+      user_id: localStorage.getItem("user"),
     };
   },
   mounted() {

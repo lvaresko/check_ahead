@@ -52,7 +52,6 @@
 
 <script>
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
-import Banner from "@/components/Banner.vue";
 import store from "@/store";
 import { firebase, db } from "@/firebase";
 
@@ -96,7 +95,6 @@ export default {
   },
   components: {
     AccountSidebar,
-    Banner,
   },
 };
 </script>
