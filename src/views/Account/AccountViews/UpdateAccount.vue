@@ -58,14 +58,13 @@
 
 <script>
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
-import store from "@/store";
 import { firebase, db } from "@/firebase";
 
 export default {
   name: "UpdateAccount",
   data() {
     return {
-      user: firebase.auth().currentUser,
+      currentUser: localStorage.getItem("user"),
       email: localStorage.getItem("email"),
       firstName: localStorage.getItem("firstName"),
       lastName: localStorage.getItem("lastName"),
@@ -73,7 +72,6 @@ export default {
       updated: false,
       emailAndPassword: false,
       enabledClass: "btn btn-primary shadow-sm mt-4",
-      store,
       localStorage,
     };
   },
@@ -95,7 +93,7 @@ export default {
         );
 
         db.collection("users")
-          .doc(store.currentUser)
+          .doc(this.currentUser)
           .update({
             firstName: this.firstName,
             lastName: this.lastName,
@@ -124,7 +122,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .signup > label {
   font-size: 15px;
   font-weight: bold;
@@ -133,6 +131,6 @@ export default {
 
 .disabledClass {
   cursor: not-allowed;
-  background-color: #6fa2b4 !important;
+  background-color: #6fa2b4;
 }
 </style>

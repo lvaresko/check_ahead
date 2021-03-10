@@ -52,7 +52,6 @@
 
 <script>
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
-import store from "@/store";
 import { firebase, db } from "@/firebase";
 
 export default {
@@ -64,7 +63,6 @@ export default {
       newPassword: "",
       passwordRepeat: "",
       updated: false,
-      store,
     };
   },
   methods: {

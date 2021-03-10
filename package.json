@@ -11,6 +11,7 @@
         "core-js": "^3.6.5",
         "firebase": "^8.2.1",
         "font-awesome": "^4.7.0",
+        "underscore": "^1.12.0",
         "vue": "^2.6.12",
         "vue-barcode-scanner": "^0.8.1",
         "vue-cc-quaggajs": "^2.2.2",

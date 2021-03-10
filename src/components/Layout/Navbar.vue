@@ -16,8 +16,7 @@
         </router-link>
 
         <router-link
-          v-if="this.user_id"
-          :to="{ name: 'AccountOverview', params: { id: this.user_id } }"
+          :to="{ name: 'AccountOverview', params: { id: this.currentUser } }"
           style="text-decoration: none"
         >
           <span class="icon-user"></span>
@@ -34,7 +33,7 @@ export default {
   name: "Navbar",
   data() {
     return {
-      user_id: localStorage.getItem("user"),
+      currentUser: localStorage.getItem("user"),
     };
   },
 };

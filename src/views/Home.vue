@@ -83,15 +83,6 @@
             >Load more... {{this.productsLimit}} {{this.filtered.length}}</a
           >
         </div>
-
-        <button
-          type="button"
-          class="btn btn-primary shadow-none"
-          @click="togglePopup"
-        >
-          Popup
-        </button>
-        <Popup :site="site" :showPopup="popupOpen" @close="togglePopup" />
       </div>
     </div>
   </div>

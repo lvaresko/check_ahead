@@ -2,25 +2,31 @@
   <div class="account-sidebar text-center">
     <li class="nav-item pb-4">
       <router-link
-        :to="{ name: 'AccountOverview', params: { id: this.user_id } }"
+        :to="{ name: 'AccountOverview', params: { id: this.currentUser } }"
         >ACCOUNT OVERVIEW</router-link
       >
     </li>
     <li class="nav-item pb-4">
-      <router-link v-if="user_id" :to="{ name: 'UpdateAccount' }"
+      <router-link
+        :to="{ name: 'UpdateAccount', params: { id: this.currentUser } }"
         >MY DETAILS</router-link
       >
     </li>
     <li v-if="this.emailAndPassword" class="nav-item pb-4">
-      <router-link :to="{ name: 'ResetPassword' }">RESET PASSWORD</router-link>
+      <router-link
+        :to="{ name: 'ResetPassword', params: { id: this.currentUser } }"
+        >RESET PASSWORD</router-link
+      >
     </li>
     <li class="nav-item pb-4">
-      <router-link :to="{ name: 'SearchHistory' }">SEARCH HISTORY</router-link>
+      <router-link
+        :to="{ name: 'SearchHistory', params: { id: this.currentUser } }"
+        >SEARCH HISTORY</router-link
+      >
     </li>
     <li class="nav-item">
       <router-link
-        v-if="this.user_id"
-        :to="{ name: 'AdminOverview', params: { id: this.user_id } }"
+        :to="{ name: 'AdminOverview', params: { id: this.currentUser } }"
         >ADMIN PANEL</router-link
       >
     </li>
@@ -37,7 +43,7 @@ export default {
     return {
       provider: "",
       emailAndPassword: false,
-      user_id: localStorage.getItem("user"),
+      currentUser: localStorage.getItem("user"),
     };
   },
   mounted() {

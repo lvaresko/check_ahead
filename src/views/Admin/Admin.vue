@@ -4,43 +4,51 @@
     <div class="container text-center">
       <div class="nav container-fluid">
         <li class="nav-item">
-          <router-link :to="{ name: 'AccountOverview', params: { id: 11 } }"
+          <router-link
+            :to="{ name: 'AdminOverview', params: { id: this.currentUser } }"
             >ADMIN OVERVIEW</router-link
           >
         </li>
         |
         <li class="nav-item">
-          <router-link :to="{ name: 'HandleRequests' }">REQUESTS</router-link>
+          <router-link
+            :to="{ name: 'HandleRequests', params: { id: this.currentUser } }"
+            >REQUESTS</router-link
+          >
         </li>
         |
         <li class="nav-item">
-          <router-link :to="{ name: 'AddProduct' }"
+          <router-link
+            :to="{ name: 'AddProduct', params: { id: this.currentUser } }"
             >PRODUCT DATABASE</router-link
           >
         </li>
       </div>
 
-      <router-view :key="$route.fullPath" id="app_content" />
+      <router-view
+        :key="$route.fullPath"
+        id="app_content"
+        @updated="toggleBanner"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import Banner from "@/components/Banner.vue";
-import store from "@/store";
 
 export default {
   name: "Admin",
   data() {
     return {
-      user_id: store.curretUser,
+      currentUser: localStorage.getItem("user"),
       updated: false,
     };
   },
   components: { Banner },
   methods: {
-    toggleBanner(value) {
-      this.updated = value;
+    toggleBanner() {
+      this.updated = true;
     },
   },
 };
