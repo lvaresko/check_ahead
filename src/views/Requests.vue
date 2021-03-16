@@ -7,18 +7,18 @@
     />
     <div v-else class="container">
       <div class="text-center">
-        <h1>Requests</h1>
+        <h1 class="pt-3">Requests</h1>
         <div>
-          Here you can see details on requests you've already made.
-          <h5>Want to make a new one?</h5>
+          Here you can see details on requests you've already made. <br />
+          Want to make a new one? <span class="make_request" @click="togglePopup"> Make a request </span>
         </div>
-        <button
+      <!--  <button
           type="button"
           class="btn btn-primary shadow-sm mt-1"
           @click="togglePopup"
         >
           Make a request
-        </button>
+        </button> -->
         <Popup
           v-if="popupOpen"
           :site="site"
@@ -27,7 +27,7 @@
         />
       </div>
       <div class="row" style="padding-top: 30px">
-        <div class="col-12 col-md-6 d-flex justify-content-center">
+        <div class="col-12 col-md-6 mb-3 d-flex justify-content-center">
           <div>
             <div class="title">
               <span class="icon-alarm-clock-1"></span>
@@ -169,6 +169,11 @@ export default {
 </script>
 
 <style scoped>
+.make_request {
+  color: #6fa2b4;
+  cursor: pointer;
+}
+
 .title {
   background: #6fa2b4;
   min-width: 330px;

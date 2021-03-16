@@ -48,7 +48,7 @@
         type="button"
         @click="updateProfile()"
         :disabled="!emailAndPassword"
-        :class="[selected ? 'disabledClass' : '', enabledClass]"
+        :class="[!emailAndPassword ? 'disabledClass' : '', 'btn btn-primary shadow-sm mt-4']"
       >
         Save changes
       </button>
@@ -64,21 +64,15 @@ export default {
   name: "UpdateAccount",
   data() {
     return {
+      user: firebase.auth().currentUser,
       currentUser: localStorage.getItem("user"),
       email: localStorage.getItem("email"),
       firstName: localStorage.getItem("firstName"),
       lastName: localStorage.getItem("lastName"),
       password: "",
       updated: false,
-      emailAndPassword: false,
-      enabledClass: "btn btn-primary shadow-sm mt-4",
-      localStorage,
+      emailAndPassword: localStorage.getItem("emailAndPassword"),
     };
-  },
-  mounted() {
-    this.provider = firebase.auth().currentUser.providerData[0].providerId;
-    if (this.provider == "password") this.emailAndPassword = true;
-    console.log(this.provider);
   },
   methods: {
     async updateProfile() {
@@ -102,7 +96,7 @@ export default {
         localStorage.setItem("firstName", this.firstName);
         localStorage.setItem("lastName", this.lastName);
 
-        let update = await user.updateEmail(this.email);
+        let update = await this.user.updateEmail(this.email);
 
         console.log("Updated");
         localStorage.setItem("email", this.email);

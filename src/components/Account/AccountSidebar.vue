@@ -34,22 +34,17 @@
 </template>
 
 <script>
-import { firebase } from "@/firebase";
-import store from "@/store";
-
 export default {
   name: "AccountSidebar",
   data() {
     return {
       provider: "",
-      emailAndPassword: false,
+      emailAndPassword: localStorage.getItem("emailAndPassword"),
       currentUser: localStorage.getItem("user"),
     };
   },
   mounted() {
-    this.provider = firebase.auth().currentUser.providerData[0].providerId;
-    if (this.provider == "password") this.emailAndPassword = true;
-    console.log(this.provider);
+    if (localStorage.getItem("provider") == "password")  localStorage.setItem("emailAndPassword", true);
   },
 };
 </script>
