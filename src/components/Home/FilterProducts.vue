@@ -12,10 +12,18 @@
         <transition name="slide-r">
           <div class="filter text-center" v-if="openFilter">
             <div class="filter-close">
-              <button type="button" class="btn btn-secondary shadow-sm" @click="clear();">
+              <button
+                type="button"
+                class="btn btn-secondary shadow-sm"
+                @click="clear()"
+              >
                 Clear
               </button>
-              <button type="button" class="btn btn-primary shadow-sm" @click.self="closeFilter();">
+              <button
+                type="button"
+                class="btn btn-primary shadow-sm"
+                @click.self="closeFilter()"
+              >
                 Done
               </button>
             </div>
@@ -158,10 +166,18 @@ export default {
   },
   methods: {
     closeFilter(option) {
-      if (option === 'close') this.$emit("close");
-      else if (this.selectedCat.length || this.selectedType.length || this.selectedBrand.length){
-        this.$emit("close");
-        this.$emit('filter', this.selectedCat, this.selectedType, this.selectedBrand);
+      if (option === "close") this.$emit("close");
+      else if (
+        this.selectedCat.length ||
+        this.selectedType.length ||
+        this.selectedBrand.length
+      ) {
+        this.$emit(
+          "filter",
+          this.selectedCat,
+          this.selectedType,
+          this.selectedBrand
+        );
       } else this.$emit("close");
     },
     async getData() {
@@ -179,11 +195,15 @@ export default {
     filter(x) {
       switch (x) {
         case 1:
-          return [...new Set(this.filter_items.map(({ category }) => category))].sort();
+          return [
+            ...new Set(this.filter_items.map(({ category }) => category)),
+          ].sort();
         case 2:
           return [...new Set(this.filter_items.map(({ type }) => type))].sort();
         case 3:
-          return [...new Set(this.filter_items.map(({ brand }) => brand))].sort();
+          return [
+            ...new Set(this.filter_items.map(({ brand }) => brand)),
+          ].sort();
       }
     },
     rotate(e) {
@@ -198,8 +218,8 @@ export default {
       this.selectedCat = [];
       this.selectedType = [];
       this.selectedBrand = [];
-      this.$emit('clear');
-    }
+      this.$emit("clear");
+    },
   },
 };
 </script>

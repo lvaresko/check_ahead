@@ -57,31 +57,43 @@
         />
 
         <div
-          v-if="!filter"
           class="row"
+          v-if="!filter"
           data-masonry='{"percentPosition": true }'
         >
           <Card
-            v-for="(product, index) in products"
-            v-if="index < productsLimit"
+            v-for="product in showProducts"
             :key="product.id"
             :site="site"
             :info="product"
           />
+          <div v-if="!this.products.length">
+            We're sorry, there are no products to show.
+          </div>
         </div>
-        <div v-if="filter" class="row" data-masonry='{"percentPosition": true }'>
+
+        <div class="row" v-else data-masonry='{"percentPosition": true }'>
           <Card
-            v-for="(product, index) in filtered"
-            v-if="index < productsLimit"
+            v-for="product in showFiltered"
             :key="product.id"
             :site="site"
             :info="product"
           />
+          <div v-if="!this.filtered.length">
+            We're sorry, there are no products to show.
+          </div>
         </div>
-        <div v-if="(this.filtered.length > 0 ? this.filtered.length : this.totalProducts) > productsLimit" class="text-left">
+
+        <div
+          v-if="
+            (this.filter ? this.filtered.length : this.totalProducts) >
+              productsLimit
+          "
+          class="text-left"
+        >
           <a href="#" @click.prevent="productsLimit += 6" class="load"
-            >Load more... {{this.productsLimit}} {{this.filtered.length}}</a
-          >
+            >Load more...
+          </a>
         </div>
       </div>
     </div>
@@ -110,6 +122,7 @@ export default {
       loading: false,
       filter: false,
       filtered: [],
+      filter_items: [],
       productsLimit: 6,
       totalProducts: 0,
     };
@@ -122,7 +135,10 @@ export default {
     SearchDropdown,
   },
   async mounted() {
-    await this.getReccomended();
+    this.loading = true;
+    await this.getRecommended();
+    console.log("mounted");
+    this.loading = false;
   },
   updated() {
     this.totalProducts = this.products.length;
@@ -137,35 +153,35 @@ export default {
     toggleBarcodeReader() {
       this.barcodeReaderOpen = !this.barcodeReaderOpen;
     },
-    async getReccomended() {
-      this.loading = true;
-
+    async getRecommended() {
       let results = await db.collection("products").get();
       this.products = [];
-      results.forEach(async (doc) => {
+
+      let favorited = await db
+        .collection("users")
+        .doc(this.currentUser)
+        .collection("favorites");
+
+      let viewed = await db
+        .collection("users")
+        .doc(this.currentUser)
+        .collection("products");
+
+      let user_results = await db
+        .collection("users")
+        .doc(this.currentUser)
+        .get();
+
+      for (let doc of results.docs) {
         let data = doc.data();
         //don't show products that are favorited, viewed and not suitable
-        let favorited = await db
-          .collection("users")
-          .doc(this.currentUser)
-          .collection("favorites")
-          .doc(doc.id)
-          .get();
-        
-        let viewed = await db
-          .collection("users")
-          .doc(this.currentUser)
-          .collection("products")
-          .doc(doc.id)
-          .get();
+        let isFavorited = await favorited.doc(doc.id).get();
+        let isViewed = await viewed.doc(doc.id).get();
 
-        if (!favorited.exists && !viewed.exists) {    // if product not favorited and viewed check suitability
-          let results = await db
-            .collection("users")
-            .doc(this.currentUser)
-            .get();
+        if (!isFavorited.exists && !isViewed.exists) {
+          // if product not favorited and viewed check suitability
 
-          const user_info = results.data();
+          const user_info = user_results.data();
           let ingredientsList = [];
           ingredientsList.push(
             ...user_info.selectedIngredients,
@@ -185,38 +201,59 @@ export default {
               ingredients: data.ingredients,
               url: data.url,
             });
-          } 
+            console.log("Stavljam proizvod");
+          }
         }
-        this.loading = false;
-      });
+        if (this.products.length == 6) this.loading = false;
+      }
     },
-    filterRecommendations(category, type, brand) {
+    async filterRecommendations(category, type, brand) {
+      this.toggleFilter();
+      this.loading = true;
       this.productsLimit = 6;
+      this.filtered = [];
+      this.filter_items = [];
 
-     if(category.length) {
-        this.filtered = this.products.filter(
-          (product) =>
-            category.includes(product.category) 
-        );
-      }
-      if (type.length) {
-        this.filtered = this.products.filter(
-          (product) =>
-            type.includes(product.type)
-        );
-      }
-      if (brand.length) {
-        console.log("EVO",this.products.filter(
-          (product) =>
-            brand.includes(product.brand)
-        ));
-        this.filtered = this.products.filter(
-          (product) =>
-            brand.includes(product.brand)
-        );
+      for (let product of this.products) {
+        this.filter_items.push({
+          brand: product.brand,
+          category: product.category,
+          type: product.type,
+        });
       }
 
+      if (!category.length) category = this.filter_options(1);
+
+      if (!type.length) type = this.filter_options(2);
+
+      if (!brand.length) brand = this.filter_options(3);
+
+      this.filtered.push(
+        this.products.filter(
+          (product) =>
+            category.includes(product.category) &&
+            type.includes(product.type) &&
+            brand.includes(product.brand)
+        )
+      );
+
+      this.filtered = this.filtered[0];
+      this.loading = false;
       this.filter = true;
+    },
+    filter_options(x) {
+      switch (x) {
+        case 1:
+          return [
+            ...new Set(this.filter_items.map(({ category }) => category)),
+          ].sort();
+        case 2:
+          return [...new Set(this.filter_items.map(({ type }) => type))].sort();
+        case 3:
+          return [
+            ...new Set(this.filter_items.map(({ brand }) => brand)),
+          ].sort();
+      }
     },
     clearFilter() {
       this.filter = false;
@@ -243,6 +280,14 @@ export default {
         store.loading = false;
         this.togglePopup();
       }
+    },
+  },
+  computed: {
+    showProducts() {
+      return this.products.slice(0, this.productsLimit);
+    },
+    showFiltered() {
+      return this.filtered.slice(0, this.productsLimit);
     },
   },
 };

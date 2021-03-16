@@ -108,13 +108,13 @@ export default {
     async getRequests() {
       try {
         this.requests = [];
-
         let query = await db.collection("users").get();
 
-        query.forEach(async (data) => {
+        for (let user of query.docs) {
+          console.log(user.data());
           let requests = await db
             .collection("users")
-            .doc(data.id)
+            .doc(user.id)
             .collection("requests")
             .get();
 
@@ -122,9 +122,9 @@ export default {
             if (doc.data().status == "pending") {
               this.sortedPush({
                 request_id: doc.id,
-                author: data.id,
-                author_firstName: data.data().firstName,
-                author_lastName: data.data().lastName,
+                author: user.id,
+                author_firstName: user.data().firstName,
+                author_lastName: user.data().lastName,
                 name: doc.data().name,
                 brand: doc.data().brand,
                 request_sent: new Date(
@@ -133,7 +133,8 @@ export default {
               });
             }
           });
-        });
+        }
+        console.log("sad sam gotov");
       } catch (e) {
         console.error(e);
       }

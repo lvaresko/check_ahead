@@ -13,14 +13,10 @@
         "font-awesome": "^4.7.0",
         "underscore": "^1.12.0",
         "vue": "^2.6.12",
-        "vue-barcode-scanner": "^0.8.1",
-        "vue-cc-quaggajs": "^2.2.2",
         "vue-multiselect": "^2.1.6",
-        "vue-qr-reader": "^1.6.2",
         "vue-quaggajs": "^1.0.12",
         "vue-router": "^3.2.0",
-        "vue-search-select": "^2.9.3",
-        "vue-simple-search-dropdown": "^1.0.1"
+        "vue-search-select": "^2.9.3"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "~4.5.0",
