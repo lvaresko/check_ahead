@@ -92,7 +92,6 @@ export default {
   async mounted() {
     this.loading = true;
     await this.getRequests();
-    console.log("mounted");
     this.loading = false;
   },
   methods: {
@@ -111,7 +110,6 @@ export default {
         let query = await db.collection("users").get();
 
         for (let user of query.docs) {
-          console.log(user.data());
           let requests = await db
             .collection("users")
             .doc(user.id)
@@ -134,7 +132,6 @@ export default {
             }
           });
         }
-        console.log("sad sam gotov");
       } catch (e) {
         console.error(e);
       }

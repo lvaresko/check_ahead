@@ -19,6 +19,9 @@ export default {
   components: {
     AccountSidebar,
   },
+  beforeMount() {
+    if (localStorage.getItem("provider") == "password")  localStorage.setItem("emailAndPassword", true);
+  }
 };
 </script>
 

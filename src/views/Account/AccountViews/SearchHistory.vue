@@ -50,7 +50,6 @@ export default {
   },
   updated() {
     this.totalHistory = this.products.length;
-    console.log(this.products.length);
   },
   methods: {
     async getHistory() {

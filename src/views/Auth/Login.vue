@@ -105,16 +105,13 @@ export default {
 
       try {
         let result = await firebase.auth().signInWithPopup(provider);
-        console.log(result.user.uid);
         let doc = await db
           .collection("users")
           .doc(result.user.uid)
           .get();
 
         
-        if (doc.exists) {
-          console.log("Document data:", doc.data());
-        } else {
+        if (!doc.exists) {
           console.log("Creating user...");
 
           db.collection("users")
@@ -129,7 +126,6 @@ export default {
         console.error(e);
 
         if (e.code ===  'auth/account-exists-with-different-credential') {
-          console.log("GOOGLE");
           // The pending Google credential.
           var pendingCred = e.credential;
           var email = e.email;
@@ -141,7 +137,6 @@ export default {
                 result.user.linkAndRetrieveDataWithCredential(pendingCred);
               });
             } else if(methods[0] === 'password') {
-              console.log("TU SAAAAM ");
               t.$router.push({ path: "/link_accounts" });  // if sign-in method password go to LinkAccounts (reauthentication)
             }
           }); 
@@ -158,16 +153,12 @@ export default {
           .doc(result.user.uid)
           .get();
 
-        if (doc.exists) {
-          console.log("**Document data:", doc.data());
-        } else {
+        if (!doc.exists) {
           console.log("Creating user...");
           
-          console.log(result.additionalUserInfo.profile.first_name, result.additionalUserInfo.profile.last_name);
           localStorage.setItem("firstName",  result.additionalUserInfo.profile.first_name);
           localStorage.setItem("lastName", result.additionalUserInfo.profile.last_name);
           localStorage.setItem("email", result.user.email);
-          console.log("maaaaaa");
 
           let a = await db.collection("users")
             .doc(result.user.uid)
@@ -176,16 +167,13 @@ export default {
               lastName: result.additionalUserInfo.profile.last_name,
               active: false,
             });
-            console.log("evo");
         }
       } catch (e) {
         console.error(e);
         if (e.code ===  'auth/account-exists-with-different-credential') {  // email already in use
           
-          console.log("FACEBOOK");
           // The pending Facebook credential.
           store.pendingCred  = e.credential;  // ma ne moze u store to ic jooo
-          console.log(store.pendingCred);
           store.email = e.email;
 
           let t = this;
@@ -195,7 +183,6 @@ export default {
               firebase.auth().signInWithPopup(provider).then(function(result) {
                 result.user.linkAndRetrieveDataWithCredential(store.pendingCred);
             });} else if(methods[0] === 'password') {
-              console.log("TU SAAAAM ");
               t.$router.push({ path: "/link_accounts" });  // if sign-in method password go to LinkAccounts (reauthentication)
             }
           });

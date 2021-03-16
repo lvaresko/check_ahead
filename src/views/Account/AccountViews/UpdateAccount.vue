@@ -74,6 +74,9 @@ export default {
       emailAndPassword: localStorage.getItem("emailAndPassword"),
     };
   },
+  mounted() {
+    console.log( localStorage.getItem("emailAndPassword"));
+  },
   methods: {
     async updateProfile() {
       try {
@@ -97,8 +100,7 @@ export default {
         localStorage.setItem("lastName", this.lastName);
 
         let update = await this.user.updateEmail(this.email);
-
-        console.log("Updated");
+        
         localStorage.setItem("email", this.email);
         this.password = "";
         this.toggleBanner(true);

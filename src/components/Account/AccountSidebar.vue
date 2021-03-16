@@ -43,9 +43,6 @@ export default {
       currentUser: localStorage.getItem("user"),
     };
   },
-  mounted() {
-    if (localStorage.getItem("provider") == "password")  localStorage.setItem("emailAndPassword", true);
-  },
 };
 </script>
 

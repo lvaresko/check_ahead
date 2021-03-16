@@ -137,7 +137,6 @@ export default {
   async mounted() {
     this.loading = true;
     await this.getRecommended();
-    console.log("mounted");
     this.loading = false;
   },
   updated() {
@@ -201,7 +200,6 @@ export default {
               ingredients: data.ingredients,
               url: data.url,
             });
-            console.log("Stavljam proizvod");
           }
         }
         if (this.products.length == 6) this.loading = false;
@@ -302,7 +300,6 @@ export default {
 
 .home .jumbotron {
   background-size: cover;
-  background-image: url("../assets/home_3.1.jpeg");
   margin-bottom: 0;
   min-height: 480px;
   background-position: center center;
