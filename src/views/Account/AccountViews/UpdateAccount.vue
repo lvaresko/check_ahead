@@ -33,22 +33,35 @@
           aria-describedby="EmailHelp"
         />
       </div>
-      <div class="form-group text-left">
+      <div
+        class="form-group text-left"
+        :class="classObject(this.passwordSuccess)"
+      >
         <label form="exampleInputPassword1">Password:</label>
         <input
           type="password"
           v-model="password"
+          @blur="checkPassword"
           class="form-control basic-input password_input"
           :disabled="!emailAndPassword"
           id="exampleInputPassword1"
           placeholder="Type here your password..."
         />
+        <i class="icon-check-2"></i>
+        <i class="icon-exclamation-2"></i>
+        <small id="password">
+          Error message.
+        </small>
       </div>
+
       <button
         type="button"
         @click="updateProfile()"
         :disabled="!emailAndPassword"
-        :class="[!emailAndPassword ? 'disabledClass' : '', 'btn btn-primary shadow-sm mt-4']"
+        :class="[
+          !emailAndPassword ? 'disabledClass' : '',
+          'btn btn-primary shadow-sm mt-4',
+        ]"
       >
         Save changes
       </button>
@@ -60,6 +73,10 @@
 import AccountSidebar from "@/components/Account/AccountSidebar.vue";
 import { firebase, db } from "@/firebase";
 
+function setMessageFor(input, message) {
+  document.getElementById(input).innerText = message;
+}
+
 export default {
   name: "UpdateAccount",
   data() {
@@ -70,8 +87,8 @@ export default {
       firstName: localStorage.getItem("firstName"),
       lastName: localStorage.getItem("lastName"),
       password: "",
-      updated: false,
       emailAndPassword: localStorage.getItem("emailAndPassword"),
+      passwordSuccess: null,
     };
   },
   methods: {
@@ -86,7 +103,8 @@ export default {
           credential
         );
 
-        db.collection("users")
+        await db
+          .collection("users")
           .doc(this.currentUser)
           .update({
             firstName: this.firstName,
@@ -100,13 +118,32 @@ export default {
         
         localStorage.setItem("email", this.email);
         this.password = "";
-        this.toggleBanner(true);
+        this.$emit("updated");
+        this.passwordSuccess = null;
       } catch (e) {
-        console.log(e);
+        if (this.password === "") {
+          this.passwordSuccess = false;
+          setMessageFor("password", "Password cannot be blank");
+        } else if (e.code === "auth/wrong-password") {
+          this.passwordSuccess = false;
+          setMessageFor("password", "Password incorrect");
+        }
       }
     },
-    toggleBanner(value) {
-      this.updated = value;
+    checkPassword() {
+      if (this.password === "") {
+        this.passwordSuccess = false;
+        setMessageFor("password", "Password cannot be blank");
+      } //else this.passwordSuccess = true;
+    },
+    classObject: function(varName) {
+      if (varName == null) {
+        return "basic";
+      } else if (varName) {
+        return "success";
+      } else {
+        return "error";
+      }
     },
   },
   components: {

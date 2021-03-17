@@ -3,7 +3,9 @@
     <Navbar
       v-if="
         (localStorage.getItem('user') && store.active) ||
-          ($route.name.match('Home') && this.IsSignedIn && localStorage.getItem('user'))
+          ($route.name.match('Home') &&
+            this.IsSignedIn &&
+            localStorage.getItem('user'))
       "
       @open="toggleSidebar"
     />
@@ -28,23 +30,28 @@ import router from "@/router";
 firebase.auth().onAuthStateChanged(async (user) => {
   const currentRoute = router.currentRoute;
 
-  if (user) {                                      //user is signed in
+  if (user) {
+    //user is signed in
     // store the user on local storage
     localStorage.setItem("isSignedIn", true);
     localStorage.setItem("user", user.uid);
+
+    let idTokenResult = await user.getIdTokenResult();
+    console.log("ADMIN TOKENNN", idTokenResult.claims.admin);
+    if (idTokenResult.claims.admin) localStorage.setItem("isAdmin", true);
+    else localStorage.setItem("isAdmin", false);
 
     let doc = await db
       .collection("users")
       .doc(localStorage.getItem("user"))
       .get();
 
-    
-    if(doc.exists) {      // if doc exists store user info on local storage
+    if (doc.exists) {
+      // if doc exists store user info on local storage
       localStorage.setItem("firstName", doc.data().firstName);
       localStorage.setItem("lastName", doc.data().lastName);
       localStorage.setItem("email", user.email);
     }
-    
 
     let provider = await user.providerData[0].providerId;
     localStorage.setItem("provider", provider);
@@ -59,7 +66,8 @@ firebase.auth().onAuthStateChanged(async (user) => {
     } else {
       router.push({ currentRoute }).catch(() => {});
     }
-  } else {                                          // no user
+  } else {
+    // no user
     store.active = false;
     localStorage.setItem("isSignedIn", false);
     if (currentRoute.meta.needsUser) {
@@ -76,7 +84,7 @@ export default {
       sidebarOpen: false,
       IsSignedIn: localStorage.getItem("isSignedIn"),
       loading: false,
-      localStorage
+      localStorage,
     };
   },
   methods: {
