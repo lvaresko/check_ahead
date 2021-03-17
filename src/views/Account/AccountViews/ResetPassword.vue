@@ -62,7 +62,6 @@ export default {
       currentPassword: "",
       newPassword: "",
       passwordRepeat: "",
-      updated: false,
     };
   },
   methods: {
@@ -82,13 +81,10 @@ export default {
         this.currentPassword = "";
         this.newPassword = "";
         this.passwordRepeat = "";
-        this.toggleBanner(true);
+        this.$emit("updated");
       } catch (e) {
         console.log(e);
       }
-    },
-    toggleBanner(value) {
-      this.updated = value;
     },
   },
   components: {

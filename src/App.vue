@@ -3,7 +3,9 @@
     <Navbar
       v-if="
         (localStorage.getItem('user') && store.active) ||
-          ($route.name.match('Home') && this.IsSignedIn && localStorage.getItem('user'))
+          ($route.name.match('Home') &&
+            this.IsSignedIn &&
+            localStorage.getItem('user'))
       "
       @open="toggleSidebar"
     />
@@ -30,6 +32,10 @@ firebase.auth().onAuthStateChanged(async (user) => {
   console.log("UŠO U ONAUTHSTATECHANGED, user: " + user);
   if (user) {
     //user is signed in
+    let idTokenResult = await user.getIdTokenResult();
+    console.log("ADMIN TOKENNN", idTokenResult.claims.admin);
+    if (idTokenResult.claims.admin) localStorage.setItem("isAdmin", true);
+    else localStorage.setItem("isAdmin", false);
 
     // store the user on local storage
     localStorage.setItem("isSignedIn", true);
@@ -42,15 +48,14 @@ firebase.auth().onAuthStateChanged(async (user) => {
       .doc(localStorage.getItem("user"))
       .get();
 
-    
-    if(doc.exists) {      // if doc exists store user info on local storage
+    if (doc.exists) {
+      // if doc exists store user info on local storage
       console.log("doc exists");
       console.log("Document data:", doc.data());
       localStorage.setItem("firstName", doc.data().firstName);
       localStorage.setItem("lastName", doc.data().lastName);
       localStorage.setItem("email", user.email);
     }
-    
 
     let provider = await user.providerData[0].providerId;
     localStorage.setItem("provider", provider);
@@ -68,7 +73,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
     }
   } else {
     console.log("No user");
-    
+
     store.active = false;
     localStorage.setItem("isSignedIn", false);
     if (currentRoute.meta.needsUser) {
@@ -85,7 +90,7 @@ export default {
       sidebarOpen: false,
       IsSignedIn: localStorage.getItem("isSignedIn"),
       loading: false,
-      localStorage
+      localStorage,
     };
   },
   methods: {

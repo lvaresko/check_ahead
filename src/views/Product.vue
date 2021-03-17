@@ -1,6 +1,11 @@
 <template>
   <div class="product">
-    <div>
+    <img
+      class="loading"
+      v-if="loading"
+      :src="require('@/assets/loading.gif')"
+    />
+    <div v-else>
       <BarcodeReader
         :showBarcodeReader="barcodeReaderOpen"
         v-if="this.barcodeReaderOpen"
@@ -106,7 +111,7 @@ export default {
       DescriptionOpen: false,
       barcodeReaderOpen: false,
       info: null,
-      loading: true,
+      loading: false,
       favorite: null,
       ingredients: null,
       ingredientsList: [],
@@ -120,6 +125,7 @@ export default {
     BarcodeReader,
   },
   async mounted() {
+    this.loading = true;
     await this.getProduct();
     this.ingredients = this.product_info.ingredients.join(", ");
     await this.checkSuitability();
@@ -199,7 +205,8 @@ export default {
       }
 
       // 3. store info for viewed product
-      db.collection("users")
+      await db
+        .collection("users")
         .doc(this.currentUser)
         .collection("products")
         .doc(this.productId)
