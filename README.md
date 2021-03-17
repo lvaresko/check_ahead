@@ -27,7 +27,12 @@ Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl.
 ## Dodaci
 npm install --save vue-quaggajs <br />
 npm install --save vue-search-select <br />
-npm install --save underscore
+npm install --save underscore <br />
+# Firebase functions
+npm install -g firebase-tools <br />
+firebase login <br />
+firebase init functions <br />
+
 
 ## Test user
 Email: test@user.com <br />
