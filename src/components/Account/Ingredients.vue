@@ -94,7 +94,6 @@ export default {
   },
   watch: {
     custom_ingredients: function(){
-      console.log("watch")
       this.onChange()
     },
   },
@@ -258,7 +257,7 @@ export default {
         }
       }
     },
-    onChange() {console.log(this.selectedIngr.length,this.custom_ingredients.length);
+    onChange() {
       if(this.selectedIngr.length > 0  || this.custom_ingredients.length > 0) this.$emit('enable');
       if (this.selectedIngr.length == 0 && this.custom_ingredients.length == 0) this.$emit('disable');
     },

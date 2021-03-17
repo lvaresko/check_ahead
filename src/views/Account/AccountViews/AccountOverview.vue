@@ -2,7 +2,7 @@
   <div class="overview col-12 col-md-8 mt-6 text-center right-side">
     <div class="col">
       <h3>Hi, {{ user_name }}! <br /> Welcome to your acocunt</h3>
-    <img id="pic" src="@/assets/proba4.jpg"  loading="lazy" alt="" />
+    <img id="pic" src="@/assets/account.jpg"  loading="lazy" alt="" />
     </div>
   </div>
 </template>

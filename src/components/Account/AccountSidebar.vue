@@ -45,9 +45,6 @@ export default {
     };
   },
   mounted() {
-    if (localStorage.getItem("provider") == "password")
-      localStorage.setItem("emailAndPassword", true);
-
     this.isAdmin = localStorage.getItem("isAdmin");
   },
 };

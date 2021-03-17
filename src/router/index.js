@@ -182,17 +182,11 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async(to, from, next) => {
-    console.log('Stara ruta', from.name, '-> ', to.name);
-    //const noUser = (store.currentUser === null);
     const User = localStorage.getItem("isSignedIn");
-    console.log("STORE CURRENT USEER" + localStorage.getItem("user")); //store.currentUser
-    console.log("USER LOCALSTORAGE" + User)
 
-    if (!User && to.matched.some(rec => rec.meta.needsUser)) { //to.meta.needsUser) {
-        console.log("Permission denied");
+    if (!User && to.matched.some(rec => rec.meta.needsUser)) {   // Permission denied
         next({ name: "Login" })
     } else {
-        console.log("IDEM PUTUJEMM");
         next();
     }
 });

@@ -115,7 +115,6 @@
 
 <script>
 import { firebase, db } from "@/firebase";
-import store from "@/store";
 
 function setMessageFor(input, message) {
   document.getElementById(input).innerText = message;
@@ -154,7 +153,6 @@ export default {
             .auth()
             .createUserWithEmailAndPassword(this.email, this.password);
 
-          console.log("Success");
           db.collection("users")
             .doc(userCredential.user.uid)
             .set({
@@ -230,7 +228,6 @@ export default {
       }
     },
   },
-  computed: {},
 };
 </script>
 

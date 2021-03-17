@@ -39,7 +39,6 @@ export default {
       this.$emit("close");
     },
     logIt(data) {
-      console.log("detected", data.codeResult.code);
       this.detecteds.push(data.codeResult.code);
     },
   },

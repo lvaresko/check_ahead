@@ -29,19 +29,17 @@ import router from "@/router";
 //Observer
 firebase.auth().onAuthStateChanged(async (user) => {
   const currentRoute = router.currentRoute;
-  console.log("UŠO U ONAUTHSTATECHANGED, user: " + user);
+
   if (user) {
     //user is signed in
-    let idTokenResult = await user.getIdTokenResult();
-    console.log("ADMIN TOKENNN", idTokenResult.claims.admin);
-    if (idTokenResult.claims.admin) localStorage.setItem("isAdmin", true);
-    else localStorage.setItem("isAdmin", false);
-
     // store the user on local storage
     localStorage.setItem("isSignedIn", true);
     localStorage.setItem("user", user.uid);
 
-    console.log("Signed in: " + user.email);
+    let idTokenResult = await user.getIdTokenResult();
+    console.log("ADMIN TOKENNN", idTokenResult.claims.admin);
+    if (idTokenResult.claims.admin) localStorage.setItem("isAdmin", true);
+    else localStorage.setItem("isAdmin", false);
 
     let doc = await db
       .collection("users")
@@ -50,8 +48,6 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
     if (doc.exists) {
       // if doc exists store user info on local storage
-      console.log("doc exists");
-      console.log("Document data:", doc.data());
       localStorage.setItem("firstName", doc.data().firstName);
       localStorage.setItem("lastName", doc.data().lastName);
       localStorage.setItem("email", user.email);
@@ -60,8 +56,6 @@ firebase.auth().onAuthStateChanged(async (user) => {
     let provider = await user.providerData[0].providerId;
     localStorage.setItem("provider", provider);
 
-    //ako ne postoji jer observer ne ceka da spremim u colLection kad se s googlom ulogiram
-    //valjda se triggera jer se promjeni to stanje prije nego ide stvarat collection
     if (doc.exists) store.active = doc.data().active;
 
     if (localStorage.getItem("user") && !store.active) {
@@ -72,8 +66,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
       router.push({ currentRoute }).catch(() => {});
     }
   } else {
-    console.log("No user");
-
+    // no user
     store.active = false;
     localStorage.setItem("isSignedIn", false);
     if (currentRoute.meta.needsUser) {

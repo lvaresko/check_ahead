@@ -12,13 +12,6 @@
           Here you can see details on requests you've already made. <br />
           Want to make a new one? <span class="make_request" @click="togglePopup"> Make a request </span>
         </div>
-      <!--  <button
-          type="button"
-          class="btn btn-primary shadow-sm mt-1"
-          @click="togglePopup"
-        >
-          Make a request
-        </button> -->
         <Popup
           v-if="popupOpen"
           :site="site"
@@ -36,10 +29,10 @@
             <div>
               <div v-if="PendingRequests.length">
                 <div
-                  v-for="pendingRequest in PendingRequests"
+                  v-for="(pendingRequest, index) in PendingRequests"
                   :key="pendingRequest.id"
                 >
-                  <div class="request">
+                  <div v-if="index < pendingLimit" class="request">
                     <label>PRODUCT NAME:</label>
                     <div>{{ pendingRequest.name }}</div>
                     <label>PRODUCT BRAND:</label>
@@ -47,6 +40,11 @@
                     <label>REQUEST SENT ON:</label>
                     <div>{{ pendingRequest.date }}</div>
                   </div>
+                </div>
+                <div v-if="totalPending > pendingLimit" class="text-left">
+                  <a href="#" @click.prevent="pendingLimit += 2" class="load"
+                    >Load more...</a
+                  >
                 </div>
               </div>
               <div v-else>
@@ -63,10 +61,10 @@
             </div>
             <div v-if="ApprovedRequests.length">
               <div
-                v-for="approvedRequest in ApprovedRequests"
+                v-for="(approvedRequest, index) in ApprovedRequests"
                 :key="approvedRequest.id"
               >
-                <div class="request">
+                <div v-if="index < approvedLimit" class="request">
                   <label>PRODUCT NAME:</label>
                   <div>{{ approvedRequest.name }}</div>
                   <label>PRODUCT BRAND:</label>
@@ -84,6 +82,11 @@
                     >
                   </div>
                 </div>
+                <div v-if="totalApproved > approvedLimit" class="text-left">
+                  <a href="#" @click.prevent="approvedLimit += 2" class="load"
+                    >Load more...</a
+                  >
+                </div>
               </div>
             </div>
             <div v-else>
@@ -99,7 +102,6 @@
 <script>
 import Popup from "../components/Home/Popup.vue";
 import { db } from "@/firebase";
-import store from "@/store";
 
 export default {
   name: "Requests",
@@ -110,6 +112,10 @@ export default {
       ApprovedRequests: [],
       PendingRequests: [],
       loading: false,
+      pendingLimit: 2,
+      approvedLimit: 2,
+      totalPending: 0,
+      totalApproved: 0,
       user: localStorage.getItem("user"),
     };
   },
@@ -120,6 +126,10 @@ export default {
     this.loading = true;
     await this.getRequests();
     this.loading = false;
+  },
+  updated() {
+    this.totalPending = this.PendingRequests.length;
+    this.totalApproved = this.ApprovedRequests.length;
   },
   methods: {
     togglePopup() {
@@ -195,6 +205,7 @@ export default {
 }
 .request {
   border: 1px solid lightgray;
+  border-radius: 5%;
   padding: 5px;
   margin: 2px;
 }

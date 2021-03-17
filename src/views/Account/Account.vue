@@ -37,6 +37,9 @@ export default {
       this.updated = true;
     },
   },
+  beforeMount() {
+    if (localStorage.getItem("provider") == "password")  localStorage.setItem("emailAndPassword", true);
+  }
 };
 </script>
 
