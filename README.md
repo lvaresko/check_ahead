@@ -32,6 +32,8 @@ npm install --save underscore <br />
 npm install -g firebase-tools <br />
 firebase login <br />
 firebase init functions <br />
+#### Deploy:
+firebase deploy --only functions <br />
 
 
 ## Test user
