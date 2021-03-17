@@ -74,9 +74,6 @@ export default {
       emailAndPassword: localStorage.getItem("emailAndPassword"),
     };
   },
-  mounted() {
-    console.log( localStorage.getItem("emailAndPassword"));
-  },
   methods: {
     async updateProfile() {
       try {
