@@ -1,8 +1,12 @@
 <template>
   <div class="overview col-12 col-md-8 mt-6 text-center right-side">
     <div class="col">
-      <h3>Hi, {{ user_name }}! <br /> Welcome to your acocunt</h3>
-    <img id="pic" src="@/assets/account.jpg"  loading="lazy" alt="" />
+      <h3>
+        Hi, {{ user_name }}! <br />
+        Welcome to your acocunt
+      </h3>
+      <h5 v-if="this.isAdmin == 'true'">ADMIN</h5>
+      <img id="pic" src="@/assets/images/account.jpg" loading="lazy" alt="" />
     </div>
   </div>
 </template>
@@ -11,7 +15,10 @@
 export default {
   name: "AccountOverview",
   data() {
-    return { user_name: localStorage.getItem("firstName") };
+    return {
+      user_name: localStorage.getItem("firstName"),
+      isAdmin: localStorage.getItem("isAdmin"),
+    };
   },
 };
 </script>

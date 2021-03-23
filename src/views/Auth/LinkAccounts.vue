@@ -1,8 +1,15 @@
 <template>
   <form class="signup text-center">
     <!-- <h2 class="pb-3">Link your social account</h2> -->
-    <img src="@/assets/social_media.png" class="img-fluid" loading="lazy" />
-    <p class="pt-3 pb-3">Great, you alredy have a CheckAhead account. Login below using your CheckAhead details to link your social profile. :)</p>
+    <img
+      src="@/assets/images/social_media.png"
+      class="img-fluid"
+      loading="lazy"
+    />
+    <p class="pt-3 pb-3">
+      Great, you alredy have a CheckAhead account. Login below using your
+      CheckAhead details to link your social profile. :)
+    </p>
     <div class="form-group text-left" :class="classObject(this.emailSuccess)">
       <label form="exampleInputEmail">Email:</label>
       <input
@@ -70,15 +77,18 @@ export default {
   methods: {
     async connectProviders() {
       try {
-        let result = await firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(function(result) {
+        let result = await firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(function(result) {
             return result.user.linkWithCredential(store.pendingCred);
-        }).then(function() {
+          })
+          .then(function() {
             store.pendingCred = "";
             store.email = "";
-             // Facebook account successfully linked to the existing Firebase user.
-            this.$router.push({ name: "Home"});
-        });
-
+            // Facebook account successfully linked to the existing Firebase user.
+            this.$router.push({ name: "Home" });
+          });
 
         localStorage.setItem("firstName", result.data().firstName);
         localStorage.setItem("lastName", result.data().lastName);

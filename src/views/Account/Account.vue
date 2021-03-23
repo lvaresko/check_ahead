@@ -29,17 +29,15 @@ export default {
     };
   },
   components: { Banner, AccountSidebar },
-  mounted() {
-    console.log("IZ ACCOUNTAAAA", localStorage.getItem("isAdmin"));
-  },
   methods: {
     toggleBanner() {
       this.updated = true;
     },
   },
   beforeMount() {
-    if (localStorage.getItem("provider") == "password")  localStorage.setItem("emailAndPassword", true);
-  }
+    if (localStorage.getItem("provider") == "password")
+      localStorage.setItem("emailAndPassword", true);
+  },
 };
 </script>
 

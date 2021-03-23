@@ -10,7 +10,10 @@
         <h1 class="pt-3">Requests</h1>
         <div>
           Here you can see details on requests you've already made. <br />
-          Want to make a new one? <span class="make_request" @click="togglePopup"> Make a request </span>
+          Want to make a new one?
+          <span class="make_request" @click="togglePopup">
+            Make a request
+          </span>
         </div>
         <Popup
           v-if="popupOpen"
@@ -82,11 +85,11 @@
                     >
                   </div>
                 </div>
-                <div v-if="totalApproved > approvedLimit" class="text-left">
-                  <a href="#" @click.prevent="approvedLimit += 2" class="load"
-                    >Load more...</a
-                  >
-                </div>
+              </div>
+              <div v-if="totalApproved > approvedLimit" class="text-left">
+                <a href="#" @click.prevent="approvedLimit += 2" class="load"
+                  >Load more...</a
+                >
               </div>
             </div>
             <div v-else>
@@ -219,5 +222,10 @@ export default {
   font-size: 15px;
   max-height: 30px;
   border: 1px solid gray;
+}
+.load:hover {
+  color: #232323;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

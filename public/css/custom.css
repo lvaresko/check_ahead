@@ -29,8 +29,7 @@ body {
 --------------*/
 
 * {
-    /*font-family: 'Noto Serif Malayalam', sans-serif;*/
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     font-weight: 400;
     color: #595959;
@@ -101,13 +100,6 @@ body {
 .btn-secondary.v2 {
     width: 120px;
     height: 40px;
-}
-
-.btn-secondary:hover,
-.btn-secondary:active:focus {
-    /*color: #595959;
-    border: 1px solid lightgray !important;
-    background-color: #eeeeee !important;*/
 }
 
 

@@ -23,7 +23,7 @@ fieldset[disabled] .multiselect {
     height: 16px;
     border-radius: 20px;
     border: 2px solid transparent;
-    border-top-color: #6391a280;
+    border-top-color: #7eb7cea1;
     box-shadow: 0 0 0 1px transparent
 }
 
@@ -201,13 +201,13 @@ fieldset[disabled] .multiselect {
 
 .multiselect__tag-icon:after {
     content: "\D7";
-    color: #6391a280;
+    color: #7eb7cea1;
     font-size: 14px
 }
 
 .multiselect__tag-icon:focus,
 .multiselect__tag-icon:hover {
-    background: #6391a280;
+    background: #7eb7cea1;
 }
 
 .multiselect__tag-icon:focus:after,
@@ -335,7 +335,7 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__option--highlight {
-    background: #6391a280;
+    background: #7eb7cea1;
     outline: none;
     color: #fff
 }

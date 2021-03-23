@@ -43,9 +43,6 @@ export default {
       emailSuccess: null,
     };
   },
-  mounted() {
-    console.log("admin overview");
-  },
   methods: {
     checkEmail() {
       if (this.email === "") {

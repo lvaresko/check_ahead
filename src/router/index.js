@@ -136,6 +136,7 @@ const routes = [{
         component: Admin,
         meta: {
             needsUser: true,
+            needsAdmin: true,
         },
         children: [{
                 path: '',
@@ -143,6 +144,7 @@ const routes = [{
                 component: AdminOverview,
                 meta: {
                     needsUser: true,
+                    needsAdmin: true,
                 }
             }, {
                 path: 'handleRequests',
@@ -150,6 +152,7 @@ const routes = [{
                 component: HandleRequests,
                 meta: {
                     needsUser: true,
+                    needsAdmin: true,
                 }
             },
             {
@@ -158,6 +161,7 @@ const routes = [{
                 component: AddProduct,
                 meta: {
                     needsUser: true,
+                    needsAdmin: true,
                 }
             }
         ]
@@ -183,8 +187,11 @@ const router = new VueRouter({
 
 router.beforeEach(async(to, from, next) => {
     const User = localStorage.getItem("isSignedIn");
+    const isAdmin = localStorage.getItem("isAdmin");
 
-    if (!User && to.matched.some(rec => rec.meta.needsUser)) {   // Permission denied
+    if ((isAdmin == 'false') && to.matched.some(rec => rec.meta.needsAdmin)) {
+        next({ name: NotFound })
+    } else if (!User && to.matched.some(rec => rec.meta.needsUser)) { // Permission denied
         next({ name: "Login" })
     } else {
         next();
