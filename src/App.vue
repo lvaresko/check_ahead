@@ -37,9 +37,9 @@ firebase.auth().onAuthStateChanged(async (user) => {
     localStorage.setItem("user", user.uid);
 
     let idTokenResult = await user.getIdTokenResult();
-    console.log("ADMIN TOKENNN", idTokenResult.claims.admin);
-    if (idTokenResult.claims.admin) localStorage.setItem("isAdmin", true);
-    else localStorage.setItem("isAdmin", false);
+    user.admin = idTokenResult.claims.admin;
+
+    localStorage.setItem("isAdmin", user.admin);
 
     let doc = await db
       .collection("users")
@@ -61,6 +61,11 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
     if (localStorage.getItem("user") && !store.active) {
       router.push({ name: "ChooseIngredients" }).catch(() => {});
+    } else if (
+      currentRoute.meta.needsAdmin &&
+      localStorage.getItem("isAdmin") == "undefined"
+    ) {
+      router.push({ name: "AccountOverview", params: { id: user.uid } });
     } else if (currentRoute.meta.auth) {
       router.push({ name: "Home" });
     } else {

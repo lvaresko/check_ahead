@@ -91,6 +91,7 @@ export default {
       passwordSuccess: null,
     };
   },
+
   methods: {
     async updateProfile() {
       try {
@@ -115,7 +116,7 @@ export default {
         localStorage.setItem("lastName", this.lastName);
 
         let update = await this.user.updateEmail(this.email);
-        
+
         localStorage.setItem("email", this.email);
         this.password = "";
         this.$emit("updated");

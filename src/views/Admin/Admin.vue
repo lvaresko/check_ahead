@@ -66,4 +66,8 @@ a {
     color: #6fa2b4;
   }
 }
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+}
 </style>

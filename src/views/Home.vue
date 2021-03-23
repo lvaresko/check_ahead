@@ -14,7 +14,9 @@
       />
       <div
         class="jumbotron jumbotron-fluid"
-        :style="{ backgroundImage: `url(${require('../assets/home.jpg')})` }"
+        :style="{
+          backgroundImage: `url(${require('../assets/images/home.jpg')})`,
+        }"
       >
         <div class="container text-center">
           <h1 class="display-5">
@@ -89,11 +91,10 @@
             (this.filter ? this.filtered.length : this.totalProducts) >
               productsLimit
           "
-          class="text-left"
+          @click.prevent="productsLimit += 6"
+          class="load text-center"
         >
-          <a href="#" @click.prevent="productsLimit += 6" class="load"
-            >Load more...
-          </a>
+          Load more...
         </div>
       </div>
     </div>
@@ -291,7 +292,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .home .icon-barcode::before {
   color: white;
   font-size: 26px;
@@ -355,9 +356,17 @@ export default {
   width: 90px;
 }
 
-.load:hover {
-  color: #232323;
-  text-decoration: none;
+.load {
+  border: 1px solid lightgray;
+  padding: 5px;
+  font-weight: 500;
   cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.load:hover {
+  color: white;
+  background: lightgray;
 }
 </style>

@@ -1,6 +1,11 @@
 <template>
   <div class="col-12 col-md-8 mt-6 text-center right-side ">
-    <div class="recently-viewed">
+    <img
+      class="loading"
+      v-if="loading"
+      :src="require('@/assets/loading.gif')"
+    />
+    <div v-else class="recently-viewed">
       <h2 class="mb-4">Recently viewed items:</h2>
       <div v-for="(product, index) in products" :key="product.id">
         <div
@@ -43,10 +48,13 @@ export default {
       products: [],
       historyLimit: 3,
       totalHistory: 0,
+      loading: false,
     };
   },
   async mounted() {
+    this.loading = true;
     await this.getHistory();
+    this.loading = false;
   },
   updated() {
     this.totalHistory = this.products.length;
@@ -59,8 +67,7 @@ export default {
         .collection("products")
         .orderBy("viewed", "desc")
         .get();
-
-      results.forEach(async (doc) => {
+      for (let doc of results.docs) {
         const product = await db
           .collection("products")
           .doc(doc.id)
@@ -82,7 +89,7 @@ export default {
           url: data.url,
           suitable: data_suitable.suitable,
         });
-      });
+      }
     },
     toProduct(x) {
       router.push({ name: "Product", params: { product_id: x.id } });

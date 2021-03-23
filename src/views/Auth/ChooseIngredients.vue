@@ -1,14 +1,24 @@
 <template>
   <div class="signup text-center">
-    <img src="@/assets/full_logo.png" class="img-fluid" loading="lazy" />
+    <img src="@/assets/images/full_logo.png" class="img-fluid" loading="lazy" />
     <p style="font-size: 20px">
       Choose the ingredients you wish to avoid:
     </p>
-    <ingredients ref="myChild" @enable="enableBtn(false)" @disable="enableBtn(true)"/>
+    <ingredients
+      ref="myChild"
+      @enable="enableBtn(false)"
+      @disable="enableBtn(true)"
+    />
     <button
       type="button"
-      @click="checkIngredients();$refs.myChild.updateList();"
-      :class="[selected ? 'disabledClass'  : '', 'btn btn-primary v2 shadow-sm mt-4 mb-4']"
+      @click="
+        checkIngredients();
+        $refs.myChild.updateList();
+      "
+      :class="[
+        selected ? 'disabledClass' : '',
+        'btn btn-primary v2 shadow-sm mt-4 mb-4',
+      ]"
       :disabled="selected"
     >
       Submit
@@ -53,7 +63,7 @@ export default {
 <style scoped>
 .disabledClass {
   cursor: not-allowed;
-  background-color: #6FA2B4;
+  background-color: #6fa2b4;
   margin: 5px 0 5px 0;
 }
 </style>

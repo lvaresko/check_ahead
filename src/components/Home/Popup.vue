@@ -13,7 +13,7 @@
           <div class="popup-image ">
             <img
               id="sad"
-              src="@/assets/unavailable.png"
+              src="@/assets/images/unavailable.png"
               alt="Product unavailable"
             />
           </div>

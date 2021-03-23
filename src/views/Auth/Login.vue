@@ -1,6 +1,6 @@
 <template>
   <form class="signup text-center">
-    <img src="@/assets/full_logo.png" class="img-fluid" loading="lazy" />
+    <img src="@/assets/images/full_logo.png" class="img-fluid" loading="lazy" />
     <div class="form-group text-left" :class="classObject(this.emailSuccess)">
       <label form="exampleInputEmail">Email:</label>
       <input
@@ -57,8 +57,16 @@
       </h2>
     </div>
     <div class="providers mt-4 mb-4">
-      <img src="@/assets/google.png" @click="SignInWithGoogle()" class="providerIcon" />
-      <img src="@/assets/facebook.png" @click="SignInWithFacebook()" class="providerIcon" />
+      <img
+        src="@/assets/images/google.png"
+        @click="SignInWithGoogle()"
+        class="providerIcon"
+      />
+      <img
+        src="@/assets/images/facebook.png"
+        @click="SignInWithFacebook()"
+        class="providerIcon"
+      />
     </div>
   </form>
 </template>
@@ -87,7 +95,6 @@ export default {
         let result = await firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password);
-
       } catch (e) {
         console.error(e);
         if (e.code === "auth/user-not-found") {
@@ -110,12 +117,9 @@ export default {
           .doc(result.user.uid)
           .get();
 
-        
         if (!doc.exists) {
-          console.log("Creating user...");
-
           db.collection("users")
-            .doc(result.user.uid) 
+            .doc(result.user.uid)
             .set({
               firstName: result.additionalUserInfo.profile.given_name,
               lastName: result.additionalUserInfo.profile.family_name,
@@ -125,22 +129,26 @@ export default {
       } catch (e) {
         console.error(e);
 
-        if (e.code ===  'auth/account-exists-with-different-credential') {
+        if (e.code === "auth/account-exists-with-different-credential") {
           // The pending Google credential.
           var pendingCred = e.credential;
           var email = e.email;
-                
-         firebase.auth().fetchProvidersForEmail(email).then(function(methods) {
-            if (methods[0] === 'facebook.com') {        // if signin method facebook signin with popup then link accounts
-              var provider = new firebase.auth.FacebookAuthProvider();
-              auth.signInWithPopup(provider).then(function(result) {
-                result.user.linkAndRetrieveDataWithCredential(pendingCred);
-              });
-            } else if(methods[0] === 'password') {
-              t.$router.push({ path: "/link_accounts" });  // if sign-in method password go to LinkAccounts (reauthentication)
-            }
-          }); 
-        }   
+
+          firebase
+            .auth()
+            .fetchProvidersForEmail(email)
+            .then(function(methods) {
+              if (methods[0] === "facebook.com") {
+                // if signin method facebook signin with popup then link accounts
+                var provider = new firebase.auth.FacebookAuthProvider();
+                auth.signInWithPopup(provider).then(function(result) {
+                  result.user.linkAndRetrieveDataWithCredential(pendingCred);
+                });
+              } else if (methods[0] === "password") {
+                t.$router.push({ path: "/link_accounts" }); // if sign-in method password go to LinkAccounts (reauthentication)
+              }
+            });
+        }
       }
     },
     async SignInWithFacebook() {
@@ -154,13 +162,18 @@ export default {
           .get();
 
         if (!doc.exists) {
-          console.log("Creating user...");
-          
-          localStorage.setItem("firstName",  result.additionalUserInfo.profile.first_name);
-          localStorage.setItem("lastName", result.additionalUserInfo.profile.last_name);
+          localStorage.setItem(
+            "firstName",
+            result.additionalUserInfo.profile.first_name
+          );
+          localStorage.setItem(
+            "lastName",
+            result.additionalUserInfo.profile.last_name
+          );
           localStorage.setItem("email", result.user.email);
 
-          let a = await db.collection("users")
+          let a = await db
+            .collection("users")
             .doc(result.user.uid)
             .set({
               firstName: result.additionalUserInfo.profile.first_name,
@@ -170,23 +183,34 @@ export default {
         }
       } catch (e) {
         console.error(e);
-        if (e.code ===  'auth/account-exists-with-different-credential') {  // email already in use
-          
+        if (e.code === "auth/account-exists-with-different-credential") {
+          // email already in use
+
           // The pending Facebook credential.
-          store.pendingCred  = e.credential;  // ma ne moze u store to ic jooo
+          store.pendingCred = e.credential; // ma ne moze u store to ic jooo
           store.email = e.email;
 
           let t = this;
-          firebase.auth().fetchSignInMethodsForEmail(e.email).then(function(methods) {
-            if (methods[0] === 'google.com') {             // if signin method google signin with popup then link accounts
-              var provider = new firebase.auth.GoogleAuthProvider();
-              firebase.auth().signInWithPopup(provider).then(function(result) {
-                result.user.linkAndRetrieveDataWithCredential(store.pendingCred);
-            });} else if(methods[0] === 'password') {
-              t.$router.push({ path: "/link_accounts" });  // if sign-in method password go to LinkAccounts (reauthentication)
-            }
-          });
-        }  
+          firebase
+            .auth()
+            .fetchSignInMethodsForEmail(e.email)
+            .then(function(methods) {
+              if (methods[0] === "google.com") {
+                // if signin method google signin with popup then link accounts
+                var provider = new firebase.auth.GoogleAuthProvider();
+                firebase
+                  .auth()
+                  .signInWithPopup(provider)
+                  .then(function(result) {
+                    result.user.linkAndRetrieveDataWithCredential(
+                      store.pendingCred
+                    );
+                  });
+              } else if (methods[0] === "password") {
+                t.$router.push({ path: "/link_accounts" }); // if sign-in method password go to LinkAccounts (reauthentication)
+              }
+            });
+        }
       }
     },
     checkEmail() {
@@ -236,9 +260,9 @@ export default {
 }
 
 .providerIcon {
-  width: 15%; 
+  width: 15%;
   height: 15%;
-  border: 1px solid transparent; 
+  border: 1px solid transparent;
   border-radius: 50%;
   cursor: pointer;
 }

@@ -24,7 +24,7 @@
         >SEARCH HISTORY</router-link
       >
     </li>
-    <li v-if="this.isAdmin" class="nav-item pb-4">
+    <li v-if="this.isAdmin == 'true'" class="nav-item pb-4">
       <router-link
         :to="{ name: 'AdminOverview', params: { id: this.currentUser } }"
         >ADMIN PANEL</router-link
@@ -41,11 +41,8 @@ export default {
       provider: "",
       emailAndPassword: localStorage.getItem("emailAndPassword"),
       currentUser: localStorage.getItem("user"),
-      isAdmin: false,
+      isAdmin: localStorage.getItem("isAdmin"),
     };
-  },
-  mounted() {
-    this.isAdmin = localStorage.getItem("isAdmin");
   },
 };
 </script>

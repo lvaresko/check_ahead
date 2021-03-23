@@ -132,7 +132,4 @@ export default {
   color: white;
   cursor: pointer;
 }
-
-.loading {
-}
 </style>

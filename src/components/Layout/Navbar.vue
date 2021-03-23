@@ -9,7 +9,7 @@
         <router-link to="/">
           <img
             id="brand_img"
-            src="@/assets/logo.png"
+            src="@/assets/images/logo.png"
             alt="Check Ahead"
             loading="lazy"
           />
