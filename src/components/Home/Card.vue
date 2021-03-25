@@ -118,7 +118,7 @@ export default {
       const x = e.target;
       const text = x.innerHTML.length; //ili treba pronac sirinu u pixelima (nemoguce bas)
       const width = x.clientWidth;
-      const total = width - text * 11.7;
+      const total = width - text * 13.5;
       x.style.transition = "2s ease-in-out";
       if (total < 0) x.style.marginLeft = total + "px";
     },

@@ -55,6 +55,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
     let provider = await user.providerData[0].providerId;
     localStorage.setItem("provider", provider);
+    if (localStorage.getItem("provider") == "password")  localStorage.setItem("emailAndPassword", true);
 
     if (doc.exists) store.active = doc.data().active;
 
