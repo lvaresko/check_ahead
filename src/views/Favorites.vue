@@ -53,24 +53,24 @@ export default {
         .orderBy("favorited", "desc")
         .get();
 
-      results.forEach(async (doc) => {
+      for (let favorite of results.docs) {
         const product = await db
           .collection("products")
-          .doc(doc.id)
+          .doc(favorite.id)
           .get();
 
         const result = await db
           .collection("users")
           .doc(this.currentUser)
           .collection("products")
-          .doc(doc.id)
+          .doc(favorite.id)
           .get();
 
         let data = product.data();
         let data_suitable = result.data();
 
         this.products.push({
-          id: doc.id,
+          id: favorite.id,
           brand: data.brand,
           name: data.name,
           category: data.category,
@@ -80,7 +80,7 @@ export default {
           suitable: data_suitable.suitable,
         });
         this.loading = false;
-      });
+      };
       this.loading = false;
     },
     handleDelete(id) {

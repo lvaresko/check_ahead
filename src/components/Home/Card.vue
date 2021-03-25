@@ -113,18 +113,6 @@ export default {
           suitable: suitable,
         });
     },
-    /*async isSuitable() {
-      let results = await db
-        .collection("users")
-        .doc(store.currentUser)
-        .collection("products")
-        .doc(this.info.id)
-        .get();
-      if (results.exists) {
-        let data = results.data();
-        this.suitable = data.suitable;
-      } //else this.favorite = false;
-    },*/
     async isFav() {
       let favorited = await db
         .collection("users")
@@ -140,7 +128,7 @@ export default {
       const x = e.target;
       const text = x.innerHTML.length; //ili treba pronac sirinu u pixelima (nemoguce bas)
       const width = x.clientWidth;
-      const total = width - text * 11.7;
+      const total = width - text * 13.5;
       x.style.transition = "2s ease-in-out";
       if (total < 0) x.style.marginLeft = total + "px";
     },
