@@ -91,7 +91,7 @@ export default {
   },
   async mounted() {
     this.loading = true;
-    await this.getRequests();
+    await this.getAllRequests();
     this.loading = false;
   },
   methods: {
@@ -104,7 +104,7 @@ export default {
       );
     },
 
-    async getRequests() {
+    async getAllRequests() {
       try {
         this.requests = [];
         let query = await db.collection("users").get();
@@ -148,7 +148,7 @@ export default {
         .doc(this.requests[0].request_id)
         .update({ status: "rejected" });
 
-      this.getRequests();
+      this.getAllRequests();
       this.rejectOpen = false;
     },
     Approve() {
@@ -165,7 +165,7 @@ export default {
         .update({ status: "approved", product_id: this.product_id });
 
       this.$emit("updated");
-      this.getRequests();
+      this.getAllRequests();
       this.added = true;
       this.approveOpen = false;
     },

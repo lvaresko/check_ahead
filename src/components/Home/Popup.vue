@@ -1,10 +1,10 @@
 <template>
   <div>
     <transition name="fade">
-      <div class="popup-overlay" @click="closePopup" v-if="showPopup"></div>
+      <div class="popup-overlay" @click="closePopup"></div>
     </transition>
     <transition name="fade">
-      <div class="popup text-center" v-if="showPopup">
+      <div class="popup text-center">
         <div v-if="updated" class="updated">
           <span class="icon-check"></span>
           <div>Your request is sent!</div>
@@ -18,7 +18,7 @@
             />
           </div>
           <div class="popup-text mt-3">
-            <p v-if="site == 'requests'" style="font-size: 18px">
+            <p v-if="this.currentRoute == 'Requests'" style="font-size: 18px">
               WE'RE SORRY THAT THE PRODUCTS YOU'RE LOOKING FOR ISN'T AVAILABLE,
               WOULD YOU LIKE TO SEND A REQUEST?
             </p>
@@ -97,7 +97,6 @@ function setMessageFor(input, message) {
 
 export default {
   name: "Popup",
-  props: ["showPopup", "site"],
   data() {
     return {
       name: "",
@@ -106,6 +105,7 @@ export default {
       brandSuccess: null,
       user: localStorage.getItem("user"),
       updated: false,
+      currentRoute: this.$router.currentRoute.name,
     };
   },
   methods: {

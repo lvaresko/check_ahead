@@ -1,25 +1,30 @@
 <template>
   <div class="container text-center">
-    <h1 class="favorite m-6">Favorites list</h1>
     <img
       class="loading"
       v-if="loading"
       :src="require('@/assets/loading.gif')"
     />
-    <div v-if="!this.products.length && !loading">
-      <p>
-        You don't have any products saved to your favorites list. <br />
-        Click the <span class="icon-heart"></span> icon to add one!
-      </p>
-    </div>
-    <div v-else class="row text-left" data-masonry='{"percentPosition": true }'>
-      <Card
-        v-for="product in products"
-        :key="product.id"
-        :site="site"
-        :info="product"
-        @delete="handleDelete"
-      />
+    <div v-else>
+      <h1 class="favorite m-6">Favorites list</h1>
+      <div v-if="!this.products.length">
+        <p>
+          You don't have any products saved to your favorites list. <br />
+          Click the <span class="icon-heart"></span> icon to add one!
+        </p>
+      </div>
+      <div
+        v-else
+        class="row text-left"
+        data-masonry='{"percentPosition": true }'
+      >
+        <Card
+          v-for="product in products"
+          :key="product.id"
+          :info="product"
+          @delete="handleDelete"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -34,8 +39,7 @@ export default {
     return {
       currentUser: localStorage.getItem("user"),
       products: [],
-      loading: true,
-      site: "favorites",
+      loading: false,
     };
   },
   components: {
@@ -46,6 +50,8 @@ export default {
   },
   methods: {
     async getFavorites() {
+      this.loading = true;
+
       let results = await db
         .collection("users")
         .doc(this.currentUser)
@@ -53,7 +59,7 @@ export default {
         .orderBy("favorited", "desc")
         .get();
 
-      results.forEach(async (doc) => {
+      for (let doc of results.docs) {
         const product = await db
           .collection("products")
           .doc(doc.id)
@@ -79,8 +85,7 @@ export default {
           url: data.url,
           suitable: data_suitable.suitable,
         });
-        this.loading = false;
-      });
+      }
       this.loading = false;
     },
     handleDelete(id) {

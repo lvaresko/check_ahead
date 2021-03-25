@@ -1,5 +1,5 @@
 <template>
-  <div class="barcodeReader" v-if="showBarcodeReader">
+  <div class="barcodeReader">
     <transition name="fade">
       <div class="popup-overlay"></div>
     </transition>
@@ -25,7 +25,6 @@
 <script>
 export default {
   name: "BarcodeReader",
-  props: ["showBarcodeReader"],
   data() {
     return {
       detecteds: [],

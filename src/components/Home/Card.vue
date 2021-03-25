@@ -4,7 +4,7 @@
       <img :src="info.url" class="card-img-top" alt="..." />
       <div class="card-img-overlay">
         <span
-          v-if="site == 'home'"
+          v-if="this.currentRoute == 'Home'"
           class="transform"
           :class="favorite ? 'icon-heart-2' : 'icon-heart'"
           @click.stop.prevent="toggleFavorites"
@@ -42,11 +42,12 @@ import { db } from "@/firebase.js";
 
 export default {
   name: "Card",
-  props: ["site", "info"],
+  props: ["info"],
   data() {
     return {
       favorite: null,
       currentUser: localStorage.getItem("user"),
+      currentRoute: router.currentRoute.name,
     };
   },
   methods: {
@@ -68,7 +69,7 @@ export default {
       } else this.removeFromFavorites();
     },
     async removeFromFavorites() {
-      if (this.site == "favorites") this.$emit("delete", this.info.id);
+      if (this.currentRoute == "Favorites") this.$emit("delete", this.info.id);
       await db
         .collection("users")
         .doc(this.currentUser)
@@ -113,29 +114,6 @@ export default {
           suitable: suitable,
         });
     },
-    /*async isSuitable() {
-      let results = await db
-        .collection("users")
-        .doc(store.currentUser)
-        .collection("products")
-        .doc(this.info.id)
-        .get();
-      if (results.exists) {
-        let data = results.data();
-        this.suitable = data.suitable;
-      } //else this.favorite = false;
-    },*/
-    async isFav() {
-      let favorited = await db
-        .collection("users")
-        .doc(this.currentUser)
-        .collection("favorites")
-        .doc(this.info.id)
-        .get();
-      if (favorited.exists) {
-        this.favorite = true;
-      } else this.favorite = false;
-    },
     moveText(e) {
       const x = e.target;
       const text = x.innerHTML.length; //ili treba pronac sirinu u pixelima (nemoguce bas)
@@ -155,10 +133,6 @@ export default {
       const icon = this.info.category.toLowerCase();
       return "icon-" + icon;
     },
-  },
-  async mounted() {
-    //this.isSuitable();
-    this.isFav();
   },
 };
 </script>
@@ -251,7 +225,7 @@ export default {
 
 .status span {
   font-size: 20px;
-  font-weight: bolder;
+  font-weight: 900;
   background: rgba(255, 255, 255, 0.466);
   padding: 7px;
 }

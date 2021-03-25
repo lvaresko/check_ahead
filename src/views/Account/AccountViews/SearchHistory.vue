@@ -73,21 +73,14 @@ export default {
           .doc(doc.id)
           .get();
 
-        const result = await db
-          .collection("users")
-          .doc(this.currentUser)
-          .collection("products")
-          .doc(doc.id)
-          .get();
-
         let data = product.data();
-        let data_suitable = result.data();
+        let data_suitable = doc.data().suitable;
 
         this.products.push({
           id: doc.id,
           name: data.name,
           url: data.url,
-          suitable: data_suitable.suitable,
+          suitable: data_suitable,
         });
       }
     },

@@ -41,7 +41,10 @@
               type="checkbox"
               v-model="selectedIngr"
               :value="ingredient"
-              @change="updateCheckAll(content); onChange();"
+              @change="
+                updateCheckAll(content);
+                onChange();
+              "
               class="custom-control-input"
             />
             <div class="custom-control-label">
@@ -93,8 +96,8 @@ export default {
     };
   },
   watch: {
-    custom_ingredients: function(){
-      this.onChange()
+    custom_ingredients: function() {
+      this.onChange();
     },
   },
   mounted() {
@@ -119,7 +122,11 @@ export default {
     addCustom(e) {
       if ((e.key === "," || e.key === "Enter") && this.tempCustom) {
         if (!this.custom_ingredients.includes(this.custom_ingredients)) {
-          this.tempCustom = this.tempCustom.charAt(0).toUpperCase().replace(",", "") + this.tempCustom.slice(1);
+          this.tempCustom =
+            this.tempCustom
+              .charAt(0)
+              .toUpperCase()
+              .replace(",", "") + this.tempCustom.slice(1);
           this.custom_ingredients.push(this.tempCustom.replace(",", ""));
         }
         this.tempCustom = "";
@@ -196,25 +203,23 @@ export default {
           },
           { merge: true }
         ); // data should be merged into the existing document
-      
-      if (this.$router.currentRoute.name == "IngredientsList") {  // if changes were made to the ingredients list
-        let ingredientsList = [];
-        ingredientsList.push(
-          ...this.selectedIngr,
-          ...this.custom_ingredients
-        );
 
-        let querry = await db
+      if (this.$router.currentRoute.name == "IngredientsList") {
+        // if changes were made to the ingredients list
+        let ingredientsList = [];
+        ingredientsList.push(...this.selectedIngr, ...this.custom_ingredients);
+
+        let query = await db
           .collection("users")
           .doc(this.currentUser)
           .collection("products")
           .get();
-        
-        querry.forEach(async (doc) => {
+
+        for (let doc of query.docs) {
           let result = await db
             .collection("products")
             .doc(doc.id)
-            .get()
+            .get();
 
           let product_info = result.data();
 
@@ -225,15 +230,16 @@ export default {
           let suitable = "";
           if (filter == 0) suitable = true;
           else suitable = false;
-        
-          db.collection("users")
-          .doc(this.currentUser)
-          .collection("products")
-          .doc(doc.id)
-          .update({
-            suitable: suitable,
-          });
-        });
+
+          await db
+            .collection("users")
+            .doc(this.currentUser)
+            .collection("products")
+            .doc(doc.id)
+            .update({
+              suitable: suitable,
+            });
+        }
       }
 
       this.$emit("toggle");
@@ -258,8 +264,10 @@ export default {
       }
     },
     onChange() {
-      if(this.selectedIngr.length > 0  || this.custom_ingredients.length > 0) this.$emit('enable');
-      if (this.selectedIngr.length == 0 && this.custom_ingredients.length == 0) this.$emit('disable');
+      if (this.selectedIngr.length > 0 || this.custom_ingredients.length > 0)
+        this.$emit("enable");
+      if (this.selectedIngr.length == 0 && this.custom_ingredients.length == 0)
+        this.$emit("disable");
     },
   },
 };

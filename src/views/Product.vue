@@ -7,11 +7,11 @@
     />
     <div v-else>
       <BarcodeReader
-        :showBarcodeReader="barcodeReaderOpen"
         v-if="this.barcodeReaderOpen"
         @close="toggleBarcodeReader"
         @code="checkBarcode"
       />
+      <Popup v-if="this.popupOpen" @close="togglePopup" />
       <div class="container-fluid search-next">
         <div class="container" style="display: flex; ">
           <SearchDropdown class="input-group search-dropdown" />
@@ -70,7 +70,6 @@
 
                 <Description
                   v-if="DescriptionOpen"
-                  :showDescription="DescriptionOpen"
                   :info="info"
                   @close="toggleDescription"
                 />
@@ -97,7 +96,7 @@
 <script>
 import Description from "../components/Description.vue";
 import { db } from "@/firebase.js";
-import store from "@/store";
+import Popup from "../components/Home/Popup.vue";
 import SearchDropdown from "../components/SearchDropdown.vue";
 import BarcodeReader from "../components/BarcodeReader.vue";
 
@@ -107,6 +106,7 @@ export default {
     return {
       currentUser: localStorage.getItem("user"),
       productId: this.$route.params.product_id,
+      popupOpen: false,
       product_info: {},
       DescriptionOpen: false,
       barcodeReaderOpen: false,
@@ -121,6 +121,7 @@ export default {
   },
   components: {
     Description,
+    Popup,
     SearchDropdown,
     BarcodeReader,
   },
@@ -129,11 +130,11 @@ export default {
     await this.getProduct();
     this.ingredients = this.product_info.ingredients.join(", ");
     await this.checkSuitability();
-    await this.isFav();
+    await this.isFavorited();
     this.loading = false;
   },
   methods: {
-    async isFav() {
+    async isFavorited() {
       let favorited = await db
         .collection("users")
         .doc(this.currentUser)
@@ -170,6 +171,9 @@ export default {
     async toggleDescription(x) {
       this.info = x;
       this.DescriptionOpen = !this.DescriptionOpen;
+    },
+    togglePopup() {
+      this.popupOpen = !this.popupOpen;
     },
     async getProduct() {
       let result = await db

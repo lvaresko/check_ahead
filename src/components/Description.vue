@@ -1,15 +1,11 @@
 <template>
   <div>
     <transition name="fade">
-      <div
-        class="desc-overlay"
-        @click="closeDescription"
-        v-if="showDescription"
-      ></div>
+      <div class="desc-overlay" @click="closeDescription"></div>
     </transition>
 
     <transition name="fade">
-      <div class="desc" v-if="showDescription">
+      <div class="desc">
         <img
           class="loading"
           v-if="loading"
@@ -37,11 +33,10 @@
 
 <script>
 import { db } from "@/firebase.js";
-import store from "@/store";
 
 export default {
   name: "Description",
-  props: ["info", "showDescription"],
+  props: ["info"],
   data() {
     return {
       custom: false,

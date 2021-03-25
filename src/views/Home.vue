@@ -7,11 +7,11 @@
     />
     <div v-else>
       <BarcodeReader
-        :showBarcodeReader="barcodeReaderOpen"
         v-if="this.barcodeReaderOpen"
         @close="toggleBarcodeReader"
         @code="checkBarcode"
       />
+      <Popup v-if="this.popupOpen" @close="togglePopup" />
       <div
         class="jumbotron jumbotron-fluid"
         :style="{
@@ -42,7 +42,6 @@
           </button>
         </div>
       </div>
-
       <div class="container">
         <div class="recommended">
           <p>Recommended for you:</p>
@@ -119,7 +118,6 @@ export default {
       popupOpen: false,
       filterOpen: false,
       barcodeReaderOpen: false,
-      site: "home",
       loading: false,
       filter: false,
       filtered: [],
@@ -160,33 +158,41 @@ export default {
       let favorited = await db
         .collection("users")
         .doc(this.currentUser)
-        .collection("favorites");
+        .collection("favorites")
+        .get();
 
       let viewed = await db
         .collection("users")
         .doc(this.currentUser)
-        .collection("products");
+        .collection("products")
+        .get();
 
       let user_results = await db
         .collection("users")
         .doc(this.currentUser)
         .get();
 
+      const user_info = user_results.data();
+      let ingredientsList = [];
+      ingredientsList.push(
+        ...user_info.selectedIngredients,
+        ...user_info.customIngredients
+      );
+
       for (let doc of results.docs) {
         let data = doc.data();
         //don't show products that are favorited, viewed and not suitable
-        let isFavorited = await favorited.doc(doc.id).get();
-        let isViewed = await viewed.doc(doc.id).get();
+        let isFavorited = favorited.docs.filter((result) => {
+          return result.id.includes(doc.id);
+        });
+        //console.log(favorited.docs.filter((lala) => console.log(lala.id)));
+        //console.log(viewed.docs.filter((lala) => console.log(lala.id)));
+        let isViewed = viewed.docs.filter((result) => {
+          return result.id.includes(doc.id);
+        });
 
-        if (!isFavorited.exists && !isViewed.exists) {
+        if (!isFavorited.length && !isViewed.length) {
           // if product not favorited and viewed check suitability
-
-          const user_info = user_results.data();
-          let ingredientsList = [];
-          ingredientsList.push(
-            ...user_info.selectedIngredients,
-            ...user_info.customIngredients
-          );
 
           let filter = data.ingredients.filter((key) =>
             ingredientsList.includes(key)
@@ -276,7 +282,7 @@ export default {
         this.loading = false;
         router.push({ name: "Product", params: { product_id: product_id } });
       } else {
-        store.loading = false;
+        this.loading = false;
         this.togglePopup();
       }
     },
@@ -328,7 +334,6 @@ export default {
 .description {
   background: rgba(200, 200, 200, 0.6);
   padding: 10px;
-  margin: 7px;
   text-shadow: 2px 2px 8px #777;
 }
 
