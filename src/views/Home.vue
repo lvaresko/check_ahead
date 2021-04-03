@@ -65,7 +65,6 @@
           <Card
             v-for="product in showProducts"
             :key="product.id"
-            :site="site"
             :info="product"
           />
           <div v-if="!this.products.length">
@@ -77,7 +76,6 @@
           <Card
             v-for="product in showFiltered"
             :key="product.id"
-            :site="site"
             :info="product"
           />
           <div v-if="!this.filtered.length">

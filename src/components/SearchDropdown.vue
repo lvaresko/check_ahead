@@ -25,7 +25,11 @@ export default {
     };
   },
   async mounted() {
-    let snapshot = await db
+    await this.getAllProducts();
+  },
+  methods: {
+    async getAllProducts() {
+      let snapshot = await db
       .collection("products")
       .orderBy("name")
       .get();
@@ -33,10 +37,10 @@ export default {
     snapshot.docs.forEach((doc) => {
       this.options.push({
         id: doc.id,
-        name: doc.data().name,
-        brand: doc.data().brand,
+        name: doc.data().name
       });
     });
+    }
   },
   watch: {
     value() {
@@ -46,4 +50,3 @@ export default {
 };
 </script>
 
-<style scoped></style>
