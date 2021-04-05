@@ -23,6 +23,11 @@ Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl.
 * Pregled nedavno pretraženih proizvoda
 
 [Link na prototip aplikacije](https://www.figma.com/proto/f99rNxIjyfLDljY60b3OAS/Prototip?node-id=12%3A18&scaling=scale-down)
+[Link na aplikaciju](https://check-ahead.netlify.app/)
+
+## Test user
+Email: test@user.com <br />
+Password: 123456
 
 ## Dodaci
 npm install --save vue-quaggajs <br />
@@ -35,7 +40,3 @@ firebase init functions <br />
 #### Deploy:
 firebase deploy --only functions <br />
 
-
-## Test user
-Email: test@user.com <br />
-Password: 123456
