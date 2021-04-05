@@ -73,4 +73,7 @@ a {
     color: #6fa2b4;
   }
 }
+a:hover {
+  color: black;
+}
 </style>
