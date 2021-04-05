@@ -143,7 +143,7 @@ export default {
   height: 100%;
   cursor: pointer;
 }
-logout {
+.logout {
   color: #595959;
   font-size: 15px;
   cursor: pointer;
