@@ -3,7 +3,7 @@
     <div class="col">
       <h3>
         Hi, {{ user_name }}! <br />
-        Welcome to your acocunt
+        Welcome to your account
       </h3>
       <h5 v-if="this.isAdmin == 'true'">ADMIN</h5>
       <img id="pic" src="@/assets/images/account.jpg" loading="lazy" alt="" />
