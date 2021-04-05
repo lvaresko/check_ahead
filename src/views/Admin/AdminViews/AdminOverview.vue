@@ -48,7 +48,7 @@ export default {
       if (this.email === "") {
         this.emailSuccess = false;
         setMessageFor("email", "Email cannot be blank");
-      } //else if (!this.email.includes("@") || !this.email.includes(".")) {
+      } 
       else if (
         !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
           this.email
@@ -56,7 +56,7 @@ export default {
       ) {
         this.emailSuccess = false;
         setMessageFor("email", "Email formulation invalid");
-      } //else this.emailSuccess = true;
+      } 
     },
     async addAdmin() {
       // Reference to addAdminRole function
