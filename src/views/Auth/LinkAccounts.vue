@@ -1,6 +1,5 @@
 <template>
   <form class="signup text-center">
-    <!-- <h2 class="pb-3">Link your social account</h2> -->
     <img
       src="@/assets/images/social_media.png"
       class="img-fluid"
@@ -109,7 +108,7 @@ export default {
       if (this.email === "") {
         this.emailSuccess = false;
         setMessageFor("email", "Email cannot be blank");
-      } //else if (!this.email.includes("@") || !this.email.includes(".")) {
+      } 
       else if (
         !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
           this.email
@@ -117,13 +116,13 @@ export default {
       ) {
         this.emailSuccess = false;
         setMessageFor("email", "Email formulation invalid");
-      } //else this.emailSuccess = true;
+      } 
     },
     checkPassword() {
       if (this.password === "") {
         this.passwordSuccess = false;
         setMessageFor("password", "Password cannot be blank");
-      } //else this.passwordSuccess = true;
+      } 
     },
     classObject: function(varName) {
       if (varName == null) {
