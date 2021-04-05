@@ -28,8 +28,6 @@ export default {
   data() {
     return {
       detecteds: [],
-      code: null,
-      loading: false,
     };
   },
 
@@ -58,12 +56,6 @@ export default {
         this.$emit("code", mostFrequent);
       }
     },
-  },
-  mounted() {
-    this.loading = false;
-  },
-  beforeMount() {
-    this.loading = true;
   },
 };
 </script>

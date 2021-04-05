@@ -34,7 +34,7 @@
             />
           </div>
           <div class="col-12 col-xl-6">
-            <div v-if="this.suitable" class="suitable">
+            <div v-if="!this.filter.length" class="suitable">
               <span class="icon-check"></span>
               <div>THIS PRODUCT IS SUITABLE FOR YOU!</div>
 
@@ -59,17 +59,17 @@
               <div class="contains">
                 <p style="font-weight: bolder">CONTAINS:</p>
                 <div
-                  v-for="sastojak in this.filter"
-                  :key="sastojak"
+                  v-for="ingredient in this.filter"
+                  :key="ingredient"
                   style="display: inline-block"
                 >
-                  <span @click="toggleDescription(sastojak)">{{
-                    sastojak
+                  <span @click="toggleDescription(ingredient)">{{
+                    ingredient
                   }}</span>
                 </div>
 
                 <Description
-                  v-if="DescriptionOpen"
+                  v-if="descriptionOpen"
                   :info="info"
                   @close="toggleDescription"
                 />
@@ -108,13 +108,12 @@ export default {
       productId: this.$route.params.product_id,
       popupOpen: false,
       product_info: {},
-      DescriptionOpen: false,
+      descriptionOpen: false,
       barcodeReaderOpen: false,
       info: null,
       loading: false,
       favorite: null,
       ingredients: null,
-      ingredientsList: [],
       filter: [],
       suitable: null,
     };
@@ -160,7 +159,7 @@ export default {
     },
     async removeFromFavorites() {
       this.favorite = false;
-      if (this.site == "favorites") this.$emit("delete", this.info.id);
+
       await db
         .collection("users")
         .doc(this.currentUser)
@@ -168,9 +167,9 @@ export default {
         .doc(this.productId)
         .delete();
     },
-    async toggleDescription(x) {
-      this.info = x;
-      this.DescriptionOpen = !this.DescriptionOpen;
+    async toggleDescription(ingredient) {
+      this.info = ingredient;
+      this.descriptionOpen = !this.descriptionOpen;
     },
     togglePopup() {
       this.popupOpen = !this.popupOpen;
@@ -191,21 +190,25 @@ export default {
         .get();
 
       const data = results.data();
-      this.ingredientsList.push(
+      let ingredientsList = [];
+
+      ingredientsList.push(
         ...data.selectedIngredients,
         ...data.customIngredients
       );
 
       // 2. check if product contains smth from ingredients list
       this.filter = this.product_info.ingredients.filter((key) =>
-        this.ingredientsList.includes(key)
+        ingredientsList.includes(key)
       );
+
+      let suitable = null;
       if (this.filter == 0) {
         //product suitable
-        this.suitable = true;
+        suitable = true;
       } else {
         //product not suitable
-        this.suitable = false;
+        suitable = false;
       }
 
       // 3. store info for viewed product
@@ -215,7 +218,7 @@ export default {
         .collection("products")
         .doc(this.productId)
         .set({
-          suitable: this.suitable,
+          suitable: suitable,
           viewed: Date.now(),
         });
     },

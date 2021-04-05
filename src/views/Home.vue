@@ -22,11 +22,11 @@
           <h1 class="display-5">
             We check the ingredients for you!
           </h1>
-          <div class="description">
+          <div class="description m-3">
             <h4 style="font-weight: bolder; color: white">
               Welcome to the searchable database of cosmetic products.
             </h4>
-            <h5 style="color:white">
+            <h5 style="color:white;">
               Based on your list of non-preferences, we determine if the product
               is suitable for you or not.
             </h5>
@@ -65,7 +65,6 @@
           <Card
             v-for="product in showProducts"
             :key="product.id"
-            :site="site"
             :info="product"
           />
           <div v-if="!this.products.length">
@@ -77,7 +76,6 @@
           <Card
             v-for="product in showFiltered"
             :key="product.id"
-            :site="site"
             :info="product"
           />
           <div v-if="!this.filtered.length">
@@ -209,8 +207,8 @@ export default {
             });
           }
         }
-        if (this.products.length == 6) this.loading = false;
       }
+      this.loading = false;
     },
     async filterRecommendations(category, type, brand) {
       this.toggleFilter();

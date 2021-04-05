@@ -34,7 +34,6 @@ export default {
       this.options.push({
         id: doc.id,
         name: doc.data().name,
-        brand: doc.data().brand,
       });
     });
   },

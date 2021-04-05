@@ -58,7 +58,6 @@ export default {
       ref.forEach((doc) => {
         this.data = doc.data();
       });
-
       if (!Object.keys(this.data).length) {
         this.custom = true;
       }
