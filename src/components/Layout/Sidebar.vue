@@ -59,16 +59,16 @@
             </div>
           </router-link>
           <h2 class="line" style="width: 100%"></h2>
-          <a
+          <div
             href="#"
             @click.prevent="logout()"
             @click.self="closeSidebar"
             tag="button"
-            class="side-btn link-container"
+            class="side-btn link-container logout"
           >
             <span class="icon-exit"></span>
             Log Out
-          </a>
+          </div>
         </div>
       </transition>
     </div>
@@ -143,9 +143,10 @@ export default {
   height: 100%;
   cursor: pointer;
 }
-a {
+logout {
   color: #595959;
   font-size: 15px;
+  cursor: pointer;
   &.router-link-exact-active {
     color: #6fa2b4;
   }
