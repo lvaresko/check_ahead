@@ -183,8 +183,7 @@ export default {
         let isFavorited = favorited.docs.filter((result) => {
           return result.id.includes(doc.id);
         });
-        //console.log(favorited.docs.filter((lala) => console.log(lala.id)));
-        //console.log(viewed.docs.filter((lala) => console.log(lala.id)));
+
         let isViewed = viewed.docs.filter((result) => {
           return result.id.includes(doc.id);
         });
