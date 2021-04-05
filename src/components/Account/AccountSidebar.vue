@@ -74,6 +74,6 @@ a {
   }
 }
 a:hover {
-  color: black;
+  color: #595959;
 }
 </style>
