@@ -37,6 +37,7 @@ export default {
     },
     logIt(data) {
       this.detecteds.push(data.codeResult.code);
+      console.log(data);
     },
   },
   watch: {

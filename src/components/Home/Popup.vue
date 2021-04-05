@@ -89,7 +89,6 @@
 
 <script>
 import { db } from "@/firebase";
-import store from "@/store";
 
 function setMessageFor(input, message) {
   document.getElementById(input).innerText = message;
@@ -158,17 +157,6 @@ export default {
 </script>
 
 <style scoped>
-/*
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.4s ease;
-}
-
-.slide-enter,
-.slide-leave-to {
-  transform: translateY(-50%) translateX(100vw);
-}*/
-
 .popup {
   position: fixed;
   top: 50%;

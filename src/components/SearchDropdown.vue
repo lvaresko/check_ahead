@@ -25,17 +25,22 @@ export default {
     };
   },
   async mounted() {
-    let snapshot = await db
-      .collection("products")
-      .orderBy("name")
-      .get();
-    this.options = [];
-    snapshot.docs.forEach((doc) => {
-      this.options.push({
-        id: doc.id,
-        name: doc.data().name,
+    await this.getAllProducts();
+  },
+  methods: {
+    async getAllProducts() {
+      let snapshot = await db
+        .collection("products")
+        .orderBy("name")
+        .get();
+      this.options = [];
+      snapshot.docs.forEach((doc) => {
+        this.options.push({
+          id: doc.id,
+          name: doc.data().name,
+        });
       });
-    });
+    },
   },
   watch: {
     value() {
@@ -44,5 +49,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

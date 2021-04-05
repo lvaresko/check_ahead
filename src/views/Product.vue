@@ -241,7 +241,7 @@ export default {
 
       if (product_id) {
         this.loading = false;
-        router.push({ name: "Product", params: { product_id: product_id } });
+        this.$router.push({ name: "Product", params: { product_id: product_id } });
       } else {
         this.loading = false;
         this.togglePopup();
