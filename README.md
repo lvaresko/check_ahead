@@ -22,7 +22,7 @@ Danas se sve češće susrećemo sa različitim alergijama, bolestima i sl.
 * Ažuriranje podataka korisničkog računa 
 * Pregled nedavno pretraženih proizvoda
 
-[Link na prototip aplikacije](https://www.figma.com/proto/f99rNxIjyfLDljY60b3OAS/Prototip?node-id=12%3A18&scaling=scale-down)
+[Link na prototip aplikacije](https://www.figma.com/proto/f99rNxIjyfLDljY60b3OAS/Prototip?node-id=12%3A18&scaling=scale-down)<br />
 [Link na aplikaciju](https://check-ahead.netlify.app/)
 
 ## Test user
