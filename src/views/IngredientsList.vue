@@ -52,4 +52,10 @@ export default {
   cursor: not-allowed;
   background-color: #6FA2B4;
 }
+
+.btn-primary:disabled{
+  color: #fff;
+  background-color: #6fa2b4;
+  border: none;
+}
 </style>
