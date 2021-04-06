@@ -66,6 +66,11 @@ a {
     color: #6fa2b4;
   }
 }
+
+a:hover {
+  color: #595959;
+}
+
 .container-fluid {
   display: flex;
   justify-content: space-between;
