@@ -135,5 +135,6 @@ export default {
 }
 .admin {
   position: absolute;
+  margin-top: 100px;
 }
 </style>
