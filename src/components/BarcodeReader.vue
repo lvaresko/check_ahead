@@ -5,7 +5,13 @@
     </transition>
 
     <transition name="fade">
-      <div class="container text-center">
+      <div
+        class="container text-center"
+        :class="{
+          admin:
+            currentRoute == 'HandleRequests' || currentRoute == 'AddProduct',
+        }"
+      >
         <div class="camera align-self-center">
           <div class="title">
             <span class="title_text">SCAN YOUR BARCODE!</span>
@@ -23,11 +29,14 @@
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "BarcodeReader",
   data() {
     return {
       detecteds: [],
+      currentRoute: router.currentRoute.name,
     };
   },
 
@@ -123,5 +132,8 @@ export default {
   font-size: 17px;
   color: white;
   cursor: pointer;
+}
+.admin {
+  position: absolute;
 }
 </style>
