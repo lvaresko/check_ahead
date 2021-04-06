@@ -61,9 +61,14 @@ export default {
 </script>
 
 <style scoped>
-.disabledClass {
+.disabledClass{
   cursor: not-allowed;
   background-color: #6fa2b4;
   margin: 5px 0 5px 0;
+}
+.btn-primary:disabled{
+  color: #fff;
+  background-color: #6fa2b4;
+  border: none;
 }
 </style>
