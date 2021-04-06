@@ -24,8 +24,8 @@
         </div>
       </div>
       <div v-if="totalHistory > historyLimit" class="text-left">
-        <a href="#" @click.prevent="historyLimit += 3" class="load"
-          >Load more...</a
+        <div href="#" @click.prevent="historyLimit += 3" class="load"
+          >Load more...</div
         >
       </div>
     </div>
@@ -130,6 +130,11 @@ export default {
 .recently-viewed .icon-cancel {
   justify-content: flex-end;
   color: #ff3d00;
+}
+
+.recently-viewed .load {
+  color: #595959;
+  font-size: 15px;
 }
 
 .recently-viewed .load:hover {
