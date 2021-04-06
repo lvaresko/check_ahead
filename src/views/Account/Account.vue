@@ -2,7 +2,7 @@
   <div class="account">
     <Banner v-if="this.updated" @toggle="toggleBanner(false)" />
 
-    <div class="container">
+    <div class="container mt-3">
       <div class="row">
         <div class="col-12 col-md-4" id="nav">
           <AccountSidebar />
