@@ -147,7 +147,8 @@ export default {
     filterIngredients(name) {
       return this.ingredients
         .filter((key) => key.category.includes(name))
-        .map(({ name }) => name);
+        .map(({ name }) => name)
+        .sort();
     },
     checkAll(x) {
       let pom = this.ingredients.filter((key) => key.category.includes(x));
