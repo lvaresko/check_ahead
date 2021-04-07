@@ -16,10 +16,10 @@
               Home
             </div>
           </router-link>
-          <router-link to="/ingredients_list" tag="button" class="side-btn">
+          <router-link to="/requests" tag="button" class="side-btn">
             <div class="link-container" @click.self="closeSidebar">
-              <span class="icon-list"></span>
-              Ingredients list
+              <span class="icon-request"></span>
+              Your requests
             </div>
           </router-link>
           <router-link to="/favorites" tag="button" class="side-btn">
@@ -28,10 +28,10 @@
               Favorites
             </div>
           </router-link>
-          <router-link to="/requests" tag="button" class="side-btn">
+          <router-link to="/ingredients_list" tag="button" class="side-btn">
             <div class="link-container" @click.self="closeSidebar">
-              <span class="icon-request"></span>
-              Your requests
+              <span class="icon-list"></span>
+              Ingredients list
             </div>
           </router-link>
           <h2 class="line" style="width: 100%"></h2>
